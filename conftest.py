@@ -1,8 +1,10 @@
+import allure
 import pytest
 import uiautomator2 as u2
 from config import *
 
 
+@allure.title("Запускаем приложение")
 @pytest.fixture
 def device():
     device_id = 'emulator-5554'

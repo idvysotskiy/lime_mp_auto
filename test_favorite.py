@@ -9,6 +9,7 @@ from config import *
 from base_page import *
 
 
+@allure.title("Чистим кеш приложения после теста")
 @pytest.fixture(autouse=True)
 def clear_app(device):
     yield
@@ -93,6 +94,7 @@ class TestMobile:
     #     page.login(valid_email, valid_password)
     #     page.go_to_feature_toggles()
     #     page.aktivate_feature_toggles()
+    #     page.click_x()
     #     page.click_x()
 
 
