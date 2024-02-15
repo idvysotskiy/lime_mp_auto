@@ -109,6 +109,6 @@ class MainPage(BasePage):
     def set_contur_nuxt_02(self):
         self.device.click(0.065, 0.68)
 
-    def cat_men(self):
-        self.device.xpath(MainLocators.)
+    # def cat_men(self):
+    #     self.device.xpath(MainLocators.)
 
