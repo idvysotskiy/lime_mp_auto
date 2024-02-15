@@ -48,7 +48,6 @@ class BasePage:
         self.device.swipe_ext(swipe_ext, scale=0.8)
 
 
-
     def generate_random_email(self):
         domain = "@example.com"
         username_length = random.randint(5, 10)

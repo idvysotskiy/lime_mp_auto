@@ -1,3 +1,5 @@
+import allure
+
 from base_page import BasePage
 from locators import *
 # from config import *
@@ -28,7 +30,9 @@ class MainPage(BasePage):
         assert name_pr1 == name_pr2, 'Наименования товаров не совпадают'
 
     def login(self, email, password):
+        # @allure.step('Открыть Личный кабинет')
         self.device(resourceId=MainLocators.PROFILE_NAV).click()
+        # @allure.step('Нажать кнопку "Войти"')
         self.device(resourceId=Profile.LOGIN_UN).click()
         self.device(resourceId=LoginLocators.LOGIN_SCREEN_EMAIL).click()
         self.device.send_keys(email)
@@ -41,6 +45,7 @@ class MainPage(BasePage):
     def go_to_registration(self):
         self.device(resourceId=MainLocators.PROFILE_NAV).click()
         self.device(resourceId=Profile.SIGNUP_UN).click()
+        BasePage.get_screen(self)
 
     def go_to_profile(self):
         self.device(resourceId=MainLocators.PROFILE_NAV).click()
@@ -52,6 +57,7 @@ class MainPage(BasePage):
         self.device.xpath(FeatureToggles.SWITCH_1).click()
         self.device.xpath(FeatureToggles.SWITCH_2).click()
         self.device.xpath(FeatureToggles.SWITCH_3).click()
+        BasePage.get_screen(self)
 
     def enter_valid_registration_data(self, name, surname, phone, password):
         self.device.xpath(LoginLocators.SIGNUP_NAME).click()
@@ -66,6 +72,7 @@ class MainPage(BasePage):
         self.device.send_keys(password)
         self.device.xpath(LoginLocators.SIGNUP_REPEAT_PASSWORD).click()
         self.device.send_keys(password)
+        BasePage.get_screen(self)
 
     def click_subscribe_boxes(self, subscribes):
         self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_WOMEN).click()
@@ -79,6 +86,7 @@ class MainPage(BasePage):
             if box == 'KIDS':
                 self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_KIDS).click()
         self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_ACCEPT).click()
+        BasePage.get_screen(self)
 
     def click_resume_btn_signup(self):
         self.device.xpath(LoginLocators.SIGNUP_RESUME_BTN).click()

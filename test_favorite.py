@@ -1,6 +1,7 @@
 # file: test_favorite.py
 import time
 
+import allure
 import pytest
 
 from main_page import MainPage
@@ -15,9 +16,9 @@ def clear_app(device):
 
 
 class TestMobile:
-
-    #    @allure.title("Test Autorization")
-    #    @allure.testcase("C1017")
+    @pytest.mark.smoke
+    @allure.title('Экран "Основной экран" / Скролл баннеров')
+    @allure.testcase("C1861")
     def test_swipe_banner(self, device):
         page = BasePage(device)
         time.sleep(10)
@@ -28,20 +29,27 @@ class TestMobile:
         page.swipe_page_up()
         page.swipe_page_up()
 
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Авторизация" / Авторизация пользователя')
+    @allure.testcase("C1016")
     def test_login(self, device):
         page = MainPage(device)
         page.login(valid_email, valid_password)
 
-    #    @allure.title("Test Add product to favotite from catalog")
-    #    @allure.testcase("C283")
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Коллекции" / Добавление в избранное (добавление в список) с экрана "Коллекция"')
+    @allure.testcase("C283")
     def test_add_to_fav_from_catalog(self, device):
         page = MainPage(device)
         page.click_to_nav_catalog()
         page.go_to_catalog_item('РАСПРОДАЖА', 'БРЮКИ')
         page.add_to_fav_from_catalog('БРЮКИ ЗАУЖЕННОГО КРОЯ С ЗАЩИПАМИ')
 
-    #    @allure.title("Test Registration")
-    #    @allure.testcase("C1030")
+    @pytest.mark.smoke
+    @allure.title('Экран "Регистрация" / Заполнение полей "Имя/Фамилия" кириллицей')
+    @allure.testcase("C1030")
     def test_reg(self, device):
         page = MainPage(device)
         page.go_to_registration()
@@ -51,8 +59,9 @@ class TestMobile:
         page.cancel_notification()
         page.screen_title('ЛИЧНЫЙ КАБИНЕТ')
 
-    #    @allure.title("Экран "Карточка товара" / Кнопка "Купить"")
-    #    @allure.testcase("C12")
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / Кнопка "Купить"')
+    @allure.testcase("C12")
     def test_size_bottom_sheet(self, device):
         page = MainPage(device)
         page.click_to_nav_catalog()
@@ -61,8 +70,9 @@ class TestMobile:
         page.add_to_cart()
         assert device.xpath(ProductCard.SIZE_INFO).get_text() == 'РУКОВОДСТВО ПО РАЗМЕРАМ +'
 
-    #    @allure.title(Экран "Карточка товара" / Добавление товара в корзину(Плашка))
-    #    @allure.testcase("C2943")
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / Добавление товара в корзину(Плашка)')
+    @allure.testcase("C2943")
     def test_buy_popup(self, device):
         page = MainPage(device)
         page.click_to_nav_catalog()
