@@ -9,7 +9,6 @@ from config import *
 from base_page import *
 
 
-@allure.title("Чистим кеш приложения после теста")
 @pytest.fixture(autouse=True)
 def clear_app(device):
     yield
@@ -30,14 +29,12 @@ class TestMobile:
         page.swipe_page_up()
         page.swipe_page_up()
 
-
     @pytest.mark.smoke
     @allure.title('Экран "Авторизация" / Авторизация пользователя')
     @allure.testcase("C1016")
     def test_login(self, device):
         page = MainPage(device)
         page.login(valid_email, valid_password)
-
 
     @pytest.mark.smoke
     @allure.title('Экран "Коллекции" / Добавление в избранное (добавление в список) с экрана "Коллекция"')
@@ -96,6 +93,3 @@ class TestMobile:
     #     page.aktivate_feature_toggles()
     #     page.click_x()
     #     page.click_x()
-
-
-
