@@ -32,8 +32,10 @@ class MainPage(BasePage):
         self.device(resourceId=Profile.LOGIN_UN).click()
         self.device(resourceId=LoginLocators.LOGIN_SCREEN_EMAIL).click()
         self.device.send_keys(email)
+        BasePage.get_screen(self)
         self.device(resourceId=LoginLocators.LOGIN_SCREEN_PASS).click()
         self.device.send_keys(password)
+        BasePage.get_screen(self)
         self.device(resourceId=LoginLocators.LOGIN_SCREEN_SIGNIN).click()
 
     def go_to_registration(self):

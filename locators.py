@@ -80,10 +80,13 @@ class Profile:
     LOGOUT = 'ru.limeshop.android.dev:id/profile_authorized_logout'
     DELETE_ACCOUNT = 'ru.limeshop.android.dev:id/deleteAccountTextView'
 
+
 class FeatureToggles:
     SWITCH_1 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[1]/android.widget.Switch[1]'
     SWITCH_2 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[2]/android.widget.Switch[1]'
     SWITCH_3 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[3]/android.widget.Switch[1]'
+
+
 class LoginLocators:
     # LOGIN_SCREEN
     LOGIN_SCREEN_TITLE = 'ru.limeshop.android.dev:id/orderflow_signin_title'
@@ -138,7 +141,9 @@ class Cart:
     PROMO_CODE = '//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
     SUMMARY_QUANTITY = '//*[@resource-id="ru.limeshop.android.dev:id/textView2"]'
     SUMMARY_PRICE = '//*[@resource-id="ru.limeshop.android.dev:id/textView4"]'
-   # SUMMARY_PRICE_FINAL =
+
+
+# SUMMARY_PRICE_FINAL =
 
 class CheckOut:
     DELIVERY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_title_text"]'
@@ -170,9 +175,5 @@ class CheckOut:
     SUMMARY_TOTAL = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_total_text"]'
     ORDER_PAY = '//*[@resource-id="ru.limeshop.android.dev:id/order_pay_button"]'
     TERMS_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_terms_text"]'
-
-
-
-
-
-
+    #
+    '//*[@resource-id="ru.limeshop.android.dev:id/title_text"]'

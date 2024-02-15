@@ -1,4 +1,5 @@
 # file: base_page.py
+import allure
 
 from locators import *
 from config import *
@@ -70,3 +71,10 @@ class BasePage:
 
     def test_text(self, locator, text):
         assert self.device.xpath(locator).get_text() == text
+
+    def get_screen(self):
+        screen = "screen.png"
+        self.device.screenshot(screen)
+        allure.attach.file(f'./{screen}', attachment_type=allure.attachment_type.PNG)
+
+
