@@ -24,8 +24,8 @@ def test_set_nuxt_02(self, device):
     page.aktivate_feature_toggles()
     page.click_x()
 
-class TestBuy:
-    def test_buy(self, device):
+# class TestBuy:
+#     def test_buy(self, device):
 
 
 

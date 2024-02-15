@@ -75,15 +75,15 @@ class TestMobile:
         # device.xpath(ProductCard.POPUP).wait_gone(timeout=10)
         # assert device.xpath(ProductCard.POPUP_TITLE).get_text() == 'Товар добавлен в корзину'
 
-    def test_set_nuxt_02(self, device):
-        page = MainPage(device)
-        page.go_to_profile()
-        time.sleep(5)
-        device.click(0.059, 0.546)
-        page.login(valid_email, valid_password)
-        page.go_to_feature_toggles()
-        page.aktivate_feature_toggles()
-        page.click_x()
+    # def test_set_nuxt_02(self, device):
+    #     page = MainPage(device)
+    #     page.go_to_profile()
+    #     time.sleep(5)
+    #     device.click(0.059, 0.546)
+    #     page.login(valid_email, valid_password)
+    #     page.go_to_feature_toggles()
+    #     page.aktivate_feature_toggles()
+    #     page.click_x()
 
 
 
