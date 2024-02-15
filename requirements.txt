@@ -1,0 +1,5 @@
+pytest==6.2.4
+Appium-Python-Client~=2.2.0
+selenium~=4.17.2
+uiautomator2~=2.16.25
+allure-pytest==2.13.2
