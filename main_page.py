@@ -1,6 +1,6 @@
 from base_page import BasePage
 from locators import *
-from config import *
+# from config import *
 from uiautomator2 import UiObject
 
 

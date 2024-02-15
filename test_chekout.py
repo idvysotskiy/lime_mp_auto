@@ -8,13 +8,13 @@ from config import *
 from base_page import *
 
 
-@pytest.fixture(autouse=True)
-def clear_app(device):
-    yield
-    device.app_clear(package)
+# @pytest.fixture(autouse=True)
+# def clear_app(device):
+#     yield
+#     device.app_clear(package)
 
-@pytest.fixture(autouse=True)
-def test_set_nuxt_02(self, device):
+# @pytest.fixture(autouse=True)
+def test_set_nuxt_02(device):
     page = MainPage(device)
     page.go_to_profile()
     time.sleep(5)
@@ -22,6 +22,7 @@ def test_set_nuxt_02(self, device):
     page.login(valid_email, valid_password)
     page.go_to_feature_toggles()
     page.aktivate_feature_toggles()
+    page.click_x()
     page.click_x()
 
 # class TestBuy:

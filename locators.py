@@ -140,3 +140,39 @@ class Cart:
     SUMMARY_PRICE = '//*[@resource-id="ru.limeshop.android.dev:id/textView4"]'
    # SUMMARY_PRICE_FINAL =
 
+class CheckOut:
+    DELIVERY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_title_text"]'
+    DELIVERY_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]'
+    DELIVERY_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[2]/android.widget.FrameLayout[1]'
+    DELIVERY_CUR = '//*[@text="КУРЬЕРОМ"]'
+    DELIVERY_SELF = '//*[@text="САМОВЫВОЗ"]'
+    DELIVERY_PRICE_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.TextView[2]'
+    DELIVERY_PRICE_2 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[2]/android.widget.TextView[2]'
+    ADDRESS = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_info_title_text"]'
+    EDIT_ADDRESS = '//*[@resource-id="ru.limeshop.android.dev:id/edit_courier_address_image"]'
+    NAME = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_info_subtitle_text"]'
+    PAYMENT_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/payment_title_text"]'
+    PAYMENT_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/payment_selector_component"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]'
+    PAYMENT_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/payment_selector_component"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[2]/android.widget.FrameLayout[1]'
+    PAYMENT_SELECTOR_3 = '//*[@resource-id="ru.limeshop.android.dev:id/payment_selector_component"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[3]/android.widget.FrameLayout[1]'
+    PAYMENT_SELECTOR_4 = '//*[@resource-id="ru.limeshop.android.dev:id/payment_selector_component"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[4]/android.widget.FrameLayout[1]'
+    PAYMENT_TITLE_1 = '//*[@text="ЧЕРЕЗ СБП"]'
+    PAYMENT_TITLE_2 = '//*[@text="КАРТОЙ ОНЛАЙН"]'
+    PAYMENT_TITLE_3 = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]'
+    PAYMENT_TITLE_4 = '//*[@text="ПРИ ПОЛУЧЕНИИ"]'
+    ORDER_LIST_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/order_list_title_text"]'
+    ORDER_LIST_SHEVRON = '//*[@resource-id="ru.limeshop.android.dev:id/order_list_chevron_image"]'
+    SUMMARY_QUANTITY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_quantity_title_text"]'
+    SUMMARY_QUANTITY = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_quantity_text"]'
+    SUMMARY_COAST_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_cost_title_text"]'
+    SUMMARY_COAST = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_cost_text"]'
+    SUMMARY_TOTAL_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_total_title_text"]'
+    SUMMARY_TOTAL = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_total_text"]'
+    ORDER_PAY = '//*[@resource-id="ru.limeshop.android.dev:id/order_pay_button"]'
+    TERMS_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_terms_text"]'
+
+
+
+
+
+
