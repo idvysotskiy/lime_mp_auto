@@ -43,6 +43,7 @@ class MainPage(BasePage):
         self.device(resourceId=LoginLocators.LOGIN_SCREEN_SIGNIN).click()
 
     def go_to_registration(self):
+        BasePage.swipe_page_up(self)
         self.device(resourceId=MainLocators.PROFILE_NAV).click()
         self.device(resourceId=Profile.SIGNUP_UN).click()
         BasePage.get_screen(self)
