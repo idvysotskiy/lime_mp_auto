@@ -1,9 +1,7 @@
 # file: test_favorite.py
 import time
-
 import allure
 import pytest
-
 from main_page import MainPage
 from config import *
 from base_page import *
@@ -28,6 +26,7 @@ class TestMobile:
         page.swipe_page_up()
         page.swipe_page_up()
         page.swipe_page_up()
+        page.get_screen()
 
     @pytest.mark.smoke
     @allure.title('Экран "Авторизация" / Авторизация пользователя')
