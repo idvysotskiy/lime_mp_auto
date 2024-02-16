@@ -1,10 +1,10 @@
 # file: test_favorite.py
 import time
-import allure
 import pytest
 from main_page import MainPage
 from config import *
 from base_page import *
+import allure
 
 
 @pytest.fixture(autouse=True)
