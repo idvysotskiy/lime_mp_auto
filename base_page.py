@@ -64,8 +64,8 @@ class BasePage:
         assert self.device.xpath(locator).exists, 'Element not found!'
 
     def cancel_notification(self):
-        element_is_present = self.device.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=10)
-        if element_is_present is not None:
+        element = self.device.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=10)
+        if element is not None:
             self.device.xpath(MainLocators.NOTIFICATION_NEGATIVE).click()
 
     def test_text(self, locator, text):

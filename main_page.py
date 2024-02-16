@@ -33,17 +33,20 @@ class MainPage(BasePage):
 
     @allure.step('Авторизоваться')
     def login(self, email, password):
-        # @allure.step('Открыть Личный кабинет')
-        self.device(resourceId=MainLocators.PROFILE_NAV).click()
-        # @allure.step('Нажать кнопку "Войти"')
-        self.device(resourceId=Profile.LOGIN_UN).click()
-        self.device(resourceId=LoginLocators.LOGIN_SCREEN_EMAIL).click()
-        self.device.send_keys(email)
-        BasePage.get_screen(self)
-        self.device(resourceId=LoginLocators.LOGIN_SCREEN_PASS).click()
-        self.device.send_keys(password)
-        BasePage.get_screen(self)
-        self.device(resourceId=LoginLocators.LOGIN_SCREEN_SIGNIN).click()
+        with allure.step('Открыть Личный кабинет'):
+            self.device(resourceId=MainLocators.PROFILE_NAV).click()
+        with allure.step('Нажать кнопку "Войти"'):
+            self.device(resourceId=Profile.LOGIN_UN).click()
+        with allure.step('Ввести email'):
+            self.device(resourceId=LoginLocators.LOGIN_SCREEN_EMAIL).click()
+            self.device.send_keys(email)
+            BasePage.get_screen(self)
+        with allure.step('Ввести пароль'):
+            self.device(resourceId=LoginLocators.LOGIN_SCREEN_PASS).click()
+            self.device.send_keys(password)
+            BasePage.get_screen(self)
+        with allure.step('Нажать кнопку "Войти"'):
+            self.device(resourceId=LoginLocators.LOGIN_SCREEN_SIGNIN).click()
 
     @allure.step('Открыть регистрацию')
     def go_to_registration(self):
