@@ -1,8 +1,10 @@
+import time
+
 import allure
 
 from base_page import BasePage
 from locators import *
-# from config import *
+from config import *
 from uiautomator2 import UiObject
 
 
@@ -68,6 +70,7 @@ class MainPage(BasePage):
         self.device.xpath(FeatureToggles.SWITCH_1).click()
         self.device.xpath(FeatureToggles.SWITCH_2).click()
         self.device.xpath(FeatureToggles.SWITCH_3).click()
+        self.device.xpath(FeatureToggles.SWITCH_4).click()
         BasePage.get_screen(self)
 
     @allure.step('Заполнить поля валидными данными')
@@ -80,6 +83,7 @@ class MainPage(BasePage):
         self.device.send_keys(phone)
         self.device.xpath(LoginLocators.SIGNUP_EMAIL).click()
         self.device.send_keys(BasePage.generate_random_email(self))
+        # self.device.send_keys('tester23n@lime.com')
         self.device.xpath(LoginLocators.SIGNUP_PASSWORD).click()
         self.device.send_keys(password)
         self.device.xpath(LoginLocators.SIGNUP_REPEAT_PASSWORD).click()
@@ -120,6 +124,45 @@ class MainPage(BasePage):
     @allure.step('Нажать кнопку "Купить"')
     def add_to_cart(self):
         self.device.xpath(ProductCard.BUY).click()
+
+    @allure.step('Нажать кнопку "Корзина" в нав.баре')
+    def go_to_cart(self):
+        self.device.xpath(ProductCard.CART).click()
+
+    def enter_promo_code(self, promo_code):
+        self.device.xpath(Cart.PROMO_CODE).click()
+        self.device.send_keys(promo_code)
+
+    def checkout_set(self):
+        self.device.xpath(CheckOut.DELIVERY_SELECTOR_1).click()
+        time.sleep(1)
+        self.device.xpath(CheckOut.PAYMENT_SELECTOR_2).click()
+        time.sleep(1)
+        self.device.xpath(CheckOut.SLOTS_DATE_SELECTOR_1).click()
+        time.sleep(1)
+        self.device.xpath(CheckOut.SLOTS_TIME_SELECTOR_1).click()
+        BasePage.get_screen(self)
+
+    def set_nuxt_02(self):
+        self.go_to_profile()
+        time.sleep(2)
+        self.device.click(0.059, 0.546)
+
+    def set_feature_toggles(self):
+        self.go_to_feature_toggles()
+        self.aktivate_feature_toggles()
+        self.click_x()
+        self.click_x()
+
+    def click_pay(self):
+        BasePage.swipe_page_up(self)
+        self.device.xpath(CheckOut.ORDER_PAY).click()
+        assert self.device.xpath(Success_pay_screen.TITLE).get_text() == 'ВАШ ЗАКАЗ ПРИНЯТ'
+        assert self.device.xpath(Success_pay_screen.BUTTON).get_text() == 'ПРОДОЛЖИТЬ ПОКУПКИ'
+        BasePage.get_screen(self)
+
+    def go_to_checkout(self):
+        self.device.xpath(Cart.CONTINUE).click()
 
     @allure.step('Выбрать размер товара')
     def select_size(self, size):

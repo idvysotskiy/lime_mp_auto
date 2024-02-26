@@ -85,7 +85,8 @@ class FeatureToggles:
     SWITCH_1 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[1]/android.widget.Switch[1]'
     SWITCH_2 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[2]/android.widget.Switch[1]'
     SWITCH_3 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[3]/android.widget.Switch[1]'
-
+    SWITCH_4 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[4]/android.widget.Switch[1]'
+    SWITCH_5 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[5]/android.widget.Switch[1]'
 
 class LoginLocators:
     # LOGIN_SCREEN
@@ -141,6 +142,7 @@ class Cart:
     PROMO_CODE = '//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
     SUMMARY_QUANTITY = '//*[@resource-id="ru.limeshop.android.dev:id/textView2"]'
     SUMMARY_PRICE = '//*[@resource-id="ru.limeshop.android.dev:id/textView4"]'
+    CONTINUE = '//*[@resource-id="ru.limeshop.android.dev:id/cart_continue_button"]'
 
 
 # SUMMARY_PRICE_FINAL =
@@ -165,6 +167,14 @@ class CheckOut:
     PAYMENT_TITLE_2 = '//*[@text="КАРТОЙ ОНЛАЙН"]'
     PAYMENT_TITLE_3 = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]'
     PAYMENT_TITLE_4 = '//*[@text="ПРИ ПОЛУЧЕНИИ"]'
+    SLOTS_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/time_slots_title_text"]'
+    SLOTS_DATE_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]'
+    SLOTS_DATE_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[2]/android.widget.LinearLayout[1]'
+    SLOTS_DATE_SELECTOR_3 = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[3]/android.widget.LinearLayout[1]'
+    SLOTS_TIME_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[1]'
+    SLOTS_TIME_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[2]'
+    SLOTS_TIME_SELECTOR_3 = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[3]'
+    SLOTS_TIME_SELECTOR_4 = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[4]'
     ORDER_LIST_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/order_list_title_text"]'
     ORDER_LIST_SHEVRON = '//*[@resource-id="ru.limeshop.android.dev:id/order_list_chevron_image"]'
     SUMMARY_QUANTITY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_quantity_title_text"]'
@@ -177,3 +187,11 @@ class CheckOut:
     TERMS_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_terms_text"]'
     #
     '//*[@resource-id="ru.limeshop.android.dev:id/title_text"]'
+
+class Success_pay_screen:
+    ICON = '//*[@resource-id="ru.limeshop.android.dev:id/status_icon_image"]'
+    TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/status_title_text"]'
+    DESCRIPTION = '//*[@text="Отслеживать его статус вы можете в личном кабинете"]'
+    BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/action_button"]'
+
+
