@@ -1,5 +1,6 @@
 # file: base_page.py
 import time
+from datetime import date
 
 import allure
 
@@ -8,6 +9,7 @@ from config import *
 import random
 import string
 from uiautomator2 import Direction
+import unittest
 
 
 class InstallAPK:
@@ -49,7 +51,6 @@ class BasePage:
     def swipe(self, swipe_ext):
         self.device.swipe_ext(swipe_ext, scale=0.8)
 
-
     def generate_random_email(self):
         domain = "@example.com"
         username_length = random.randint(5, 10)
@@ -63,7 +64,7 @@ class BasePage:
         print(element.get_text())
 
     def is_element_present(self, locator):
-        assert self.device.xpath(locator).exists == True, 'Element not found!'
+        unittest.TestCase.assertTrue(self.device.xpath(locator).exists, 'Element not found!')
 
     def cancel_notification(self):
         element = self.device.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=10)
@@ -72,12 +73,6 @@ class BasePage:
 
     def test_text(self, locator, text):
         assert self.device.xpath(locator).get_text() == text
-
-    def get_screen(self):
-        screen = "screen.png"
-        self.device.screenshot(screen)
-        allure.attach.file(f'./{screen}', attachment_type=allure.attachment_type.PNG)
-
 
     def current_date(self):
         current_date = date.today()
@@ -146,5 +141,3 @@ class BasePage:
                 self.get_element(locator).click()
         else:
             self.device.clear_text()
-
-

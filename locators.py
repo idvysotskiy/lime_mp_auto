@@ -149,13 +149,24 @@ class Cart:
     MINUS = '//*[@resource-id="ru.limeshop.android.dev:id/minus_image_view"]'
     PLUS = '//*[@resource-id="ru.limeshop.android.dev:id/plus_image_view"]'
     QUANTITY = '//*[@resource-id="ru.limeshop.android.dev:id/quantity_text_view"]'
+    QUANTITY_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/textView3"]'
     PROMO_CODE = '//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
+    PRICE_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/textView5"]'
     SUMMARY_QUANTITY = '//*[@resource-id="ru.limeshop.android.dev:id/textView2"]'
     SUMMARY_PRICE = '//*[@resource-id="ru.limeshop.android.dev:id/textView4"]'
+    SUMMARY_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/textView11"]'
     CONTINUE = '//*[@resource-id="ru.limeshop.android.dev:id/cart_continue_button"]'
+    # CLEAR CART
+    ICON = '//androidx.appcompat.widget.LinearLayoutCompat/android.widget.ImageView[1]'
+    DESCRIPTION_CLEAR = '//*[@text="ВАША КОРЗИНА ПУСТА"]'
+    BUY_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/cart_buy_button"]'
+    # POPUP
+    POPUP_CLEAR = '//*[@resource-id="ru.limeshop.android.dev:id/positive_button_outlined"]'
+    POPUP_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
+    POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
+    POPUP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
 
 
-# SUMMARY_PRICE_FINAL =
 
 class CheckOut:
     DELIVERY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_title_text"]'
