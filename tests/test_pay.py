@@ -1,10 +1,8 @@
 # file: test_pay.py
-import time
 import pytest
-from main_page import MainPage
-from checkout_page import CheckOutPage
-from config import *
-from base_page import *
+from pages.main_page import MainPage
+from pages.checkout_page import CheckOutPage
+from pages.base_page import *
 import allure
 
 

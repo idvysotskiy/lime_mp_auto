@@ -2,10 +2,8 @@ import time
 
 import allure
 
-from base_page import BasePage
+from pages.base_page import BasePage
 from locators import *
-from config import *
-from uiautomator2 import UiObject
 
 
 class MainPage(BasePage):

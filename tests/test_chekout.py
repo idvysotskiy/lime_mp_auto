@@ -1,11 +1,7 @@
 # file: test_favorite.py
-import time
 
-import pytest
-
-from main_page import MainPage
-from config import *
-from base_page import *
+from pages.main_page import MainPage
+from pages.base_page import *
 
 
 # @pytest.fixture(autouse=True)

@@ -2,10 +2,8 @@ import time
 
 import allure
 
-from base_page import BasePage
+from pages.base_page import BasePage
 from locators import *
-from config import *
-from uiautomator2 import UiObject
 
 
 class CheckOutPage(BasePage):
@@ -18,8 +16,8 @@ class CheckOutPage(BasePage):
         time.sleep(0.5)
         self.click(CheckOut.ORDER_PAY)
         time.sleep(2)
-        assert self.device.xpath(Success_pay_screen.TITLE).get_text() == 'ВАШ ЗАКАЗ ПРИНЯТ'
-        assert self.device.xpath(Success_pay_screen.BUTTON).get_text() == 'ПРОДОЛЖИТЬ ПОКУПКИ'
+        assert self.device.xpath(SuccessPayScreen.TITLE).get_text() == 'ВАШ ЗАКАЗ ПРИНЯТ'
+        assert self.device.xpath(SuccessPayScreen.BUTTON).get_text() == 'ПРОДОЛЖИТЬ ПОКУПКИ'
         BasePage.get_screen(self)
 
     def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
