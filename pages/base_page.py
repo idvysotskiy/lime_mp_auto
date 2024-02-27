@@ -91,7 +91,7 @@ class BasePage:
         return username + rnd_name + domain
 
     def is_element_present(self, locator):
-        print(self.device.xpath(locator).exists)
+        # print(self.device.xpath(locator).exists)
         assert self.device.xpath(locator).exists == True, 'Element not found!'
 
     def get_screen(self):

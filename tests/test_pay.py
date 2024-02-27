@@ -62,4 +62,7 @@ class TestAndroid:
         page.checkout_set('1', '4', '2', '2')
         page.elements_checkout_self()
         page.click_pay()
+        page.continue_shopping()
+
+
 

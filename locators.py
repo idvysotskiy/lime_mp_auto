@@ -23,9 +23,9 @@ class MainLocators:
 
 
 class Catalog:
-    WOMEN = '//*[@resource-id="ru.limeshop.android.dev:id/tabRecyclerView"]/android.widget.LinearLayout[1]'
-    MEN = '//*[@resource-id="ru.limeshop.android.dev:id/tabRecyclerView"]/android.widget.LinearLayout[2]'
-    KIDS = '//*[@resource-id="ru.limeshop.android.dev:id/tabRecyclerView"]/android.widget.LinearLayout[3]'
+    WOMEN = '//*[@text="ЖЕНЩИНЫ"]'
+    MEN = '//*[@text="МУЖЧИНЫ"]'
+    KIDS = '//*[@text="ДЕТИ"]'
     EDITORIAL = '//*[@text="EDITORIAL"]'
     GIFT_CARD = '//*[@text="ПОДАРОЧНАЯ КАРТА"]'
 
@@ -161,6 +161,7 @@ class CheckOut:
     DELIVERY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_title_text"]'
     DELIVERY_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]'
     DELIVERY_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[2]/android.widget.FrameLayout[1]'
+    DELIVERY_SELECTOR_3 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[3]/android.widget.FrameLayout[1]'
     DELIVERY_TEXT_CUR = '//*[@text="КУРЬЕРОМ"]'
     DELIVERY_TEXT_SELF = '//*[@text="САМОВЫВОЗ"]'
     DELIVERY_PRICE_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.TextView[2]'
