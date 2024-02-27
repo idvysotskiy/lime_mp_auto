@@ -22,9 +22,18 @@ class MainLocators:
     PRODUCT_CARD_2_2 = '//android.widget.TableLayout/android.widget.TableRow[2]/android.view.ViewGroup[2]/android.widget.FrameLayout[1]'
 
 
+class Catalog:
+    WOMEN = '//*[@resource-id="ru.limeshop.android.dev:id/tabRecyclerView"]/android.widget.LinearLayout[1]'
+    MEN = '//*[@resource-id="ru.limeshop.android.dev:id/tabRecyclerView"]/android.widget.LinearLayout[2]'
+    KIDS = '//*[@resource-id="ru.limeshop.android.dev:id/tabRecyclerView"]/android.widget.LinearLayout[3]'
+    EDITORIAL = '//*[@text="EDITORIAL"]'
+    GIFT_CARD = '//*[@text="ПОДАРОЧНАЯ КАРТА"]'
+
+
 class ProductCard:
     # PRODUCT_CARD
     BUY = '//*[@resource-id="ru.limeshop.android.dev:id/buy_button"]'
+    BUY_MORE = '//*[@resource-id="ru.limeshop.android.dev:id/buy_more_button"]'
     COLORS = '//*[@resource-id="ru.limeshop.android.dev:id/productColorsConstraintLayout"]'
     FAVORITE = '//*[@resource-id="ru.limeshop.android.dev:id/productAddToFavoritesImageButton"]'
     SHARE = '//*[@resource-id="ru.limeshop.android.dev:id/productShareImageButton"]'
@@ -87,6 +96,7 @@ class FeatureToggles:
     SWITCH_3 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[3]/android.widget.Switch[1]'
     SWITCH_4 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[4]/android.widget.Switch[1]'
     SWITCH_5 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[5]/android.widget.Switch[1]'
+
 
 class LoginLocators:
     # LOGIN_SCREEN
@@ -151,8 +161,8 @@ class CheckOut:
     DELIVERY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_title_text"]'
     DELIVERY_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]'
     DELIVERY_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[2]/android.widget.FrameLayout[1]'
-    DELIVERY_CUR = '//*[@text="КУРЬЕРОМ"]'
-    DELIVERY_SELF = '//*[@text="САМОВЫВОЗ"]'
+    DELIVERY_TEXT_CUR = '//*[@text="КУРЬЕРОМ"]'
+    DELIVERY_TEXT_SELF = '//*[@text="САМОВЫВОЗ"]'
     DELIVERY_PRICE_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.TextView[2]'
     DELIVERY_PRICE_2 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[2]/android.widget.TextView[2]'
     ADDRESS = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_info_title_text"]'
@@ -167,6 +177,7 @@ class CheckOut:
     PAYMENT_TITLE_2 = '//*[@text="КАРТОЙ ОНЛАЙН"]'
     PAYMENT_TITLE_3 = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]'
     PAYMENT_TITLE_4 = '//*[@text="ПРИ ПОЛУЧЕНИИ"]'
+    PAYMENT_INFO_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/payment_info_title_text"]'
     SLOTS_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/time_slots_title_text"]'
     SLOTS_DATE_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]'
     SLOTS_DATE_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[2]/android.widget.LinearLayout[1]'
@@ -188,10 +199,9 @@ class CheckOut:
     #
     '//*[@resource-id="ru.limeshop.android.dev:id/title_text"]'
 
-class Success_pay_screen:
+
+class SuccessPayScreen:
     ICON = '//*[@resource-id="ru.limeshop.android.dev:id/status_icon_image"]'
     TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/status_title_text"]'
     DESCRIPTION = '//*[@text="Отслеживать его статус вы можете в личном кабинете"]'
     BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/action_button"]'
-
-

@@ -18,7 +18,7 @@ class MainPage(BasePage):
 
     @allure.step('Перейти в каталог')
     def click_to_nav_catalog(self):
-       # assert self.device(resourceId=MainLocators.CATALOG_NAV).exist
+        # assert self.device(resourceId=MainLocators.CATALOG_NAV).exist
         self.device.xpath(MainLocators.CATALOG_NAV).click()
 
     def go_to_catalog_item(self, il1, il2):
@@ -36,30 +36,30 @@ class MainPage(BasePage):
     @allure.step('Авторизоваться')
     def login(self, email, password):
         with allure.step('Открыть Личный кабинет'):
-            self.device(resourceId=MainLocators.PROFILE_NAV).click()
+            self.click(MainLocators.PROFILE_NAV)
         with allure.step('Нажать кнопку "Войти"'):
-            self.device(resourceId=Profile.LOGIN_UN).click()
+            self.click(Profile.LOGIN_UN)
         with allure.step('Ввести email'):
-            self.device(resourceId=LoginLocators.LOGIN_SCREEN_EMAIL).click()
+            self.click(LoginLocators.LOGIN_SCREEN_EMAIL)
             self.device.send_keys(email)
             BasePage.get_screen(self)
         with allure.step('Ввести пароль'):
-            self.device(resourceId=LoginLocators.LOGIN_SCREEN_PASS).click()
+            self.click(LoginLocators.LOGIN_SCREEN_PASS)
             self.device.send_keys(password)
             BasePage.get_screen(self)
         with allure.step('Нажать кнопку "Войти"'):
-            self.device(resourceId=LoginLocators.LOGIN_SCREEN_SIGNIN).click()
+            self.click(LoginLocators.LOGIN_SCREEN_SIGNIN)
 
     @allure.step('Открыть регистрацию')
     def go_to_registration(self):
         BasePage.swipe_page_up(self)
-        self.device(resourceId=MainLocators.PROFILE_NAV).click()
-        self.device(resourceId=Profile.SIGNUP_UN).click()
+        self.click(MainLocators.PROFILE_NAV)
+        self.click(Profile.SIGNUP_UN)
         BasePage.get_screen(self)
 
     @allure.step('Открыть личный кабинет')
     def go_to_profile(self):
-        self.device(resourceId=MainLocators.PROFILE_NAV).click()
+        self.click(MainLocators.PROFILE_NAV)
 
     @allure.step('Открыть feature toggles')
     def go_to_feature_toggles(self):
@@ -123,44 +123,34 @@ class MainPage(BasePage):
 
     @allure.step('Нажать кнопку "Купить"')
     def add_to_cart(self):
-        self.device.xpath(ProductCard.BUY).click()
+        # if self.get_text(ProductCard.BUY) == 'КУПИТЬ':
+        self.click(ProductCard.BUY)
+        # if self.get_text(ProductCard.BUY_MORE) == "КУПИТ ЕЩЕ":
+        #     self.click(ProductCard.BUY_MORE)
 
     @allure.step('Нажать кнопку "Корзина" в нав.баре')
     def go_to_cart(self):
         self.device.xpath(ProductCard.CART).click()
 
+    @allure.step('Вводим промокод')
     def enter_promo_code(self, promo_code):
         self.device.xpath(Cart.PROMO_CODE).click()
         self.device.send_keys(promo_code)
 
-    def checkout_set(self):
-        self.device.xpath(CheckOut.DELIVERY_SELECTOR_1).click()
-        time.sleep(1)
-        self.device.xpath(CheckOut.PAYMENT_SELECTOR_2).click()
-        time.sleep(1)
-        self.device.xpath(CheckOut.SLOTS_DATE_SELECTOR_1).click()
-        time.sleep(1)
-        self.device.xpath(CheckOut.SLOTS_TIME_SELECTOR_1).click()
-        BasePage.get_screen(self)
-
+    @allure.step('Меняем контур на nuxt-02')
     def set_nuxt_02(self):
         self.go_to_profile()
         time.sleep(2)
         self.device.click(0.059, 0.546)
 
+    @allure.step('Включаем feature_toggles')
     def set_feature_toggles(self):
         self.go_to_feature_toggles()
         self.aktivate_feature_toggles()
         self.click_x()
         self.click_x()
 
-    def click_pay(self):
-        BasePage.swipe_page_up(self)
-        self.device.xpath(CheckOut.ORDER_PAY).click()
-        assert self.device.xpath(Success_pay_screen.TITLE).get_text() == 'ВАШ ЗАКАЗ ПРИНЯТ'
-        assert self.device.xpath(Success_pay_screen.BUTTON).get_text() == 'ПРОДОЛЖИТЬ ПОКУПКИ'
-        BasePage.get_screen(self)
-
+    @allure.step('Нажимаем кнопку "К оформлению"')
     def go_to_checkout(self):
         self.device.xpath(Cart.CONTINUE).click()
 
@@ -177,10 +167,4 @@ class MainPage(BasePage):
         if size == 'XL':
             self.device.xpath(ProductCard.XS_SIZE).click()
 
-    @allure.step('Сменить контур на nuxt-02')
-    def set_contur_nuxt_02(self):
-        self.device.click(0.065, 0.68)
-
-    # def cat_men(self):
-    #     self.device.xpath(MainLocators.)
 
