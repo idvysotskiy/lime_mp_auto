@@ -39,7 +39,7 @@ class TestMobile:
     def test_add_to_fav_from_catalog(self, device):
         page = MainPage(device)
         page.click_to_nav_catalog()
-        page.go_to_catalog_item('РАСПРОДАЖА', 'БРЮКИ')
+        page.go_to_catalog_item(menu_l1, menu_l2)
         page.add_to_fav_from_catalog('БРЮКИ ЗАУЖЕННОГО КРОЯ С ЗАЩИПАМИ')
 
     @pytest.mark.smoke
@@ -60,7 +60,7 @@ class TestMobile:
     def test_size_bottom_sheet(self, device):
         page = MainPage(device)
         page.click_to_nav_catalog()
-        page.go_to_catalog_item('РАСПРОДАЖА', 'БРЮКИ')
+        page.go_to_catalog_item(menu_l1, menu_l2)
         page.go_to_product_card()
         page.add_to_cart()
         assert device.xpath(ProductCard.SIZE_INFO).get_text() == 'РУКОВОДСТВО ПО РАЗМЕРАМ +'
@@ -71,10 +71,10 @@ class TestMobile:
     def test_buy_popup(self, device):
         page = MainPage(device)
         page.click_to_nav_catalog()
-        page.go_to_catalog_item('РАСПРОДАЖА', 'БРЮКИ')
+        page.go_to_catalog_item(menu_l1, menu_l2)
         page.go_to_product_card()
         page.add_to_cart()
-        page.select_size('XS')
+        page.select_size(size)
         assert device.xpath(ProductCard.POPUP_TITLE).get_text() == 'Товар добавлен в корзину'
         # Ожидание элементы, чтобы исчезнуть, вернуть True False, Timout по умолчанию для времени ожидания глобальных настроек
         # device.xpath(ProductCard.POPUP).wait_gone(timeout=10)
