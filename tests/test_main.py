@@ -17,7 +17,7 @@ class TestMobile:
     @allure.testcase("C1861")
     def test_swipe_banner(self, device):
         page = BasePage(device)
-        time.sleep(10)
+        time.sleep(5)
         page.swipe_page_up()
         page.swipe_page_up()
         page.swipe_page_up()
@@ -39,8 +39,8 @@ class TestMobile:
     def test_add_to_fav_from_catalog(self, device):
         page = MainPage(device)
         page.click_to_nav_catalog()
-        page.go_to_catalog_item(menu_l1, menu_l2)
-        page.add_to_fav_from_catalog('БРЮКИ ЗАУЖЕННОГО КРОЯ С ЗАЩИПАМИ')
+        page.go_to_catalog_item(menu_l1)
+        page.add_to_fav_from_catalog()
 
     @pytest.mark.smoke
     @allure.title('Экран "Регистрация" / Заполнение полей "Имя/Фамилия" кириллицей')
@@ -55,14 +55,3 @@ class TestMobile:
         page.screen_title('ЛИЧНЫЙ КАБИНЕТ')
 
 
-
-    # def test_set_nuxt_02(self, device):
-    #     page = MainPage(device)
-    #     page.go_to_profile()
-    #     time.sleep(5)
-    #     device.click(0.059, 0.546)
-    #     page.login(valid_email, valid_password)
-    #     page.go_to_feature_toggles()
-    #     page.aktivate_feature_toggles()
-    #     page.click_x()
-    #     page.click_x()

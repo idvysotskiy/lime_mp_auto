@@ -1,4 +1,5 @@
 # file: locators.py
+from config import *
 class MainLocators:
     # BASE
     X_BUTTON = '//android.widget.ImageButton'
@@ -13,13 +14,16 @@ class MainLocators:
     CART_NAV = 'ru.limeshop.android.dev:id/nav_cart'
 
     # CATALOG
-    CATALOG_ITEM = 'ru.limeshop.android.dev:id/catalog_item_name'
+    MENU_ITEM_1 = f'//*[@text="{menu_l1}"]'
+    MENU_ITEM_2 = f'//*[@text="{menu_l2}"]'
     FAV_ICON = 'ru.limeshop.android.dev:id/favoriteImageView'
     NAME_PRODUCT_COLLECTION = 'ru.limeshop.android.dev:id/nameTextView'
     NAME_PRODUCT_FAVORITE = 'ru.limeshop.android.dev:id/item_product_name'
     FILTER_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/filter_menu"]'
-    PRODUCT_CARD_1_1 = '//android.widget.TableLayout/android.widget.TableRow[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
-    PRODUCT_CARD_2_2 = '//android.widget.TableLayout/android.widget.TableRow[2]/android.view.ViewGroup[2]/android.widget.FrameLayout[1]'
+    PRODUCT_CARD_1_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
+    PRODUCT_CARD_2_2 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[2]/android.view.ViewGroup[1]'
+    # PRODUCT_CARD_1_1 = '//android.widget.TableLayout/android.widget.TableRow[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
+    # PRODUCT_CARD_2_2 = '//android.widget.TableLayout/android.widget.TableRow[2]/android.view.ViewGroup[2]/android.widget.FrameLayout[1]'
 
 
 class Catalog:

@@ -15,19 +15,28 @@ class MainPage(BasePage):
     @allure.step('Перейти в каталог')
     def click_to_nav_catalog(self):
         # assert self.device(resourceId=MainLocators.CATALOG_NAV).exist
-        self.device.xpath(MainLocators.CATALOG_NAV).click()
+        self.click(MainLocators.CATALOG_NAV)
 
-    def go_to_catalog_item(self, il1, il2):
-        self.device(resourceId=MainLocators.CATALOG_ITEM, text=il1).click()
-        self.device(resourceId=MainLocators.CATALOG_ITEM, text=il2).click()
+    def go_to_catalog_item(self):
+        try:
+            self.click(MainLocators.MENU_ITEM_1)
+        except ZeroDivisionError:
+            pass
+        try:
+            self.click(MainLocators.MENU_ITEM_2)
+        except Exception:
+            print('Элемент меню не найден')
+            raise
 
-    def add_to_fav_from_catalog(self, product_name):
-        self.device(resourceId=MainLocators.FAV_ICON).click()
-        name_pr1 = self.device(resourceId=MainLocators.NAME_PRODUCT_COLLECTION, text=product_name).get_text()
+    def add_to_fav_from_catalog(self):
+        self.click(MainLocators.FAV_ICON)
+        product_name_1 = self.device(resourceId=MainLocators.NAME_PRODUCT_COLLECTION, text=product_name).get_text()
         BasePage.cancel_notification(self)
-        self.device(resourceId=MainLocators.FAVORITES_NAV).click()
-        name_pr2 = self.device(resourceId=MainLocators.NAME_PRODUCT_FAVORITE, text=product_name).get_text()
-        assert name_pr1 == name_pr2, 'Наименования товаров не совпадают'
+        # product_name_1 = self.get_text(MainLocators.ITEM)
+        self.click(MainLocators.FAVORITES_NAV)
+        time.sleep(1)
+        product_name_2 = self.device(resourceId=MainLocators.NAME_PRODUCT_FAVORITE, text=product_name).get_text()
+        assert product_name_1 == product_name_2, 'Наименования товаров не совпадают'
 
     @allure.step('Авторизоваться')
     def login(self, email, password):
@@ -117,8 +126,6 @@ class MainPage(BasePage):
     def go_to_product_card(self):
         self.device.xpath(MainLocators.PRODUCT_CARD_1_1).click()
 
-
-
     @allure.step('Нажать кнопку "Корзина" в нав.баре')
     def go_to_cart(self):
         self.device.xpath(ProductCard.CART).click()
@@ -133,6 +140,7 @@ class MainPage(BasePage):
         self.go_to_profile()
         time.sleep(2)
         self.device.click(0.059, 0.546)
+        time.sleep(2)
 
     @allure.step('Включаем feature_toggles')
     def set_feature_toggles(self):
@@ -144,7 +152,3 @@ class MainPage(BasePage):
     @allure.step('Нажимаем кнопку "К оформлению"')
     def go_to_checkout(self):
         self.device.xpath(Cart.CONTINUE).click()
-
-
-
-

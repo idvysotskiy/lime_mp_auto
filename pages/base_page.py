@@ -68,7 +68,7 @@ class BasePage:
         unittest.TestCase.assertTrue(self.device.xpath(locator).exists, 'Element not found!')
 
     def cancel_notification(self):
-        element = self.device.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=10)
+        element = self.device.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=2)
         if element is not None:
             self.device.xpath(MainLocators.NOTIFICATION_NEGATIVE).click()
 
