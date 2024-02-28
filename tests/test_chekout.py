@@ -1,4 +1,4 @@
-# file: test_favorite.py
+# file: test_main.py
 
 from pages.main_page import MainPage
 from pages.base_page import *

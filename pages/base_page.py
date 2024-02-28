@@ -52,10 +52,11 @@ class BasePage:
         self.device.swipe_ext(swipe_ext, scale=0.8)
 
     def generate_random_email(self):
-        domain = "@example.com"
+        domain = "@yandex.ru"
         username_length = random.randint(5, 10)
-        username = ''.join(random.choice(string.ascii_lowercase) for _ in range(username_length))
-        return username + domain
+        rnd_name = ''.join(random.choice(string.ascii_lowercase) for _ in range(username_length))
+        username = 'yapmap.tester+'
+        return username + rnd_name + domain
 
     def get_element_text(self, locator, element_name):
         element = self.device.xpath(locator, text=element_name)
@@ -77,17 +78,6 @@ class BasePage:
     def current_date(self):
         current_date = date.today()
         return current_date
-
-    def generate_random_email(self):
-        domain = "@yandex.ru"
-        username_length = random.randint(5, 10)
-        rnd_name = ''.join(random.choice(string.ascii_lowercase) for _ in range(username_length))
-        username = 'yapmap.tester+'
-        return username + rnd_name + domain
-
-    def is_element_present(self, locator):
-        # print(self.device.xpath(locator).exists)
-        assert self.device.xpath(locator).exists == True, 'Element not found!'
 
     def get_screen(self):
         print('screen')
