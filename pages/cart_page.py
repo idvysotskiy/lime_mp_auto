@@ -28,3 +28,15 @@ class CartPage(BasePage):
         self.is_element_present(Cart.ICON)
         self.is_element_present(Cart.DESCRIPTION_CLEAR)
         assert self.get_text(Cart.BUY_BUTTON) == 'НАЧАТЬ ПОКУПКИ'
+
+    @allure.step('Вводим промокод')
+    def enter_promo_code(self, promo_code):
+        # self.device.xpath(Cart.PROMO_CODE).click()
+        # self.device.send_keys(promo_code)
+        self.set_text(Cart.PROMO_CODE, promo_code)
+
+    @allure.step('Нажимаем кнопку "К оформлению"')
+    def go_to_checkout(self):
+        self.device.xpath(Cart.CONTINUE).click()
+
+

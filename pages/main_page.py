@@ -17,6 +17,7 @@ class MainPage(BasePage):
         # assert self.device(resourceId=MainLocators.CATALOG_NAV).exist
         self.click(MainLocators.CATALOG_NAV)
 
+    @allure.step('Перейти в раздел каталога')
     def go_to_catalog_item(self):
         try:
             self.click(MainLocators.MENU_ITEM_1)
@@ -28,6 +29,7 @@ class MainPage(BasePage):
             print('Элемент меню не найден')
             raise
 
+    @allure.step('Добавить товар в избранное')
     def add_to_fav_from_catalog(self):
         self.click(MainLocators.FAV_ICON)
         product_name_1 = self.device(resourceId=MainLocators.NAME_PRODUCT_COLLECTION, text=product_name).get_text()
@@ -68,51 +70,44 @@ class MainPage(BasePage):
 
     @allure.step('Открыть feature toggles')
     def go_to_feature_toggles(self):
-        self.device.xpath(Profile.FEATURE_TOGGLES).click()
+        self.click(Profile.FEATURE_TOGGLES)
 
     @allure.step('Включить feature toggles')
     def aktivate_feature_toggles(self):
-        self.device.xpath(FeatureToggles.SWITCH_1).click()
-        self.device.xpath(FeatureToggles.SWITCH_2).click()
-        self.device.xpath(FeatureToggles.SWITCH_3).click()
-        self.device.xpath(FeatureToggles.SWITCH_4).click()
+        self.click(FeatureToggles.SWITCH_1)
+        self.click(FeatureToggles.SWITCH_2)
+        self.click(FeatureToggles.SWITCH_3)
+        self.click(FeatureToggles.SWITCH_4)
         BasePage.get_screen(self)
 
     @allure.step('Заполнить поля валидными данными')
     def enter_valid_registration_data(self, name, surname, phone, password):
-        self.device.xpath(LoginLocators.SIGNUP_NAME).click()
-        self.device.send_keys(name)
-        self.device.xpath(LoginLocators.SIGNUP_SURNAME).click()
-        self.device.send_keys(surname)
-        self.device.xpath(LoginLocators.SIGNUP_PHONE).click()
-        self.device.send_keys(phone)
-        self.device.xpath(LoginLocators.SIGNUP_EMAIL).click()
-        self.device.send_keys(BasePage.generate_random_email(self))
-        # self.device.send_keys('tester23n@lime.com')
-        self.device.xpath(LoginLocators.SIGNUP_PASSWORD).click()
-        self.device.send_keys(password)
-        self.device.xpath(LoginLocators.SIGNUP_REPEAT_PASSWORD).click()
-        self.device.send_keys(password)
+        self.set_text(LoginLocators.SIGNUP_NAME, name)
+        self.set_text(LoginLocators.SIGNUP_SURNAME, surname)
+        self.set_text(LoginLocators.SIGNUP_PHONE, phone)
+        self.set_text(LoginLocators.SIGNUP_EMAIL, BasePage.generate_random_email(self))
+        self.set_text(LoginLocators.SIGNUP_PASSWORD, password)
+        self.set_text(LoginLocators.SIGNUP_REPEAT_PASSWORD, password)
         BasePage.get_screen(self)
 
     @allure.step('Выбрать чекбоксы подписок')
     def click_subscribe_boxes(self, subscribes):
-        self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_WOMEN).click()
-        self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_MEN).click()
-        self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_KIDS).click()
+        self.click(LoginLocators.SIGNUP_SUBSCRIBE_WOMEN)
+        self.click(LoginLocators.SIGNUP_SUBSCRIBE_MEN)
+        self.click(LoginLocators.SIGNUP_SUBSCRIBE_KIDS)
         for box in subscribes:
             if box == 'WOMEN':
-                self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_WOMEN).click()
+                self.click(LoginLocators.SIGNUP_SUBSCRIBE_WOMEN)
             if box == 'MEN':
-                self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_MEN).click()
+                self.click(LoginLocators.SIGNUP_SUBSCRIBE_MEN)
             if box == 'KIDS':
-                self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_KIDS).click()
-        self.device.xpath(LoginLocators.SIGNUP_SUBSCRIBE_ACCEPT).click()
+                self.click(LoginLocators.SIGNUP_SUBSCRIBE_KIDS)
+        self.click(LoginLocators.SIGNUP_SUBSCRIBE_ACCEPT)
         BasePage.get_screen(self)
 
     @allure.step('Нажать кнопку "Продолжить"')
     def click_resume_btn_signup(self):
-        self.device.xpath(LoginLocators.SIGNUP_RESUME_BTN).click()
+        self.click(LoginLocators.SIGNUP_RESUME_BTN)
 
     @allure.step('Отменить уведомления')
     def cancel_notification(self):
@@ -124,16 +119,11 @@ class MainPage(BasePage):
 
     @allure.step('Перейти к карточке товара')
     def go_to_product_card(self):
-        self.device.xpath(MainLocators.PRODUCT_CARD_1_1).click()
+        self.click(MainLocators.PRODUCT_CARD_1_1)
 
     @allure.step('Нажать кнопку "Корзина" в нав.баре')
     def go_to_cart(self):
-        self.device.xpath(ProductCard.CART).click()
-
-    @allure.step('Вводим промокод')
-    def enter_promo_code(self, promo_code):
-        self.device.xpath(Cart.PROMO_CODE).click()
-        self.device.send_keys(promo_code)
+        self.click(ProductCard.CART)
 
     @allure.step('Меняем контур на nuxt-02')
     def set_nuxt_02(self):
@@ -149,6 +139,4 @@ class MainPage(BasePage):
         self.click_x()
         self.click_x()
 
-    @allure.step('Нажимаем кнопку "К оформлению"')
-    def go_to_checkout(self):
-        self.device.xpath(Cart.CONTINUE).click()
+
