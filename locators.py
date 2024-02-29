@@ -22,8 +22,8 @@ class MainLocators:
     FILTER_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/filter_menu"]'
     PRODUCT_CARD_1_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
     PRODUCT_CARD_2_2 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[2]/android.view.ViewGroup[1]'
-    # PRODUCT_CARD_1_1 = '//android.widget.TableLayout/android.widget.TableRow[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
-    # PRODUCT_CARD_2_2 = '//android.widget.TableLayout/android.widget.TableRow[2]/android.view.ViewGroup[2]/android.widget.FrameLayout[1]'
+    PRODUCT_CARD_1 = '//android.widget.TableLayout/android.widget.TableRow[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
+    PRODUCT_CARD_2 = '//android.widget.TableLayout/android.widget.TableRow[2]/android.view.ViewGroup[2]/android.widget.FrameLayout[1]'
 
 
 class Catalog:

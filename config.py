@@ -17,9 +17,12 @@ checkboxes = ['WOMEN', 'MEN', 'KIDS']
 # Доступные товары
 size = 'XS'
 
-menu_l1 = 'БРЮКИ'
-menu_l2 = 'ВСЕ МОДЕЛИ'
-product_name = 'БРЮКИ В СПОРТИВНОМ СТИЛЕ С ВЫШИВКОЙ'
+# menu_l1 = 'БРЮКИ'
+# menu_l2 = 'ВСЕ МОДЕЛИ'
+menu_l1 = 'РАСПРОДАЖА'
+menu_l2 = 'БРЮКИ'
+# product_name = 'БРЮКИ В СПОРТИВНОМ СТИЛЕ С ВЫШИВКОЙ'
+product_name = 'ДЖОГГЕРЫ GARMENT DYE'
 item_name = menu_l1
 
 # Промокоды (купоны):

@@ -119,7 +119,14 @@ class MainPage(BasePage):
 
     @allure.step('Перейти к карточке товара')
     def go_to_product_card(self):
-        self.click(MainLocators.PRODUCT_CARD_1_1)
+        try:
+            self.click(MainLocators.PRODUCT_CARD_1)
+        except ZeroDivisionError:
+            try:
+                self.click(MainLocators.PRODUCT_CARD_1_1)
+            except Exception:
+                print('Элемент меню не найден')
+                raise
 
     @allure.step('Нажать кнопку "Корзина" в нав.баре')
     def go_to_cart(self):
