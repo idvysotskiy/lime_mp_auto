@@ -2,6 +2,7 @@ import time
 import allure
 from pages.base_page import BasePage
 from locators import *
+from config import *
 
 
 class ProductCardPage(BasePage):
@@ -10,10 +11,14 @@ class ProductCardPage(BasePage):
 
     @allure.step('Нажать кнопку "Купить"')
     def add_to_cart(self):
-        # if self.get_text(ProductCard.BUY) == 'КУПИТЬ':
-        self.click(ProductCard.BUY)
-        # if self.get_text(ProductCard.BUY_MORE) == "КУПИТ ЕЩЕ":
-        #     self.click(ProductCard.BUY_MORE)
+        try:
+            self.click(ProductCard.BUY_MORE)
+        except ZeroDivisionError:
+            try:
+                self.click(ProductCard.BUY)
+            except Exception:
+                print('Элемент меню не найден')
+                raise
 
     @allure.step('Выбрать размер товара')
     def select_size(self, size):

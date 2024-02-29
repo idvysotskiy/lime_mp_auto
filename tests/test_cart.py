@@ -8,15 +8,15 @@ from pages.product_card_page import *
 import allure
 
 
-# @pytest.fixture(autouse=True)
-# def clear_app(device):
-#     MainPage(device).set_nuxt_02()
-#     MainPage(device).login(valid_email, valid_password)
-#     page.set_feature_toggles()
-#     time.sleep(2)
-#     MainPage(device).click(MainLocators.X_BUTTON)
-#     yield
-#     device.app_clear(package)
+@pytest.fixture(autouse=True)
+def clear_app(device):
+    MainPage(device).set_nuxt_02()
+    MainPage(device).login(valid_email, valid_password)
+    MainPage(device).set_feature_toggles()
+    time.sleep(2)
+    MainPage(device).click(MainLocators.X_BUTTON)
+    yield
+    device.app_clear(package)
 
 
 class TestAndroid:

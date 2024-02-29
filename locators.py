@@ -1,5 +1,7 @@
 # file: locators.py
 from config import *
+
+
 class MainLocators:
     # BASE
     X_BUTTON = '//android.widget.ImageButton'
@@ -171,7 +173,6 @@ class Cart:
     POPUP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
 
 
-
 class CheckOut:
     DELIVERY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_title_text"]'
     DELIVERY_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]'
@@ -212,8 +213,6 @@ class CheckOut:
     SUMMARY_TOTAL = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_total_text"]'
     ORDER_PAY = '//*[@resource-id="ru.limeshop.android.dev:id/order_pay_button"]'
     TERMS_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_terms_text"]'
-    #
-    '//*[@resource-id="ru.limeshop.android.dev:id/title_text"]'
 
 
 class SuccessPayScreen:
