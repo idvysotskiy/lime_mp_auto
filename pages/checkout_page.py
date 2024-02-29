@@ -2,6 +2,9 @@ import time
 import allure
 from pages.base_page import BasePage
 from locators import *
+from pages.main_page import MainPage
+from pages.product_card_page import ProductCardPage
+from pages.cart_page import CartPage
 
 
 class CheckOutPage(BasePage):
@@ -74,3 +77,18 @@ class CheckOutPage(BasePage):
         assert self.get_text(Catalog.KIDS) == 'ДЕТИ'
         self.is_element_present(MainLocators.X_BUTTON)
         BasePage.get_screen(self)
+
+    @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
+    @allure.testcase("C2869")
+    def checkout_with_one_product(self):
+        MainPage(self).click_to_nav_catalog()
+        MainPage(self).go_to_catalog_item()
+        MainPage(self).go_to_product_card()
+        ProductCardPage(self).add_to_cart()
+        ProductCardPage(self).select_size(size)
+        time.sleep(2)
+        MainPage(self).go_to_cart()
+        CartPage(self).enter_promo_code(promo_code_2)
+        time.sleep(2)
+        CartPage(self).go_to_checkout()
+
