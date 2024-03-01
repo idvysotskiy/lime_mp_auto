@@ -14,7 +14,6 @@ def clear_app(device):
     MainPage(device).login(valid_email, valid_password)
     MainPage(device).set_feature_toggles()
     time.sleep(2)
-    MainPage(device).click(MainLocators.X_BUTTON)
     yield
     device.app_clear(package)
 
@@ -29,7 +28,7 @@ class TestAndroid:
         page.go_to_catalog_item()
         page.go_to_product_card()
         ProductCardPage(device).add_to_cart()
-        ProductCardPage(device).select_size(size)
+        ProductCardPage(device).select_size(select_size)
         time.sleep(2)
         page.go_to_cart()
         time.sleep(2)

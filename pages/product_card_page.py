@@ -11,14 +11,15 @@ class ProductCardPage(BasePage):
 
     @allure.step('Нажать кнопку "Купить"')
     def add_to_cart(self):
-        try:
-            self.click(ProductCard.BUY_MORE)
-        except ZeroDivisionError:
-            try:
-                self.click(ProductCard.BUY)
-            except Exception:
-                print('Элемент меню не найден')
-                raise
+        self.click(ProductCard.BUY)
+        # try:
+        #     self.click(ProductCard.BUY_MORE)
+        # except ZeroDivisionError:
+        #     try:
+        #         self.click(ProductCard.BUY)
+        #     except Exception:
+        #         print('Элемент меню не найден')
+        #         raise
 
     @allure.step('Выбрать размер товара')
     def select_size(self, size):

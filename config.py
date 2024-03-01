@@ -15,7 +15,7 @@ subscribe = ['WOMEN', 'KIDS']
 checkboxes = ['WOMEN', 'MEN', 'KIDS']
 
 # Доступные товары
-size = 'XS'
+select_size = 'XS'
 
 # menu_l1 = 'БРЮКИ'
 # menu_l2 = 'ВСЕ МОДЕЛИ'

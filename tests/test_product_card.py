@@ -8,6 +8,10 @@ import allure
 
 @pytest.fixture(autouse=True)
 def clear_app(device):
+    MainPage(device).set_nuxt_02()
+    MainPage(device).login(valid_email, valid_password)
+    MainPage(device).set_feature_toggles()
+    time.sleep(2)
     yield
     device.app_clear(package)
 
@@ -33,7 +37,7 @@ class TestMobile:
         MainPage(device).go_to_catalog_item(menu_l1, menu_l2)
         MainPage(device).go_to_product_card()
         page.add_to_cart()
-        page.select_size(size)
+        page.select_size(select_size)
         assert device.xpath(ProductCard.POPUP_TITLE).get_text() == 'Товар добавлен в корзину'
         # Ожидание элементы, чтобы исчезнуть, вернуть True False, Timout по умолчанию для времени ожидания глобальных настроек
         # device.xpath(ProductCard.POPUP).wait_gone(timeout=10)

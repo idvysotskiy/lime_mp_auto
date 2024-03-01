@@ -7,6 +7,10 @@ import allure
 
 @pytest.fixture(autouse=True)
 def clear_app(device):
+    MainPage(device).set_nuxt_02()
+    MainPage(device).login(valid_email, valid_password)
+    MainPage(device).set_feature_toggles()
+    time.sleep(2)
     yield
     device.app_clear(package)
 
