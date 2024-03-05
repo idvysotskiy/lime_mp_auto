@@ -146,4 +146,9 @@ class MainPage(BasePage):
         self.click_x()
         self.click_x()
 
+    def open_product_card_screen(self):
+        self.click_to_nav_catalog()
+        self.go_to_catalog_item(menu_l1, menu_l2)
+        self.go_to_product_card()
+
 

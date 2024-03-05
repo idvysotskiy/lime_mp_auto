@@ -22,9 +22,7 @@ class TestMobile:
     @allure.testcase("C12")
     def test_size_bottom_sheet(self, device):
         page = ProductCardPage(device)
-        MainPage(device).click_to_nav_catalog()
-        MainPage(device).go_to_catalog_item(menu_l1, menu_l2)
-        MainPage(device).go_to_product_card()
+        MainPage(device).open_product_card_screen()
         page.add_to_cart()
         assert device.xpath(ProductCard.SIZE_INFO).get_text() == 'РУКОВОДСТВО ПО РАЗМЕРАМ +'
 
@@ -33,12 +31,21 @@ class TestMobile:
     @allure.testcase("C2943")
     def test_buy_popup(self, device):
         page = ProductCardPage(device)
-        MainPage(device).click_to_nav_catalog()
-        MainPage(device).go_to_catalog_item(menu_l1, menu_l2)
-        MainPage(device).go_to_product_card()
+        MainPage(device).open_product_card_screen()
         page.add_to_cart()
         page.select_size(select_size)
         assert device.xpath(ProductCard.POPUP_TITLE).get_text() == 'Товар добавлен в корзину'
         # Ожидание элементы, чтобы исчезнуть, вернуть True False, Timout по умолчанию для времени ожидания глобальных настроек
         # device.xpath(ProductCard.POPUP).wait_gone(timeout=10)
         # assert device.xpath(ProductCard.POPUP_TITLE).get_text() == 'Товар добавлен в корзину'
+
+    @pytest.mark.smoke
+    @allure.title('')
+    @allure.testcase("")
+    def test_buy_popup(self, device):
+        page = ProductCardPage(device)
+        MainPage(device).open_product_card_screen()
+        page.elements_product_card()
+        page.open_full_product_card()
+        page.elements_full_product_card()
+

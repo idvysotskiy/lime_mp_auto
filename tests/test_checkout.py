@@ -14,9 +14,10 @@ def clear_app(device):
     MainPage(device).login(valid_email, valid_password)
     MainPage(device).set_feature_toggles()
     time.sleep(2)
-    MainPage(device).click(MainLocators.CART_NAV)
-    CartPage(device).click(Cart.CLEAR_ALL)
-    CartPage(device).click(Cart.POPUP_CLEAR)
+    # MainPage(device).click(MainLocators.CART_NAV)
+    # CartPage(device).click(Cart.CLEAR_ALL)
+    # CartPage(device).click(Cart.POPUP_CLEAR)
+    #
     yield
     device.app_clear(package)
 
