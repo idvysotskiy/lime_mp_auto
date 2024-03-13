@@ -5,8 +5,8 @@ from locators import *
 
 
 class CartPage(BasePage):
-    def __init__(self, device):
-        super().__init__(device)
+    def __init__(self, d):
+        super().__init__(d)
 
     def elements_full_cart(self):
         self.is_element_present(MainLocators.X_BUTTON)
@@ -31,12 +31,12 @@ class CartPage(BasePage):
 
     @allure.step('Вводим промокод')
     def enter_promo_code(self, promo_code):
-        # self.device.xpath(Cart.PROMO_CODE).click()
-        # self.device.send_keys(promo_code)
+        # self.d.xpath(Cart.PROMO_CODE).click()
+        # self.d.send_keys(promo_code)
         self.set_text(Cart.PROMO_CODE, promo_code)
 
     @allure.step('Нажимаем кнопку "К оформлению"')
     def go_to_checkout(self):
-        self.device.xpath(Cart.CONTINUE).click()
+        self.d.xpath(Cart.CONTINUE).click()
 
 

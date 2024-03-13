@@ -13,43 +13,43 @@ import unittest
 
 
 class InstallAPK:
-    def __init__(self, device):
-        self.device = device
+    def __init__(self, d):
+        self.d = d
 
     def clear_app_data(self):
-        self.device.app_stop(package)
-        self.device.app_clear(package)
+        self.d.app_stop(package)
+        self.d.app_clear(package)
 
     def install_app(self):
-        self.device.app_install(app_link)
+        self.d.app_install(app_link)
 
     def remove_app(self):
-        self.device.app_uninstall(package)
+        self.d.app_uninstall(package)
 
     def stop_app(self):
-        self.device.app_stop(package)
+        self.d.app_stop(package)
 
 
 class BasePage:
-    def __init__(self, device):
-        self.device = device
+    def __init__(self, d):
+        self.d = d
 
     # def find_element_by_text(self, element_text):
-    # self.device.xpath(//*[@text=element_text])
+    # self.d.xpath(//*[@text=element_text])
     def swipe_page_up(self):
-        self.device.swipe_ext(Direction.FORWARD)
+        self.d.swipe_ext(Direction.FORWARD)
 
     def swipe_page_down(self):
-        self.device.swipe_ext(Direction.BACKWARD)
+        self.d.swipe_ext(Direction.BACKWARD)
 
     def swipe_page_left(self):
-        self.device.swipe_ext(Direction.HORIZ_FORWARD)
+        self.d.swipe_ext(Direction.HORIZ_FORWARD)
 
     def swipe_page_right(self):
-        self.device.swipe_ext(Direction.HORIZ_BACKWARD)
+        self.d.swipe_ext(Direction.HORIZ_BACKWARD)
 
     def swipe(self, swipe_ext):
-        self.device.swipe_ext(swipe_ext, scale=0.8)
+        self.d.swipe_ext(swipe_ext, scale=0.8)
 
     def generate_random_email(self):
         domain = "@yandex.ru"
@@ -59,21 +59,21 @@ class BasePage:
         return username + rnd_name + domain
 
     def get_element_text(self, locator, element_name):
-        element = self.device.xpath(locator, text=element_name)
+        element = self.d.xpath(locator, text=element_name)
         element.wait(timeout=10)
         assert element.exists, f"Catalog item '{element_name}' not found"
         print(element.get_text())
 
     def is_element_present(self, locator):
-        unittest.TestCase.assertTrue(self.device.xpath(locator).exists, 'Element not found!')
+        unittest.TestCase.assertTrue(self.d.xpath(locator).exists, 'Element not found!')
 
     def cancel_notification(self):
-        element = self.device.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=2)
+        element = self.d.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=2)
         if element is not None:
-            self.device.xpath(MainLocators.NOTIFICATION_NEGATIVE).click()
+            self.d.xpath(MainLocators.NOTIFICATION_NEGATIVE).click()
 
     def test_text(self, locator, text):
-        assert self.device.xpath(locator).get_text() == text
+        assert self.d.xpath(locator).get_text() == text
 
     def current_date(self):
         current_date = date.today()
@@ -101,9 +101,9 @@ class BasePage:
 
     def get_element(self, locator):
         if locator[0] == '/' and locator[1] == '/':
-            return self.device.xpath(locator)
+            return self.d.xpath(locator)
         else:
-            return self.device(resourceId=locator)
+            return self.d(resourceId=locator)
 
     def get_text(self, locator):
         return self.get_element(locator).get_text()
@@ -115,11 +115,11 @@ class BasePage:
         time.sleep(1)
 
     def swipe_down(self):
-        self.device.swipe(400, self.device.window_size()[1] / 2, 400, self.device.window_size()[1] / 4)
+        self.d.swipe(400, self.d.window_size()[1] / 2, 400, self.d.window_size()[1] / 4)
 
     @allure.step('Сделать свайп влево')
     def swipe(self, swipe_ext):
-        self.device.swipe_ext(swipe_ext, scale=0.8)
+        self.d.swipe_ext(swipe_ext, scale=0.8)
 
     # @allure.step('Сделать свайп вверх')
     # def swipe_page(self):
@@ -130,4 +130,4 @@ class BasePage:
             with allure.step("Удалить текст из поля '{element_name}'"):
                 self.get_element(locator).click()
         else:
-            self.device.clear_text()
+            self.d.clear_text()

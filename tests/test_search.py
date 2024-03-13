@@ -9,16 +9,16 @@ import allure
 
 
 @pytest.fixture(autouse=True)
-def clear_app(device):
+def clear_app(d):
     yield
-    device.app_clear(package)
+    d.app_clear(package)
 
 
 class TestAndroid:
     @allure.title('Экран "Поиск" / Удачный поиск по текстовому запросу')
     @allure.testcase("C3")
-    def test_search_text(self, device):
-        page = SearchPage(device)
+    def test_search_text(self, d):
+        page = SearchPage(d)
         page.go_to_search()
         page.elements_search_first()
         page.search('платье')
@@ -26,8 +26,8 @@ class TestAndroid:
 
     @allure.title('Экран "Поиск" / Валидный запрос для одной категории')
     @allure.testcase("C1779")
-    def test_search_text_one_category(self, device):
-        page = SearchPage(device)
+    def test_search_text_one_category(self, d):
+        page = SearchPage(d)
         page.go_to_search()
         page.elements_search_first()
         page.search('платье')
@@ -37,8 +37,8 @@ class TestAndroid:
 
     @allure.title('Экран "Поиск" / Удачный поиск по артикулу')
     @allure.testcase("C199")
-    def test_search_article(self, device):
-        page = SearchPage(device)
+    def test_search_article(self, d):
+        page = SearchPage(d)
         page.go_to_search()
         page.elements_search_first()
         page.search('0377-454')

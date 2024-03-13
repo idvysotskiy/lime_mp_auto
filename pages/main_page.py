@@ -5,16 +5,16 @@ from locators import *
 
 
 class MainPage(BasePage):
-    def __init__(self, device):
-        super().__init__(device)
+    def __init__(self, d):
+        super().__init__(d)
 
     @allure.step('Нажать кнопку "X"')
     def click_x(self):
-        self.device.xpath(MainLocators.X_BUTTON).click()
+        self.d.xpath(MainLocators.X_BUTTON).click()
 
     @allure.step('Перейти в каталог')
     def click_to_nav_catalog(self):
-        # assert self.device(resourceId=MainLocators.CATALOG_NAV).exist
+        # assert self.d(resourceId=MainLocators.CATALOG_NAV).exist
         self.click(MainLocators.CATALOG_NAV)
 
     @allure.step('Перейти в раздел каталога')
@@ -32,12 +32,12 @@ class MainPage(BasePage):
     @allure.step('Добавить товар в избранное')
     def add_to_fav_from_catalog(self):
         self.click(MainLocators.FAV_ICON)
-        product_name_1 = self.device(resourceId=MainLocators.NAME_PRODUCT_COLLECTION, text=product_name).get_text()
+        product_name_1 = self.d(resourceId=MainLocators.NAME_PRODUCT_COLLECTION, text=product_name).get_text()
         BasePage.cancel_notification(self)
         # product_name_1 = self.get_text(MainLocators.ITEM)
         self.click(MainLocators.FAVORITES_NAV)
         time.sleep(1)
-        product_name_2 = self.device(resourceId=MainLocators.NAME_PRODUCT_FAVORITE, text=product_name).get_text()
+        product_name_2 = self.d(resourceId=MainLocators.NAME_PRODUCT_FAVORITE, text=product_name).get_text()
         assert product_name_1 == product_name_2, 'Наименования товаров не совпадают'
 
     @allure.step('Авторизоваться')
@@ -48,11 +48,11 @@ class MainPage(BasePage):
             self.click(Profile.LOGIN_UN)
         with allure.step('Ввести email'):
             self.click(LoginLocators.LOGIN_SCREEN_EMAIL)
-            self.device.send_keys(email)
+            self.d.send_keys(email)
             BasePage.get_screen(self)
         with allure.step('Ввести пароль'):
             self.click(LoginLocators.LOGIN_SCREEN_PASS)
-            self.device.send_keys(password)
+            self.d.send_keys(password)
             BasePage.get_screen(self)
         with allure.step('Нажать кнопку "Войти"'):
             self.click(LoginLocators.LOGIN_SCREEN_SIGNIN)
@@ -114,7 +114,7 @@ class MainPage(BasePage):
         BasePage.cancel_notification(self)
 
     def screen_title(self, name):
-        title_name = self.device(resourceId=MainLocators.TOOLBAR_TITLE).get_text()
+        title_name = self.d(resourceId=MainLocators.TOOLBAR_TITLE).get_text()
         assert name == title_name
 
     @allure.step('Перейти к карточке товара')
@@ -136,7 +136,7 @@ class MainPage(BasePage):
     def set_nuxt_02(self):
         self.go_to_profile()
         time.sleep(2)
-        self.device.click(0.059, 0.546)
+        self.d.click(0.059, 0.546)
         time.sleep(2)
 
     @allure.step('Включаем feature_toggles')

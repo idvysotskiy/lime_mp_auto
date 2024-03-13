@@ -8,8 +8,8 @@ from pages.cart_page import CartPage
 
 
 class CheckOutPage(BasePage):
-    def __init__(self, device):
-        super().__init__(device)
+    def __init__(self, d):
+        super().__init__(d)
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
