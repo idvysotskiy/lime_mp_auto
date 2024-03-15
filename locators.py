@@ -224,6 +224,27 @@ class CheckOut:
     POPUP_BACK_CART_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
     POPUP_BACK_CART_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/positive_button"]'
     POPUP_BACK_CART_YES = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
+    # Card online
+    CARD_ICON = '//*[@resource-id="ru.limeshop.android.dev:id/payment_card_image"]'
+    CARD_INFO = '//*[@resource-id="ru.limeshop.android.dev:id/payment_card_number_text"]'
+    CARD_EDIT = '//*[@resource-id="ru.limeshop.android.dev:id/edit_payment_card_image"]'
+    # BOTTOM-SHEET YOUR CARDS
+    CARD_TITLE = '//*[@text="ВАШИ КАРТЫ"]'
+    CARD_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/is_selected_card_radio"]'
+    CARD_ICON_BOTTOM_SHEET = '//*[@resource-id="ru.limeshop.android.dev:id/icon_image_view"]'
+    CARD_INFO_BOTTOM_SHEET = '//*[@resource-id="ru.limeshop.android.dev:id/info_text_view"]'
+    CARD_DELETE_SOLO = '//*[@resource-id="ru.limeshop.android.dev:id/delete_image_view"]'
+    CARD_DELETE_1 = '//*[@resource-id="ru.limeshop.android.dev:id/saved_cards_recycler_view"]/android.view.ViewGroup[1]/android.widget.ImageView[2]'
+    CARD_DELETE_2 = '//*[@resource-id="ru.limeshop.android.dev:id/saved_cards_recycler_view"]/android.view.ViewGroup[2]/android.widget.ImageView[2]'
+    ADD_NEW_CARD_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/add_new_card_button"]'
+    # BOTTOM-SHEET ADD CARD
+    ADD_CARD_TITLE = '//*[@text="ДОБАВИТЬ КАРТУ"]'
+    ADD_CARD_NUMBER = '//*[@resource-id="ru.limeshop.android.dev:id/card_number"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
+    ADD_CARD_OWNER = '//*[@resource-id="ru.limeshop.android.dev:id/card_owner"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
+    ADD_CARD_EXPIRY = '//*[@resource-id="ru.limeshop.android.dev:id/card_expiry"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
+    ADD_CARD_CVV = '//*[@resource-id="ru.limeshop.android.dev:id/card_security"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
+    ADD_CARD_SAVE_CHECK_BOX = '//*[@resource-id="ru.limeshop.android.dev:id/saveCardCheckBox"]'
+    ADD_CARD_SAVE_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/order_continue_button"]'
 
 
 class SuccessPayScreen:
