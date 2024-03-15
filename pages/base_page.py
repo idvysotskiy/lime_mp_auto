@@ -130,3 +130,33 @@ class BasePage:
                 self.get_element(locator).click()
         else:
             self.d.clear_text()
+
+    def get_random_element(self, locator):
+        if locator[0] == '/' and locator[1] == '/':
+            counter = random.randrange(0, len(self.d.xpath(locator)))
+            return self.d.xpath(locator)[counter]
+        else:
+            counter = random.randrange(0, len(self.d(resourceId=locator)))
+            return self.d(resourceId=locator)[counter]
+
+    def wait_element(self, locator, element_name=None):
+        if element_name is not None:
+            with allure.step(f"Ожидание элемента '{element_name}'"):
+                self.get_element(locator).wait(timeout=10)
+                # assert self.get_element(locator).exists == True, print(element_name + " отсутствует")
+        else:
+            self.get_element(locator).wait(timeout=10)
+            # assert self.get_element(locator).exists == True
+
+    # def checking_exists_element(self, locator, element_name=None):
+    #     if element_name is not None:
+    #         with allure.step(f"Ожидание элемента '{element_name}'"):
+    #             assert self.get_element(locator).exists == True, print(element_name + " отсутствует")
+    #     else:
+    #         assert self.get_element(locator).exists == True
+
+    def accept_cloud_payments(self):
+        self.d.click(0.504, 0.366)
+
+    def close_popup(self):
+        self.d.click(0.477, 0.031)

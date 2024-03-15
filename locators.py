@@ -63,6 +63,12 @@ class ProductCard:
     M_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[3]'
     L_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[4]'
     XL_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[5]'
+    SIZE_34 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
+    SIZE_36 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[2]'
+    SIZE_38 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[3]'
+    SIZE_40 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[4]'
+    SIZE_42 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[5]'
+    SIZE_44 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[6]'
     SIZE_INFO = '//*[@resource-id="ru.limeshop.android.dev:id/sizeInfoButton"]'
     POPUP = '//*[@resource-id="ru.limeshop.android.dev:id/productPopup"]'
     POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/popupStartTitle"]'
@@ -224,6 +230,7 @@ class CheckOut:
     POPUP_BACK_CART_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
     POPUP_BACK_CART_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/positive_button"]'
     POPUP_BACK_CART_YES = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
+    ADD_NEW_CARD_PLUS = '//*[@resource-id="ru.limeshop.android.dev:id/add_payment_button"]'
     # Card online
     CARD_ICON = '//*[@resource-id="ru.limeshop.android.dev:id/payment_card_image"]'
     CARD_INFO = '//*[@resource-id="ru.limeshop.android.dev:id/payment_card_number_text"]'
@@ -245,6 +252,11 @@ class CheckOut:
     ADD_CARD_CVV = '//*[@resource-id="ru.limeshop.android.dev:id/card_security"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     ADD_CARD_SAVE_CHECK_BOX = '//*[@resource-id="ru.limeshop.android.dev:id/saveCardCheckBox"]'
     ADD_CARD_SAVE_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/order_continue_button"]'
+    # POP-UP DELETE CARD
+    DEL_CARD_POP_UP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
+    DEL_CARD_POP_UP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
+    DEL_CARD_POP_UP_DELETE = '//*[@resource-id="ru.limeshop.android.dev:id/danger_button"]'
+    DEL_CARD_POP_UP_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
 
 
 class SuccessPayScreen:

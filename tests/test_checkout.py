@@ -11,7 +11,7 @@ import allure
 @pytest.mark.usefixtures("setup")
 class TestAndroid:
     @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
-    @allure.testcase("C2869")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2869")
     def test_checkout_with_one_product(self):
         CheckOutPage().checkout_with_one()
         CheckOutPage().back_to_cart()
@@ -20,7 +20,7 @@ class TestAndroid:
 
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата ранее сохраненной картой')
-    @allure.testcase("C3048")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3048")
     def test_pay_card(self):
         page = CheckOutPage()
         page.checkout_with_one()
@@ -31,7 +31,7 @@ class TestAndroid:
 
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Оплата при получении')
-    @allure.testcase("C3038")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3038")
     def test_pay_self(self):
         page = CheckOutPage()
         page.checkout_with_one()
@@ -41,5 +41,27 @@ class TestAndroid:
         page.click_pay()
         page.continue_shopping()
 
+    @pytest.mark.smoke
+    @allure.title('Блок "Оплата" / Сохранение карты')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2946")
+    def test_add_new_card(self):
+        page = CheckOutPage()
+        page.checkout_with_one()
+        page.wait_a_second()
+        page.click(CheckOut.PAYMENT_SELECTOR_2)
+        page.add_new_card()
+        page.click(CheckOut.SLOTS_DATE_SELECTOR_1)
+        page.click(CheckOut.SLOTS_TIME_SELECTOR_1)
+        page.click_pay()
 
-
+    @pytest.mark.smoke
+    @allure.title('Блок "Оплата" / Попап "Удалить карту (Удалить последнюю карту)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2954")
+    def test_delete_last_card(self):
+        page = CheckOutPage()
+        page.checkout_with_one()
+        page.click(CheckOut.PAYMENT_SELECTOR_2)
+        page.delete_card_solo()
+        time.sleep(4)
+        BasePage().close_popup()
+        page.check_btn_add_card()

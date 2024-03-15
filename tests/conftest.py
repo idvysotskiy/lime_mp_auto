@@ -42,6 +42,7 @@ def teardown():
 
 @pytest.fixture()
 def setup():
-    open_app()
-    yield
-    teardown()
+    print('yo')
+    # open_app()
+    # yield
+    # teardown()
