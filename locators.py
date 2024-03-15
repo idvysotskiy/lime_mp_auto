@@ -220,6 +220,10 @@ class CheckOut:
     SUMMARY_TOTAL = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_total_text"]'
     ORDER_PAY = '//*[@resource-id="ru.limeshop.android.dev:id/order_pay_button"]'
     TERMS_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_terms_text"]'
+    POPUP_BACK_CART_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
+    POPUP_BACK_CART_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
+    POPUP_BACK_CART_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/positive_button"]'
+    POPUP_BACK_CART_YES = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
 
 
 class SuccessPayScreen:

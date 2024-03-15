@@ -1,7 +1,10 @@
 import time
 import allure
+import pytest
+
 from pages.base_page import BasePage
 from locators import *
+from pages.main_page import MainPage
 
 
 class CartPage(BasePage):
@@ -35,6 +38,11 @@ class CartPage(BasePage):
 
     @allure.step('Нажимаем кнопку "К оформлению"')
     def go_to_checkout(self):
-        self.d.xpath(Cart.CONTINUE).click()
+        self.click(Cart.CONTINUE)
+
+    @allure.step('Очищяем корзину')
+    def cart_clear(self):
+        self.click(Cart.CLEAR_ALL)
+        self.click(Cart.POPUP_CLEAR)
 
 

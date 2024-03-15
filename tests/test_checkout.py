@@ -13,28 +13,20 @@ class TestAndroid:
     @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
     @allure.testcase("C2869")
     def test_checkout_with_one_product(self):
+        CheckOutPage().checkout_with_one()
+        CheckOutPage().back_to_cart()
         time.sleep(2)
-        main = MainPage()
-        product_card_page = ProductCardPage()
-        main.click_to_nav_catalog()
-        main.go_to_catalog_item()
-        main.go_to_product_card()
-        product_card_page.add_to_cart()
-        product_card_page.select_size(select_size)
-        time.sleep(2)
-        main.go_to_cart()
-        # CartPage(d).enter_promo_code(promo_code_2)
-        # time.sleep(2)
-        CartPage().go_to_checkout()
-        time.sleep(4)
+        CartPage().cart_clear()
 
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата ранее сохраненной картой')
     @allure.testcase("C3048")
-    def test_pay_card(self, login):
+    def test_pay_card(self):
         page = CheckOutPage()
-        self.test_checkout_with_one_product()
+        page.checkout_with_one()
+        time.sleep(2)
         page.checkout_set('1', '2', '1', '1')
+        time.sleep(2)
         page.click_pay()
 
     @pytest.mark.smoke
@@ -42,7 +34,7 @@ class TestAndroid:
     @allure.testcase("C3038")
     def test_pay_self(self):
         page = CheckOutPage()
-        self.test_checkout_with_one_product()
+        page.checkout_with_one()
         page.elements_checkout()
         page.checkout_set('1', '4', '2', '2')
         page.elements_checkout_self()

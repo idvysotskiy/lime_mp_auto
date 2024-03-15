@@ -78,5 +78,22 @@ class CheckOutPage(BasePage):
         self.is_element_present(MainLocators.X_BUTTON)
         BasePage.get_screen(self)
 
+    def back_to_cart(self):
+        self.click(MainLocators.X_BUTTON)
+        self.click(CheckOut.POPUP_BACK_CART_YES)
 
-
+    def checkout_with_one(self):
+        time.sleep(2)
+        main = MainPage()
+        product_card_page = ProductCardPage()
+        main.click_to_nav_catalog()
+        main.go_to_catalog_item()
+        main.go_to_product_card()
+        product_card_page.add_to_cart()
+        product_card_page.select_size(select_size)
+        time.sleep(2)
+        main.go_to_cart()
+        CartPage().go_to_checkout()
+        time.sleep(2)
+        CheckOutPage().elements_checkout()
+        BasePage.get_screen(self)

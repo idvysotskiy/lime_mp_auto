@@ -33,6 +33,5 @@ class TestAndroid:
     @allure.testcase("C28")
     def test_cart_clear(self):
         page = CartPage()
-        MainPage().click(MainLocators.CART_NAV)
-        time.sleep(2)
-        page.elements_clear_cart()
+        page.cart_clear()
+
