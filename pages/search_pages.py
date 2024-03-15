@@ -24,9 +24,8 @@ ICON_FAIL_SEARCH = '//androidx.appcompat.widget.LinearLayoutCompat/android.widge
 FAIL_SEARCH_TEXT = '//*[@text="НИЧЕГО НЕ НАЙДЕНО"]'
 FAIL_SEARCH_DESCRIPTION = '//*[@text="Проверьте, правильно ли введен запрос"]'
 
+
 class SearchPage(BasePage):
-    def __init__(self, d):
-        super().__init__(d)
 
     @allure.step('Нажать кнопку "Поиск"')
     def go_to_search(self):

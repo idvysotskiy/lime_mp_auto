@@ -5,8 +5,6 @@ from locators import *
 
 
 class CartPage(BasePage):
-    def __init__(self, d):
-        super().__init__(d)
 
     def elements_full_cart(self):
         self.is_element_present(MainLocators.X_BUTTON)

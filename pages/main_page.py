@@ -5,8 +5,6 @@ from locators import *
 
 
 class MainPage(BasePage):
-    def __init__(self, d):
-        super().__init__(d)
 
     @allure.step('Нажать кнопку "X"')
     def click_x(self):

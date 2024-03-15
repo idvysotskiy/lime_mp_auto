@@ -10,11 +10,11 @@ import random
 import string
 from uiautomator2 import Direction
 import unittest
+import uiautomator2 as u2
 
 
 class InstallAPK:
-    def __init__(self, d):
-        self.d = d
+    d = u2.connect('emulator-5554')
 
     def clear_app_data(self):
         self.d.app_stop(package)
@@ -31,8 +31,7 @@ class InstallAPK:
 
 
 class BasePage:
-    def __init__(self, d):
-        self.d = d
+    d = u2.connect('emulator-5554')
 
     # def find_element_by_text(self, element_text):
     # self.d.xpath(//*[@text=element_text])
@@ -59,7 +58,7 @@ class BasePage:
         return username + rnd_name + domain
 
     def get_element_text(self, locator, element_name):
-        element = self.d.xpath(locator, text=element_name)
+        element = self.d.xpath(locator)
         element.wait(timeout=10)
         assert element.exists, f"Catalog item '{element_name}' not found"
         print(element.get_text())

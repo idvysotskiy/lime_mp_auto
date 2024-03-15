@@ -35,8 +35,6 @@ POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/popupStartTitle"]'
 POPUP_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/popupButton"]'
 
 class ProductCardPage(BasePage):
-    def __init__(self, device):
-        super().__init__(device)
 
     @allure.step('Нажать кнопку "Купить"')
     def add_to_cart(self):
@@ -62,7 +60,7 @@ class ProductCardPage(BasePage):
         self.is_element_present(MainLocators.X_BUTTON)
         assert self.get_text(BUY) == 'КУПИТЬ'
         assert self.get_text(COLORS) == 'Цвета'
-        BasePage(self).get_screen()
+        BasePage().get_screen()
 
     def elements_full_product_card(self):
         assert self.get_text(BUY) == 'КУПИТЬ'
@@ -77,7 +75,7 @@ class ProductCardPage(BasePage):
         self.is_element_present(PAYMENT)
         self.is_element_present(GOES_WELL)
         self.is_element_present(YOU_LIKE_IT)
-        BasePage(self).get_screen()
+        BasePage().get_screen()
 
     def open_full_product_card(self):
         self.click(COLORS)
