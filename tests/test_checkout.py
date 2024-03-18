@@ -67,9 +67,42 @@ class TestAndroid:
         page.check_btn_add_card()
 
     @pytest.mark.smoke
-    @allure.title('Блок "Оплата" / Оплата картой онлайн (Нет сохраненных карт)')
+    @allure.title('Блок "Оплата" / Боттом шит "Добавить карту"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2833")
-    def test_full_buy(self):
+    def test_add_card_elements(self):
+        page = MainPage()
+        page.reg_kir()
+        page.click_x()
+        BasePage().cancel_notification()
+        page = CheckOutPage()
+        page.checkout_with_one()
+        page.click(CheckOut.PAYMENT_SELECTOR_2)
+        page.click(CheckOut.ADD_NEW_CARD_PLUS)
+        page.elements_add_card()
+
+    @pytest.mark.smoke
+    @allure.title('Блок "Оплата" / Оплата картой онлайн (Добавление карты)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2834")
+    def test_add_card(self):
+        page = MainPage()
+        page.reg_kir()
+        page.click_x()
+        BasePage().cancel_notification()
+        page = CheckOutPage()
+        page.checkout_with_one()
+        page.add_main_address()
+        page.click(CheckOut.PAYMENT_SELECTOR_2)
+        page.add_new_card()
+        assert page.is_element_present(CheckOut.CARD_ICON)
+        assert page.is_element_present(CheckOut.CARD_INFO)
+        assert page.is_element_present(CheckOut.CARD_EDIT)
+        page.get_screen()
+
+
+    @pytest.mark.smoke
+    @allure.title('Блок "Оплата" / Успешная оплата картой (Нет сохраненных карт)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3147")
+    def test_success_pay_card_with_add_card(self):
         page = MainPage()
         page.reg_kir()
         page.click_x()
@@ -80,6 +113,5 @@ class TestAndroid:
         page.click(CheckOut.PAYMENT_SELECTOR_2)
         page.add_new_card()
         page.click_pay()
-
 
 

@@ -150,3 +150,12 @@ class CheckOutPage(BasePage):
         with allure.step('Нажать кнопку "Сохранить"'):
             self.click(CheckOut.ADD_ADDRESS_SAVE_BUTTON)
 
+    def elements_add_card(self):
+        assert self.get_text(CheckOut.ADD_CARD_TITLE) == 'ДОБАВИТЬ КАРТУ'
+        assert self.get_text(CheckOut.ADD_CARD_NUMBER) == 'Номер карты'
+        assert self.get_text(CheckOut.ADD_CARD_OWNER) == 'Владелец карты'
+        assert self.get_text(CheckOut.ADD_CARD_EXPIRY) == 'Месяц / год'
+        assert self.get_text(CheckOut.ADD_CARD_CVV) == 'CVV / CVC'
+        assert self.get_text(CheckOut.ADD_CARD_SAVE_CHECK_BOX) == 'Запомнить данные карты'
+        assert self.get_text(CheckOut.ADD_CARD_SAVE_BUTTON) == 'СОХРАНИТЬ'
+        self.get_screen()
