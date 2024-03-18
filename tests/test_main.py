@@ -41,11 +41,7 @@ class TestMobile:
     @allure.testcase("C1030")
     def test_reg(self):
         page = MainPage()
-        page.go_to_registration()
-        page.enter_valid_registration_data(valid_name_kir, valid_surname_kir, valid_phone, valid_password)
-        page.click_subscribe_boxes(subscribe)
-        page.click_resume_btn_signup()
-        page.cancel_notification()
+        page.reg_kir()
         page.screen_title('ЛИЧНЫЙ КАБИНЕТ')
 
 

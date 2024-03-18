@@ -65,3 +65,21 @@ class TestAndroid:
         time.sleep(4)
         BasePage().close_popup()
         page.check_btn_add_card()
+
+    @pytest.mark.smoke
+    @allure.title('Блок "Оплата" / Оплата картой онлайн (Нет сохраненных карт)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2833")
+    def test_full_buy(self):
+        page = MainPage()
+        page.reg_kir()
+        page.click_x()
+        BasePage().cancel_notification()
+        page = CheckOutPage()
+        page.checkout_with_one()
+        page.add_main_address()
+        page.click(CheckOut.PAYMENT_SELECTOR_2)
+        page.add_new_card()
+        page.click_pay()
+
+
+

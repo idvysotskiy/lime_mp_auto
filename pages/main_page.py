@@ -149,4 +149,11 @@ class MainPage(BasePage):
         self.go_to_catalog_item(menu_l1, menu_l2)
         self.go_to_product_card()
 
+    def reg_kir(self):
+        self.go_to_registration()
+        self.enter_valid_registration_data(valid_name_kir, valid_surname_kir, valid_phone, valid_password)
+        self.click_subscribe_boxes(subscribe)
+        self.click_resume_btn_signup()
+        self.cancel_notification()
+
 

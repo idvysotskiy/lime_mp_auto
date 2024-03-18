@@ -196,6 +196,7 @@ class CheckOut:
     DELIVERY_PRICE_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.TextView[2]'
     DELIVERY_PRICE_2 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[2]/android.widget.TextView[2]'
     ADDRESS = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_info_title_text"]'
+    ADD_ADDRESS_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/add_courier_address_button"]'
     EDIT_ADDRESS = '//*[@resource-id="ru.limeshop.android.dev:id/edit_courier_address_image"]'
     NAME = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_info_subtitle_text"]'
     PAYMENT_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/payment_title_text"]'
@@ -257,6 +258,13 @@ class CheckOut:
     DEL_CARD_POP_UP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
     DEL_CARD_POP_UP_DELETE = '//*[@resource-id="ru.limeshop.android.dev:id/danger_button"]'
     DEL_CARD_POP_UP_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
+    # ADD ADDRESS BOTTOM-SHEET
+    ADD_ADDRESS_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text"]'
+    ADD_ADDRESS_CITY = '//*[@text="Город / Населенный пункт"]'
+    ADD_ADDRESS_POPUP = '//*[@resource-id="ru.limeshop.android.dev:id/popupTextView"]'
+    ADD_ADDRESS_STREET = '//*[@text="Улица и дом"]'
+    ADD_ADDRESS_APARTMENT = '//*[@text="Квартира"]'
+    ADD_ADDRESS_SAVE_BUTTON = '//*[@text="СОХРАНИТЬ"]'
 
 
 class SuccessPayScreen:

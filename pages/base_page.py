@@ -54,7 +54,7 @@ class BasePage:
         domain = "@yandex.ru"
         username_length = random.randint(5, 10)
         rnd_name = ''.join(random.choice(string.ascii_lowercase) for _ in range(username_length))
-        username = 'yapmap.tester+'
+        username = 'lime.tester+'
         return username + rnd_name + domain
 
     def get_element_text(self, locator, element_name):
@@ -67,7 +67,7 @@ class BasePage:
         unittest.TestCase.assertTrue(self.d.xpath(locator).exists, 'Element not found!')
 
     def cancel_notification(self):
-        element = self.d.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=2)
+        element = self.d.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=10)
         if element is not None:
             self.d.xpath(MainLocators.NOTIFICATION_NEGATIVE).click()
 
@@ -154,9 +154,6 @@ class BasePage:
     #             assert self.get_element(locator).exists == True, print(element_name + " отсутствует")
     #     else:
     #         assert self.get_element(locator).exists == True
-
-    def accept_cloud_payments(self):
-        self.d.click(0.504, 0.366)
 
     def close_popup(self):
         self.d.click(0.477, 0.031)

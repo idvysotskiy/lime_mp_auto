@@ -11,13 +11,16 @@ class CheckOutPage(BasePage):
     # def __init__(self, d):
     #     super().__init__(d)
 
+    def accept_cloud_payments(self):
+        self.d.click(0.504, 0.366)
+
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
         BasePage.swipe_page_up(self)
         time.sleep(0.5)
         self.click(CheckOut.ORDER_PAY)
-        time.sleep(4)
-        BasePage().accept_cloud_payments()
+        time.sleep(5)
+        self.accept_cloud_payments()
         time.sleep(1)
         assert self.get_text(SuccessPayScreen.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         assert self.get_text(SuccessPayScreen.DESCRIPTION) == 'Отслеживать его статус вы можете в личном кабинете'
@@ -86,7 +89,6 @@ class CheckOutPage(BasePage):
         self.click(CheckOut.POPUP_BACK_CART_YES)
 
     def checkout_with_one(self):
-        time.sleep(2)
         main = MainPage()
         product_card_page = ProductCardPage()
         main.click_to_nav_catalog()
@@ -113,20 +115,17 @@ class CheckOutPage(BasePage):
 
     def add_new_card(self):
         with allure.step('Нажать кнопку "Добавить карту"'):
-            # self.wait_element(CheckOut.ADD_NEW_CARD_BUTTON)
-            time.sleep(2)
             self.click(CheckOut.ADD_NEW_CARD_PLUS)
             self.wait_element(CheckOut.ADD_CARD_TITLE)
             assert self.get_text(CheckOut.ADD_CARD_TITLE) == 'ДОБАВИТЬ КАРТУ'
         with allure.step('Заполнить поля валидными данными'):
-            # self.click(CheckOut.ADD_CARD_NUMBER)
-            # self.d(CheckOut.ADD_CARD_NUMBER).send_keys(card_1)
             self.set_text(CheckOut.ADD_CARD_NUMBER, card_1)
             self.set_text(CheckOut.ADD_CARD_OWNER, card_owner)
             self.set_text(CheckOut.ADD_CARD_EXPIRY, card_expiry)
             self.set_text(CheckOut.ADD_CARD_CVV, card_cvv)
         # with allure.step('Выбрать чекбокс "Запомнить данные карты'):
         #     self.click(CheckOut.ADD_CARD_SAVE_CHECK_BOX)
+            self.get_screen()
         with allure.step('Нажать кнопку "Сохранить"'):
             self.click(CheckOut.ADD_CARD_SAVE_BUTTON)
         self.get_screen()
@@ -134,5 +133,20 @@ class CheckOutPage(BasePage):
     def check_btn_add_card(self):
         self.is_element_present(CheckOut.ADD_NEW_CARD_PLUS)
 
-
+    def add_main_address(self):
+        with allure.step('Нажать кнопку "Добавить адрес"'):
+            self.click(CheckOut.ADD_ADDRESS_BUTTON)
+        with allure.step('Ввести значение в поле "Город"'):
+            self.set_text(CheckOut.ADD_ADDRESS_CITY, 'Новосибирск')
+        with allure.step('Выбрать город из всплывашки'):
+            self.click(CheckOut.ADD_ADDRESS_POPUP)
+        with allure.step('Ввести значение в поле "Улица"'):
+            self.set_text(CheckOut.ADD_ADDRESS_STREET, 'Лаврентьева 6/1')
+        with allure.step('Выбрать улицу из всплывашки'):
+            self.click(CheckOut.ADD_ADDRESS_POPUP)
+        with allure.step('Ввести значение в поле "Квартира"'):
+            self.set_text(CheckOut.ADD_ADDRESS_APARTMENT, '605')
+        self.get_screen()
+        with allure.step('Нажать кнопку "Сохранить"'):
+            self.click(CheckOut.ADD_ADDRESS_SAVE_BUTTON)
 
