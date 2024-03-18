@@ -57,8 +57,8 @@ class MainPage(BasePage):
 
     @allure.step('Открыть регистрацию')
     def go_to_registration(self):
-        BasePage.swipe_page_up(self)
         self.click(MainLocators.PROFILE_NAV)
+        BasePage.swipe_page_up(self)
         self.click(Profile.SIGNUP_UN)
         BasePage.get_screen(self)
 

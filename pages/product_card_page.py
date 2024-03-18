@@ -1,6 +1,7 @@
 import time
 import allure
 from pages.base_page import BasePage
+from pages.main_page import MainPage
 from locators import *
 from config import *
 
@@ -54,3 +55,15 @@ class ProductCardPage(BasePage):
 
     def open_full_product_card(self):
         self.click(ProductCard.COLORS)
+
+    def add_one_product_to_cart(self):
+        main = MainPage()
+        main.click_to_nav_catalog()
+        main.go_to_catalog_item()
+        main.go_to_product_card()
+        self.add_to_cart()
+        self.select_size(select_size)
+        time.sleep(2)
+        main.go_to_cart()
+
+

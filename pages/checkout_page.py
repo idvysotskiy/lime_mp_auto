@@ -89,19 +89,16 @@ class CheckOutPage(BasePage):
         self.click(CheckOut.POPUP_BACK_CART_YES)
 
     def checkout_with_one(self):
-        main = MainPage()
-        product_card_page = ProductCardPage()
-        main.click_to_nav_catalog()
-        main.go_to_catalog_item()
-        main.go_to_product_card()
-        product_card_page.add_to_cart()
-        product_card_page.select_size(select_size)
-        time.sleep(2)
-        main.go_to_cart()
+        ProductCardPage().add_one_product_to_cart()
         CartPage().go_to_checkout()
         time.sleep(2)
         self.elements_checkout()
-        BasePage.get_screen(self)
+        BasePage().get_screen()
+
+    def checkout_with_one_un(self):
+        ProductCardPage().add_one_product_to_cart()
+        CartPage().go_to_checkout()
+        self.get_screen()
 
     def delete_card_solo(self):
         with allure.step('Нажать на иконку "Карандаш" справа от данных карты'):
@@ -159,3 +156,9 @@ class CheckOutPage(BasePage):
         assert self.get_text(CheckOut.ADD_CARD_SAVE_CHECK_BOX) == 'Запомнить данные карты'
         assert self.get_text(CheckOut.ADD_CARD_SAVE_BUTTON) == 'СОХРАНИТЬ'
         self.get_screen()
+
+    def reg_user(self):
+        page = MainPage()
+        page.reg_kir()
+        page.click_x()
+        self.cancel_notification()

@@ -13,15 +13,17 @@ class TestAndroid:
     @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2869")
     def test_checkout_with_one_product(self):
-        CheckOutPage().checkout_with_one()
-        CheckOutPage().back_to_cart()
-        time.sleep(2)
-        CartPage().cart_clear()
+
+        page = CheckOutPage()
+        page.checkout_with_one()
+        page.back_to_cart()
+
 
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата ранее сохраненной картой')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3048")
     def test_pay_card(self):
+        MainPage().login()
         page = CheckOutPage()
         page.checkout_with_one()
         time.sleep(2)
@@ -59,7 +61,9 @@ class TestAndroid:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2954")
     def test_delete_last_card(self):
         page = CheckOutPage()
+        self.test_add_new_card()
         page.checkout_with_one()
+        page.wait_a_second()
         page.click(CheckOut.PAYMENT_SELECTOR_2)
         page.delete_card_solo()
         time.sleep(4)
@@ -70,11 +74,8 @@ class TestAndroid:
     @allure.title('Блок "Оплата" / Боттом шит "Добавить карту"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2833")
     def test_add_card_elements(self):
-        page = MainPage()
-        page.reg_kir()
-        page.click_x()
-        BasePage().cancel_notification()
         page = CheckOutPage()
+        page.reg_user()
         page.checkout_with_one()
         page.click(CheckOut.PAYMENT_SELECTOR_2)
         page.click(CheckOut.ADD_NEW_CARD_PLUS)
@@ -84,11 +85,8 @@ class TestAndroid:
     @allure.title('Экран "Оформление заказа" / Не заполнены основные данные')
     @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131747")
     def test_add_main_address_elements(self):
-        page = MainPage()
-        page.reg_kir()
-        page.click_x()
-        BasePage().cancel_notification()
         page = CheckOutPage()
+        page.reg_user()
         page.checkout_with_one()
         page.click(CheckOut.ADD_ADDRESS_BUTTON)
         assert page.get_text(CheckOut.ADD_ADDRESS_TITLE) == 'РЕДАКТИРОВАТЬ АДРЕС'
@@ -143,3 +141,17 @@ class TestAndroid:
         page.click(CheckOut.PAYMENT_SELECTOR_2)
         page.add_new_card()
         page.click_pay()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Оформление заказа" / Авторизация')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131745")
+    def test_go_checkout_unautorized(self):
+        page = CheckOutPage()
+        page.checkout_with_one_un()
+        MainPage().login()
+        assert page.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
+        page.click(MainLocators.PROFILE_NAV)
+        assert page.is_element_present(Profile.EMAIL)
+
+
+

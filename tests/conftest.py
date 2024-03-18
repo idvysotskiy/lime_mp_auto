@@ -14,8 +14,8 @@ def open_app():
     d.implicitly_wait(10)
     d.app_clear(package)
     d.app_start(package, stop=True)
-    page = MainPage()
-    page.set_nuxt_02()
+    # page = MainPage()
+    # page.set_nuxt_02()
     # page.login(valid_email, valid_password)
     # page.set_feature_toggles()
 
