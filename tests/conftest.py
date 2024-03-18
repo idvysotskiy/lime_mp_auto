@@ -16,8 +16,8 @@ def open_app():
     d.app_start(package, stop=True)
     page = MainPage()
     page.set_nuxt_02()
-    page.login(valid_email, valid_password)
-    page.set_feature_toggles()
+    # page.login(valid_email, valid_password)
+    # page.set_feature_toggles()
 
 
 @allure.title("Сменить контур на nuxt02.mp.lmdev")
@@ -42,7 +42,7 @@ def teardown():
 
 @pytest.fixture()
 def setup():
-    print('yo')
-    # open_app()
-    # yield
-    # teardown()
+    # print('yo')
+    open_app()
+    yield
+    teardown()

@@ -81,6 +81,37 @@ class TestAndroid:
         page.elements_add_card()
 
     @pytest.mark.smoke
+    @allure.title('Экран "Оформление заказа" / Не заполнены основные данные')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131747")
+    def test_add_main_address_elements(self):
+        page = MainPage()
+        page.reg_kir()
+        page.click_x()
+        BasePage().cancel_notification()
+        page = CheckOutPage()
+        page.checkout_with_one()
+        page.click(CheckOut.ADD_ADDRESS_BUTTON)
+        assert page.get_text(CheckOut.ADD_ADDRESS_TITLE) == 'РЕДАКТИРОВАТЬ АДРЕС'
+        # ...
+        assert page.get_text(CheckOut.ADD_ADDRESS_SAVE_BUTTON) == 'СОХРАНИТЬ'
+        page.get_screen()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Оформление заказа" / Заполнение основного адреса ')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131748")
+    def test_add_main_address(self):
+        page = MainPage()
+        page.reg_kir()
+        page.click_x()
+        BasePage().cancel_notification()
+        page = CheckOutPage()
+        page.checkout_with_one()
+        page.add_main_address()
+        assert page.is_element_present(CheckOut.SELECTED_ADDRESS)
+        assert page.is_element_present(CheckOut.EDIT_ADDRESS)
+        page.get_screen()
+
+    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Оплата картой онлайн (Добавление карты)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2834")
     def test_add_card(self):
@@ -98,7 +129,6 @@ class TestAndroid:
         assert page.is_element_present(CheckOut.CARD_EDIT)
         page.get_screen()
 
-
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата картой (Нет сохраненных карт)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3147")
@@ -113,5 +143,3 @@ class TestAndroid:
         page.click(CheckOut.PAYMENT_SELECTOR_2)
         page.add_new_card()
         page.click_pay()
-
-

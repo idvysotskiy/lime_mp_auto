@@ -196,6 +196,7 @@ class CheckOut:
     DELIVERY_PRICE_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.TextView[2]'
     DELIVERY_PRICE_2 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[2]/android.widget.TextView[2]'
     ADDRESS = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_info_title_text"]'
+    SELECTED_ADDRESS = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_courier_title_text"]'
     ADD_ADDRESS_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/add_courier_address_button"]'
     EDIT_ADDRESS = '//*[@resource-id="ru.limeshop.android.dev:id/edit_courier_address_image"]'
     NAME = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_info_subtitle_text"]'
