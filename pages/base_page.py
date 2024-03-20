@@ -79,10 +79,10 @@ class BasePage:
         return current_date
 
     def get_screen(self):
-        print('screen')
-        # screen = "screen.png"
-        # self.d.screenshot(screen)
-        # allure.attach.file(f'./{screen}', attachment_type=allure.attachment_type.PNG)
+        # print('screen')
+        screen = "screen.png"
+        self.d.screenshot(screen)
+        allure.attach.file(f'./{screen}', attachment_type=allure.attachment_type.PNG)
 
     def click(self, locator, element_name=None):
         if element_name is not None:
