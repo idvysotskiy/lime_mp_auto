@@ -332,3 +332,8 @@ class SuccessPayScreenLocators:
     TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/status_title_text"]'
     DESCRIPTION = '//*[@text="Отслеживать его статус вы можете в личном кабинете"]'
     BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/action_button"]'
+
+class FavoritesLocators:
+    BOTTOMBACK = "//android.widget.ImageButton"
+    TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
+    BOTTOMBUY = 'ru.limeshop.android.dev:id/buyButton'

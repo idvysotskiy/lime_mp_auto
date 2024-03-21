@@ -148,32 +148,30 @@ class BasePage:
             return locator[counter]
 
     def wait_element(self, locator, element_name=None):
-        time.sleep(5)
-        # if element_name is not None:
-        #     with allure.step(f"Ожидание элемента '{element_name}'"):
-        #         if isinstance(locator, str):
-        #             if locator[0] == '/' and locator[1] == '/':
-        #                 assert self.get_element(locator).exists == True, print(f"Элемент {element_name} отсутствует")
-        #             else:
-        #                 assert self.get_element(locator).wait(10) == True, print(f"Элемент {element_name} отсутствует")
-        #         else:
-        #             assert locator.wait(10) == True, print(f"Элемент {element_name} отсутствует")
-        # else:
-        #     if isinstance(locator, str):
-        #         if locator[0] == '/' and locator[1] == '/':
-        #             assert self.get_element(locator).exists == True
-        #         else:
-        #             assert self.get_element(locator).wait(10) == True
-        #     else:
-        #         assert locator.wait(10) == True
+        # time.sleep(5)
+        if element_name is not None:
+            with allure.step(f"Ожидание элемента '{element_name}'"):
+                if isinstance(locator, str):
+                    if locator[0] == '/' and locator[1] == '/':
+                        assert self.get_element(locator).exists == True, print(f"Элемент {element_name} отсутствует")
+                    else:
+                        assert self.get_element(locator).wait(10) == True, print(f"Элемент {element_name} отсутствует")
+                else:
+                    assert locator.wait(10) == True, print(f"Элемент {element_name} отсутствует")
+        else:
+            if isinstance(locator, str):
+                if locator[0] == '/' and locator[1] == '/':
+                    assert self.get_element(locator).exists == True
+                else:
+                    assert self.get_element(locator).wait(10) == True
+            else:
+                assert locator.wait(10) == True
 
     def wait_text(self, text):
-        self.d(text=text).wait(10)
+        assert self.d(text=text).wait(10) == True, print(f"Элемент с текстом '{text}' не найден")
 
     def close_popup(self):
         self.d.click(0.477, 0.031)
 
     def get_number_from_element(self, element):
         return int(re.sub('[^0-9]', "", self.get_text(element)))
-
-
