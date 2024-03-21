@@ -1,7 +1,6 @@
 # file: test_favorites.py
 import pytest
 from pages.main_page import MainPage
-from pages.base_page import *
 import allure
 
 
@@ -11,6 +10,8 @@ class TestAndroid:
     @allure.title('Шаблон')
     @allure.testcase("")
     def test_example(self):
-        print('test')
+        page = MainPage()
+        page.favorites.open_favorites()
+
 
 
