@@ -1,10 +1,7 @@
 # file: test_checkout.py
 import pytest
 from pages.main_page import MainPage
-from pages.checkout_page import CheckOutPage
 from pages.base_page import *
-from pages.cart_page import *
-from pages.product_card_page import *
 import allure
 
 
@@ -15,8 +12,10 @@ class TestAndroid:
     def test_checkout_with_one_product(self):
         page = MainPage()
         page.click_to_nav_catalog()
-        page.go_to_catalog_item()
-        page.go_to_product_card()
+        # page.go_to_catalog_item()
+        # page.go_to_product_card()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
         self.add_to_cart()
         self.select_size(select_size)
         time.sleep(2)
@@ -228,7 +227,7 @@ class TestAndroid:
         page.go_to_cart()
         page.cart.go_to_checkout()
         self.get_screen()
-        MainPage().login()
+        page.login()
         assert page.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
         page.click(MainLocators.PROFILE_NAV)
         assert page.is_element_present(ProfileLocators.EMAIL)

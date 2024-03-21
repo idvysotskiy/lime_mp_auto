@@ -51,3 +51,6 @@ card_15 = "2203000000000043"  # Карта МИР без 3-D Secure		    Нед�
 card_owner = 'IVAN SIDOROV'
 card_expiry = '0125'
 card_cvv = '123'
+
+product_name_ru = 'платье'
+product_article = '0377-454'
