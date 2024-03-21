@@ -4,6 +4,7 @@ from pages.main_page import MainPage
 from pages.base_page import *
 import allure
 
+
 @pytest.mark.usefixtures("setup")
 class TestMobile:
     @pytest.mark.smoke
@@ -43,5 +44,3 @@ class TestMobile:
         page = MainPage()
         page.reg_kir()
         page.screen_title('ЛИЧНЫЙ КАБИНЕТ')
-
-

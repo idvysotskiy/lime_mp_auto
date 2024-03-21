@@ -1,9 +1,8 @@
 # file: base_page.py
 import time
 from datetime import date
-
 import allure
-
+import re
 from locators import *
 from config import *
 import random
@@ -14,7 +13,7 @@ import uiautomator2 as u2
 
 
 class InstallAPK:
-    d = u2.connect('emulator-5554')
+    d = u2.connect(device_id)
 
     def clear_app_data(self):
         self.d.app_stop(package)
@@ -31,12 +30,7 @@ class InstallAPK:
 
 
 class BasePage:
-    d = u2.connect('emulator-5554')
-
-    # def find_element_by_text(self, element_text):
-    # self.d.xpath(//*[@text=element_text])
-    def swipe_page_up(self):
-        self.d.swipe_ext(Direction.FORWARD)
+    d = u2.connect(device_id)
 
     def swipe_page_down(self):
         self.d.swipe_ext(Direction.BACKWARD)
@@ -87,9 +81,15 @@ class BasePage:
     def click(self, locator, element_name=None):
         if element_name is not None:
             with allure.step("Клик по элементу '{element_name}'"):
-                self.get_element(locator).click()
+                if isinstance(locator, str):
+                    self.get_element(locator).click()
+                else:
+                    locator.click()
         else:
-            self.get_element(locator).click()
+            if isinstance(locator, str):
+                self.get_element(locator).click()
+            else:
+                locator.click()
 
     def set_text(self, locator, text, element_name=None):
         if element_name is not None:
@@ -113,16 +113,19 @@ class BasePage:
     def wait_a_second(self):
         time.sleep(1)
 
+    def swipe_page_up(self, count=None):
+        if count is not None:
+            for i in range(count):
+                self.d.swipe_ext(Direction.FORWARD)
+        else:
+            self.d.swipe_ext(Direction.FORWARD)
+
     def swipe_down(self):
         self.d.swipe(400, self.d.window_size()[1] / 2, 400, self.d.window_size()[1] / 4)
 
     @allure.step('Сделать свайп влево')
     def swipe(self, swipe_ext):
         self.d.swipe_ext(swipe_ext, scale=0.8)
-
-    # @allure.step('Сделать свайп вверх')
-    # def swipe_page(self):
-    #     self.d.swipe_ext(Direction.HORIZ_FORWARD)
 
     def clear_text(self, locator, element_name=None):
         if element_name is not None:
@@ -132,28 +135,44 @@ class BasePage:
             self.d.clear_text()
 
     def get_random_element(self, locator):
-        if locator[0] == '/' and locator[1] == '/':
-            counter = random.randrange(0, len(self.d.xpath(locator)))
-            return self.d.xpath(locator)[counter]
+        if isinstance(locator, str):
+            if locator[0] == '/' and locator[1] == '/':
+                counter = random.randrange(0, len(self.d.xpath(locator).all()))
+                elements_list = self.d.xpath(locator).all()
+                return elements_list[counter]
+            else:
+                counter = random.randrange(0, self.d(resourceId=locator).count)
+                return self.d(resourceId=locator)[counter]
         else:
-            counter = random.randrange(0, len(self.d(resourceId=locator)))
-            return self.d(resourceId=locator)[counter]
+            counter = random.randrange(0, locator.count)
+            return locator[counter]
 
     def wait_element(self, locator, element_name=None):
         if element_name is not None:
             with allure.step(f"Ожидание элемента '{element_name}'"):
-                self.get_element(locator).wait(timeout=10)
-                # assert self.get_element(locator).exists == True, print(element_name + " отсутствует")
+                if isinstance(locator, str):
+                    if locator[0] == '/' and locator[1] == '/':
+                        assert self.get_element(locator).exists == True, print(f"Элемент {element_name} отсутствует")
+                    else:
+                        assert self.get_element(locator).wait(10) == True, print(f"Элемент {element_name} отсутствует")
+                else:
+                    assert locator.wait(10) == True, print(f"Элемент {element_name} отсутствует")
         else:
-            self.get_element(locator).wait(timeout=10)
-            # assert self.get_element(locator).exists == True
+            if isinstance(locator, str):
+                if locator[0] == '/' and locator[1] == '/':
+                    assert self.get_element(locator).exists == True
+                else:
+                    assert self.get_element(locator).wait(10) == True
+            else:
+                assert locator.wait(10) == True
 
-    # def checking_exists_element(self, locator, element_name=None):
-    #     if element_name is not None:
-    #         with allure.step(f"Ожидание элемента '{element_name}'"):
-    #             assert self.get_element(locator).exists == True, print(element_name + " отсутствует")
-    #     else:
-    #         assert self.get_element(locator).exists == True
+    def wait_text(self, text):
+        self.d(text=text).wait(10)
 
     def close_popup(self):
         self.d.click(0.477, 0.031)
+
+    def get_number_from_element(self, element):
+        return int(re.sub('[^0-9]', "", self.get_text(element)))
+
+

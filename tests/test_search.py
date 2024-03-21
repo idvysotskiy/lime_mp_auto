@@ -4,8 +4,9 @@ from pages.main_page import MainPage
 from pages.checkout_page import CheckOutPage
 from pages.base_page import *
 from pages.cart_page import *
-from pages.search_pages import *
+from pages.search_page import *
 import allure
+
 
 @pytest.mark.usefixtures("setup")
 class TestAndroid:

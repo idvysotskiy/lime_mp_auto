@@ -13,11 +13,9 @@ class TestAndroid:
     @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2869")
     def test_checkout_with_one_product(self):
-
         page = CheckOutPage()
         page.checkout_with_one()
         page.back_to_cart()
-
 
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата ранее сохраненной картой')
@@ -50,10 +48,10 @@ class TestAndroid:
         page = CheckOutPage()
         page.checkout_with_one()
         page.wait_a_second()
-        page.click(CheckOut.PAYMENT_SELECTOR_2)
+        page.click(CheckOutLocators.PAYMENT_SELECTOR_2)
         page.add_new_card()
-        page.click(CheckOut.SLOTS_DATE_SELECTOR_1)
-        page.click(CheckOut.SLOTS_TIME_SELECTOR_1)
+        page.click(CheckOutLocators.SLOTS_DATE_SELECTOR_1)
+        page.click(CheckOutLocators.SLOTS_TIME_SELECTOR_1)
         page.click_pay()
 
     @pytest.mark.smoke
@@ -64,7 +62,7 @@ class TestAndroid:
         self.test_add_new_card()
         page.checkout_with_one()
         page.wait_a_second()
-        page.click(CheckOut.PAYMENT_SELECTOR_2)
+        page.click(CheckOutLocators.PAYMENT_SELECTOR_2)
         page.delete_card_solo()
         time.sleep(4)
         BasePage().close_popup()
@@ -77,8 +75,8 @@ class TestAndroid:
         page = CheckOutPage()
         page.reg_user()
         page.checkout_with_one()
-        page.click(CheckOut.PAYMENT_SELECTOR_2)
-        page.click(CheckOut.ADD_NEW_CARD_PLUS)
+        page.click(CheckOutLocators.PAYMENT_SELECTOR_2)
+        page.click(CheckOutLocators.ADD_NEW_CARD_PLUS)
         page.elements_add_card()
 
     @pytest.mark.smoke
@@ -88,10 +86,10 @@ class TestAndroid:
         page = CheckOutPage()
         page.reg_user()
         page.checkout_with_one()
-        page.click(CheckOut.ADD_ADDRESS_BUTTON)
-        assert page.get_text(CheckOut.ADD_ADDRESS_TITLE) == 'РЕДАКТИРОВАТЬ АДРЕС'
+        page.click(CheckOutLocators.ADD_ADDRESS_BUTTON)
+        assert page.get_text(CheckOutLocators.ADD_ADDRESS_TITLE) == 'РЕДАКТИРОВАТЬ АДРЕС'
         # ...
-        assert page.get_text(CheckOut.ADD_ADDRESS_SAVE_BUTTON) == 'СОХРАНИТЬ'
+        assert page.get_text(CheckOutLocators.ADD_ADDRESS_SAVE_BUTTON) == 'СОХРАНИТЬ'
         page.get_screen()
 
     @pytest.mark.smoke
@@ -105,8 +103,8 @@ class TestAndroid:
         page = CheckOutPage()
         page.checkout_with_one()
         page.add_main_address()
-        assert page.is_element_present(CheckOut.SELECTED_ADDRESS)
-        assert page.is_element_present(CheckOut.EDIT_ADDRESS)
+        assert page.is_element_present(CheckOutLocators.SELECTED_ADDRESS)
+        assert page.is_element_present(CheckOutLocators.EDIT_ADDRESS)
         page.get_screen()
 
     @pytest.mark.smoke
@@ -120,11 +118,11 @@ class TestAndroid:
         page = CheckOutPage()
         page.checkout_with_one()
         page.add_main_address()
-        page.click(CheckOut.PAYMENT_SELECTOR_2)
+        page.click(CheckOutLocators.PAYMENT_SELECTOR_2)
         page.add_new_card()
-        assert page.is_element_present(CheckOut.CARD_ICON)
-        assert page.is_element_present(CheckOut.CARD_INFO)
-        assert page.is_element_present(CheckOut.CARD_EDIT)
+        assert page.is_element_present(CheckOutLocators.CARD_ICON)
+        assert page.is_element_present(CheckOutLocators.CARD_INFO)
+        assert page.is_element_present(CheckOutLocators.CARD_EDIT)
         page.get_screen()
 
     @pytest.mark.smoke
@@ -138,7 +136,7 @@ class TestAndroid:
         page = CheckOutPage()
         page.checkout_with_one()
         page.add_main_address()
-        page.click(CheckOut.PAYMENT_SELECTOR_2)
+        page.click(CheckOutLocators.PAYMENT_SELECTOR_2)
         page.add_new_card()
         page.click_pay()
 
@@ -147,11 +145,44 @@ class TestAndroid:
     @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131745")
     def test_go_checkout_unautorized(self):
         page = CheckOutPage()
+        time.sleep(8)
         page.checkout_with_one_un()
         MainPage().login()
         assert page.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
         page.click(MainLocators.PROFILE_NAV)
-        assert page.is_element_present(Profile.EMAIL)
+        assert page.is_element_present(ProfileLocators.EMAIL)
 
+    @pytest.mark.smoke
+    @allure.title('')
+    @allure.testcase("")
+    def test_order_courier_online_card(self, login):
+        page = MainPage()
+        page.click_to_nav_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_cart()
+        page.card.select_random_size()
+        page.go_to_cart()
+        page.cart.swipe_page_up()
+        page.cart.go_to_checkout()
+        page.cart.swipe_page_up(3)
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay()
 
-
+    @pytest.mark.smoke
+    @allure.title('Блок "Оплата" / Успешная оплата подарочной картой (Полная стоимость)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3163")
+    def test_order_courier_gift_card(self, login):
+        page = MainPage()
+        page.click_to_nav_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        price = page.card.get_product_price()
+        page.card.add_to_cart()
+        page.card.select_random_size()
+        page.go_to_cart()
+        page.cart.swipe_page_up()
+        page.cart.go_to_checkout()
+        page.checkout.set_gift_card(price)
+        page.checkout.swipe_page_up(3)
+        page.checkout.click_pay()

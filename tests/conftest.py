@@ -1,12 +1,10 @@
-import time
-
 import pytest
 import uiautomator2 as u2
 from config import *
 import allure
 from pages.main_page import MainPage
 
-d = u2.connect("emulator-5554")
+d = u2.connect(device_id)
 
 
 @allure.title("Запустить приложение")
@@ -32,7 +30,7 @@ def change_nuxt02():
 def login():
     page = MainPage()
     page.login(valid_email, valid_password)
-    page.set_feature_toggles()
+    # page.set_feature_toggles()
 
 
 @allure.step("Закрытие приложения")

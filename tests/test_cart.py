@@ -1,7 +1,6 @@
 # file: test_cart.py
 import pytest
 from pages.main_page import MainPage
-from pages.checkout_page import CheckOutPage
 from pages.base_page import *
 from pages.cart_page import *
 from pages.product_card_page import *
@@ -25,8 +24,8 @@ class TestAndroid:
         time.sleep(2)
         page = CartPage()
         page.elements_full_cart()
-        page.click(Cart.CLEAR_ALL)
-        page.click(Cart.POPUP_CLEAR)
+        page.click(CartLocators.CLEAR_ALL)
+        page.click(CartLocators.POPUP_CLEAR)
 
     @pytest.mark.smoke
     @allure.title('Экран "Корзина" / Пустой список')

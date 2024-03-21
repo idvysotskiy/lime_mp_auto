@@ -1,5 +1,8 @@
 # file: locators.py
 from config import *
+import uiautomator2 as u2
+
+d = u2.connect(device_id)
 
 
 class MainLocators:
@@ -27,16 +30,33 @@ class MainLocators:
     PRODUCT_CARD_1 = '//android.widget.TableLayout/android.widget.TableRow[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
     PRODUCT_CARD_2 = '//android.widget.TableLayout/android.widget.TableRow[2]/android.view.ViewGroup[2]/android.widget.FrameLayout[1]'
 
+    registration_btn = 'ru.limeshop.android.dev:id/profile_unauthorized_signup'
+    name = '//*[@text="Имя"]'
+    surname = '//*[@text="Фамилия"]'
+    phone = '//*[@text="Моб. телефон"]'
+    email = '//*[@text="Эл. почта"]'
+    password = '//*[@text="Пароль"]'
+    repeat_password = '//*[@text="Повтор нового пароля"]'
+    approve_checkbox = 'ru.limeshop.android.dev:id/checkable_option_active'
+    continue_btn = '//*[@text="ПРОДОЛЖИТЬ"]'
+    submenu_elements_list = d(resourceId='ru.limeshop.android.dev:id/catalog_item_recycler').child(
+        resourceId="ru.limeshop.android.dev:id/catalog_item_name")
 
-class Catalog:
+
+class CatalogLocators:
     WOMEN = '//*[@text="ЖЕНЩИНЫ"]'
     MEN = '//*[@text="МУЖЧИНЫ"]'
     KIDS = '//*[@text="ДЕТИ"]'
     EDITORIAL = '//*[@text="EDITORIAL"]'
     GIFT_CARD = '//*[@text="ПОДАРОЧНАЯ КАРТА"]'
+    MENU_ITEM = "ru.limeshop.android.dev:id/catalog_item_name"
+    catalog_item = 'ru.limeshop.android.dev:id/catalog_item_name'
+    catalog_item_recycler = 'ru.limeshop.android.dev:id/catalog_item_recycler'
+    submenu_elements_list = '//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_recycler"]//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_name"]'
+    cards_image = 'ru.limeshop.android.dev:id/media_view'
 
 
-class ProductCard:
+class ProductCardLocators:
     # PRODUCT_CARD
     BUY = '//*[@resource-id="ru.limeshop.android.dev:id/buy_button"]'
     BUY_MORE = '//*[@resource-id="ru.limeshop.android.dev:id/buy_more_button"]'
@@ -73,9 +93,12 @@ class ProductCard:
     POPUP = '//*[@resource-id="ru.limeshop.android.dev:id/productPopup"]'
     POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/popupStartTitle"]'
     POPUP_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/popupButton"]'
+    product_size_list = d(resourceId="ru.limeshop.android.dev:id/product_add_to_cart_name")
+    product_price = 'ru.limeshop.android.dev:id/productPriceTextView'
+    product_name = 'ru.limeshop.android.dev:id/productNameTextView'
 
 
-class Profile:
+class ProfileLocators:
     # PROFILE
     PROFILE_ESTIMATION_TITLE = '//*[@text="ОЦЕНИТЕ ПРИЛОЖЕНИЕ:"]'
     PROFILE_ESTIMATION = '//android.widget.ScrollView/android.widget.LinearLayout[1]/androidx.appcompat.widget.LinearLayoutCompat[2]/androidx.appcompat.widget.LinearLayoutCompat[1]/android.widget.ImageView[5]'
@@ -109,7 +132,7 @@ class Profile:
     DELETE_ACCOUNT = 'ru.limeshop.android.dev:id/deleteAccountTextView'
 
 
-class FeatureToggles:
+class FeatureTogglesLocators:
     SWITCH_1 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[1]/android.widget.Switch[1]'
     SWITCH_2 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[2]/android.widget.Switch[1]'
     SWITCH_3 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[3]/android.widget.Switch[1]'
@@ -153,9 +176,10 @@ class LoginLocators:
     SIGNUP_TERMS_TEXT = "ru.limeshop.android.dev:id/signup_terms_text_view"
     SIGNUP_SUBSCRIBE_ACCEPT = '//*[@resource-id="ru.limeshop.android.dev:id/checkable_option_active"]'
     SIGNUP_RESUME_BTN = '//*[@text="ПРОДОЛЖИТЬ"]'
+    profile_avatar = 'ru.limeshop.android.dev:id/avatarImageView'
 
 
-class Cart:
+class CartLocators:
     CLEAR_ALL = '//*[@resource-id="ru.limeshop.android.dev:id/toolbar_secondary_text_view"]'
     FAVORITE = '//*[@resource-id="ru.limeshop.android.dev:id/favorites_image_view"]'
     PRODUCT_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/item_cart_name"]'
@@ -186,7 +210,7 @@ class Cart:
     POPUP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
 
 
-class CheckOut:
+class CheckOutLocators:
     DELIVERY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_title_text"]'
     DELIVERY_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]'
     DELIVERY_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.RelativeLayout[2]/android.widget.FrameLayout[1]'
@@ -266,9 +290,24 @@ class CheckOut:
     ADD_ADDRESS_STREET = '//*[@text="Улица и дом"]'
     ADD_ADDRESS_APARTMENT = '//*[@text="Квартира"]'
     ADD_ADDRESS_SAVE_BUTTON = '//*[@text="СОХРАНИТЬ"]'
+    date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]'
+    time = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]'
+    gift_card_selector = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]/..'
+    add_gift_card_title = d(resourceId="ru.limeshop.android.dev:id/title_view", text="ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
+    gift_card_number_field = '//*[@text="Номер подарочной карты"]'
+    gift_card_sum_field = '//*[@text="Сумма к списанию"]'
+    gift_card_pin_field = '//*[@text="Пин-код"]'
+    gift_card_balance = 'ru.limeshop.android.dev:id/errorText'
+    gift_card_continue_btn = '//*[@text="ПРОДОЛЖИТЬ"]'
+    pickup_selector = '//*[@text="САМОВЫВОЗ"]/..'
+    courier_selector = '//*[@text="КУРЬЕРОМ"]/..'
+    receiving_selector = '//*[@text="ПРИ ПОЛУЧЕНИИ"]/..'
+    upon_receipt_text = d(resourceId="ru.limeshop.android.dev:id/payment_info_title_text", text='НАЛИЧНЫМИ ИЛИ КАРТОЙ ПРИ ПОЛУЧЕНИИ')
+    permission_while_using_the_app = 'com.android.permissioncontroller:id/permission_allow_foreground_only_button'
+    gift_number_text = '//*[@resource-id="ru.limeshop.android.dev:id/payment_gift_number_text"]'
 
 
-class SuccessPayScreen:
+class SuccessPayScreenLocators:
     ICON = '//*[@resource-id="ru.limeshop.android.dev:id/status_icon_image"]'
     TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/status_title_text"]'
     DESCRIPTION = '//*[@text="Отслеживать его статус вы можете в личном кабинете"]'
