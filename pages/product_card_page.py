@@ -55,16 +55,6 @@ class ProductCardPage(BasePage):
     def open_full_product_card(self):
         self.click(ProductCardLocators.COLORS)
 
-    def add_one_product_to_cart(self):
-        main = MainPage()
-        main.click_to_nav_catalog()
-        main.go_to_catalog_item()
-        main.go_to_product_card()
-        self.add_to_cart()
-        self.select_size(select_size)
-        time.sleep(2)
-        main.go_to_cart()
-
     @allure.step("Выбор рандомного размера")
     def select_random_size(self):
         self.get_random_element(ProductCardLocators.product_size_list).click()

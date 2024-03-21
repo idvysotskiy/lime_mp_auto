@@ -86,17 +86,6 @@ class CheckOutPage(BasePage):
         self.click(MainLocators.X_BUTTON)
         self.click(CheckOutLocators.POPUP_BACK_CART_YES)
 
-    def checkout_with_one(self):
-        ProductCardPage().add_one_product_to_cart()
-        CartPage().go_to_checkout()
-        time.sleep(2)
-        self.elements_checkout()
-        BasePage().get_screen()
-
-    def checkout_with_one_un(self):
-        ProductCardPage().add_one_product_to_cart()
-        CartPage().go_to_checkout()
-        self.get_screen()
 
     def delete_card_solo(self):
         with allure.step('Нажать на иконку "Карандаш" справа от данных карты'):
@@ -155,11 +144,11 @@ class CheckOutPage(BasePage):
         assert self.get_text(CheckOutLocators.ADD_CARD_SAVE_BUTTON) == 'СОХРАНИТЬ'
         self.get_screen()
 
-    def reg_user(self):
-        page = MainPage()
-        page.reg_kir()
-        page.click_x()
-        self.cancel_notification()
+    # def reg_user(self):
+    #     page = MainPage()
+    #     page.reg_kir()
+    #     page.click_x()
+    #     self.cancel_notification()
 
     @allure.step("Установка даты и времени доставки")
     def set_date_and_time(self):

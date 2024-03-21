@@ -42,6 +42,26 @@ class MainLocators:
     submenu_elements_list = d(resourceId='ru.limeshop.android.dev:id/catalog_item_recycler').child(
         resourceId="ru.limeshop.android.dev:id/catalog_item_name")
 
+class SearchLocators:
+    X_BUTTON = '//android.widget.ImageButton'
+    TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/toolbarTitle"]'
+    TEXT_EDIT = '//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
+    TEXT_HINT = '//*[@resource-id="ru.limeshop.android.dev:id/hintText"]'
+    ICON = '//*[@resource-id="ru.limeshop.android.dev:id/startIcon"]'
+    SHOPS_BTN = '//*[@resource-id="ru.limeshop.android.dev:id/topButtonsContainerLinearLayout"]/androidx.appcompat.widget.LinearLayoutCompat[1]'
+    SCAN_BTH = '//*[@resource-id="ru.limeshop.android.dev:id/topButtonsContainerLinearLayout"]/androidx.appcompat.widget.LinearLayoutCompat[2]'
+    SHOPS_TEXT = '//*[@text="МАГАЗИНЫ"]'
+    SCAN_TEXT = '//*[@text="СКАНЕР"]'
+    ALL = '//*[@text="ВСЕ"]'
+    WOMAN = '//*[@text="ЖЕНЩИНЫ"]'
+    MEN = '//*[@text="МУЖЧИНЫ"]'
+    KIDS = '//*[@text="ДЕТИ"]'
+    FIRST_RESULT_IMAGE = '//*[@resource-id="ru.limeshop.android.dev:id/searchRecyclerView"]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
+    FIRST_RESULT_NAME = '"ru.limeshop.android.dev:id/item_product_name", text="ПЛАТЬЕ ИЗ АТЛАСА С ПРИНТОМ «ЖЕМЧУГ»"'
+    FIRST_RESULT_FAV = '//*[@resource-id="ru.limeshop.android.dev:id/searchRecyclerView"]/android.view.ViewGroup[1]/android.widget.ImageView[1]'
+    ICON_FAIL_SEARCH = '//androidx.appcompat.widget.LinearLayoutCompat/android.widget.ImageView[1]'
+    FAIL_SEARCH_TEXT = '//*[@text="НИЧЕГО НЕ НАЙДЕНО"]'
+    FAIL_SEARCH_DESCRIPTION = '//*[@text="Проверьте, правильно ли введен запрос"]'
 
 class CatalogLocators:
     WOMEN = '//*[@text="ЖЕНЩИНЫ"]'
