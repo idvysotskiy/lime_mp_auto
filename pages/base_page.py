@@ -73,27 +73,34 @@ class BasePage:
         return current_date
 
     def get_screen(self):
-        # print('screen')
         screen = "screen.png"
         self.d.screenshot(screen)
         allure.attach.file(f'./{screen}', attachment_type=allure.attachment_type.PNG)
 
     def click(self, locator, element_name=None):
         if element_name is not None:
-            with allure.step("Клик по элементу '{element_name}'"):
+            with allure.step(f"Клик по элементу '{element_name}'"):
                 if isinstance(locator, str):
                     self.get_element(locator).click()
+                    self.wait_a_moment()
+                    self.get_screen()
                 else:
                     locator.click()
+                    self.wait_a_moment()
+                    self.get_screen()
         else:
             if isinstance(locator, str):
                 self.get_element(locator).click()
+                self.wait_a_moment()
+                self.get_screen()
             else:
                 locator.click()
+                self.wait_a_moment()
+                self.get_screen()
 
     def set_text(self, locator, text, element_name=None):
         if element_name is not None:
-            with allure.step("Заполнение поля '{element_name}' текстом '{text}'"):
+            with allure.step(f"Заполнение поля '{element_name}' текстом '{text}'"):
                 self.get_element(locator).set_text(text)
         else:
             self.get_element(locator).set_text(text)
@@ -129,11 +136,12 @@ class BasePage:
 
     def clear_text(self, locator, element_name=None):
         if element_name is not None:
-            with allure.step("Удалить текст из поля '{element_name}'"):
+            with allure.step(f"Удалить текст из поля '{element_name}'"):
                 self.get_element(locator).click()
         else:
             self.d.clear_text()
 
+    # @allure.step("Получение рандомного элемента")
     def get_random_element(self, locator):
         if isinstance(locator, str):
             if locator[0] == '/' and locator[1] == '/':
@@ -147,6 +155,7 @@ class BasePage:
             counter = random.randrange(0, locator.count)
             return locator[counter]
 
+    # @allure.step("Ожидание элемента")
     def wait_element(self, locator, element_name=None):
         if element_name is not None:
             with allure.step(f"Ожидание элемента '{element_name}'"):
@@ -166,13 +175,39 @@ class BasePage:
             else:
                 assert locator.wait(10) == True
 
+    # @allure.step("Ожидание отсутствия элемента")
+    def wait_hidden_element(self, locator, element_name=None):
+        if element_name is not None:
+            with allure.step(f"Ожидание отсутствия элемента '{element_name}'"):
+                if isinstance(locator, str):
+                    if locator[0] == '/' and locator[1] == '/':
+                        assert self.get_element(locator).exists == False, print(f"Элемент {element_name} присутствует на экране")
+                    else:
+                        assert self.get_element(locator).wait_gone(5) == True, print(f"Элемент {element_name} присутствует на экране")
+                else:
+                    assert locator.wait_gone(5) == True, print(f"Элемент {element_name} присутствует на экране")
+        else:
+            if isinstance(locator, str):
+                if locator[0] == '/' and locator[1] == '/':
+                    assert self.get_element(locator).exists == False
+                else:
+                    assert self.get_element(locator).wait_gone(5) == True
+            else:
+                assert locator.wait_gone(5) == True
+
+    @allure.step("Ожидание на экране текста '{text}'")
     def wait_text(self, text):
-        self.d(text=text).wait(10)
+        assert self.d(text=text).wait(10) == True, print(f"Элемент с текстом '{text}' не найден")
 
     def close_popup(self):
         self.d.click(0.477, 0.031)
 
+    # @allure.step("Получение числа из элемента (формат int)")
     def get_number_from_element(self, element):
         return int(re.sub('[^0-9]', "", self.get_text(element)))
+
+    @allure.step("Клик по координатам ({x}:{y})")
+    def coordinate_click(self, x, y):
+        self.d.click(x, y)
 
 

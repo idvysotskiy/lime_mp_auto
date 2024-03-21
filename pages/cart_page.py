@@ -36,6 +36,7 @@ class CartPage(BasePage):
 
     @allure.step('Нажать кнопку "К оформлению"')
     def go_to_checkout(self):
+        self.swipe_page_up()
         self.click(CartLocators.CONTINUE)
 
     @allure.step('Очистить корзину')

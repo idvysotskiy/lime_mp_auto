@@ -65,7 +65,7 @@ class MainPage(BasePage):
     def click_x(self):
         self.click(MainLocators.X_BUTTON)
 
-    @allure.step('Перейти в каталог')
+    @allure.step('Переход в каталог')
     def click_to_nav_catalog(self):
         self.wait_element(MainLocators.CATALOG_NAV)
         self.click(MainLocators.CATALOG_NAV, "каталог")

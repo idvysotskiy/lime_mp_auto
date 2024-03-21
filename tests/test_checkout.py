@@ -9,7 +9,7 @@ import allure
 
 
 @pytest.mark.usefixtures("setup")
-class TestAndroid:
+class TestCheckout:
     @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2869")
     def test_checkout_with_one_product(self):
@@ -186,3 +186,21 @@ class TestAndroid:
         page.checkout.set_gift_card(price)
         page.checkout.swipe_page_up(3)
         page.checkout.click_pay()
+
+    @pytest.mark.smoke1
+    @allure.title('Блок "Оплата" / Закрытие боттом шита "Добавить подарочную карту" ')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3023")
+    def test_closing_gift_card_block(self, login):
+        page = MainPage()
+        page.click_to_nav_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_cart()
+        page.wait_a_moment()
+        page.card.select_random_size()
+        page.go_to_cart()
+        page.cart.go_to_checkout()
+        page.checkout.set_gift_card_selector()
+        page.checkout.close_gift_card_block()
+        page.checkout.set_gift_card_selector()
+        page.checkout.close_gift_card_block2()

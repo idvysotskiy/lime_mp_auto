@@ -14,7 +14,7 @@ class MainLocators:
     # NAV_BAR
     SEARCH_NAV = 'ru.limeshop.android.dev:id/nav_search'
     FAVORITES_NAV = 'ru.limeshop.android.dev:id/nav_favorites'
-    CATALOG_NAV = '//*[@resource-id="ru.limeshop.android.dev:id/nav_catalog_menu"]/android.widget.FrameLayout[1]'
+    CATALOG_NAV = 'ru.limeshop.android.dev:id/nav_catalog_menu'
     PROFILE_NAV = 'ru.limeshop.android.dev:id/nav_profile'
     CART_NAV = 'ru.limeshop.android.dev:id/nav_cart'
 
@@ -305,6 +305,8 @@ class CheckOutLocators:
     upon_receipt_text = d(resourceId="ru.limeshop.android.dev:id/payment_info_title_text", text='НАЛИЧНЫМИ ИЛИ КАРТОЙ ПРИ ПОЛУЧЕНИИ')
     permission_while_using_the_app = 'com.android.permissioncontroller:id/permission_allow_foreground_only_button'
     gift_number_text = '//*[@resource-id="ru.limeshop.android.dev:id/payment_gift_number_text"]'
+    gift_card_dragger_view = 'ru.limeshop.android.dev:id/dragger_view'
+    add_payment_btn = 'ru.limeshop.android.dev:id/add_payment_button'
 
 
 class SuccessPayScreenLocators:

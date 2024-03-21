@@ -4,10 +4,7 @@ from pages.base_page import BasePage
 from locators import *
 
 
-
 class CheckOutPage(BasePage):
-    # def __init__(self, d):
-    #     super().__init__(d)
 
     def accept_cloud_payments(self):
         self.d.click(0.504, 0.366)
@@ -21,12 +18,13 @@ class CheckOutPage(BasePage):
         self.accept_cloud_payments()
         time.sleep(1)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
-        assert self.get_text(SuccessPayScreenLocators.DESCRIPTION) == 'Отслеживать его статус вы можете в личном кабинете'
+        assert self.get_text(
+            SuccessPayScreenLocators.DESCRIPTION) == 'Отслеживать его статус вы можете в личном кабинете'
         assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПРОДОЛЖИТЬ ПОКУПКИ'
         BasePage.get_screen(self)
 
     def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
-        with allure.step("Выбрать способ доставки '{delivery_method}'"):
+        with allure.step(f"Выбрать способ доставки '{delivery_method}'"):
             if delivery_method == '1':
                 self.click(CheckOutLocators.DELIVERY_SELECTOR_1)
             elif delivery_method == '2':
@@ -34,7 +32,7 @@ class CheckOutPage(BasePage):
             elif delivery_method == '3':
                 self.click(CheckOutLocators.DELIVERY_SELECTOR_3)
             time.sleep(1)
-        with allure.step("Выбрать способ оплаты '{pay_method}'"):
+        with allure.step(f"Выбрать способ оплаты '{pay_method}'"):
             if pay_method == '1':
                 self.click(CheckOutLocators.PAYMENT_SELECTOR_1)
             elif pay_method == '2':
@@ -44,7 +42,7 @@ class CheckOutPage(BasePage):
             elif pay_method == '4':
                 self.click(CheckOutLocators.PAYMENT_SELECTOR_4)
             time.sleep(1)
-        with allure.step("Выбрать дату доставки '{date_slot}'"):
+        with allure.step(f"Выбрать дату доставки '{date_slot}'"):
             if date_slot == '1':
                 self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_1)
             elif date_slot == '2':
@@ -52,7 +50,7 @@ class CheckOutPage(BasePage):
             elif date_slot == '3':
                 self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_3)
             time.sleep(1)
-        with allure.step("Выбрать время доставки '{time_slot}'"):
+        with allure.step(f"Выбрать время доставки '{time_slot}'"):
             if time_slot == '1':
                 self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_1)
             elif time_slot == '2':
@@ -86,17 +84,17 @@ class CheckOutPage(BasePage):
         self.click(MainLocators.X_BUTTON)
         self.click(CheckOutLocators.POPUP_BACK_CART_YES)
 
-    def checkout_with_one(self):
-        ProductCardPage().add_one_product_to_cart()
-        CartPage().go_to_checkout()
-        time.sleep(2)
-        self.elements_checkout()
-        BasePage().get_screen()
-
-    def checkout_with_one_un(self):
-        ProductCardPage().add_one_product_to_cart()
-        CartPage().go_to_checkout()
-        self.get_screen()
+    # def checkout_with_one(self):
+    #     ProductCardPage().add_one_product_to_cart()
+    #     CartPage().go_to_checkout()
+    #     time.sleep(2)
+    #     self.elements_checkout()
+    #     BasePage().get_screen()
+    #
+    # def checkout_with_one_un(self):
+    #     ProductCardPage().add_one_product_to_cart()
+    #     CartPage().go_to_checkout()
+    #     self.get_screen()
 
     def delete_card_solo(self):
         with allure.step('Нажать на иконку "Карандаш" справа от данных карты'):
@@ -118,8 +116,8 @@ class CheckOutPage(BasePage):
             self.set_text(CheckOutLocators.ADD_CARD_OWNER, card_owner)
             self.set_text(CheckOutLocators.ADD_CARD_EXPIRY, card_expiry)
             self.set_text(CheckOutLocators.ADD_CARD_CVV, card_cvv)
-        # with allure.step('Выбрать чекбокс "Запомнить данные карты'):
-        #     self.click(CheckOut.ADD_CARD_SAVE_CHECK_BOX)
+            # with allure.step('Выбрать чекбокс "Запомнить данные карты'):
+            #     self.click(CheckOut.ADD_CARD_SAVE_CHECK_BOX)
             self.get_screen()
         with allure.step('Нажать кнопку "Сохранить"'):
             self.click(CheckOutLocators.ADD_CARD_SAVE_BUTTON)
@@ -155,11 +153,12 @@ class CheckOutPage(BasePage):
         assert self.get_text(CheckOutLocators.ADD_CARD_SAVE_BUTTON) == 'СОХРАНИТЬ'
         self.get_screen()
 
-    def reg_user(self):
-        page = MainPage()
-        page.reg_kir()
-        page.click_x()
-        self.cancel_notification()
+    #
+    # def reg_user(self):
+    #     page = MainPage()
+    #     page.reg_kir()
+    #     page.click_x()
+    #     self.cancel_notification()
 
     @allure.step("Установка даты и времени доставки")
     def set_date_and_time(self):
@@ -171,8 +170,7 @@ class CheckOutPage(BasePage):
 
     @allure.step("Выбор способа оплаты - Подарочной картой. С заполнением данных")
     def set_gift_card(self, price):
-        self.click(CheckOutLocators.gift_card_selector, "Подарочной картой")
-        self.wait_element(CheckOutLocators.add_gift_card_title, "Добавить подарочную карту")
+        self.set_gift_card_selector()
         dictionary = {'7094029525265482': '8508', '2731131568122692': '6467', '2928365005547483': '7272',
                       '5385968791470207': '7510', '4363956160383861': '2683'}
         gift_card_number = ''
@@ -205,3 +203,24 @@ class CheckOutPage(BasePage):
     def set_upon_receipt(self):
         self.click(CheckOutLocators.receiving_selector, "при получении")
         self.wait_element(CheckOutLocators.upon_receipt_text)
+
+    @allure.step("Выбор способа оплаты - Подарочной картой")
+    def set_gift_card_selector(self):
+        self.click(CheckOutLocators.gift_card_selector, "Подарочной картой")
+        self.wait_element(CheckOutLocators.add_gift_card_title, "Добавить подарочную карту")
+
+    @allure.step("Закрытие блока подарочной карты кликом мимо области блока")
+    def close_gift_card_block(self):
+        self.coordinate_click(500, 300)
+        self.wait_hidden_element(CheckOutLocators.add_gift_card_title, 'блок добавления подарочной карты')
+        self.wait_element(CheckOutLocators.add_payment_btn, "кнопка Добавить карту")
+
+    @allure.step("Закрытие блока подарочной карты свайпом шторки вниз")
+    def close_gift_card_block2(self):
+        with allure.step("Свайп вниз блока подарочной карты"):
+            gift_card_dragger_view_x = self.get_element(CheckOutLocators.gift_card_dragger_view).center()[0]
+            gift_card_dragger_view_y = self.get_element(CheckOutLocators.gift_card_dragger_view).center()[1]
+            d.swipe(gift_card_dragger_view_x, gift_card_dragger_view_y, gift_card_dragger_view_x,
+                    gift_card_dragger_view_y + 300)
+        self.wait_hidden_element(CheckOutLocators.add_gift_card_title, 'блок добавления подарочной карты')
+        self.wait_element(CheckOutLocators.add_payment_btn, "кнопка Добавить карту")
