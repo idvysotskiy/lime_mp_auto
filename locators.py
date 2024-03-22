@@ -42,6 +42,7 @@ class MainLocators:
     submenu_elements_list = d(resourceId='ru.limeshop.android.dev:id/catalog_item_recycler').child(
         resourceId="ru.limeshop.android.dev:id/catalog_item_name")
 
+
 class SearchLocators:
     X_BUTTON = '//android.widget.ImageButton'
     TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/toolbarTitle"]'
@@ -62,6 +63,7 @@ class SearchLocators:
     ICON_FAIL_SEARCH = '//androidx.appcompat.widget.LinearLayoutCompat/android.widget.ImageView[1]'
     FAIL_SEARCH_TEXT = '//*[@text="НИЧЕГО НЕ НАЙДЕНО"]'
     FAIL_SEARCH_DESCRIPTION = '//*[@text="Проверьте, правильно ли введен запрос"]'
+
 
 class CatalogLocators:
     WOMEN = '//*[@text="ЖЕНЩИНЫ"]'
@@ -322,7 +324,8 @@ class CheckOutLocators:
     pickup_selector = '//*[@text="САМОВЫВОЗ"]/..'
     courier_selector = '//*[@text="КУРЬЕРОМ"]/..'
     receiving_selector = '//*[@text="ПРИ ПОЛУЧЕНИИ"]/..'
-    upon_receipt_text = d(resourceId="ru.limeshop.android.dev:id/payment_info_title_text", text='НАЛИЧНЫМИ ИЛИ КАРТОЙ ПРИ ПОЛУЧЕНИИ')
+    upon_receipt_text = d(resourceId="ru.limeshop.android.dev:id/payment_info_title_text",
+                          text='НАЛИЧНЫМИ ИЛИ КАРТОЙ ПРИ ПОЛУЧЕНИИ')
     permission_while_using_the_app = 'com.android.permissioncontroller:id/permission_allow_foreground_only_button'
     gift_number_text = '//*[@resource-id="ru.limeshop.android.dev:id/payment_gift_number_text"]'
 
@@ -332,3 +335,39 @@ class SuccessPayScreenLocators:
     TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/status_title_text"]'
     DESCRIPTION = '//*[@text="Отслеживать его статус вы можете в личном кабинете"]'
     BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/action_button"]'
+
+
+class PermissionGeoLocators:
+    title = "com.android.permissioncontroller:id/permission_message"
+    allow_foreground_only_button = "com.android.permissioncontroller:id/permission_allow_foreground_only_button"
+    allow_one_time_button = "com.android.permissioncontroller:id/permission_allow_one_time_button"
+    deny_button = "com.android.permissioncontroller:id/permission_deny_button"
+    img_1 = "com.android.permissioncontroller:id/permission_location_accuracy_radio_fine"
+    img_2 = "com.android.permissioncontroller:id/permission_location_accuracy_radio_coarse"
+
+
+class PickupLocators:
+    tab_map = "ru.limeshop.android.dev:id/maps_title_text"
+    tab_list = "ru.limeshop.android.dev:id/list_title_text"
+    search_field = "ru.limeshop.android.dev:id/editText"
+    filter_lime = '//*[@resource-id="ru.limeshop.android.dev:id/selector_recycler_view"]/android.widget.FrameLayout[1]'
+    filter_boxberry = '//*[@resource-id="ru.limeshop.android.dev:id/selector_recycler_view"]/android.widget.FrameLayout[2]'
+    filter_yandex = '//*[@resource-id="ru.limeshop.android.dev:id/selector_recycler_view"]/android.widget.FrameLayout[3]'
+    list_select_1 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[1]/android.widget.RelativeLayout[2]/android.widget.Button[1]'
+    list_select_2 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[2]/android.widget.RelativeLayout[2]/android.widget.Button[1]'
+    list_select_3 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[3]/android.widget.RelativeLayout[2]/android.widget.Button[1]'
+    info_btn_1 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[1]/android.widget.RelativeLayout[2]/android.widget.ImageView[1]'
+    info_btn_2 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[2]/android.widget.RelativeLayout[2]/android.widget.ImageView[1]'
+    info_btn_3 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[3]/android.widget.RelativeLayout[2]/android.widget.ImageView[1]'
+    # INFO SCREEN
+    info_name_text = "ru.limeshop.android.dev:id/pickup_point_info_name_text"
+    info_address_text = "ru.limeshop.android.dev:id/pickup_point_info_address_text"
+    info_schedule_text = "ru.limeshop.android.dev:id/pickup_point_info_schedule_text"
+    title_address = '//*[@text="АДРЕС"]'
+    title_schedule = '//*[@text="ВРЕМЯ РАБОТЫ"]'
+    take_point_btn = '//*[@text="ЗАБЕРУ ОТСЮДА"]'
+
+
+
+
+
