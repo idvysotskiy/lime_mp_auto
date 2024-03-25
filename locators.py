@@ -82,7 +82,8 @@ class CatalogLocators:
     catalog_item = 'ru.limeshop.android.dev:id/catalog_item_name'
     catalog_item_recycler = 'ru.limeshop.android.dev:id/catalog_item_recycler'
     submenu_elements_list = '//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_recycler"]//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_name"]'
-    cards_image = 'ru.limeshop.android.dev:id/media_view'
+    # cards_image = 'ru.limeshop.android.dev:id/media_view'
+    cards_image = "ru.limeshop.android.dev: id / media_view_container_layout"
 
 
 class CollectionLocators:
