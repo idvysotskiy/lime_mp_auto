@@ -26,13 +26,14 @@ class MainPage(BasePage):
         self.click(MainLocators.registration_btn, "кнопка Зарегистрироваться")
         self.wait_a_second()
         email = 'test' + str(random.randint(0, 999999999)) + '@test.ru'
-        self.set_text(MainLocators.name, 'Test', "имя")
-        self.set_text(MainLocators.surname, 'Testov', "фамилия")
+        self.set_text(MainLocators.name, 'Иван', "имя")
+        self.set_text(MainLocators.surname, 'Иванов', "фамилия")
         self.set_text(MainLocators.phone, '9998887755', "телефон")
         self.set_text(MainLocators.email, email, "почта")
         self.set_text(MainLocators.password, '87654321', "пароль")
         self.set_text(MainLocators.repeat_password, '87654321', "повторение пароля")
         self.swipe_page_up()
+        self.click(LoginLocators.)
         self.click(MainLocators.approve_checkbox, 'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
         self.click(MainLocators.continue_btn, "кнопка Продолжить")
         self.wait_text(email)
@@ -44,18 +45,13 @@ class MainPage(BasePage):
         with allure.step('Открыть Личный кабинет'):
             self.click(MainLocators.PROFILE_NAV)
             self.swipe_page_up()
-            self.swipe_page_up()
+            self.wait_a_moment()
         with allure.step('Нажать кнопку "Войти"'):
             self.click(ProfileLocators.LOGIN_UN)
         with allure.step('Ввести email'):
-            # self.click(LoginLocators.LOGIN_SCREEN_EMAIL)
             self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_email"]', email)
-            # BasePage.get_screen(self)
         with allure.step('Ввести пароль'):
-            # self.click(LoginLocators.LOGIN_SCREEN_PASS)
             self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]', password)
-            # self.d.xpath('//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]/android.view.ViewGroup[1]/android.widget.EditText[1]').send_keys(password)
-            # BasePage.get_screen(self)
         with allure.step('Нажать кнопку "Войти"'):
             self.click(LoginLocators.LOGIN_SCREEN_SIGNIN)
             self.wait_element(LoginLocators.profile_avatar)

@@ -20,8 +20,7 @@ class CatalogPage(BasePage):
         self.swipe_page_up(3)
         self.wait_a_moment()
         self.click(CatalogLocators.cards_image, "рандомная карточка товара")
-        # self.wait_hidden_element(ProductCardLocators.product_name)
-        self.wait_a_moment()
+        # self.wait_element(ProductCardLocators.product_name)
         product_name = self.get_text(ProductCardLocators.product_name)
         product_price = self.get_number_from_element(ProductCardLocators.product_price)
         return product_name, product_price

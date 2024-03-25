@@ -250,8 +250,11 @@ class TestAndroid:
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата подарочной картой (Полная стоимость)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3163")
-    def test_order_courier_gift_card(self, login):
+    def test_order_courier_gift_card(self):
         page = MainPage()
+        page.user_registration()
+        page.click_x()
+        page.cancel_notification()
         page.click_to_nav_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -260,6 +263,7 @@ class TestAndroid:
         page.card.select_random_size()
         page.go_to_cart()
         page.cart.swipe_page_up()
+        page.wait_a_moment()
         page.cart.go_to_checkout()
         page.checkout.set_gift_card(price)
         page.checkout.swipe_page_up(3)
