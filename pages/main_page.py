@@ -67,7 +67,7 @@ class MainPage(BasePage):
 
     @allure.step('Перейти в каталог')
     def click_to_nav_catalog(self):
-        self.wait_element(MainLocators.CATALOG_NAV)
+        # self.wait_hidden_element(MainLocators.CATALOG_NAV)
         self.click(MainLocators.CATALOG_NAV, "каталог")
 
     @allure.step('Перейти в раздел каталога')

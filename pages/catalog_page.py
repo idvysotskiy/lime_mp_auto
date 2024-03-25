@@ -18,8 +18,10 @@ class CatalogPage(BasePage):
     @allure.step("Переход в рандомную карточку товара")
     def open_random_card(self):
         self.swipe_page_up(3)
+        self.wait_a_moment()
         self.click(CatalogLocators.cards_image, "рандомная карточка товара")
-        self.wait_element(ProductCardLocators.product_name)
+        # self.wait_hidden_element(ProductCardLocators.product_name)
+        self.wait_a_moment()
         product_name = self.get_text(ProductCardLocators.product_name)
         product_price = self.get_number_from_element(ProductCardLocators.product_price)
         return product_name, product_price

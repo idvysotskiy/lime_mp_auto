@@ -11,6 +11,13 @@ class MainLocators:
     NOTIFICATION_NEGATIVE = '//*[@resource-id="ru.limeshop.android.dev:id/notification_negative_button"]'
     TOOLBAR_TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
 
+    # BANNERS
+    banner_1 = '//*[@resource-id="android:id/content"]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]'
+    banner_2 = '//*[@resource-id="ru.limeshop.android.dev:id/bannersRecyclerView"]/android.widget.RelativeLayout[1]'
+    banner_3 = '//*[@resource-id="ru.limeshop.android.dev:id/bannersRecyclerView"]/android.widget.RelativeLayout[2]'
+    banner_4 = '//*[@resource-id="ru.limeshop.android.dev:id/bannersRecyclerView"]/android.widget.RelativeLayout[1]'
+    banner_5 = '//*[@resource-id="ru.limeshop.android.dev:id/bannersRecyclerView"]/android.widget.RelativeLayout[2]'
+
     # NAV_BAR
     SEARCH_NAV = 'ru.limeshop.android.dev:id/nav_search'
     FAVORITES_NAV = 'ru.limeshop.android.dev:id/nav_favorites'
@@ -77,6 +84,23 @@ class CatalogLocators:
     submenu_elements_list = '//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_recycler"]//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_name"]'
     cards_image = 'ru.limeshop.android.dev:id/media_view'
 
+
+class CollectionLocators:
+    # COLLECTION
+    image_view_btn = "ru.limeshop.android.dev:id/toolbar_secondary_image_view"
+    filters_btn = "ru.limeshop.android.dev:id/imageView"
+    filter_sort_title = d(resourceId="ru.limeshop.android.dev:id/item_filter_name", text="СОРТИРОВАТЬ")
+    filter_price_asc_text = d(resourceId="ru.limeshop.android.dev:id/item_checkable_option_name",
+                              text="По возрастанию цены")
+    filter_price_desc_text = d(resourceId="ru.limeshop.android.dev:id/item_checkable_option_name",
+                               text="По убыванию цены")
+    filter_price_asc_cbox = '//*[@resource-id="ru.limeshop.android.dev:id/sorted_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[1]/android.widget.ImageView[1]'
+    filter_price_desc_cbox = '//*[@resource-id="ru.limeshop.android.dev:id/sorted_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[2]/android.widget.ImageView[1]'
+    filter_color_title = d(resourceId="ru.limeshop.android.dev:id/item_filter_name", text="ЦВЕТ")
+    color_box_1 = '//*[@resource-id="ru.limeshop.android.dev:id/filter_color_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[1]/android.widget.ImageView[1]'
+    color_box_2 = '//*[@resource-id="ru.limeshop.android.dev:id/filter_color_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[2]/android.widget.ImageView[1]'
+    filter_apply_btn = d(resourceId="ru.limeshop.android.dev:id/filter_apply")
+    price_product_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]'
 
 class ProductCardLocators:
     # PRODUCT_CARD
@@ -366,8 +390,3 @@ class PickupLocators:
     title_address = '//*[@text="АДРЕС"]'
     title_schedule = '//*[@text="ВРЕМЯ РАБОТЫ"]'
     take_point_btn = '//*[@text="ЗАБЕРУ ОТСЮДА"]'
-
-
-
-
-

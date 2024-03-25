@@ -12,8 +12,6 @@ class TestAndroid:
     def test_checkout_with_one_product(self):
         page = MainPage()
         page.click_to_nav_catalog()
-        # page.go_to_catalog_item()
-        # page.go_to_product_card()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         page.cart.add_to_cart()
@@ -266,3 +264,4 @@ class TestAndroid:
         page.checkout.set_gift_card(price)
         page.checkout.swipe_page_up(3)
         page.checkout.click_pay()
+
