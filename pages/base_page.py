@@ -134,12 +134,12 @@ class BasePage:
     def swipe(self, swipe_ext):
         self.d.swipe_ext(swipe_ext, scale=0.8)
 
-    def clear_text(self, locator, element_name=None):
+    def clear_field(self, locator, element_name=None):
         if element_name is not None:
             with allure.step(f"Удалить текст из поля '{element_name}'"):
-                self.get_element(locator).click()
+                self.get_element(locator).clear_text()
         else:
-            self.d.clear_text()
+            self.get_element(locator).clear_text()
 
     # @allure.step("Получение рандомного элемента")
     def get_random_element(self, locator):
@@ -197,7 +197,7 @@ class BasePage:
 
     @allure.step("Ожидание на экране текста '{text}'")
     def wait_text(self, text):
-        assert self.d(text=text).wait(10) == True, print(f"Элемент с текстом '{text}' не найден")
+        assert self.d(textContains=text).wait(10) == True, print(f"Элемент с текстом '{text}' не найден")
 
     def close_popup(self):
         self.d.click(0.477, 0.031)
@@ -209,5 +209,15 @@ class BasePage:
     @allure.step("Клик по координатам ({x}:{y})")
     def coordinate_click(self, x, y):
         self.d.click(x, y)
+
+    @allure.step("Клик Назад")
+    def press_back(self):
+        d.press("back")
+
+    @allure.step("Проверка заголовка экрана - '{title}'")
+    def checking_title_page(self, title):
+        assert self.d(resourceId='ru.limeshop.android.dev:id/toolbarTitle', text=title).wait(5) == True, print(
+            f"Заголовок экрана некорректен. Текущий заголовок - {self.get_text(MainLocators.TOOLBAR_TITLE)}, ожидаемый - {title}")
+
 
 

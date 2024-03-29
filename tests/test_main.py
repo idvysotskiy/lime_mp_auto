@@ -33,7 +33,7 @@ class TestMobile:
     @allure.testcase("C283")
     def test_add_to_fav_from_catalog(self):
         page = MainPage()
-        page.click_to_nav_catalog()
+        page.open_catalog()
         page.go_to_catalog_item(menu_l1)
         page.add_to_fav_from_catalog()
 

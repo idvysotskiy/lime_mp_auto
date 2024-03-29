@@ -2,6 +2,8 @@ import pytest
 import uiautomator2 as u2
 from config import *
 import allure
+
+from pages.base_page import BasePage
 from pages.main_page import MainPage
 
 d = u2.connect(device_id)
@@ -35,6 +37,7 @@ def login():
 
 @allure.step("Закрытие приложения")
 def teardown():
+    BasePage().get_screen()
     d.app_stop(package)
 
 

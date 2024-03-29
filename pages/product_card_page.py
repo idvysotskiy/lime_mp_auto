@@ -7,12 +7,13 @@ from config import *
 
 class ProductCardPage(BasePage):
 
-    @allure.step('Нажать кнопку "Купить"')
+    @allure.step('Клик по кнопке "Купить"')
     def add_to_cart(self):
         if self.get_text(ProductCardLocators.BUY) == 'КУПИТЬ':
             self.click(ProductCardLocators.BUY)
         elif self.get_text(ProductCardLocators.BUY_MORE) == 'КУПИТЬ ЕЩЕ':
             self.click(ProductCardLocators.BUY_MORE)
+        self.wait_a_moment()
 
     @allure.step('Выбрать размер товара')
     def select_size(self, size):
@@ -55,24 +56,31 @@ class ProductCardPage(BasePage):
     def open_full_product_card(self):
         self.click(ProductCardLocators.COLORS)
 
-    def add_one_product_to_cart(self):
-        main = MainPage()
-        main.click_to_nav_catalog()
-        main.go_to_catalog_item()
-        main.go_to_product_card()
-        self.add_to_cart()
-        self.select_size(select_size)
-        time.sleep(2)
-        main.go_to_cart()
+    # def add_one_product_to_cart(self):
+    #     main = MainPage()
+    #     main.open_catalog()
+    #     main.go_to_catalog_item()
+    #     main.go_to_product_card()
+    #     self.add_to_cart()
+    #     self.select_size(select_size)
+    #     time.sleep(2)
+    #     main.go_to_cart()
 
     @allure.step("Выбор рандомного размера")
     def select_random_size(self):
-        self.get_random_element(ProductCardLocators.product_size_list).click()
-        self.wait_a_second()
+        if len(self.get_element(ProductCardLocators.available_size).all()) > 0:
+            self.get_random_element(ProductCardLocators.available_size).click()
+            self.wait_a_second()
+            return True
+        else:
+            self.press_back()
+            self.press_back()
 
     def get_product_price(self):
         return self.get_number_from_element(ProductCardLocators.product_price)
 
-
+    @allure.step('Переход в корзину')
+    def open_cart(self):
+        self.click(ProductCardLocators.CART)
 
 

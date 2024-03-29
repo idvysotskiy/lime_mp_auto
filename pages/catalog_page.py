@@ -20,8 +20,7 @@ class CatalogPage(BasePage):
     @allure.step("Переход в рандомную карточку товара")
     def open_random_card(self):
         self.wait_element(CatalogLocators.cards_image)
-        self.swipe_page_up(random.randint(1, 4))
-        self.wait_a_second()
+        self.swipe_page_up(random.randint(1, 3))
         self.wait_a_second()
         self.wait_a_second()
         self.click(self.get_random_element(CatalogLocators.cards_image), "рандомная карточка товара")
