@@ -253,8 +253,6 @@ class TestAndroid:
     def test_order_courier_gift_card(self):
         page = MainPage()
         page.user_registration()
-        page.click_x()
-        page.cancel_notification()
         page.click_to_nav_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -265,7 +263,9 @@ class TestAndroid:
         page.cart.swipe_page_up()
         page.wait_a_moment()
         page.cart.go_to_checkout()
+        page.checkout.add_main_address()
         page.checkout.set_gift_card(price)
-        page.checkout.swipe_page_up(3)
+        page.click(CheckOutLocators.SLOTS_DATE_SELECTOR_1)
+        page.click(CheckOutLocators.SLOTS_TIME_SELECTOR_1)
         page.checkout.click_pay()
 

@@ -162,8 +162,7 @@ class CheckOutPage(BasePage):
     def set_gift_card(self, price):
         self.click(CheckOutLocators.gift_card_selector, "Подарочной картой")
         self.wait_element(CheckOutLocators.add_gift_card_title, "Добавить подарочную карту")
-        dictionary = {'7094029525265482': '8508', '2731131568122692': '6467', '2928365005547483': '7272',
-                      '5385968791470207': '7510', '4363956160383861': '2683'}
+
         gift_card_number = ''
         gift_card_pin = ''
 

@@ -103,6 +103,7 @@ class CollectionLocators:
     filter_apply_btn = d(resourceId="ru.limeshop.android.dev:id/filter_apply")
     price_product_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]'
 
+
 class ProductCardLocators:
     # PRODUCT_CARD
     BUY = '//*[@resource-id="ru.limeshop.android.dev:id/buy_button"]'
