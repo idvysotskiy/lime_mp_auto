@@ -337,3 +337,4 @@ class FavoritesLocators:
     BOTTOMBACK = "//android.widget.ImageButton"
     TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
     BOTTOMBUY = 'ru.limeshop.android.dev:id/buyButton'
+    INFOTEXT = '//*[@text="ВАШ ВИШЛИСТ ПУСТ"]'

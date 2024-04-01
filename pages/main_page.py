@@ -194,3 +194,8 @@ class MainPage(BasePage):
         self.click_subscribe_boxes(subscribe)
         self.click_resume_btn_signup()
         self.cancel_notification()
+
+    @allure.step("Переход в Избранное")
+    def open_favorites(self):
+        self.click(MainLocators.FAVORITES_NAV, "Кнопка Избранное")
+        self.wait_element(FavoritesLocators.TITLE, "Заголовок Избранное")

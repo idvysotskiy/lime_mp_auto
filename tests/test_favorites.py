@@ -11,7 +11,8 @@ class TestAndroid:
     @allure.testcase("")
     def test_example(self):
         page = MainPage()
-        page.favorites.open_favorites()
+        page.open_favorites()
+        page.c
 
 
 
