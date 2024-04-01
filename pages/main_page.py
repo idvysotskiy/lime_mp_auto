@@ -242,6 +242,7 @@ class MainPage(BasePage):
         self.wait_element(MainLocators.lime_logo, "логотип Lime")
 
     def elements_login_screen(self):
+        self.wait_element(MainLocators.TOOLBAR_TITLE)
         assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'ВОЙТИ В АККАУНТ'
         assert self.get_text(LoginLocators.LOGIN_SCREEN_TITLE) == 'ВОЙТИ'
         assert self.get_text(LoginLocators.LOGIN_SCREEN_HINT_EMAIL) == 'Эл. почта'
