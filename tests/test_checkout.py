@@ -10,17 +10,15 @@ import allure
 
 @pytest.mark.usefixtures("setup")
 class TestAndroid:
+
+    
     @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2869")
-    def test_checkout_with_one_product(self):
+    def test_checkout_with_one_product(self, login):
         page = MainPage()
-        page.click_to_nav_catalog()
-        page.catalog.open_random_catalog()
-        page.catalog.open_random_card()
-        page.cart.add_to_cart()
-        page.cart.select_size(select_size)
-        time.sleep(2)
-        page.go_to_cart()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.cart.go_to_cart()
         page.card.go_to_checkout()
         time.sleep(2)
         page.checkout.elements_checkout()
@@ -32,13 +30,13 @@ class TestAndroid:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3048")
     def test_pay_card(self):
         page = MainPage()
-        page.click_to_nav_catalog()
+        page.open_catalog()
         page.go_to_catalog_item()
         page.go_to_product_card()
-        page.cart.add_to_cart()
+        page.card.add_to_cart()
         page.cart.select_size(select_size)
         time.sleep(2)
-        page.go_to_cart()
+        page.cart.go_to_cart()
         page.card.go_to_checkout()
         time.sleep(2)
         page.checkout.checkout_set('1', '2', '1', '1')
@@ -50,13 +48,13 @@ class TestAndroid:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3038")
     def test_pay_self(self):
         page = MainPage()
-        page.click_to_nav_catalog()
+        page.open_catalog()
         page.go_to_catalog_item()
         page.go_to_product_card()
-        page.cart.add_to_cart()
+        page.card.add_to_cart()
         page.cart.select_size(select_size)
         time.sleep(2)
-        page.go_to_cart()
+        page.cart.go_to_cart()
         page.card.go_to_checkout()
         page.checkout.elements_checkout()
         page.checkout.checkout_set('1', '4', '2', '2')
@@ -115,34 +113,22 @@ class TestAndroid:
         page.checkout.checking_payment_card_number('4242')
         page.checkout.deleting_single_payment_card()
 
+
+    # @pytest.mark.smoke
+    # @allure.title('Экран "Оформление заказа" / Авторизация')
+    # @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131745")
+    # def test_go_checkout_unautorized(self):
+    #     page = CheckOutPage()
+    #     time.sleep(8)
+    #     page.checkout_with_one_un()
+    #     MainPage().login()
+    #     assert page.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
+    #     page.click(MainLocators.PROFILE_NAV)
+    #     assert page.is_element_present(ProfileLocators.EMAIL)
+
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата картой (Нет сохраненных карт)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3147")
-    def test_success_pay_card_with_add_card(self):
-        page = MainPage()
-        page.reg_kir()
-        page.click_x()
-        BasePage().cancel_notification()
-        page = CheckOutPage()
-        page.checkout_with_one()
-        page.add_main_address()
-        page.click(CheckOutLocators.PAYMENT_SELECTOR_2)
-        page.add_new_card()
-        page.click_pay()
-
-    @pytest.mark.smoke
-    @allure.title('Экран "Оформление заказа" / Авторизация')
-    @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131745")
-    def test_go_checkout_unautorized(self):
-        page = CheckOutPage()
-        time.sleep(8)
-        page.checkout_with_one_un()
-        MainPage().login()
-        assert page.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
-        page.click(MainLocators.PROFILE_NAV)
-        assert page.is_element_present(ProfileLocators.EMAIL)
-
-    @pytest.mark.smoke
     def test_success_pay_card_with_add_card(self):
         page = MainPage()
         page.user_registration()

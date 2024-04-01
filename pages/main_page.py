@@ -50,18 +50,12 @@ class MainPage(BasePage):
         with allure.step('Открыть Личный кабинет'):
             self.click(MainLocators.PROFILE_NAV)
             self.swipe_page_up()
-            self.swipe_page_up()
         with allure.step('Нажать кнопку "Войти"'):
             self.click(ProfileLocators.LOGIN_UN)
         with allure.step('Ввести email'):
-            # self.click(LoginLocators.LOGIN_SCREEN_EMAIL)
-            self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_email"]', email)
-            # BasePage.get_screen(self)
+            self.set_text('	ru.limeshop.android.dev:id/editText', email)
         with allure.step('Ввести пароль'):
-            # self.click(LoginLocators.LOGIN_SCREEN_PASS)
             self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]', password)
-            # self.d.xpath('//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]/android.view.ViewGroup[1]/android.widget.EditText[1]').send_keys(password)
-            # BasePage.get_screen(self)
         with allure.step('Нажать кнопку "Войти"'):
             self.click(LoginLocators.LOGIN_SCREEN_SIGNIN)
             self.wait_element(LoginLocators.profile_avatar)
@@ -115,13 +109,13 @@ class MainPage(BasePage):
     def go_to_feature_toggles(self):
         self.click(ProfileLocators.FEATURE_TOGGLES)
 
-    # @allure.step('Включить feature toggles')
-    # def aktivate_feature_toggles(self):
-    #     self.click(FeatureTogglesLocators.SWITCH_1)
-    #     self.click(FeatureTogglesLocators.SWITCH_2)
-    #     self.click(FeatureTogglesLocators.SWITCH_3)
-    #     self.click(FeatureTogglesLocators.SWITCH_4)
-    #     BasePage.get_screen(self)
+    @allure.step('Включить feature toggles')
+    def aktivate_feature_toggles(self):
+        self.click(FeatureTogglesLocators.SWITCH_1)
+        self.click(FeatureTogglesLocators.SWITCH_2)
+        self.click(FeatureTogglesLocators.SWITCH_3)
+        self.click(FeatureTogglesLocators.SWITCH_4)
+        BasePage.get_screen(self)
 
     @allure.step('Заполнить поля валидными данными')
     def enter_valid_registration_data(self, name, surname, phone, password):
