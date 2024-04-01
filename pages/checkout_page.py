@@ -85,7 +85,15 @@ class CheckOutPage(BasePage):
 
     def back_to_cart(self):
         self.click(MainLocators.X_BUTTON)
+        self.wait_element(CheckOutLocators.POPUP_BACK_CART_TITLE)
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_TITLE) == 'Хотите вернуться в корзину?'
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'Отмена'
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'Вернуться в корзину'
+        self.get_screen()
         self.click(CheckOutLocators.POPUP_BACK_CART_YES)
+        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'Корзина'
+
 
     # def checkout_with_one(self):
     #     ProductCardPage().add_one_product_to_cart()

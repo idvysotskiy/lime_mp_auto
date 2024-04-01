@@ -11,19 +11,30 @@ import allure
 @pytest.mark.usefixtures("setup")
 class TestAndroid:
 
-    
     @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2869")
-    def test_checkout_with_one_product(self, login):
+    @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/136157")
+    def test_open_checkout_auth(self, login):
         page = MainPage()
+        page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
-        page.cart.go_to_cart()
-        page.card.go_to_checkout()
-        time.sleep(2)
+        page.card.open_cart()
+        page.cart.go_to_checkout()
         page.checkout.elements_checkout()
         page.get_screen()
         page.checkout.back_to_cart()
+
+    @allure.title('Экран "Корзина" / Переход к чекауту (Не авторизованный)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2868")
+    def test_open_checkout_unauth(self):
+        page = MainPage()
+        page.clear_basket()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.elements_login_screen()
 
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата ранее сохраненной картой')
@@ -112,7 +123,6 @@ class TestAndroid:
         page.cart.go_to_checkout()
         page.checkout.checking_payment_card_number('4242')
         page.checkout.deleting_single_payment_card()
-
 
     # @pytest.mark.smoke
     # @allure.title('Экран "Оформление заказа" / Авторизация')

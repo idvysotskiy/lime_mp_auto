@@ -53,9 +53,9 @@ class MainPage(BasePage):
         with allure.step('Нажать кнопку "Войти"'):
             self.click(ProfileLocators.LOGIN_UN)
         with allure.step('Ввести email'):
-            self.set_text('	ru.limeshop.android.dev:id/editText', email)
+            self.set_text(LoginLocators.LOGIN_SCREEN_EMAIL, email)
         with allure.step('Ввести пароль'):
-            self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]', password)
+            self.set_text(LoginLocators.LOGIN_SCREEN_PASS, password)
         with allure.step('Нажать кнопку "Войти"'):
             self.click(LoginLocators.LOGIN_SCREEN_SIGNIN)
             self.wait_element(LoginLocators.profile_avatar)
@@ -240,4 +240,13 @@ class MainPage(BasePage):
     @allure.step("Ожидание логотипа Lime")
     def wait_logo(self):
         self.wait_element(MainLocators.lime_logo, "логотип Lime")
+
+    def elements_login_screen(self):
+        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'ВОЙТИ В АККАУНТ'
+        assert self.get_text(LoginLocators.LOGIN_SCREEN_TITLE) == 'ВОЙТИ'
+        assert self.get_text(LoginLocators.LOGIN_SCREEN_HINT_EMAIL) == 'Эл. почта'
+        assert self.get_text(LoginLocators.LOGIN_SCREEN_HINT_PASS) == 'Пароль'
+        assert self.get_text(LoginLocators.PASSWORD_RESET_LINK) == 'Забыли данные для входа?'
+        assert self.get_text(LoginLocators.LOGIN_BTN) == 'ВОЙТИ'
+        assert self.get_text(LoginLocators.SIGN_UP_BTN) == 'ЗАРЕГИСТРИРОВАТЬСЯ'
 
