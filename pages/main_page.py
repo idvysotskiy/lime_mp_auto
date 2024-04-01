@@ -1,6 +1,9 @@
 import time
 import allure
 import random
+
+import pytest
+
 from pages.base_page import BasePage
 from locators import *
 from pages.cart_page import CartPage
@@ -8,6 +11,7 @@ from pages.catalog_page import CatalogPage
 from pages.checkout_page import CheckOutPage
 from pages.favorites_page import FavoritesPage
 from pages.product_card_page import ProductCardPage
+from pages.profile_page import ProfilePage
 from pages.search_page import SearchPage
 
 
@@ -18,6 +22,7 @@ class MainPage(BasePage):
     card = ProductCardPage()
     search = SearchPage()
     favorites = FavoritesPage()
+    profile = ProfilePage()
 
     @allure.step("Регистрация")
     def user_registration(self):
@@ -25,18 +30,18 @@ class MainPage(BasePage):
         self.swipe_page_up()
         self.click(MainLocators.registration_btn, "кнопка Зарегистрироваться")
         self.wait_a_second()
-        email = BasePage().generate_random_email()
-        self.set_text(MainLocators.name, valid_name_kir, "имя")
-        self.set_text(MainLocators.surname, valid_surname_kir, "фамилия")
-        self.set_text(MainLocators.phone, valid_phone, "телефон")
+        email = 'test' + str(random.randint(0, 999999999)) + '@test.ru'
+        self.set_text(MainLocators.name, 'Тест', "имя")
+        self.set_text(MainLocators.surname, 'Тестов', "фамилия")
+        self.set_text(MainLocators.phone, '9998887755', "телефон")
         self.set_text(MainLocators.email, email, "почта")
-        self.set_text(MainLocators.password, valid_password, "пароль")
-        self.set_text(MainLocators.repeat_password, valid_password, "повторение пароля")
+        self.set_text(MainLocators.password, '87654321', "пароль")
+        self.set_text(MainLocators.repeat_password, '87654321', "повторение пароля")
         self.swipe_page_up()
-        self.click_subscribe_boxes(subscribe)
+        self.click(MainLocators.approve_checkbox, 'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
         self.click(MainLocators.continue_btn, "кнопка Продолжить")
-        self.cancel_notification()
         self.wait_text(email)
+        # self.add_new_address()
         self.click_x()
         return email
 
@@ -45,13 +50,18 @@ class MainPage(BasePage):
         with allure.step('Открыть Личный кабинет'):
             self.click(MainLocators.PROFILE_NAV)
             self.swipe_page_up()
-            self.wait_a_moment()
+            self.swipe_page_up()
         with allure.step('Нажать кнопку "Войти"'):
             self.click(ProfileLocators.LOGIN_UN)
         with allure.step('Ввести email'):
+            # self.click(LoginLocators.LOGIN_SCREEN_EMAIL)
             self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_email"]', email)
+            # BasePage.get_screen(self)
         with allure.step('Ввести пароль'):
+            # self.click(LoginLocators.LOGIN_SCREEN_PASS)
             self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]', password)
+            # self.d.xpath('//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]/android.view.ViewGroup[1]/android.widget.EditText[1]').send_keys(password)
+            # BasePage.get_screen(self)
         with allure.step('Нажать кнопку "Войти"'):
             self.click(LoginLocators.LOGIN_SCREEN_SIGNIN)
             self.wait_element(LoginLocators.profile_avatar)
@@ -61,9 +71,9 @@ class MainPage(BasePage):
     def click_x(self):
         self.click(MainLocators.X_BUTTON)
 
-    @allure.step('Перейти в каталог')
-    def click_to_nav_catalog(self):
-        # self.wait_hidden_element(MainLocators.CATALOG_NAV)
+    @allure.step('Переход в каталог')
+    def open_catalog(self):
+        self.wait_element(MainLocators.CATALOG_NAV)
         self.click(MainLocators.CATALOG_NAV, "каталог")
 
     @allure.step('Перейти в раздел каталога')
@@ -98,8 +108,8 @@ class MainPage(BasePage):
         BasePage.get_screen(self)
 
     @allure.step('Открыть личный кабинет')
-    def go_to_profile(self):
-        self.click(MainLocators.PROFILE_NAV)
+    def open_profile(self):
+        self.click(MainLocators.PROFILE_NAV, "личный кабинет")
 
     @allure.step('Открыть feature toggles')
     def go_to_feature_toggles(self):
@@ -113,15 +123,15 @@ class MainPage(BasePage):
     #     self.click(FeatureTogglesLocators.SWITCH_4)
     #     BasePage.get_screen(self)
 
-    # @allure.step('Заполнить поля валидными данными')
-    # def enter_valid_registration_data(self, name, surname, phone, password):
-    #     self.set_text(LoginLocators.SIGNUP_NAME, name)
-    #     self.set_text(LoginLocators.SIGNUP_SURNAME, surname)
-    #     self.set_text(LoginLocators.SIGNUP_PHONE, phone)
-    #     self.set_text(LoginLocators.SIGNUP_EMAIL, BasePage.generate_random_email(self))
-    #     self.set_text(LoginLocators.SIGNUP_PASSWORD, password)
-    #     self.set_text(LoginLocators.SIGNUP_REPEAT_PASSWORD, password)
-    #     BasePage.get_screen(self)
+    @allure.step('Заполнить поля валидными данными')
+    def enter_valid_registration_data(self, name, surname, phone, password):
+        self.set_text(LoginLocators.SIGNUP_NAME, name)
+        self.set_text(LoginLocators.SIGNUP_SURNAME, surname)
+        self.set_text(LoginLocators.SIGNUP_PHONE, phone)
+        self.set_text(LoginLocators.SIGNUP_EMAIL, BasePage.generate_random_email(self))
+        self.set_text(LoginLocators.SIGNUP_PASSWORD, password)
+        self.set_text(LoginLocators.SIGNUP_REPEAT_PASSWORD, password)
+        BasePage.get_screen(self)
 
     @allure.step('Выбрать чекбоксы подписок')
     def click_subscribe_boxes(self, subscribes):
@@ -161,13 +171,13 @@ class MainPage(BasePage):
                 print('Элемент меню не найден')
                 raise
 
-    @allure.step('Нажать кнопку "Корзина" в нав.баре')
-    def go_to_cart(self):
-        self.click(ProductCardLocators.CART)
+    @allure.step("Переход в корзину")
+    def open_cart(self):
+        self.click(MainLocators.CART_NAV)
 
     @allure.step('Меняем контур на nuxt-02')
     def set_nuxt_02(self):
-        self.go_to_profile()
+        self.open_profile()
         time.sleep(2)
         self.d.click(0.062, 0.508)
         time.sleep(2)
@@ -180,7 +190,7 @@ class MainPage(BasePage):
         self.click_x()
 
     def open_product_card_screen(self):
-        self.click_to_nav_catalog()
+        self.open_catalog()
         self.go_to_catalog_item(menu_l1, menu_l2)
         self.go_to_product_card()
 
@@ -190,3 +200,50 @@ class MainPage(BasePage):
         self.click_subscribe_boxes(subscribe)
         self.click_resume_btn_signup()
         self.cancel_notification()
+
+    @allure.step("Очистка корзины")
+    def clear_basket(self):
+        self.wait_element(MainLocators.CART_NAV)
+        if self.d(resourceId='ru.limeshop.android.dev:id/nav_cart').child(
+                className='android.widget.TextView').count > 0:
+            self.open_cart()
+            self.wait_element(CartLocators.CLEAR_ALL)
+            self.click(CartLocators.CLEAR_ALL, "кнопка Очистить")
+            self.wait_element(CartLocators.POPUP_CLEAR)
+            self.click(CartLocators.POPUP_CLEAR, "кнопка Очистить корзину")
+            self.wait_text("ВАША КОРЗИНА ПУСТА")
+            self.click_x()
+
+    @allure.step("Добавление нового адреса в личном кабинете")
+    def add_new_address(self):
+        self.click(ProfileLocators.MY_INFO, "мои данные")
+        self.click(ProfileLocators.add_new_address_btn, "кнопка Добавить новый адрес")
+        self.set_text(ProfileLocators.city, "Новосибирск", "город")
+        self.wait_element(ProfileLocators.address_popup)
+        self.click(ProfileLocators.address_popup)
+        self.set_text(ProfileLocators.street, "Иванова 1", "улица")
+        self.wait_element(ProfileLocators.address_popup)
+        self.click(ProfileLocators.address_popup)
+        self.set_text(ProfileLocators.apartment, "1", "квартира")
+        self.click(ProfileLocators.save_address_btn, "кнопка Сохранить")
+        self.wait_text("ОБНОВИТЬ ПАРОЛЬ")
+        self.click_x()
+
+    @allure.step("Добавление в корзину рандомного товара")
+    def add_to_cart_random_product(self):
+        self.catalog.open_random_catalog()
+
+        for i in range(3):
+            self.catalog.open_random_card()
+            self.card.add_to_cart()
+            size = self.card.select_random_size()
+
+            if size is True:
+                return
+
+        pytest.xfail("Нет доступных размеров в выбранных карточках")
+
+    @allure.step("Ожидание логотипа Lime")
+    def wait_logo(self):
+        self.wait_element(MainLocators.lime_logo, "логотип Lime")
+
