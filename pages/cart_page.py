@@ -34,11 +34,12 @@ class CartPage(BasePage):
     def enter_promo_code(self, promo_code):
         self.set_text(CartLocators.PROMO_CODE, promo_code)
 
-    @allure.step('Нажать кнопку "К оформлению"')
+    @allure.step('Клик по кнопке "К оформлению"')
     def go_to_checkout(self):
+        self.swipe_page_up()
         self.click(CartLocators.CONTINUE)
 
-    @allure.step('Очистить корзину')
+    @allure.step('Очистка корзины')
     def cart_clear(self):
         self.click(CartLocators.CLEAR_ALL)
         self.click(CartLocators.POPUP_CLEAR)
