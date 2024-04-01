@@ -19,6 +19,7 @@ class TestCheckout:
         page.cart.go_to_checkout()
         page.checkout.elements_checkout()
 
+
     # @pytest.mark.smoke
     # @allure.title('Блок "Оплата" / Успешная оплата ранее сохраненной картой')
     # @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3048")

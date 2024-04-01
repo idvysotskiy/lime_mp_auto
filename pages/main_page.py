@@ -55,6 +55,7 @@ class MainPage(BasePage):
             self.click(ProfileLocators.LOGIN_UN)
         with allure.step('Ввести email'):
             # self.click(LoginLocators.LOGIN_SCREEN_EMAIL)
+            self.wait_element('ru.limeshop.android.dev:id/signin_email')
             self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_email"]', email)
             # BasePage.get_screen(self)
         with allure.step('Ввести пароль'):
