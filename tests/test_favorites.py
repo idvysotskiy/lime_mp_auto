@@ -7,12 +7,12 @@ import allure
 @pytest.mark.usefixtures("setup")
 class TestAndroid:
     @pytest.mark.smoke
-    @allure.title('Шаблон')
+    @allure.title('Кнопка "НАЧАТЬ ПОКУПКИ')
     @allure.testcase("")
     def test_example(self):
         page = MainPage()
         page.open_favorites()
-        page.c
+        page.favorites.click_pay()
 
 
 
