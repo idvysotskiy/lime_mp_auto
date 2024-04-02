@@ -10,6 +10,7 @@ class MainLocators:
     X_BUTTON = '//android.widget.ImageButton'
     NOTIFICATION_NEGATIVE = '//*[@resource-id="ru.limeshop.android.dev:id/notification_negative_button"]'
     TOOLBAR_TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
+    lime_logo = 'ru.limeshop.android.dev:id/banner_label_image_view'
 
     # NAV_BAR
     SEARCH_NAV = 'ru.limeshop.android.dev:id/nav_search'
@@ -73,7 +74,7 @@ class CatalogLocators:
     catalog_item = 'ru.limeshop.android.dev:id/catalog_item_name'
     catalog_item_recycler = 'ru.limeshop.android.dev:id/catalog_item_recycler'
     submenu_elements_list = '//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_recycler"]//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_name"]'
-    cards_image = 'ru.limeshop.android.dev:id/media_view'
+    cards_image = 'ru.limeshop.android.dev:id/media_view_container_layout'
 
 
 class ProductCardLocators:
@@ -341,6 +342,4 @@ class FavoritesLocators:
     BOTTOMFAVORITES = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.ImageView[1]'
     BOTTOMFAVORITES2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.ImageView[1]'
     STUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
-    STUFF2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
     BOTTOMBUYSTUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.Button[1]'
-    BOTTOMBUYSTUFF2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.Button[1]'
