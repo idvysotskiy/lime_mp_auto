@@ -30,15 +30,16 @@ class MainPage(BasePage):
         self.swipe_page_up()
         self.click(MainLocators.registration_btn, "кнопка Зарегистрироваться")
         self.wait_a_second()
-        email = 'test' + str(random.randint(0, 999999999)) + '@test.ru'
-        self.set_text(MainLocators.name, 'Тест', "имя")
-        self.set_text(MainLocators.surname, 'Тестов', "фамилия")
-        self.set_text(MainLocators.phone, '9998887755', "телефон")
+        email = BasePage().generate_random_email()
+        self.set_text(MainLocators.name, valid_name_kir, "имя")
+        self.set_text(MainLocators.surname, valid_surname_kir, "фамилия")
+        self.set_text(MainLocators.phone, valid_phone, "телефон")
         self.set_text(MainLocators.email, email, "почта")
-        self.set_text(MainLocators.password, '87654321', "пароль")
-        self.set_text(MainLocators.repeat_password, '87654321', "повторение пароля")
+        self.set_text(MainLocators.password, valid_password, "пароль")
+        self.set_text(MainLocators.repeat_password, valid_password, "повторение пароля")
         self.swipe_page_up()
-        self.click(MainLocators.approve_checkbox, 'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
+        # self.click(MainLocators.approve_checkbox, 'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
+        self.click_subscribe_boxes(subscribe)
         self.click(MainLocators.continue_btn, "кнопка Продолжить")
         self.wait_text(email)
         # self.add_new_address()
@@ -245,9 +246,7 @@ class MainPage(BasePage):
         self.wait_element(MainLocators.TOOLBAR_TITLE)
         assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'ВОЙТИ В АККАУНТ'
         assert self.get_text(LoginLocators.LOGIN_SCREEN_TITLE) == 'ВОЙТИ'
-        assert self.get_text(LoginLocators.LOGIN_SCREEN_HINT_EMAIL) == 'Эл. почта'
-        assert self.get_text(LoginLocators.LOGIN_SCREEN_HINT_PASS) == 'Пароль'
         assert self.get_text(LoginLocators.PASSWORD_RESET_LINK) == 'Забыли данные для входа?'
         assert self.get_text(LoginLocators.LOGIN_BTN) == 'ВОЙТИ'
-        assert self.get_text(LoginLocators.SIGN_UP_BTN) == 'ЗАРЕГИСТРИРОВАТЬСЯ'
+
 

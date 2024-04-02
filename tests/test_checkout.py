@@ -37,6 +37,23 @@ class TestAndroid:
         page.elements_login_screen()
 
     @pytest.mark.smoke
+    @allure.title('Экран "Оформление заказа" / Не заполнены основные данные')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/136163")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2875")
+    def test_add_main_address(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.click_add_address_btn()
+        page.checkout.elements_add_address()
+        page.checkout.add_main_address()
+        print('test')
+
+
+    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата ранее сохраненной картой')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3048")
     def test_pay_card(self):

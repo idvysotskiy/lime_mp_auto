@@ -87,13 +87,13 @@ class CheckOutPage(BasePage):
         self.click(MainLocators.X_BUTTON)
         self.wait_element(CheckOutLocators.POPUP_BACK_CART_TITLE)
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_TITLE) == 'Хотите вернуться в корзину?'
-        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
+        assert self.get_text(
+            CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'Отмена'
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'Вернуться в корзину'
         self.get_screen()
         self.click(CheckOutLocators.POPUP_BACK_CART_YES)
         assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'Корзина'
-
 
     # def checkout_with_one(self):
     #     ProductCardPage().add_one_product_to_cart()
@@ -145,8 +145,8 @@ class CheckOutPage(BasePage):
         self.is_element_present(CheckOutLocators.ADD_NEW_CARD_PLUS)
 
     def add_main_address(self):
-        with allure.step('Нажать кнопку "Добавить адрес"'):
-            self.click(CheckOutLocators.ADD_ADDRESS_BUTTON)
+        # with allure.step('Нажать кнопку "Добавить адрес"'):
+        #     self.click(CheckOutLocators.ADD_ADDRESS_BUTTON)
         with allure.step('Ввести значение в поле "Город"'):
             self.set_text(CheckOutLocators.ADD_ADDRESS_CITY, 'Новосибирск')
         with allure.step('Выбрать город из всплывашки'):
@@ -320,7 +320,8 @@ class CheckOutPage(BasePage):
         if len(self.d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
             self.coordinate_click(100, 100)
 
-        assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text', textContains='4242').wait(5) == True, print("В блоке Доплата не отображается карта 4242")
+        assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text', textContains='4242').wait(
+            5) == True, print("В блоке Доплата не отображается карта 4242")
 
     @allure.step("Клик Продолжить покупки (после оформления заказа)")
     def click_continue_shopping(self):
@@ -328,11 +329,13 @@ class CheckOutPage(BasePage):
 
     @allure.step("Проверка наличия номера карты '{card_number}' в чекауте")
     def checking_payment_card_number(self, card_number):
-        assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text', textContains=f'{card_number}').wait(5) == True, print(f"Не отображается карта {card_number}")
+        assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text',
+                      textContains=f'{card_number}').wait(5) == True, print(f"Не отображается карта {card_number}")
 
     @allure.step("Проверка наличия номера карты '{card_number}' на экране Ваши карты")
     def checking_card_list(self, card_number):
-        assert self.d(resourceId='ru.limeshop.android.dev:id/info_text_view', textContains=f'{card_number}').wait(5) == True, print(f"Не отображается карта {card_number}")
+        assert self.d(resourceId='ru.limeshop.android.dev:id/info_text_view', textContains=f'{card_number}').wait(
+            5) == True, print(f"Не отображается карта {card_number}")
 
     @allure.step("Добавление адреса доставки")
     def add_courier_address(self):
@@ -347,5 +350,14 @@ class CheckOutPage(BasePage):
         self.click(CheckOutLocators.save_address_btn, "кнопка Сохранить")
         self.wait_text("ОФОРМЛЕНИЕ ЗАКАЗА")
 
-def test_1():
-    print()
+    @allure.step("Нажать кнопку 'Добавить адрес'")
+    def click_add_address_btn(self):
+        self.click(CheckOutLocators.add_courier_address_btn, "кнопка Добавить адрес")
+
+    def elements_add_address(self):
+        assert self.get_text(CheckOutLocators.ADD_ADDRESS_TITLE) == 'ДОБАВИТЬ АДРЕС'
+        assert self.get_text(CheckOutLocators.ADD_ADDRESS_SAVE_BUTTON) == 'СОХРАНИТЬ'
+        self.wait_text(valid_name_kir)
+        self.wait_text(valid_surname_kir)
+        self.wait_text('+7 963 944 78 45')
+        # self.wait_text(email)
