@@ -9,10 +9,14 @@ from locators import *
 
 class FavoritesPage(BasePage):
 
+    @allure.step("Экран 'Избранное'")
+
+
     @allure.step("Кнопка 'Назад'")
     def click_back(self):
         self.click(FavoritesLocators.BOTTOMBACK,"Кнопка 'Назад'")
-        self.(FavoritesLocators.TITLE,)
+        self.wait_hidden_element(FavoritesLocators.TITLE,"ЗАГОЛОВОК")
+        self.wait_hidden_element(FavoritesLocators.BOTTOMBUY,"Кнопка 'НАЧАТЬ ПОКУПКИ'")
 
     @allure.step('Нажать кнопку "НАЧАТЬ ПОКУПКИ"')
     def click_pay(self):

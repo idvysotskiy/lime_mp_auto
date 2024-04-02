@@ -6,6 +6,14 @@ import allure
 
 @pytest.mark.usefixtures("setup")
 class TestAndroid:
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Избранное"')
+    @allure.testcase("")
+    def test_screenFavorites(self):
+        page = MainPage()
+        page.open_favorites()
+
     @pytest.mark.smoke
     @allure.title('Кнопка "НАЧАТЬ ПОКУПКИ')
     @allure.testcase("")
