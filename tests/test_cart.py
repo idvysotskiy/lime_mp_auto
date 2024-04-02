@@ -17,14 +17,13 @@ class TestAndroid:
         page.open_catalog()
         page.go_to_catalog_item()
         page.go_to_product_card()
-        ProductCardPage().add_to_cart()
-        ProductCardPage().select_size(select_size)
+        page.cart.add_to_cart()
+        page.card.select_size()
         time.sleep(2)
         page.card.open_cart()
         time.sleep(2)
-        page = CartPage()
-        page.elements_full_cart()
-        page.click(CartLocators.CLEAR_ALL)
+        page.cart.elements_full_cart()
+        self.click(CartLocators.CLEAR_ALL)
         page.click(CartLocators.POPUP_CLEAR)
 
     @pytest.mark.smoke

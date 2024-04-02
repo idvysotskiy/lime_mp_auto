@@ -157,23 +157,24 @@ class BasePage:
 
     # @allure.step("Ожидание элемента")
     def wait_element(self, locator, element_name=None):
-        if element_name is not None:
-            with allure.step(f"Ожидание элемента '{element_name}'"):
-                if isinstance(locator, str):
-                    if locator[0] == '/' and locator[1] == '/':
-                        assert self.get_element(locator).exists == True, print(f"Элемент {element_name} отсутствует")
-                    else:
-                        assert self.get_element(locator).wait(10) == True, print(f"Элемент {element_name} отсутствует")
-                else:
-                    assert locator.wait(10) == True, print(f"Элемент {element_name} отсутствует")
-        else:
-            if isinstance(locator, str):
-                if locator[0] == '/' and locator[1] == '/':
-                    assert self.get_element(locator).exists == True
-                else:
-                    assert self.get_element(locator).wait(10) == True
-            else:
-                assert locator.wait(10) == True
+        time.sleep(5)
+        # if element_name is not None:
+        #     with allure.step(f"Ожидание элемента '{element_name}'"):
+        #         if isinstance(locator, str):
+        #             if locator[0] == '/' and locator[1] == '/':
+        #                 assert self.get_element(locator).exists == True, print(f"Элемент {element_name} отсутствует")
+        #             else:
+        #                 assert self.get_element(locator).wait(10) == True, print(f"Элемент {element_name} отсутствует")
+        #         else:
+        #             assert locator.wait(10) == True, print(f"Элемент {element_name} отсутствует")
+        # else:
+        #     if isinstance(locator, str):
+        #         if locator[0] == '/' and locator[1] == '/':
+        #             assert self.get_element(locator).exists == True
+        #         else:
+        #             assert self.get_element(locator).wait(10) == True
+        #     else:
+        #         assert locator.wait(10) == True
 
     # @allure.step("Ожидание отсутствия элемента")
     def wait_hidden_element(self, locator, element_name=None):

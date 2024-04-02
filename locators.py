@@ -43,6 +43,26 @@ class MainLocators:
     submenu_elements_list = d(resourceId='ru.limeshop.android.dev:id/catalog_item_recycler').child(
         resourceId="ru.limeshop.android.dev:id/catalog_item_name")
 
+class SearchLocators:
+    X_BUTTON = '//android.widget.ImageButton'
+    TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/toolbarTitle"]'
+    TEXT_EDIT = '//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
+    TEXT_HINT = '//*[@resource-id="ru.limeshop.android.dev:id/hintText"]'
+    ICON = '//*[@resource-id="ru.limeshop.android.dev:id/startIcon"]'
+    SHOPS_BTN = '//*[@resource-id="ru.limeshop.android.dev:id/topButtonsContainerLinearLayout"]/androidx.appcompat.widget.LinearLayoutCompat[1]'
+    SCAN_BTH = '//*[@resource-id="ru.limeshop.android.dev:id/topButtonsContainerLinearLayout"]/androidx.appcompat.widget.LinearLayoutCompat[2]'
+    SHOPS_TEXT = '//*[@text="МАГАЗИНЫ"]'
+    SCAN_TEXT = '//*[@text="СКАНЕР"]'
+    ALL = '//*[@text="ВСЕ"]'
+    WOMAN = '//*[@text="ЖЕНЩИНЫ"]'
+    MEN = '//*[@text="МУЖЧИНЫ"]'
+    KIDS = '//*[@text="ДЕТИ"]'
+    FIRST_RESULT_IMAGE = '//*[@resource-id="ru.limeshop.android.dev:id/searchRecyclerView"]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
+    FIRST_RESULT_NAME = '"ru.limeshop.android.dev:id/item_product_name", text="ПЛАТЬЕ ИЗ АТЛАСА С ПРИНТОМ «ЖЕМЧУГ»"'
+    FIRST_RESULT_FAV = '//*[@resource-id="ru.limeshop.android.dev:id/searchRecyclerView"]/android.view.ViewGroup[1]/android.widget.ImageView[1]'
+    ICON_FAIL_SEARCH = '//androidx.appcompat.widget.LinearLayoutCompat/android.widget.ImageView[1]'
+    FAIL_SEARCH_TEXT = '//*[@text="НИЧЕГО НЕ НАЙДЕНО"]'
+    FAIL_SEARCH_DESCRIPTION = '//*[@text="Проверьте, правильно ли введен запрос"]'
 
 class CatalogLocators:
     WOMEN = '//*[@text="ЖЕНЩИНЫ"]'
@@ -54,7 +74,26 @@ class CatalogLocators:
     catalog_item = 'ru.limeshop.android.dev:id/catalog_item_name'
     catalog_item_recycler = 'ru.limeshop.android.dev:id/catalog_item_recycler'
     submenu_elements_list = '//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_recycler"]//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_name"]'
-    cards_image = 'ru.limeshop.android.dev:id/media_view'
+    # cards_image = 'ru.limeshop.android.dev:id/media_view'
+    cards_image = "ru.limeshop.android.dev:id/media_view_container_layout"
+
+
+class CollectionLocators:
+    # COLLECTION
+    image_view_btn = "ru.limeshop.android.dev:id/toolbar_secondary_image_view"
+    filters_btn = "ru.limeshop.android.dev:id/imageView"
+    filter_sort_title = d(resourceId="ru.limeshop.android.dev:id/item_filter_name", text="СОРТИРОВАТЬ")
+    filter_price_asc_text = d(resourceId="ru.limeshop.android.dev:id/item_checkable_option_name",
+                              text="По возрастанию цены")
+    filter_price_desc_text = d(resourceId="ru.limeshop.android.dev:id/item_checkable_option_name",
+                               text="По убыванию цены")
+    filter_price_asc_cbox = '//*[@resource-id="ru.limeshop.android.dev:id/sorted_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[1]/android.widget.ImageView[1]'
+    filter_price_desc_cbox = '//*[@resource-id="ru.limeshop.android.dev:id/sorted_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[2]/android.widget.ImageView[1]'
+    filter_color_title = d(resourceId="ru.limeshop.android.dev:id/item_filter_name", text="ЦВЕТ")
+    color_box_1 = '//*[@resource-id="ru.limeshop.android.dev:id/filter_color_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[1]/android.widget.ImageView[1]'
+    color_box_2 = '//*[@resource-id="ru.limeshop.android.dev:id/filter_color_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[2]/android.widget.ImageView[1]'
+    filter_apply_btn = d(resourceId="ru.limeshop.android.dev:id/filter_apply")
+    price_product_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]'
 
 
 class ProductCardLocators:
@@ -156,12 +195,17 @@ class LoginLocators:
     # LOGIN_SCREEN
     LOGIN_SCREEN_TITLE = 'ru.limeshop.android.dev:id/orderflow_signin_title'
     LOGIN_SCREEN_HINT_EMAIL = 'ru.limeshop.android.dev:id/hintText, text="Эл. почта"'
-    LOGIN_SCREEN_EMAIL = 'ru.limeshop.android.dev:id/signin_email'
+    # LOGIN_SCREEN_EMAIL = 'ru.limeshop.android.dev:id/signin_email'
+    LOGIN_SCREEN_EMAIL = '//*[@resource-id="ru.limeshop.android.dev:id/signin_email"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     LOGIN_SCREEN_HINT_PASS = '"ru.limeshop.android.dev:id/hintText", text="Пароль"'
-    LOGIN_SCREEN_PASS = 'ru.limeshop.android.dev:id/signin_password'
+    # LOGIN_SCREEN_PASS = 'ru.limeshop.android.dev:id/signin_password'
+    LOGIN_SCREEN_PASS = '//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     LOGIN_SCREEN_SHOW_PASS = 'ru.limeshop.android.dev:id/endIcon'
     LOGIN_SCREEN_PASS_RESET = 'ru.limeshop.android.dev:id/signin_password_reset'
     LOGIN_SCREEN_SIGNIN = 'ru.limeshop.android.dev:id/signin_proceed'
+    PASSWORD_RESET_LINK = "ru.limeshop.android.dev:id/signin_password_reset"
+    LOGIN_BTN = "ru.limeshop.android.dev:id/signin_proceed"
+    SIGN_UP_BTN = "ru.limeshop.android.dev:id/signUpButton"
 
     # REG_SCREEN
     SIGNUP_HINT_NAME = '"ru.limeshop.android.dev:id/hintText", text="Имя"'
@@ -342,3 +386,34 @@ class SuccessPayScreenLocators:
     TITLE = 'ru.limeshop.android.dev:id/status_title_text'
     DESCRIPTION = '//*[@text="Отслеживать его статус вы можете в личном кабинете"]'
     BUTTON = 'ru.limeshop.android.dev:id/action_button'
+
+
+class PermissionGeoLocators:
+    title = "com.android.permissioncontroller:id/permission_message"
+    allow_foreground_only_button = "com.android.permissioncontroller:id/permission_allow_foreground_only_button"
+    allow_one_time_button = "com.android.permissioncontroller:id/permission_allow_one_time_button"
+    deny_button = "com.android.permissioncontroller:id/permission_deny_button"
+    img_1 = "com.android.permissioncontroller:id/permission_location_accuracy_radio_fine"
+    img_2 = "com.android.permissioncontroller:id/permission_location_accuracy_radio_coarse"
+
+
+class PickupLocators:
+    tab_map = "ru.limeshop.android.dev:id/maps_title_text"
+    tab_list = "ru.limeshop.android.dev:id/list_title_text"
+    search_field = "ru.limeshop.android.dev:id/editText"
+    filter_lime = '//*[@resource-id="ru.limeshop.android.dev:id/selector_recycler_view"]/android.widget.FrameLayout[1]'
+    filter_boxberry = '//*[@resource-id="ru.limeshop.android.dev:id/selector_recycler_view"]/android.widget.FrameLayout[2]'
+    filter_yandex = '//*[@resource-id="ru.limeshop.android.dev:id/selector_recycler_view"]/android.widget.FrameLayout[3]'
+    list_select_1 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[1]/android.widget.RelativeLayout[2]/android.widget.Button[1]'
+    list_select_2 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[2]/android.widget.RelativeLayout[2]/android.widget.Button[1]'
+    list_select_3 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[3]/android.widget.RelativeLayout[2]/android.widget.Button[1]'
+    info_btn_1 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[1]/android.widget.RelativeLayout[2]/android.widget.ImageView[1]'
+    info_btn_2 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[2]/android.widget.RelativeLayout[2]/android.widget.ImageView[1]'
+    info_btn_3 = '//*[@resource-id="ru.limeshop.android.dev:id/pickup_points_recycler"]/androidx.appcompat.widget.LinearLayoutCompat[3]/android.widget.RelativeLayout[2]/android.widget.ImageView[1]'
+    # INFO SCREEN
+    info_name_text = "ru.limeshop.android.dev:id/pickup_point_info_name_text"
+    info_address_text = "ru.limeshop.android.dev:id/pickup_point_info_address_text"
+    info_schedule_text = "ru.limeshop.android.dev:id/pickup_point_info_schedule_text"
+    title_address = '//*[@text="АДРЕС"]'
+    title_schedule = '//*[@text="ВРЕМЯ РАБОТЫ"]'
+    take_point_btn = '//*[@text="ЗАБЕРУ ОТСЮДА"]'
