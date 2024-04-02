@@ -29,8 +29,22 @@ class TestAndroid:
 
     @pytest.mark.smoke
     @allure.title('Экран "Корзина" / Пустой список')
-    @allure.testcase("C28")
-    def test_cart_clear(self):
-        page = CartPage()
-        page.cart_clear()
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/28")
+    def test_clear_cart(self):
+        page = MainPage()
+        page.clear_basket()
+        page.open_cart()
+        page.cart.check_empty_cart()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Корзина" / Переход в каталог')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/310")
+    def test_go_to_card(self):
+        page = MainPage()
+        page.clear_basket()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        product_name = page.card.get_product_name()
+        page.card.open_cart()
+
 

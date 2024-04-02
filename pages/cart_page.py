@@ -44,4 +44,9 @@ class CartPage(BasePage):
         self.click(CartLocators.CLEAR_ALL)
         self.click(CartLocators.POPUP_CLEAR)
 
+    @allure.step("Проверка пустой корзины")
+    def check_empty_cart(self):
+        self.wait_text("ВАША КОРЗИНА ПУСТА")
+        self.wait_element(CartLocators.BUY_BUTTON, "кнопка Начать покупки")
+
 
