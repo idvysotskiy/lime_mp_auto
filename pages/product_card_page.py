@@ -84,5 +84,5 @@ class ProductCardPage(BasePage):
         self.click(ProductCardLocators.CART)
 
     def get_product_name(self):
-        return self.get_element_text(ProductCardLocators.product_name)
+        return self.get_text(ProductCardLocators.product_name)
 
