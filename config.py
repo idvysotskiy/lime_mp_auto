@@ -52,5 +52,6 @@ card_owner = 'IVAN SIDOROV'
 card_expiry = '0125'
 card_cvv = '123'
 
-product_name_ru = 'платье'
-product_article = '0377-454'
+gift_card_list = {'2928365005547483': '7272',
+                      '5385968791470207': '7510', '4363956160383861': '2683'}
+blocked_gift_card = {'2731131568122692': '6467'}
