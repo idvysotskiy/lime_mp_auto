@@ -194,10 +194,10 @@ class FeatureTogglesLocators:
 class LoginLocators:
     # LOGIN_SCREEN
     LOGIN_SCREEN_TITLE = 'ru.limeshop.android.dev:id/orderflow_signin_title'
-    LOGIN_SCREEN_HINT_EMAIL = 'ru.limeshop.android.dev:id/hintText, text="Эл. почта"'
+    LOGIN_SCREEN_HINT_EMAIL = d(resourceId="ru.limeshop.android.dev:id/hintText", text="Эл. почта")
     # LOGIN_SCREEN_EMAIL = 'ru.limeshop.android.dev:id/signin_email'
     LOGIN_SCREEN_EMAIL = '//*[@resource-id="ru.limeshop.android.dev:id/signin_email"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
-    LOGIN_SCREEN_HINT_PASS = '"ru.limeshop.android.dev:id/hintText", text="Пароль"'
+    LOGIN_SCREEN_HINT_PASS = d(resourceId="ru.limeshop.android.dev:id/hintText", text="Пароль")
     # LOGIN_SCREEN_PASS = 'ru.limeshop.android.dev:id/signin_password'
     LOGIN_SCREEN_PASS = '//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     LOGIN_SCREEN_SHOW_PASS = 'ru.limeshop.android.dev:id/endIcon'
@@ -341,10 +341,10 @@ class CheckOutLocators:
     DEL_CARD_POP_UP_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
     # ADD ADDRESS BOTTOM-SHEET
     ADD_ADDRESS_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text"]'
-    ADD_ADDRESS_CITY = '//*[@text="Город / Населенный пункт"]'
+    ADD_ADDRESS_CITY = '//*[@resource-id="ru.limeshop.android.dev:id/edit_city"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     ADD_ADDRESS_POPUP = '//*[@resource-id="ru.limeshop.android.dev:id/popupTextView"]'
-    ADD_ADDRESS_STREET = '//*[@text="Улица и дом"]'
-    ADD_ADDRESS_APARTMENT = '//*[@text="Квартира"]'
+    ADD_ADDRESS_STREET = '//*[@resource-id="ru.limeshop.android.dev:id/edit_street"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
+    ADD_ADDRESS_APARTMENT = '//*[@resource-id="ru.limeshop.android.dev:id/edit_apartment"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     ADD_ADDRESS_SAVE_BUTTON = '//*[@text="СОХРАНИТЬ"]'
     date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
     time = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
@@ -358,7 +358,8 @@ class CheckOutLocators:
     pickup_selector = '//*[@text="САМОВЫВОЗ"]/..'
     courier_selector = '//*[@text="КУРЬЕРОМ"]/..'
     receiving_selector = '//*[@text="ПРИ ПОЛУЧЕНИИ"]/..'
-    upon_receipt_text = d(resourceId="ru.limeshop.android.dev:id/payment_info_title_text", text='НАЛИЧНЫМИ ИЛИ КАРТОЙ ПРИ ПОЛУЧЕНИИ')
+    upon_receipt_text = d(resourceId="ru.limeshop.android.dev:id/payment_info_title_text",
+                          text='НАЛИЧНЫМИ ИЛИ КАРТОЙ ПРИ ПОЛУЧЕНИИ')
     permission_while_using_the_app = 'com.android.permissioncontroller:id/permission_allow_foreground_only_button'
     gift_number_text = '//*[@resource-id="ru.limeshop.android.dev:id/payment_gift_number_text"]'
     gift_card_dragger_view = 'ru.limeshop.android.dev:id/dragger_view'
@@ -380,6 +381,7 @@ class CheckOutLocators:
     postcode = '//*[@resource-id="ru.limeshop.android.dev:id/edit_postcode"]//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
     address_popup = 'ru.limeshop.android.dev:id/popUpRecycler'
     save_address_btn = '//*[@text="СОХРАНИТЬ"]'
+
 
 class SuccessPayScreenLocators:
     ICON = '//*[@resource-id="ru.limeshop.android.dev:id/status_icon_image"]'

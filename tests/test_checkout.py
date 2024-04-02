@@ -1,50 +1,97 @@
+# file: test_checkout.py
 import pytest
 from pages.main_page import MainPage
+from pages.checkout_page import CheckOutPage
+from pages.base_page import *
 from pages.cart_page import *
 from pages.product_card_page import *
 import allure
 
 
 @pytest.mark.usefixtures("setup")
-class TestCheckout:
+class TestAndroid:
+
     @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2869")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/136157")
+    def test_open_checkout_auth(self, login):
+        page = MainPage()
+        page.clear_basket()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.elements_checkout()
+        page.get_screen()
+        page.checkout.back_to_cart()
+
+    @allure.title('Экран "Корзина" / Переход к чекауту (Не авторизованный)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2868")
+    def test_open_checkout_unauth(self):
+        page = MainPage()
+        page.clear_basket()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.elements_login_screen()
+
     @pytest.mark.smoke
-    def test_checkout_with_one_product(self):
+    @allure.title('Экран "Оформление заказа" / Не заполнены основные данные')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/136163")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2875")
+    def test_add_main_address(self):
         page = MainPage()
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.click_add_address_btn()
+        page.checkout.elements_add_address()
+        page.checkout.add_main_address()
+        print('test')
+
+
+    @pytest.mark.smoke
+    @allure.title('Блок "Оплата" / Успешная оплата ранее сохраненной картой')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3048")
+    def test_pay_card(self):
+        page = MainPage()
+        page.open_catalog()
+        page.go_to_catalog_item()
+        page.go_to_product_card()
+        page.card.add_to_cart()
+        page.cart.select_size(select_size)
+        time.sleep(2)
+        page.cart.go_to_cart()
+        page.card.go_to_checkout()
+        time.sleep(2)
+        page.checkout.checkout_set('1', '2', '1', '1')
+        time.sleep(2)
+        page.checkout.click_pay()
+
+    @pytest.mark.smoke
+    @allure.title('Блок "Оплата" / Оплата при получении')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3038")
+    def test_pay_self(self):
+        page = MainPage()
+        page.open_catalog()
+        page.go_to_catalog_item()
+        page.go_to_product_card()
+        page.card.add_to_cart()
+        page.cart.select_size(select_size)
+        time.sleep(2)
+        page.cart.go_to_cart()
+        page.card.go_to_checkout()
         page.checkout.elements_checkout()
+        page.checkout.checkout_set('1', '4', '2', '2')
+        page.checkout.elements_checkout_self()
+        page.checkout.click_pay()
+        page.checkout.continue_shopping()
 
-
-    # @pytest.mark.smoke
-    # @allure.title('Блок "Оплата" / Успешная оплата ранее сохраненной картой')
-    # @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3048")
-    # def test_pay_card(self):
-    #     MainPage().login()
-    #     page = CheckOutPage()
-    #     page.checkout_with_one()
-    #     time.sleep(2)
-    #     page.checkout_set('1', '2', '1', '1')
-    #     time.sleep(2)
-    #     page.click_pay()
-
-    # @pytest.mark.smoke
-    # @allure.title('Блок "Оплата" / Оплата при получении')
-    # @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3038")
-    # def test_pay_self(self):
-    #     page = CheckOutPage()
-    #     page.checkout_with_one()
-    #     page.elements_checkout()
-    #     page.checkout_set('1', '4', '2', '2')
-    #     page.elements_checkout_self()
-    #     page.click_pay()
-    #     page.continue_shopping()
-
-    @allure.title('Блок "Оплата" / Добавление карты для оплаты')
+    @pytest.mark.smoke
+    @allure.title('Блок "Оплата" / Сохранение карты')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2946")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2833")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2834")
@@ -95,36 +142,20 @@ class TestCheckout:
         page.checkout.deleting_single_payment_card()
 
     # @pytest.mark.smoke
-    # @allure.title('Экран "Оформление заказа" / Не заполнены основные данные')
-    # @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131747")
-    # def test_add_main_address_elements(self):
+    # @allure.title('Экран "Оформление заказа" / Авторизация')
+    # @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131745")
+    # def test_go_checkout_unautorized(self):
     #     page = CheckOutPage()
-    #     page.reg_user()
-    #     page.checkout_with_one()
-    #     page.click(CheckOutLocators.ADD_ADDRESS_BUTTON)
-    #     assert page.get_text(CheckOutLocators.ADD_ADDRESS_TITLE) == 'РЕДАКТИРОВАТЬ АДРЕС'
-    #     # ...
-    #     assert page.get_text(CheckOutLocators.ADD_ADDRESS_SAVE_BUTTON) == 'СОХРАНИТЬ'
-    #     page.get_screen()
-    #
-    # @pytest.mark.smoke
-    # @allure.title('Экран "Оформление заказа" / Заполнение основного адреса ')
-    # @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131748")
-    # def test_add_main_address(self):
-    #     page = MainPage()
-    #     page.reg_kir()
-    #     page.click_x()
-    #     BasePage().cancel_notification()
-    #     page = CheckOutPage()
-    #     page.checkout_with_one()
-    #     page.add_main_address()
-    #     assert page.is_element_present(CheckOutLocators.SELECTED_ADDRESS)
-    #     assert page.is_element_present(CheckOutLocators.EDIT_ADDRESS)
-    #     page.get_screen()
+    #     time.sleep(8)
+    #     page.checkout_with_one_un()
+    #     MainPage().login()
+    #     assert page.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
+    #     page.click(MainLocators.PROFILE_NAV)
+    #     assert page.is_element_present(ProfileLocators.EMAIL)
 
+    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата картой (Нет сохраненных карт)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3147")
-    @pytest.mark.smoke
     def test_success_pay_card_with_add_card(self):
         page = MainPage()
         page.user_registration()
@@ -137,8 +168,8 @@ class TestCheckout:
         page.swipe_page_up()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
-        page.checkout.click_continue_shopping()
 
+    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата подарочной картой (Полная стоимость)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3163")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3028")
