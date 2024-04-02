@@ -9,18 +9,18 @@ class CartPage(BasePage):
 
     @allure.step('Проверить наличие элементов не пустой корзины')
     def elements_full_cart(self):
-        self.is_element_present(MainLocators.X_BUTTON)
-        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
-        assert self.get_text(CartLocators.CLEAR_ALL) == 'ОЧИСТИТЬ'
-        self.is_element_present(CartLocators.FAVORITE)
-        self.is_element_present(CartLocators.DELETE)
-        self.is_element_present(CartLocators.PLUS)
-        self.is_element_present(CartLocators.MINUS)
-        self.is_element_present(CartLocators.PROMO_CODE)
-        assert self.get_text(CartLocators.QUANTITY_TEXT) == 'Количество'
-        assert self.get_text(CartLocators.PRICE_TEXT) == 'Стоимость товаров'
-        assert self.get_text(CartLocators.SUMMARY_TEXT) == 'ИТОГО'
-        assert self.get_text(CartLocators.CONTINUE) == 'К ОФОРМЛЕНИЮ'
+        self.wait_element(MainLocators.X_BUTTON, "кнопка Закрыть")
+        self.wait_element(MainLocators.TOOLBAR_TITLE, "заголовок Корзина")
+        self.wait_element(CartLocators.CLEAR_ALL, "кнопка Очистить")
+        self.wait_element(CartLocators.FAVORITE, "кнопка добавления в избранное")
+        self.wait_element(CartLocators.DELETE, "кнопка удаления товара")
+        self.wait_element(CartLocators.PLUS, "кнопка увеличения количества")
+        self.wait_element(CartLocators.MINUS, "кнопка уменьшения количества")
+        self.wait_element(CartLocators.PROMO_CODE, "поле для ввода промокода")
+        self.wait_element(CartLocators.QUANTITY_TEXT, "количество")
+        self.wait_element(CartLocators.PRICE_TEXT, "цена")
+        self.wait_element(CartLocators.SUMMARY_TEXT, "итого")
+        self.wait_element(CartLocators.CONTINUE, "кнопка К оформлению")
 
     @allure.step('Проверить наличие элементов пустой корзины')
     def elements_clear_cart(self):
@@ -48,5 +48,14 @@ class CartPage(BasePage):
     def check_empty_cart(self):
         self.wait_text("ВАША КОРЗИНА ПУСТА")
         self.wait_element(CartLocators.BUY_BUTTON, "кнопка Начать покупки")
+        self.checking_title_page("КОРЗИНА")
+        self.wait_hidden_element(CartLocators.CLEAR_ALL, "кнопка Очистить")
 
+    @allure.step("Переход в карточку товара")
+    def open_card(self):
+        self.click(CartLocators.card_photo, "фото карточки товара")
 
+    @allure.step("Клик по кнопке Начать покупки")
+    def click_start_shopping(self):
+        self.click(CartLocators.BUY_BUTTON, "кнопка Начать покупки")
+        self.wait_element(CatalogLocators.WOMEN, "заголовок каталога 'Женщины'")

@@ -264,6 +264,7 @@ class CartLocators:
     POPUP_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
     POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
     POPUP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
+    card_photo = 'ru.limeshop.android.dev:id/item_cart_photo'
 
 
 class CheckOutLocators:
