@@ -83,4 +83,9 @@ class ProductCardPage(BasePage):
     def open_cart(self):
         self.click(ProductCardLocators.CART)
 
+    @allure.step('Добавление в избранное')
+    def add_to_favorites(self):
+        self.click(ProductCardLocators.FAVORITE,'Кнопка добавления в избранное')
+        product_name = self.get_text(ProductCardLocators.product_name)
+        return product_name
 

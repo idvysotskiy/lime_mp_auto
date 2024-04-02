@@ -27,5 +27,10 @@ class FavoritesPage(BasePage):
         self.wait_element(CatalogLocators.KIDS,"ДЕТИ")
         self.wait_element(CatalogLocators.MENU_ITEM)
 
+    @allure.step('Удалить все товары из Избранного')
+    def delete_from_favorites(self):
+        self.wait_element(FavoritesLocators.BOTTOMBUYSTUFF, 'Кнопка "Купить"')
+            if
+
 
 
