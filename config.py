@@ -12,19 +12,13 @@ valid_surname_kir = 'Иванов'
 valid_password = 'Qwerty1'
 valid_email = 'tester23@lime.com'
 valid_phone = '9639447845'
+valid_city = 'Новосибирск'
+valid_street = 'Лаврентьева 6/1'
+valid_apartment = '605'
 subscribe = ['WOMEN', 'KIDS']
 checkboxes = ['WOMEN', 'MEN', 'KIDS']
 
-# Доступные товары
-select_size = '36'
 
-# menu_l1 = 'БРЮКИ'
-# menu_l2 = 'ВСЕ МОДЕЛИ'
-menu_l1 = 'РАСПРОДАЖА'
-menu_l2 = 'ДЖИНСЫ'
-# product_name = 'БРЮКИ В СПОРТИВНОМ СТИЛЕ С ВЫШИВКОЙ'
-product_name = 'ДЖИНСЫ WIDE LEG СО СТРАЗАМИ'
-item_name = menu_l1
 
 # Промокоды (купоны):
 promo_code_1 = 'LIMEPR'  # спец купон для блоггеров, 0% скидка, просто чтобы передалось везде что это блоггер

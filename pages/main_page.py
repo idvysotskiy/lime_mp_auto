@@ -38,6 +38,7 @@ class MainPage(BasePage):
         self.set_text(MainLocators.password, valid_password, "пароль")
         self.set_text(MainLocators.repeat_password, valid_password, "повторение пароля")
         self.swipe_page_up()
+        self.wait_a_second()
         # self.click(MainLocators.approve_checkbox, 'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
         self.click_subscribe_boxes(subscribe)
         self.click(MainLocators.continue_btn, "кнопка Продолжить")
@@ -70,30 +71,6 @@ class MainPage(BasePage):
     def open_catalog(self):
         self.wait_element(MainLocators.CATALOG_NAV)
         self.click(MainLocators.CATALOG_NAV, "каталог")
-
-    @allure.step('Перейти в раздел каталога')
-    def go_to_catalog_item(self):
-        # self.click(self.get_random_element(Catalog.MENU_ITEM))
-        try:
-            self.click(MainLocators.MENU_ITEM_1)
-        except ZeroDivisionError:
-            pass
-        try:
-            self.click(MainLocators.MENU_ITEM_2)
-        except Exception:
-            print('Элемент меню не найден')
-            raise
-
-    @allure.step('Добавить товар в избранное')
-    def add_to_fav_from_catalog(self):
-        self.click(MainLocators.FAV_ICON)
-        product_name_1 = self.d(resourceId=MainLocators.NAME_PRODUCT_COLLECTION, text=product_name).get_text()
-        BasePage.cancel_notification(self)
-        # product_name_1 = self.get_text(MainLocators.ITEM)
-        self.click(MainLocators.FAVORITES_NAV)
-        time.sleep(1)
-        product_name_2 = self.d(resourceId=MainLocators.NAME_PRODUCT_FAVORITE, text=product_name).get_text()
-        assert product_name_1 == product_name_2, 'Наименования товаров не совпадают'
 
     @allure.step('Открыть регистрацию')
     def go_to_registration(self):

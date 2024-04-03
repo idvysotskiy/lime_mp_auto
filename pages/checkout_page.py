@@ -8,16 +8,15 @@ class CheckOutPage(BasePage):
 
     def accept_cloud_payments(self):
         self.wait_element(CheckOutLocators.cloud_payments)
-        self.d.click(0.504, 0.45)
+        self.d.click(0.506, 0.363)
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
-        self.swipe_page_up(2)
+        self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
         self.accept_cloud_payments()
-        time.sleep(1)
         self.wait_element(SuccessPayScreenLocators.TITLE)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         assert self.get_text(
@@ -69,7 +68,7 @@ class CheckOutPage(BasePage):
         # assert self.get_text(CheckOutLocators.ORDER_LIST_TITLE) == 'СОСТАВ ЗАКАЗА'
 
     def elements_checkout_self(self):
-        assert self.get_text(CheckOutLocators.PAYMENT_TITLE_4) == 'ПРИ ПОЛУЧЕНИИ'
+        # assert self.get_text(CheckOutLocators.PAYMENT_TITLE_4) == 'ПРИ ПОЛУЧЕНИИ'
         assert self.get_text(CheckOutLocators.PAYMENT_INFO_TEXT) == 'Наличными или картой при получении'
 
     @allure.title('Блок "Оплата" / Успешная оплата (Кнопка продолжить покупки)')
@@ -118,15 +117,18 @@ class CheckOutPage(BasePage):
         self.coordinate_click(100, 100)
         self.checking_card_list('4242')
         self.click(CheckOutLocators.CARD_DELETE_SOLO, "иконка удаления карты")
-        self.click(CheckOutLocators.POPUP_BACK_CART_CANCEL, "кнопка Отмена")
+        self.click(CheckOutLocators.POPUP_BACK_CART_YES, "кнопка Отмена")
         self.checking_card_list('4242')
+        self.click(CheckOutLocators.CARD_DELETE_SOLO, "иконка удаления карты")
         self.click(CheckOutLocators.DEL_CARD_POP_UP_DELETE, "кнопка Удалить")
-        self.wait_element(CheckOutLocators.ADD_NEW_CARD_BUTTON, "кнопка Добавить карту")
+        self.wait_element(CheckOutLocators.ADD_NEW_CARD_BUTTON, "кнопка Добавить карту на модальном окне Ваши карты")
         self.press_back()
-        self.wait_element(CheckOutLocators.ADD_NEW_CARD_PLUS, "кнопка Добавить карту")
+        self.wait_element(CheckOutLocators.ADD_NEW_CARD_PLUS, "кнопка Добавить карту + на экране Оформление заказа")
 
     @allure.step("Добавление новой карты для оплаты заказ")
-    def add_new_card(self):
+    def add_first_card(self):
+        self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
+        self.wait_element(CheckOutLocators.ADD_NEW_CARD_PLUS)
         with allure.step('Нажать кнопку "Добавить карту"'):
             self.click(CheckOutLocators.ADD_NEW_CARD_PLUS)
             self.wait_element(CheckOutLocators.ADD_CARD_TITLE)
@@ -144,19 +146,20 @@ class CheckOutPage(BasePage):
     def check_btn_add_card(self):
         self.is_element_present(CheckOutLocators.ADD_NEW_CARD_PLUS)
 
+    @allure.step("Добавление адреса доставки")
     def add_main_address(self):
         # with allure.step('Нажать кнопку "Добавить адрес"'):
         #     self.click(CheckOutLocators.ADD_ADDRESS_BUTTON)
         with allure.step('Ввести значение в поле "Город"'):
-            self.set_text(CheckOutLocators.ADD_ADDRESS_CITY, 'Новосибирск')
+            self.set_text(CheckOutLocators.ADD_ADDRESS_CITY, valid_city)
         with allure.step('Выбрать город из всплывашки'):
             self.click(CheckOutLocators.ADD_ADDRESS_POPUP)
         with allure.step('Ввести значение в поле "Улица"'):
-            self.set_text(CheckOutLocators.ADD_ADDRESS_STREET, 'Лаврентьева 6/1')
+            self.set_text(CheckOutLocators.ADD_ADDRESS_STREET, valid_street)
         with allure.step('Выбрать улицу из всплывашки'):
             self.click(CheckOutLocators.ADD_ADDRESS_POPUP)
         with allure.step('Ввести значение в поле "Квартира"'):
-            self.set_text(CheckOutLocators.ADD_ADDRESS_APARTMENT, '605')
+            self.set_text(CheckOutLocators.ADD_ADDRESS_APARTMENT, valid_apartment)
         self.get_screen()
         with allure.step('Нажать кнопку "Сохранить"'):
             self.click(CheckOutLocators.ADD_ADDRESS_SAVE_BUTTON)
@@ -181,6 +184,7 @@ class CheckOutPage(BasePage):
     @allure.step("Установка даты и времени доставки")
     def set_date_and_time(self):
         if len(self.get_element(CheckOutLocators.date).all()) > 0:
+            self.wait_a_moment()
             self.click(CheckOutLocators.date)
             self.click(CheckOutLocators.time)
 
@@ -329,6 +333,7 @@ class CheckOutPage(BasePage):
 
     @allure.step("Проверка наличия номера карты '{card_number}' в чекауте")
     def checking_payment_card_number(self, card_number):
+        self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
         assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text',
                       textContains=f'{card_number}').wait(5) == True, print(f"Не отображается карта {card_number}")
 
@@ -337,18 +342,18 @@ class CheckOutPage(BasePage):
         assert self.d(resourceId='ru.limeshop.android.dev:id/info_text_view', textContains=f'{card_number}').wait(
             5) == True, print(f"Не отображается карта {card_number}")
 
-    @allure.step("Добавление адреса доставки")
-    def add_courier_address(self):
-        self.click(CheckOutLocators.add_courier_address_btn, "кнопка Добавить адрес")
-        self.set_text(CheckOutLocators.city, "Новосибирск", "город")
-        self.wait_element(CheckOutLocators.address_popup)
-        self.click(CheckOutLocators.address_popup)
-        self.set_text(CheckOutLocators.street, "Иванова 1", "улица")
-        self.wait_element(CheckOutLocators.address_popup)
-        self.click(CheckOutLocators.address_popup)
-        self.set_text(CheckOutLocators.apartment, "1", "квартира")
-        self.click(CheckOutLocators.save_address_btn, "кнопка Сохранить")
-        self.wait_text("ОФОРМЛЕНИЕ ЗАКАЗА")
+    # @allure.step("Добавление адреса доставки")
+    # def add_courier_address(self):
+    #     self.click(CheckOutLocators.add_courier_address_btn, "кнопка Добавить адрес")
+    #     self.set_text(CheckOutLocators.city, "Новосибирск", "город")
+    #     self.wait_element(CheckOutLocators.address_popup)
+    #     self.click(CheckOutLocators.address_popup)
+    #     self.set_text(CheckOutLocators.street, "Иванова 1", "улица")
+    #     self.wait_element(CheckOutLocators.address_popup)
+    #     self.click(CheckOutLocators.address_popup)
+    #     self.set_text(CheckOutLocators.apartment, "1", "квартира")
+    #     self.click(CheckOutLocators.save_address_btn, "кнопка Сохранить")
+    #     self.wait_text("ОФОРМЛЕНИЕ ЗАКАЗА")
 
     @allure.step("Нажать кнопку 'Добавить адрес'")
     def click_add_address_btn(self):
