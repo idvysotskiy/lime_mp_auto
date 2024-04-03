@@ -38,6 +38,7 @@ class CartPage(BasePage):
     def go_to_checkout(self):
         self.swipe_page_up()
         self.click(CartLocators.CONTINUE)
+        self.wait_text('ОФОРМЛЕНИЕ ЗАКАЗА')
 
     @allure.step('Очистка корзины')
     def cart_clear(self):
