@@ -42,3 +42,7 @@ class FavoritesPage(BasePage):
         self.wait_element(FavoritesLocators.SIZEINSTUCTION, "Руководство по размерам")
         self.wait_element(FavoritesLocators.SIZE, "Размер")
 
+    @allure.step("Добавление в корзину")
+    def add_favorite_product_to_cart(self):
+
+

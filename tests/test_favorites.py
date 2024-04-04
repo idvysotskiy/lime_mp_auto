@@ -1,5 +1,7 @@
 # file: test_favorites.py
 import pytest
+
+from locators import FavoritesLocators
 from pages.main_page import MainPage
 import allure
 
@@ -80,4 +82,21 @@ class TestAndroid:
         page.press_back()
         page.open_favorites()
         page.favorites.favorites_product_bottom_buy()
+
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Добавление товара в корзину')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/10')
+    def add_to_cart(self):
+        page = MainPage()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_favorites()
+        page.press_back()
+        page.open_favorites()
+        page.favorites.favorites_product_bottom_buy()
+        page.click(FavoritesLocators.SIZE)
+        page.open_cart()
+
 
