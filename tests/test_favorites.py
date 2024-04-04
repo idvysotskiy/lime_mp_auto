@@ -92,11 +92,13 @@ class TestAndroid:
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
-        page.card.add_to_favorites()
+        product_name = [page.card.add_to_favorites()]
         page.press_back()
         page.open_favorites()
         page.favorites.favorites_product_bottom_buy()
         page.click(FavoritesLocators.SIZE)
         page.open_cart()
+        page.cart.checking_availability_cards(product_name)
+
 
 
