@@ -74,7 +74,6 @@ class CatalogLocators:
     catalog_item = 'ru.limeshop.android.dev:id/catalog_item_name'
     catalog_item_recycler = 'ru.limeshop.android.dev:id/catalog_item_recycler'
     submenu_elements_list = '//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_recycler"]//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_name"]'
-    # cards_image = 'ru.limeshop.android.dev:id/media_view'
     cards_image = "ru.limeshop.android.dev:id/media_view_container_layout"
 
 
@@ -94,6 +93,7 @@ class CollectionLocators:
     color_box_2 = '//*[@resource-id="ru.limeshop.android.dev:id/filter_color_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[2]/android.widget.ImageView[1]'
     filter_apply_btn = d(resourceId="ru.limeshop.android.dev:id/filter_apply")
     price_product_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]'
+    cards_image = 'ru.limeshop.android.dev:id/media_view'
 
 
 class ProductCardLocators:
@@ -426,6 +426,7 @@ class FavoritesLocators:
     BOTTOMFAVORITES = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.ImageView[1]'
     BOTTOMFAVORITES2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.ImageView[1]'
     STUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
-    STUFF2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
     BOTTOMBUYSTUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.Button[1]'
-    BOTTOMBUYSTUFF2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.Button[1]'
+    MODULEWINDOW = '//*[@resource-id="ru.limeshop.android.dev:id/design_bottom_sheet"]/android.widget.LinearLayout[1]'
+    SIZEINSTUCTION = "ru.limeshop.android.dev:id/sizeInfoButton"
+    SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'

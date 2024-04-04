@@ -19,7 +19,7 @@ class TestAndroid:
     @pytest.mark.regress
     @allure.title('Кнопка "НАЧАТЬ ПОКУПКИ')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/231")
-    def test_click_bottombuy(self):
+    def test_click_bottom_buy(self):
         page = MainPage()
         page.open_favorites()
         page.favorites.click_pay()
@@ -41,14 +41,43 @@ class TestAndroid:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/8")
     def test_product_in_favorites(self):
         page = MainPage()
+        page.open_favorites()
+        page.favorites.delete_from_favorites()
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         product_name = page.card.add_to_favorites()
         page.press_back()
         page.open_favorites()
-        page.wait_element()
+        page.wait_text(product_name)
 
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Удаление из избранного')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/9')
+    def test_delete_from_favorites(self):
+        page = MainPage()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        product_name = page.card.add_to_favorites()
+        page.press_back()
+        page.open_favorites()
+        page.favorites.delete_from_favorites()
+        page.wait_hidden_element(product_name)
+        page.favorites.check_empty_favorites()
 
-
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Кнопка "Купить" для товара в избранном')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/232')
+    def test_bottom_buy_for_favorites_product(self):
+        page = MainPage()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_favorites()
+        page.press_back()
+        page.open_favorites()
+        page.favorites.favorites_product_bottom_buy()
 
