@@ -346,6 +346,14 @@ class CheckOutLocators:
     ADD_ADDRESS_STREET = '//*[@resource-id="ru.limeshop.android.dev:id/edit_street"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     ADD_ADDRESS_APARTMENT = '//*[@resource-id="ru.limeshop.android.dev:id/edit_apartment"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     ADD_ADDRESS_SAVE_BUTTON = '//*[@text="СОХРАНИТЬ"]'
+    # ADD surcharge
+    SURCHARGE_SBP_SELECTOR = '//*[@resource-id="ru.limeshop.android.dev:id/saved_cards_recycler_view"]/android.view.ViewGroup[1]/android.widget.RadioButton[1]'
+    # SBP SCREEN
+    SBP_BANK_LIST_TITLE = "ru.limeshop.android.dev:id/banks_title_text"
+    SBP_BANK_LIST_SEARCH_FIELD = "ru.limeshop.android.dev:id/editText"
+    SBP_SELECTOR_TINKOFF = d(resourceId="ru.limeshop.android.dev:id/info_text", text="Тинькофф Банк")
+    STATUS_PAY_TITLE = "ru.limeshop.android.dev:id/status_title_text"
+    #
     date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
     time = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
     gift_card_selector = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]/..'

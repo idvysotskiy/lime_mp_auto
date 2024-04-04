@@ -22,7 +22,24 @@ class CheckOutPage(BasePage):
         assert self.get_text(
             SuccessPayScreenLocators.DESCRIPTION) == 'Отслеживать его статус вы можете в личном кабинете'
         assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПРОДОЛЖИТЬ ПОКУПКИ'
-        BasePage.get_screen(self)
+        self.get_screen()
+
+    @allure.step('Нажать кнопку "Оплатить" (СБП)')
+    def click_pay_sbp(self):
+        self.swipe_page_up()
+        self.wait_a_second()
+        self.click(CheckOutLocators.ORDER_PAY)
+        self.wait_element(CheckOutLocators.SBP_BANK_LIST_TITLE)
+        self.get_screen()
+        self.click(CheckOutLocators.SBP_SELECTOR_TINKOFF)
+        time.sleep(5)
+        self.accept_cloud_payments()
+        self.press_back()
+        self.wait_element(CheckOutLocators.STATUS_PAY_TITLE)
+        assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ОЖИДАЕМ ПОДТВЕРЖДЕНИЕ ПЛАТЕЖА'
+        time.sleep(100)
+        assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
+        # assert self.d(resourceId="ru.limeshop.android.dev:id/status_title_text", textContains='ВАШ ЗАКАЗ ПРИНЯТ').wait(59) == True, print('ВАШ ЗАКАЗ ПРИНЯТ не отображается')
 
     def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
         with allure.step(f"Выбрать способ доставки '{delivery_method}'"):
@@ -88,11 +105,11 @@ class CheckOutPage(BasePage):
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_TITLE) == 'Хотите вернуться в корзину?'
         assert self.get_text(
             CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
-        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'Отмена'
-        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'Вернуться в корзину'
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'ОТМЕНА'
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'ВЕРНУТЬСЯ В КОРЗИНУ'
         self.get_screen()
         self.click(CheckOutLocators.POPUP_BACK_CART_YES)
-        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'Корзина'
+        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
 
     # def checkout_with_one(self):
     #     ProductCardPage().add_one_product_to_cart()
@@ -309,7 +326,7 @@ class CheckOutPage(BasePage):
         self.wait_element(CheckOutLocators.gift_number_text)
         return gift_card_number, gift_card_pin
 
-    @allure.step("Добавление доплаты")
+    @allure.step("Добавление доплаты картой")
     def add_additional_payment(self):
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
         self.click(self.d(textContains='Добавить карту').sibling(
@@ -326,6 +343,14 @@ class CheckOutPage(BasePage):
 
         assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text', textContains='4242').wait(
             5) == True, print("В блоке Доплата не отображается карта 4242")
+
+    @allure.step("Добавление доплаты картой")
+    def add_additional_payment_sbp(self):
+        self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
+        self.click(CheckOutLocators.SURCHARGE_SBP_SELECTOR, "радиобаттон ""Через СБП")
+        self.wait_element(CheckOutLocators.CARD_INFO)
+        assert self.get_text(CheckOutLocators.CARD_INFO) == 'Через СБП', print(
+            'В блоке Доплата не отображается Через СБП')
 
     @allure.step("Клик Продолжить покупки (после оформления заказа)")
     def click_continue_shopping(self):
@@ -357,6 +382,7 @@ class CheckOutPage(BasePage):
 
     @allure.step("Нажать кнопку 'Добавить адрес'")
     def click_add_address_btn(self):
+        self.wait_element(CheckOutLocators.add_courier_address_btn)
         self.click(CheckOutLocators.add_courier_address_btn, "кнопка Добавить адрес")
 
     def elements_add_address(self):

@@ -52,20 +52,6 @@ class TestAndroid:
         page.checkout.add_main_address()
         page.screen_title('ОФОРМЛЕНИЕ ЗАКАЗА')
 
-    @pytest.mark.smoke
-    @allure.title('Экран "Оформление заказа" / Успешная оплата сохраненной "Картой онлайн"')
-    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3060")
-    def test_pay_card(self):
-        page = MainPage()
-        page.user_registration()
-        page.open_catalog()
-        page.add_to_cart_random_product()
-        page.card.open_cart()
-        page.cart.go_to_checkout()
-        page.add_new_address()
-        page.add
-        page.checkout.checkout_set('1', '2', '1', '1')
-        page.checkout.click_pay()
 
     @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Оплата при получении')
@@ -91,6 +77,7 @@ class TestAndroid:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2946")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2833")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2834")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3060")
     @pytest.mark.smoke
     def test_saving_payment_card(self):
         page = MainPage()
@@ -110,6 +97,10 @@ class TestAndroid:
         page.card.open_cart()
         page.cart.go_to_checkout()
         page.checkout.checking_payment_card_number('4242')
+        page.swipe_page_up()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay()
+
 
     @allure.title('Блок "Оплата" / Попап удаления карты')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2948")
@@ -186,7 +177,7 @@ class TestAndroid:
         page.cart.go_to_checkout()
         page.checkout.set_gift_card_selector()
         page.checkout.set_gift_card(price)
-        page.swipe_page_up(2)
+        page.swipe_page_up(1)
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
@@ -245,3 +236,23 @@ class TestAndroid:
         page.swipe_page_up()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+
+    @allure.title('Блок "Оплата" / Доплата СБП')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3036")
+    @pytest.mark.smoke
+    @pytest.mark.checkout
+    def test_order_with_gift_card_and_additional_payment_sbp(self, login):
+        page = MainPage()
+        page.clear_basket()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        price = page.card.get_product_price()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.set_gift_card_selector()
+        page.checkout.set_gift_card_with_additional_payment(price)
+        page.checkout.add_additional_payment_sbp()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay_sbp()
+        print('test')
+
