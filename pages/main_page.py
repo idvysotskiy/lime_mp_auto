@@ -28,6 +28,7 @@ class MainPage(BasePage):
     def user_registration(self):
         self.click(MainLocators.PROFILE_NAV, "иконка профиля")
         self.swipe_page_up()
+        self.swipe_page_up()
         self.click(MainLocators.registration_btn, "кнопка Зарегистрироваться")
         self.wait_a_second()
         email = 'test' + str(random.randint(0, 999999999)) + '@test.ru'

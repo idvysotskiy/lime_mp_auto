@@ -74,7 +74,6 @@ class CatalogLocators:
     catalog_item = 'ru.limeshop.android.dev:id/catalog_item_name'
     catalog_item_recycler = 'ru.limeshop.android.dev:id/catalog_item_recycler'
     submenu_elements_list = '//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_recycler"]//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_name"]'
-    # cards_image = 'ru.limeshop.android.dev:id/media_view'
     cards_image = "ru.limeshop.android.dev:id/media_view_container_layout"
 
 
@@ -94,6 +93,7 @@ class CollectionLocators:
     color_box_2 = '//*[@resource-id="ru.limeshop.android.dev:id/filter_color_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[2]/android.widget.ImageView[1]'
     filter_apply_btn = d(resourceId="ru.limeshop.android.dev:id/filter_apply")
     price_product_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]'
+    cards_image = 'ru.limeshop.android.dev:id/media_view'
 
 
 class ProductCardLocators:
@@ -346,7 +346,7 @@ class CheckOutLocators:
     ADD_ADDRESS_STREET = '//*[@text="Улица и дом"]'
     ADD_ADDRESS_APARTMENT = '//*[@text="Квартира"]'
     ADD_ADDRESS_SAVE_BUTTON = '//*[@text="СОХРАНИТЬ"]'
-    date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
+    date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/text_container_layout"]'
     time = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
     gift_card_selector = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]/..'
     add_gift_card_title = d(resourceId="ru.limeshop.android.dev:id/title_view", text="ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
