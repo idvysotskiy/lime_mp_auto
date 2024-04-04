@@ -65,5 +65,19 @@ class TestAndroid:
         page.open_favorites()
         page.favorites.delete_from_favorites()
         page.wait_hidden_element(product_name)
+        page.favorites.check_empty_favorites()
 
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Кнопка "Купить" для товара в избранном')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/232')
+    def test_bottom_buy_for_favorites_product(self):
+        page = MainPage()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_favorites()
+        page.press_back()
+        page.open_favorites()
+        page.favorites.favorites_product_bottom_buy()
 

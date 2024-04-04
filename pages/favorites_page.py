@@ -29,3 +29,16 @@ class FavoritesPage(BasePage):
         while len(self.get_element(FavoritesLocators.BOTTOMBUYSTUFF).all()) > 0:
             self.click(FavoritesLocators.BOTTOMFAVORITES, 'Кнопка "Добавить/Убрать в избранное"')
             self.wait_a_second()
+
+    @allure.step("Проверка пустого избранного")
+    def check_empty_favorites(self):
+        self.wait_element(FavoritesLocators.INFOTEXT,"ВАШ ВИШЛИСТ ПУСТ")
+        self.wait_element(FavoritesLocators.BOTTOMBUY, 'Кнопка "НАЧАТЬ ПОКУПКИ')
+
+    @allure.step("Открытие модального окна")
+    def favorites_product_bottom_buy(self):
+        self.click(FavoritesLocators.BOTTOMBUYSTUFF, 'Кнопка "Купить" для товара')
+        self.wait_element(FavoritesLocators.MODULEWINDOW, "Модальное окно")
+        self.wait_element(FavoritesLocators.SIZEINSTUCTION, "Руководство по размерам")
+        self.wait_element(FavoritesLocators.SIZE, "Размер")
+

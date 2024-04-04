@@ -417,3 +417,16 @@ class PickupLocators:
     title_address = '//*[@text="АДРЕС"]'
     title_schedule = '//*[@text="ВРЕМЯ РАБОТЫ"]'
     take_point_btn = '//*[@text="ЗАБЕРУ ОТСЮДА"]'
+
+class FavoritesLocators:
+    BOTTOMBACK = "//android.widget.ImageButton"
+    TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
+    BOTTOMBUY = 'ru.limeshop.android.dev:id/buyButton'
+    INFOTEXT = '//*[@text="ВАШ ВИШЛИСТ ПУСТ"]'
+    BOTTOMFAVORITES = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.ImageView[1]'
+    BOTTOMFAVORITES2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.ImageView[1]'
+    STUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
+    BOTTOMBUYSTUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.Button[1]'
+    MODULEWINDOW = '//*[@resource-id="ru.limeshop.android.dev:id/design_bottom_sheet"]/android.widget.LinearLayout[1]'
+    SIZEINSTUCTION = "ru.limeshop.android.dev:id/sizeInfoButton"
+    SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
