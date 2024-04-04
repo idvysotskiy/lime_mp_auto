@@ -249,3 +249,9 @@ class MainPage(BasePage):
     def wait_logo(self):
         self.wait_element(MainLocators.lime_logo, "логотип Lime")
 
+    @allure.step('Открыть экран "Избранное"')
+    def open_favorites(self):
+        self.click(MainLocators.FAVORITES_NAV, "Экран'Избранное'")
+        self.wait_element(FavoritesLocators.TITLE, "Заголовок")
+
+
