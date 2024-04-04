@@ -94,3 +94,8 @@ class CartPage(BasePage):
         self.wait_hidden_text(cards_list[0])
         self.wait_text(cards_list[1])
 
+    @allure.step("Добавление в избранное")
+    def add_to_favorite(self):
+        self.click(CartLocators.FAVORITE, "кнопка добавления в избранное")
+
+

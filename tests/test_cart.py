@@ -168,5 +168,20 @@ class TestCart:
         page.open_profile()
         page.profile.logout()
         page.click_x()
+        page.open_cart()
+        page.cart.check_empty_cart()
+
+    @allure.title('Экран "Корзина" / Добавление в избранное')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/599")
+    @pytest.mark.smoke
+    def test_add_to_favorite_from_basket(self):
+        page = MainPage()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        cards_list = page.card.get_product_name()
+        page.card.open_cart()
+        page.cart.add_to_favorite()
+        page.click_x()
+        page.press_back()
 
 
