@@ -37,12 +37,12 @@ class CartPage(BasePage):
     @allure.step('Клик по кнопке "К оформлению"')
     def go_to_checkout(self):
         self.swipe_page_up()
-        self.click(CartLocators.CONTINUE)
+        self.click(CartLocators.CONTINUE, "кнопка К оформлению")
 
     @allure.step('Очистка корзины')
     def cart_clear(self):
-        self.click(CartLocators.CLEAR_ALL)
-        self.click(CartLocators.POPUP_CLEAR)
+        self.click(CartLocators.CLEAR_ALL, "кнопка Очистить")
+        self.click(CartLocators.POPUP_CLEAR, "кнопка Очистить корзину")
 
     @allure.step("Проверка пустой корзины")
     def check_empty_cart(self):
@@ -59,3 +59,38 @@ class CartPage(BasePage):
     def click_start_shopping(self):
         self.click(CartLocators.BUY_BUTTON, "кнопка Начать покупки")
         self.wait_element(CatalogLocators.WOMEN, "заголовок каталога 'Женщины'")
+
+    @allure.step("Проверка наличия в корзине товаров: '{cards_list}'")
+    def checking_availability_cards(self, cards_list):
+        cards_list_in_cart = []
+        elements_list = self.get_element(CartLocators.PRODUCT_TITLE).all()
+
+        for i in range(len(self.get_element(CartLocators.PRODUCT_TITLE).all())):
+            cards_list_in_cart.append(elements_list[i].text)
+
+        for i in range(len(cards_list)):
+            assert cards_list[i] in cards_list_in_cart, print(f"{cards_list[i]} отсутствует в корзине")
+
+    @allure.step("Увеличение количества товаров")
+    def increasing_products_number(self, price_in_card):
+        assert int(price_in_card) == self.get_number_from_element(CartLocators.PRICE_TOTAL), print(
+            "Сумма товара в карточке и корзине отличаются")
+        self.click(CartLocators.PLUS, "кнопка увеличение количества товара")
+        self.wait_a_second()
+        self.wait_a_second()
+        total_price = self.get_number_from_element(CartLocators.PRICE_TOTAL)
+        assert int(price_in_card) * 2 == total_price, print(
+            "Сумма товара после увеличения не равна сумме товара в карточке * 2")
+
+    @allure.step("Удаление товара из корзины")
+    def delete_item(self):
+        self.click(CartLocators.DELETE, "кнопка удаления из корзины")
+        self.wait_a_second()
+        self.wait_a_second()
+
+    @allure.step("Удаление одного товара из корзины и проверка наличия оставшегося товара")
+    def remove_one_item(self, cards_list):
+        self.delete_item()
+        self.wait_hidden_text(cards_list[0])
+        self.wait_text(cards_list[1])
+
