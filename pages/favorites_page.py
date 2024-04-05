@@ -42,3 +42,14 @@ class FavoritesPage(BasePage):
         self.wait_element(FavoritesLocators.SIZEINSTUCTION, "Руководство по размерам")
         self.wait_element(FavoritesLocators.SIZE, "Размер")
 
+    @allure.step("Проверка наличия в избранном товаров: '{cards_list}'")
+    def checking_availability_cards(self, cards_list):
+        cards_list_in_favorite = []
+        elements_list = self.get_element(FavoritesLocators.card_name).all()
+
+        for i in range(len(self.get_element(FavoritesLocators.card_name).all())):
+            cards_list_in_favorite.append(elements_list[i].text)
+
+        for i in range(len(cards_list)):
+            assert cards_list[i] in cards_list_in_favorite, print(f"{cards_list[i]} отсутствует в избранном")
+

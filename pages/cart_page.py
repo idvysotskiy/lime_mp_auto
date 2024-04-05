@@ -44,6 +44,15 @@ class CartPage(BasePage):
         self.click(CartLocators.CLEAR_ALL, "кнопка Очистить")
         self.click(CartLocators.POPUP_CLEAR, "кнопка Очистить корзину")
 
+    @allure.step("Клик по кнопке Очистить")
+    def click_clear_btn(self):
+        self.click(CartLocators.CLEAR_ALL, "кнопка Очистить")
+        self.wait_element(CartLocators.POPUP_CLEAR)
+
+    @allure.step("Клик по кнопке Отмена")
+    def cancel_confirm_of_cleaning(self):
+        self.click(CartLocators.POPUP_CANCEL, "кнопка Отмена")
+
     @allure.step("Проверка пустой корзины")
     def check_empty_cart(self):
         self.wait_text("ВАША КОРЗИНА ПУСТА")

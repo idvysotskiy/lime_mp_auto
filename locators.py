@@ -260,10 +260,11 @@ class CartLocators:
     DESCRIPTION_CLEAR = '//*[@text="ВАША КОРЗИНА ПУСТА"]'
     BUY_BUTTON = '//*[@resource-id="ru.limeshop.android.dev:id/cart_buy_button"]'
     # POPUP
-    POPUP_CLEAR = '//*[@resource-id="ru.limeshop.android.dev:id/positive_button_outlined"]'
-    POPUP_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
+    POPUP_CLEAR = 'ru.limeshop.android.dev:id/positive_button_outlined'
+    POPUP_CANCEL = 'ru.limeshop.android.dev:id/negative_button'
     POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
     POPUP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
+    card_photo = 'ru.limeshop.android.dev:id/item_cart_photo'
 
 
 class CheckOutLocators:
@@ -380,6 +381,7 @@ class CheckOutLocators:
     postcode = '//*[@resource-id="ru.limeshop.android.dev:id/edit_postcode"]//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
     address_popup = 'ru.limeshop.android.dev:id/popUpRecycler'
     save_address_btn = '//*[@text="СОХРАНИТЬ"]'
+    card_online_selector = '//*[@text="КАРТОЙ ОНЛАЙН"]/..'
 
 class SuccessPayScreenLocators:
     ICON = '//*[@resource-id="ru.limeshop.android.dev:id/status_icon_image"]'
@@ -430,3 +432,4 @@ class FavoritesLocators:
     MODULEWINDOW = '//*[@resource-id="ru.limeshop.android.dev:id/design_bottom_sheet"]/android.widget.LinearLayout[1]'
     SIZEINSTUCTION = "ru.limeshop.android.dev:id/sizeInfoButton"
     SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
+    card_name = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_name"]'

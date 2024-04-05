@@ -339,5 +339,6 @@ class CheckOutPage(BasePage):
         self.click(CheckOutLocators.save_address_btn, "кнопка Сохранить")
         self.wait_text("ОФОРМЛЕНИЕ ЗАКАЗА")
 
-def test_1():
-    print()
+    @allure.step("Выбор способа оплаты - Картой онлайн")
+    def set_card_online_selector(self):
+        self.click(CheckOutLocators.card_online_selector, "Картой онлайн")
