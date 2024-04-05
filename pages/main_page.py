@@ -161,11 +161,6 @@ class MainPage(BasePage):
         self.click_x()
         self.click_x()
 
-    def open_product_card_screen(self):
-        self.open_catalog()
-        self.go_to_catalog_item(menu_l1, menu_l2)
-        self.go_to_product_card()
-
     def reg_kir(self):
         self.go_to_registration()
         self.enter_valid_registration_data(valid_name_kir, valid_surname_kir, valid_phone, valid_password)
@@ -225,5 +220,10 @@ class MainPage(BasePage):
         assert self.get_text(LoginLocators.LOGIN_SCREEN_TITLE) == 'ВОЙТИ'
         assert self.get_text(LoginLocators.PASSWORD_RESET_LINK) == 'Забыли данные для входа?'
         assert self.get_text(LoginLocators.LOGIN_BTN) == 'ВОЙТИ'
+
+    @allure.step('Открыть экран "Избранное"')
+    def open_favorites(self):
+        self.click(MainLocators.FAVORITES_NAV, "Экран'Избранное'")
+        self.wait_element(FavoritesLocators.TITLE, "Заголовок")
 
 

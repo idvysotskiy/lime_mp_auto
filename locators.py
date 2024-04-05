@@ -20,6 +20,8 @@ class MainLocators:
     CART_NAV = 'ru.limeshop.android.dev:id/nav_cart'
 
     # CATALOG
+    MENU_ITEM_1 = f'//*[@text="{menu_l1}"]'
+    MENU_ITEM_2 = f'//*[@text="{menu_l2}"]'
     FAV_ICON = 'ru.limeshop.android.dev:id/favoriteImageView'
     NAME_PRODUCT_COLLECTION = 'ru.limeshop.android.dev:id/nameTextView'
     NAME_PRODUCT_FAVORITE = 'ru.limeshop.android.dev:id/item_product_name'
@@ -62,6 +64,7 @@ class SearchLocators:
     FAIL_SEARCH_TEXT = '//*[@text="НИЧЕГО НЕ НАЙДЕНО"]'
     FAIL_SEARCH_DESCRIPTION = '//*[@text="Проверьте, правильно ли введен запрос"]'
 
+
 class CatalogLocators:
     WOMEN = '//*[@text="ЖЕНЩИНЫ"]'
     MEN = '//*[@text="МУЖЧИНЫ"]'
@@ -72,7 +75,6 @@ class CatalogLocators:
     catalog_item = 'ru.limeshop.android.dev:id/catalog_item_name'
     catalog_item_recycler = 'ru.limeshop.android.dev:id/catalog_item_recycler'
     submenu_elements_list = '//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_recycler"]//*[@resource-id="ru.limeshop.android.dev:id/catalog_item_name"]'
-    # cards_image = 'ru.limeshop.android.dev:id/media_view'
     cards_image = "ru.limeshop.android.dev:id/media_view_container_layout"
 
 
@@ -92,6 +94,7 @@ class CollectionLocators:
     color_box_2 = '//*[@resource-id="ru.limeshop.android.dev:id/filter_color_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[2]/android.widget.ImageView[1]'
     filter_apply_btn = d(resourceId="ru.limeshop.android.dev:id/filter_apply")
     price_product_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]'
+    cards_image = 'ru.limeshop.android.dev:id/media_view'
 
 
 class ProductCardLocators:
@@ -262,6 +265,7 @@ class CartLocators:
     POPUP_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
     POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
     POPUP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
+    card_photo = 'ru.limeshop.android.dev:id/item_cart_photo'
 
 
 class CheckOutLocators:
@@ -286,8 +290,8 @@ class CheckOutLocators:
     PAYMENT_TITLE_1 = '//*[@text="ЧЕРЕЗ СБП"]'
     PAYMENT_TITLE_2 = '//*[@text="КАРТОЙ ОНЛАЙН"]'
     PAYMENT_TITLE_3 = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]'
-    PAYMENT_TITLE_4 = d(resourceId="ru.limeshop.android.dev:id/selector_title", text="ПРИ ПОЛУЧЕНИИ")
-    PAYMENT_INFO_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/cash_title_text"]'
+    PAYMENT_TITLE_4 = '//*[@text="ПРИ ПОЛУЧЕНИИ"]'
+    PAYMENT_INFO_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/payment_info_title_text"]'
     SLOTS_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/time_slots_title_text"]'
     SLOTS_DATE_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]'
     SLOTS_DATE_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[2]/android.widget.LinearLayout[1]'
@@ -344,7 +348,15 @@ class CheckOutLocators:
     ADD_ADDRESS_STREET = '//*[@resource-id="ru.limeshop.android.dev:id/edit_street"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     ADD_ADDRESS_APARTMENT = '//*[@resource-id="ru.limeshop.android.dev:id/edit_apartment"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     ADD_ADDRESS_SAVE_BUTTON = '//*[@text="СОХРАНИТЬ"]'
-    date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
+    # ADD surcharge
+    SURCHARGE_SBP_SELECTOR = '//*[@resource-id="ru.limeshop.android.dev:id/saved_cards_recycler_view"]/android.view.ViewGroup[1]/android.widget.RadioButton[1]'
+    # SBP SCREEN
+    SBP_BANK_LIST_TITLE = "ru.limeshop.android.dev:id/banks_title_text"
+    SBP_BANK_LIST_SEARCH_FIELD = "ru.limeshop.android.dev:id/editText"
+    SBP_SELECTOR_TINKOFF = d(resourceId="ru.limeshop.android.dev:id/info_text", text="Тинькофф Банк")
+    STATUS_PAY_TITLE = "ru.limeshop.android.dev:id/status_title_text"
+    #
+    date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/text_container_layout"]'
     time = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
     gift_card_selector = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]/..'
     add_gift_card_title = d(resourceId="ru.limeshop.android.dev:id/title_view", text="ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
@@ -379,6 +391,8 @@ class CheckOutLocators:
     postcode = '//*[@resource-id="ru.limeshop.android.dev:id/edit_postcode"]//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
     address_popup = 'ru.limeshop.android.dev:id/popUpRecycler'
     save_address_btn = '//*[@text="СОХРАНИТЬ"]'
+    card_online_selector = '//*[@text="КАРТОЙ ОНЛАЙН"]/..'
+
 
 
 class SuccessPayScreenLocators:
@@ -417,3 +431,21 @@ class PickupLocators:
     title_address = '//*[@text="АДРЕС"]'
     title_schedule = '//*[@text="ВРЕМЯ РАБОТЫ"]'
     take_point_btn = '//*[@text="ЗАБЕРУ ОТСЮДА"]'
+
+
+class FavoritesLocators:
+    BOTTOMBACK = "//android.widget.ImageButton"
+    TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
+    BOTTOMBUY = 'ru.limeshop.android.dev:id/buyButton'
+    INFOTEXT = '//*[@text="ВАШ ВИШЛИСТ ПУСТ"]'
+    BOTTOMFAVORITES = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.ImageView[1]'
+    BOTTOMFAVORITES2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.ImageView[1]'
+    STUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
+    STUFFNAME = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_name"]'
+    BOTTOMBUYSTUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.Button[1]'
+    MODULEWINDOW = '//*[@resource-id="ru.limeshop.android.dev:id/design_bottom_sheet"]/android.widget.LinearLayout[1]'
+    SIZEINSTUCTION = "ru.limeshop.android.dev:id/sizeInfoButton"
+    SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
+    SNECKBARADDCART = "ru.limeshop.android.dev:id/favoritePopup"
+    SNECKBARBOTTOMGOTOCART = "ru.limeshop.android.dev:id/popupButton"
+    card_name = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_name"]'

@@ -51,4 +51,9 @@ class ProfilePage(BasePage):
         dialer_digits = self.get_text(ProfileLocators.dialer_digits)
         assert str(phone_number) == dialer_digits, print(f"Отображается некорректный номер. В приложении - {phone_number}, в приложении для звонков - {dialer_digits}")
 
-
+    @allure.step("Логаут")
+    def logout(self):
+        self.swipe_page_up(3)
+        self.wait_a_moment()
+        self.click(ProfileLocators.LOGOUT, "кнопка Выйти")
+        self.wait_element(ProfileLocators.LOGIN_UN, "кнопка Войти")

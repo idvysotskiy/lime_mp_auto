@@ -27,7 +27,7 @@ def change_nuxt02():
     page.set_nuxt_02()
 
 
-@allure.title("Авторизоваться")
+@allure.title("Авторизация")
 @pytest.fixture()
 def login():
     page = MainPage()
