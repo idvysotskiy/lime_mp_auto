@@ -20,8 +20,6 @@ class MainLocators:
     CART_NAV = 'ru.limeshop.android.dev:id/nav_cart'
 
     # CATALOG
-    MENU_ITEM_1 = f'//*[@text="{menu_l1}"]'
-    MENU_ITEM_2 = f'//*[@text="{menu_l2}"]'
     FAV_ICON = 'ru.limeshop.android.dev:id/favoriteImageView'
     NAME_PRODUCT_COLLECTION = 'ru.limeshop.android.dev:id/nameTextView'
     NAME_PRODUCT_FAVORITE = 'ru.limeshop.android.dev:id/item_product_name'
