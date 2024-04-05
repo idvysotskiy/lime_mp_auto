@@ -289,7 +289,7 @@ class CheckOutLocators:
     PAYMENT_TITLE_2 = '//*[@text="КАРТОЙ ОНЛАЙН"]'
     PAYMENT_TITLE_3 = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]'
     PAYMENT_TITLE_4 = '//*[@text="ПРИ ПОЛУЧЕНИИ"]'
-    PAYMENT_INFO_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/payment_info_title_text"]'
+    PAYMENT_INFO_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/cash_title_text"]'
     SLOTS_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/time_slots_title_text"]'
     SLOTS_DATE_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]'
     SLOTS_DATE_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]/android.widget.FrameLayout[1]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.FrameLayout[2]/android.widget.LinearLayout[1]'

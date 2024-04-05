@@ -8,7 +8,8 @@ class CheckOutPage(BasePage):
 
     def accept_cloud_payments(self):
         self.wait_element(CheckOutLocators.cloud_payments)
-        self.d.click(0.504, 0.45)
+        self.d.click(0.504, 0.350)
+        self.d.click(0.504, 0.450)
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
@@ -105,11 +106,11 @@ class CheckOutPage(BasePage):
         self.wait_element(CheckOutLocators.POPUP_BACK_CART_TITLE)
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_TITLE) == 'Хотите вернуться в корзину?'
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
-        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'Отмена'
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'ОТМЕНА'
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'Вернуться в корзину'
         self.get_screen()
         self.click(CheckOutLocators.POPUP_BACK_CART_YES)
-        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'Корзина'
+        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
 
 
     # def checkout_with_one(self):
@@ -269,7 +270,6 @@ class CheckOutPage(BasePage):
         self.wait_element(CheckOutLocators.gift_card_number_field)
         self.set_text(CheckOutLocators.gift_card_number_field, list(dictionary.keys())[0], "Номер подарочной карты")
         self.wait_element(CheckOutLocators.gift_card_balance, "баланс подарочной карты")
-        self.wait_text(price)
         assert self.d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
         self.set_text(CheckOutLocators.gift_card_number_field, '1234567890123456', "Номер подарочной карты")
         self.wait_element(CheckOutLocators.gift_card_balance, "баланс подарочной карты")

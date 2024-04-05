@@ -155,6 +155,19 @@ class BasePage:
             counter = random.randrange(0, locator.count)
             return locator[counter]
 
+    def get_random_element_catalog(self, locator):
+        if isinstance(locator, str):
+            if locator[0] == '/' and locator[1] == '/':
+                counter = random.randrange(2, len(self.d.xpath(locator).all())-2)
+                elements_list = self.d.xpath(locator).all()
+                return elements_list[counter]
+            else:
+                counter = random.randrange(2, self.d(resourceId=locator).count-2)
+                return self.d(resourceId=locator)[counter]
+        else:
+            counter = random.randrange(2, locator.count-2)
+            return locator[counter]
+
     # @allure.step("Ожидание элемента")
     def wait_element(self, locator, element_name=None):
         if element_name is not None:
