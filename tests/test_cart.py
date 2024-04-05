@@ -140,7 +140,7 @@ class TestCart:
         page.press_back()
         page.press_back()
         page.click_x()
-        page.login(email, valid_password2)
+        page.login(email, valid_password)
         page.open_cart()
         page.cart.checking_availability_cards(cards_list)
 
@@ -160,7 +160,7 @@ class TestCart:
         page.press_back()
         page.press_back()
         page.click_x()
-        page.login(email, valid_password2)
+        page.login(email, valid_password)
         page.open_cart()
         page.cart.checking_availability_cards(cards_list)
 
@@ -273,7 +273,7 @@ class TestCart:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.go_to_checkout()
-        page.checkout.add_courier_address()
+        page.checkout.add_main_address()
         page.checkout.set_card_online_selector()
         page.checkout.add_new_card()
         page.swipe_page_up()
