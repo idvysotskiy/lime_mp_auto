@@ -7,8 +7,8 @@ from locators import *
 class CheckOutPage(BasePage):
 
     def accept_cloud_payments(self):
-        self.wait_element(CheckOutLocators.cloud_payments)
-        self.wait_a_moment()
+        # self.wait_element(CheckOutLocators.cloud_payments)
+        time.sleep(2)
         self.d.click(0.504, 0.360)
         self.wait_a_moment()
         self.d.click(0.504, 0.470)
