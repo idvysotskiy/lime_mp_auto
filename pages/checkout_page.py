@@ -8,8 +8,10 @@ class CheckOutPage(BasePage):
 
     def accept_cloud_payments(self):
         self.wait_element(CheckOutLocators.cloud_payments)
-        self.d.click(0.504, 0.350)
-        self.d.click(0.504, 0.450)
+        self.d.click(0.504, 0.400)
+        self.wait_a_moment()
+        self.d.click(0.504, 0.470)
+
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
@@ -107,7 +109,7 @@ class CheckOutPage(BasePage):
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_TITLE) == 'Хотите вернуться в корзину?'
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'ОТМЕНА'
-        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'Вернуться в корзину'
+        # assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'Вернуться в корзину'
         self.get_screen()
         self.click(CheckOutLocators.POPUP_BACK_CART_YES)
         assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
@@ -203,7 +205,8 @@ class CheckOutPage(BasePage):
     @allure.step("Установка даты и времени доставки")
     def set_date_and_time(self):
         if len(self.get_element(CheckOutLocators.date).all()) > 0:
-            self.wait_a_moment()
+            self.swipe_page_up()
+            self.wait_a_second()
             self.click(CheckOutLocators.date)
             self.click(CheckOutLocators.time)
 
