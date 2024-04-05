@@ -27,10 +27,10 @@ class MainPage(BasePage):
     @allure.step("Регистрация")
     def user_registration(self):
         self.click(MainLocators.PROFILE_NAV, "иконка профиля")
-        self.swipe_page_up()
+        self.swipe_page_up(2)
         self.click(MainLocators.registration_btn, "кнопка Зарегистрироваться")
         self.wait_a_second()
-        email = BasePage().generate_random_email()
+        email = self.generate_random_email()
         self.set_text(MainLocators.name, valid_name_kir, "имя")
         self.set_text(MainLocators.surname, valid_surname_kir, "фамилия")
         self.set_text(MainLocators.phone, valid_phone, "телефон")
