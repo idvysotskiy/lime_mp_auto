@@ -264,6 +264,7 @@ class CartLocators:
     POPUP_CANCEL = '//*[@resource-id="ru.limeshop.android.dev:id/negative_button"]'
     POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
     POPUP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
+    card_photo = 'ru.limeshop.android.dev:id/item_cart_photo'
 
 
 class CheckOutLocators:
@@ -354,7 +355,7 @@ class CheckOutLocators:
     SBP_SELECTOR_TINKOFF = d(resourceId="ru.limeshop.android.dev:id/info_text", text="Тинькофф Банк")
     STATUS_PAY_TITLE = "ru.limeshop.android.dev:id/status_title_text"
     #
-    date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
+    date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/text_container_layout"]'
     time = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
     gift_card_selector = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]/..'
     add_gift_card_title = d(resourceId="ru.limeshop.android.dev:id/title_view", text="ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
@@ -389,6 +390,7 @@ class CheckOutLocators:
     postcode = '//*[@resource-id="ru.limeshop.android.dev:id/edit_postcode"]//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
     address_popup = 'ru.limeshop.android.dev:id/popUpRecycler'
     save_address_btn = '//*[@text="СОХРАНИТЬ"]'
+    card_online_selector = '//*[@text="КАРТОЙ ОНЛАЙН"]/..'
 
 
 class SuccessPayScreenLocators:
@@ -427,3 +429,17 @@ class PickupLocators:
     title_address = '//*[@text="АДРЕС"]'
     title_schedule = '//*[@text="ВРЕМЯ РАБОТЫ"]'
     take_point_btn = '//*[@text="ЗАБЕРУ ОТСЮДА"]'
+
+class FavoritesLocators:
+    BOTTOMBACK = "//android.widget.ImageButton"
+    TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
+    BOTTOMBUY = 'ru.limeshop.android.dev:id/buyButton'
+    INFOTEXT = '//*[@text="ВАШ ВИШЛИСТ ПУСТ"]'
+    BOTTOMFAVORITES = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.ImageView[1]'
+    BOTTOMFAVORITES2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.ImageView[1]'
+    STUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
+    BOTTOMBUYSTUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.Button[1]'
+    MODULEWINDOW = '//*[@resource-id="ru.limeshop.android.dev:id/design_bottom_sheet"]/android.widget.LinearLayout[1]'
+    SIZEINSTUCTION = "ru.limeshop.android.dev:id/sizeInfoButton"
+    SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
+    card_name = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_name"]'

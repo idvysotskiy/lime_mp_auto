@@ -8,15 +8,16 @@ class CheckOutPage(BasePage):
 
     def accept_cloud_payments(self):
         self.wait_element(CheckOutLocators.cloud_payments)
-        self.d.click(0.506, 0.363)
+        self.d.click(0.504, 0.45)
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
-        self.swipe_page_up()
+        self.swipe_page_up(2)
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
         self.accept_cloud_payments()
+        time.sleep(1)
         self.wait_element(SuccessPayScreenLocators.TITLE)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         assert self.get_text(
@@ -103,13 +104,13 @@ class CheckOutPage(BasePage):
         self.click(MainLocators.X_BUTTON)
         self.wait_element(CheckOutLocators.POPUP_BACK_CART_TITLE)
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_TITLE) == 'Хотите вернуться в корзину?'
-        assert self.get_text(
-            CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
-        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'ОТМЕНА'
-        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'ВЕРНУТЬСЯ В КОРЗИНУ'
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'Отмена'
+        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'Вернуться в корзину'
         self.get_screen()
         self.click(CheckOutLocators.POPUP_BACK_CART_YES)
-        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
+        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'Корзина'
+
 
     # def checkout_with_one(self):
     #     ProductCardPage().add_one_product_to_cart()

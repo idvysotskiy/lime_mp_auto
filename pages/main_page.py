@@ -52,6 +52,7 @@ class MainPage(BasePage):
         with allure.step('Открыть Личный кабинет'):
             self.click(MainLocators.PROFILE_NAV)
             self.swipe_page_up()
+            self.swipe_page_up()
         with allure.step('Нажать кнопку "Войти"'):
             self.click(ProfileLocators.LOGIN_UN)
         with allure.step('Ввести email'):
@@ -87,13 +88,13 @@ class MainPage(BasePage):
     def go_to_feature_toggles(self):
         self.click(ProfileLocators.FEATURE_TOGGLES)
 
-    @allure.step('Включить feature toggles')
-    def aktivate_feature_toggles(self):
-        self.click(FeatureTogglesLocators.SWITCH_1)
-        self.click(FeatureTogglesLocators.SWITCH_2)
-        self.click(FeatureTogglesLocators.SWITCH_3)
-        self.click(FeatureTogglesLocators.SWITCH_4)
-        BasePage.get_screen(self)
+    # @allure.step('Включить feature toggles')
+    # def aktivate_feature_toggles(self):
+    #     self.click(FeatureTogglesLocators.SWITCH_1)
+    #     self.click(FeatureTogglesLocators.SWITCH_2)
+    #     self.click(FeatureTogglesLocators.SWITCH_3)
+    #     self.click(FeatureTogglesLocators.SWITCH_4)
+    #     BasePage.get_screen(self)
 
     @allure.step('Заполнить поля валидными данными')
     def enter_valid_registration_data(self, name, surname, phone, password):
@@ -161,11 +162,6 @@ class MainPage(BasePage):
         self.click_x()
         self.click_x()
 
-    def open_product_card_screen(self):
-        self.open_catalog()
-        self.go_to_catalog_item(menu_l1, menu_l2)
-        self.go_to_product_card()
-
     def reg_kir(self):
         self.go_to_registration()
         self.enter_valid_registration_data(valid_name_kir, valid_surname_kir, valid_phone, valid_password)
@@ -225,5 +221,10 @@ class MainPage(BasePage):
         assert self.get_text(LoginLocators.LOGIN_SCREEN_TITLE) == 'ВОЙТИ'
         assert self.get_text(LoginLocators.PASSWORD_RESET_LINK) == 'Забыли данные для входа?'
         assert self.get_text(LoginLocators.LOGIN_BTN) == 'ВОЙТИ'
+
+    @allure.step('Открыть экран "Избранное"')
+    def open_favorites(self):
+        self.click(MainLocators.FAVORITES_NAV, "Экран'Избранное'")
+        self.wait_element(FavoritesLocators.TITLE, "Заголовок")
 
 

@@ -10,6 +10,7 @@ valid_surname_lat = 'Ivanov'
 valid_name_kir = "Иван"
 valid_surname_kir = 'Иванов'
 valid_password = 'Qwerty1'
+valid_password2 = '87654321'
 valid_email = 'tester23@lime.com'
 valid_phone = '9639447845'
 valid_city = 'Новосибирск'

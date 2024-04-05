@@ -199,6 +199,10 @@ class BasePage:
     def wait_text(self, text):
         assert self.d(textContains=text).wait(10) == True, print(f"Элемент с текстом '{text}' не найден")
 
+    @allure.step("Ожидание отсутствия на экране текста '{text}'")
+    def wait_hidden_text(self, text):
+        assert self.d(textContains=text).wait_gone(10) == True, print(f"Элемент с текстом '{text}' присутствует на экране")
+
     def close_popup(self):
         self.d.click(0.477, 0.031)
 
