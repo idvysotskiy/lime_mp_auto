@@ -6,6 +6,7 @@ from locators import *
 
 class CheckOutPage(BasePage):
 
+    @allure.step('Нажать кнопку "Успешно" на экране Cloud Payments')
     def accept_cloud_payments(self):
         # self.wait_element(CheckOutLocators.cloud_payments)
         time.sleep(2)
@@ -46,7 +47,6 @@ class CheckOutPage(BasePage):
         time.sleep(100)
         assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         self.get_screen()
-
 
     @allure.step('Выбрать элементы на экране Оформление заказа')
     def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
