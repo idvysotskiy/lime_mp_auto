@@ -9,10 +9,10 @@ class CheckOutPage(BasePage):
     def accept_cloud_payments(self):
         # self.wait_element(CheckOutLocators.cloud_payments)
         time.sleep(2)
+        self.get_screen()
         self.d.click(0.504, 0.360)
         self.wait_a_moment()
         self.d.click(0.504, 0.470)
-
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
@@ -42,10 +42,13 @@ class CheckOutPage(BasePage):
         self.press_back()
         self.wait_element(CheckOutLocators.STATUS_PAY_TITLE)
         assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ОЖИДАЕМ ПОДТВЕРЖДЕНИЕ ПЛАТЕЖА'
+        self.get_screen()
         time.sleep(100)
         assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
-        # assert self.d(resourceId="ru.limeshop.android.dev:id/status_title_text", textContains='ВАШ ЗАКАЗ ПРИНЯТ').wait(59) == True, print('ВАШ ЗАКАЗ ПРИНЯТ не отображается')
+        self.get_screen()
 
+
+    @allure.step('Выбрать элементы на экране Оформление заказа')
     def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
         with allure.step(f"Выбрать способ доставки '{delivery_method}'"):
             if delivery_method == '1':
@@ -80,18 +83,21 @@ class CheckOutPage(BasePage):
                 self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_2)
             elif time_slot == '3':
                 self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_3)
-        BasePage.get_screen(self)
+        self.get_screen()
 
+    @allure.step('Проверить элементы на экране Оформление заказа')
     def elements_checkout(self):
         self.wait_text("ОФОРМЛЕНИЕ ЗАКАЗА")
         assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'ОФОРМЛЕНИЕ ЗАКАЗА'
         assert self.get_text(CheckOutLocators.DELIVERY_TITLE) == 'ВЫБЕРИТЕ СПОСОБ ДОСТАВКИ'
         assert self.get_text(CheckOutLocators.PAYMENT_TITLE) == 'ВЫБЕРИТЕ СПОСОБ ОПЛАТЫ'
         # assert self.get_text(CheckOutLocators.ORDER_LIST_TITLE) == 'СОСТАВ ЗАКАЗА'
+        self.get_screen()
 
     def elements_checkout_self(self):
         # assert self.get_text(CheckOutLocators.PAYMENT_TITLE_4) == 'ПРИ ПОЛУЧЕНИИ'
         assert self.get_text(CheckOutLocators.PAYMENT_INFO_TEXT) == 'Наличными или картой при получении'
+        self.get_screen()
 
     @allure.title('Блок "Оплата" / Успешная оплата (Кнопка продолжить покупки)')
     @allure.testcase("C3050")
@@ -102,31 +108,22 @@ class CheckOutPage(BasePage):
         assert self.get_text(CatalogLocators.MEN) == 'МУЖЧИНЫ'
         assert self.get_text(CatalogLocators.KIDS) == 'ДЕТИ'
         self.is_element_present(MainLocators.X_BUTTON)
-        BasePage.get_screen(self)
+        self.get_screen()
 
+    @allure.step('Вернуться в корзину с экрана Оформление заказа')
     def back_to_cart(self):
         self.click(MainLocators.X_BUTTON)
         self.wait_element(CheckOutLocators.POPUP_BACK_CART_TITLE)
+        self.get_screen()
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_TITLE) == 'Хотите вернуться в корзину?'
-        assert self.get_text(CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
+        assert self.get_text(
+            CheckOutLocators.POPUP_BACK_CART_DESCRIPTION) == 'При возвращении в корзину все заполненные данные будут сброшены'
         assert self.get_text(CheckOutLocators.POPUP_BACK_CART_CANCEL) == 'ОТМЕНА'
         # assert self.get_text(CheckOutLocators.POPUP_BACK_CART_YES) == 'Вернуться в корзину'
         self.get_screen()
         self.click(CheckOutLocators.POPUP_BACK_CART_YES)
         assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
-
-
-    # def checkout_with_one(self):
-    #     ProductCardPage().add_one_product_to_cart()
-    #     CartPage().go_to_checkout()
-    #     time.sleep(2)
-    #     self.elements_checkout()
-    #     BasePage().get_screen()
-    #
-    # def checkout_with_one_un(self):
-    #     ProductCardPage().add_one_product_to_cart()
-    #     CartPage().go_to_checkout()
-    #     self.get_screen()
+        self.get_screen()
 
     @allure.step("Удаление единственной карты")
     def deleting_single_payment_card(self):
@@ -139,6 +136,7 @@ class CheckOutPage(BasePage):
         self.coordinate_click(100, 100)
         self.checking_card_list('4242')
         self.click(CheckOutLocators.CARD_DELETE_SOLO, "иконка удаления карты")
+        self.get_screen()
         self.click(CheckOutLocators.POPUP_BACK_CART_YES, "кнопка Отмена")
         self.checking_card_list('4242')
         self.click(CheckOutLocators.CARD_DELETE_SOLO, "иконка удаления карты")
@@ -146,6 +144,7 @@ class CheckOutPage(BasePage):
         self.wait_element(CheckOutLocators.ADD_NEW_CARD_BUTTON, "кнопка Добавить карту на модальном окне Ваши карты")
         self.press_back()
         self.wait_element(CheckOutLocators.ADD_NEW_CARD_PLUS, "кнопка Добавить карту + на экране Оформление заказа")
+        self.get_screen()
 
     @allure.step("Добавление новой карты для оплаты заказ")
     def add_first_card(self):
@@ -165,6 +164,7 @@ class CheckOutPage(BasePage):
         with allure.step('Нажать кнопку "Сохранить"'):
             self.click(CheckOutLocators.ADD_CARD_SAVE_BUTTON)
 
+    @allure.step("Проверить наличие кнопки 'Добавить карту +'")
     def check_btn_add_card(self):
         self.is_element_present(CheckOutLocators.ADD_NEW_CARD_PLUS)
 
@@ -186,6 +186,7 @@ class CheckOutPage(BasePage):
         with allure.step('Нажать кнопку "Сохранить"'):
             self.click(CheckOutLocators.ADD_ADDRESS_SAVE_BUTTON)
 
+    @allure.step("Проверить элементы модального окна 'ДОБАВИТЬ КАРТУ'")
     def elements_add_card(self):
         assert self.get_text(CheckOutLocators.ADD_CARD_TITLE) == 'ДОБАВИТЬ КАРТУ'
         assert self.get_text(CheckOutLocators.ADD_CARD_NUMBER) == 'Номер карты'
@@ -195,13 +196,6 @@ class CheckOutPage(BasePage):
         assert self.get_text(CheckOutLocators.ADD_CARD_SAVE_CHECK_BOX) == 'Запомнить данные карты'
         assert self.get_text(CheckOutLocators.ADD_CARD_SAVE_BUTTON) == 'СОХРАНИТЬ'
         self.get_screen()
-
-    #
-    # def reg_user(self):
-    #     page = MainPage()
-    #     page.reg_kir()
-    #     page.click_x()
-    #     self.cancel_notification()
 
     @allure.step("Установка даты и времени доставки")
     def set_date_and_time(self):
@@ -328,7 +322,7 @@ class CheckOutPage(BasePage):
                 gift_card_pin = list(dictionary.values())[i]
                 break
 
-        self.wait_element(CheckOutLocators.gift_number_text)
+        # self.wait_element(CheckOutLocators.gift_number_text)
         return gift_card_number, gift_card_pin
 
     @allure.step("Добавление доплаты картой")
@@ -390,6 +384,7 @@ class CheckOutPage(BasePage):
         self.wait_element(CheckOutLocators.add_courier_address_btn)
         self.click(CheckOutLocators.add_courier_address_btn, "кнопка Добавить адрес")
 
+    @allure.step("Проверить элементы окна 'ДОБАВИТЬ АДРЕС'")
     def elements_add_address(self):
         assert self.get_text(CheckOutLocators.ADD_ADDRESS_TITLE) == 'ДОБАВИТЬ АДРЕС'
         assert self.get_text(CheckOutLocators.ADD_ADDRESS_SAVE_BUTTON) == 'СОХРАНИТЬ'
