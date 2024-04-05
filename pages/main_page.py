@@ -224,7 +224,7 @@ class MainPage(BasePage):
 
     @allure.step('Открыть экран "Избранное"')
     def open_favorites(self):
-        self.click(MainLocators.FAVORITES_NAV, "Экран'Избранное'")
-        self.wait_element(FavoritesLocators.TITLE, "Заголовок")
+        self.click(MainLocators.FAVORITES_NAV, "кнопка 'Избранное'")
+        self.wait_element(FavoritesLocators.TITLE)
 
 

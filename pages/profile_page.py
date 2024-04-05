@@ -53,7 +53,8 @@ class ProfilePage(BasePage):
 
     @allure.step("Логаут")
     def logout(self):
+        self.click(MainLocators.PROFILE_NAV)
         self.swipe_page_up(3)
-        self.wait_a_moment()
+        self.wait_a_second()
         self.click(ProfileLocators.LOGOUT, "кнопка Выйти")
         self.wait_element(ProfileLocators.LOGIN_UN, "кнопка Войти")
