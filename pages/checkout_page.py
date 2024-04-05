@@ -265,7 +265,7 @@ class CheckOutPage(BasePage):
     @allure.step("Проверка номера подарочной карты. Проверка кнопки Продолжить")
     def checking_gift_card_number(self, price):
         dictionary = gift_card_list
-
+        self.wait_element(CheckOutLocators.gift_card_number_field)
         self.set_text(CheckOutLocators.gift_card_number_field, list(dictionary.keys())[0], "Номер подарочной карты")
         self.wait_element(CheckOutLocators.gift_card_balance, "баланс подарочной карты")
         self.wait_text(price)
