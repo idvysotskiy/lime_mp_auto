@@ -15,6 +15,15 @@ class CheckOutPage(BasePage):
         self.wait_a_moment()
         self.d.click(0.504, 0.470)
 
+    @allure.step('Нажать кнопку "Неудачно" на экране Cloud Payments')
+    def accept_cloud_payments(self):
+        # self.wait_element(CheckOutLocators.cloud_payments)
+        time.sleep(2)
+        self.get_screen()
+        self.d.click(0.504, 0.360)
+        self.wait_a_moment()
+        self.d.click(0.504, 0.470)
+
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
         # self.swipe_page_up(1)
@@ -22,6 +31,22 @@ class CheckOutPage(BasePage):
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
         self.accept_cloud_payments()
+        time.sleep(1)
+        self.wait_element(SuccessPayScreenLocators.TITLE)
+        assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
+        assert self.get_text(
+            SuccessPayScreenLocators.DESCRIPTION) == 'Отслеживать его статус вы можете в личном кабинете'
+        assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПРОДОЛЖИТЬ ПОКУПКИ'
+        self.get_screen()
+
+    @allure.step('Нажать кнопку "Оплатить"')
+    def click_pay(self):
+        # self.swipe_page_up(1)
+        self.wait_a_second()
+        self.click(CheckOutLocators.ORDER_PAY)
+        time.sleep(5)
+        self.accept_cloud_payments()
+
         time.sleep(1)
         self.wait_element(SuccessPayScreenLocators.TITLE)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
@@ -147,7 +172,7 @@ class CheckOutPage(BasePage):
         self.get_screen()
 
     @allure.step("Добавление новой карты для оплаты заказ")
-    def add_first_card(self):
+    def add_first_card(self, card_number=card_1):
         self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
         self.wait_element(CheckOutLocators.ADD_NEW_CARD_PLUS)
         with allure.step('Нажать кнопку "Добавить карту"'):
@@ -155,7 +180,7 @@ class CheckOutPage(BasePage):
             self.wait_element(CheckOutLocators.ADD_CARD_TITLE)
             assert self.get_text(CheckOutLocators.ADD_CARD_TITLE) == 'ДОБАВИТЬ КАРТУ'
         with allure.step('Заполнить поля валидными данными'):
-            self.set_text(CheckOutLocators.ADD_CARD_NUMBER, card_1)
+            self.set_text(CheckOutLocators.ADD_CARD_NUMBER, card_number)
             self.set_text(CheckOutLocators.ADD_CARD_OWNER, card_owner)
             self.set_text(CheckOutLocators.ADD_CARD_EXPIRY, card_expiry)
             self.set_text(CheckOutLocators.ADD_CARD_CVV, card_cvv)
@@ -392,3 +417,28 @@ class CheckOutPage(BasePage):
         self.wait_text(valid_surname_kir)
         self.wait_text('+7 963 944 78 45')
         # self.wait_text(email)
+
+    @allure.step("Выбрать способ доставки 'КУРЬЕРОМ'")
+    def courier_select(self):
+        self.click(CheckOutLocators.courier_selector, "Курьером")
+
+    @allure.step("Выбрать способ доставки 'САМОВЫВОЗ'")
+    def pickup_select(self):
+        self.click(CheckOutLocators.pickup_selector, "Самовывоз")
+
+    @allure.step("Выбрать способ оплаты 'КАРТОЙ ОНЛАЙН'")
+    def card_online_select(self):
+        self.click(CheckOutLocators.card_online_selector, "КАРТОЙ ОНЛАЙН")
+
+    @allure.step("Выбрать способ оплаты 'ЧЕРЕЗ СБП'")
+    def sbp_select(self):
+        self.click(CheckOutLocators.sbp_selector, "ЧЕРЕЗ СБП")
+
+    @allure.step("Выбрать способ оплаты 'ПОДАРОЧНОЙ КАРТОЙ'")
+    def gift_card_select(self):
+        self.click(CheckOutLocators.gift_card_selector, "ПОДАРОЧНОЙ КАРТОЙ")
+
+    @allure.step("Выбрать способ оплаты 'ПРИ ПОЛУЧЕНИИ'")
+    def receiving_select(self):
+        self.click(CheckOutLocators.receiving_selector, "ПРИ ПОЛУЧЕНИИ")
+

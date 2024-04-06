@@ -31,8 +31,11 @@ class CartPage(BasePage):
         assert self.get_text(CartLocators.BUY_BUTTON) == 'НАЧАТЬ ПОКУПКИ'
 
     @allure.step('Ввести промокод')
-    def enter_promo_code(self, promo_code):
+    def enter_promo_code(self, promo_code=promo_code_2):
         self.set_text(CartLocators.PROMO_CODE, promo_code)
+        self.wait_element(CartLocators.gift_card_error)
+        assert self.get_text(CartLocators.gift_card_error) == 'ПРОМОКОД ПРИМЕНЕН'
+        self.get_screen()
 
     @allure.step('Клик по кнопке "К оформлению"')
     def go_to_checkout(self):

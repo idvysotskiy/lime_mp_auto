@@ -254,6 +254,7 @@ class CartLocators:
     SUMMARY_PRICE = '//*[@resource-id="ru.limeshop.android.dev:id/textView4"]'
     SUMMARY_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/textView11"]'
     CONTINUE = '//*[@resource-id="ru.limeshop.android.dev:id/cart_continue_button"]'
+    gift_card_error = 'ru.limeshop.android.dev:id/errorText'
     # CLEAR CART
     ICON = '//androidx.appcompat.widget.LinearLayoutCompat/android.widget.ImageView[1]'
     DESCRIPTION_CLEAR = '//*[@text="ВАША КОРЗИНА ПУСТА"]'
@@ -356,7 +357,6 @@ class CheckOutLocators:
     #
     date = '//*[@resource-id="ru.limeshop.android.dev:id/date_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/text_container_layout"]'
     time = '//*[@resource-id="ru.limeshop.android.dev:id/time_selector_view"]//*[@resource-id="ru.limeshop.android.dev:id/selector_card"]'
-    gift_card_selector = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]/..'
     add_gift_card_title = d(resourceId="ru.limeshop.android.dev:id/title_view", text="ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
     gift_card_number_field = '//*[@resource-id="ru.limeshop.android.dev:id/number_text_input_edit"]//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
     gift_card_sum_field = '//*[@resource-id="ru.limeshop.android.dev:id/amount_text_input_edit"]//*[@resource-id="ru.limeshop.android.dev:id/editText"]'
@@ -365,6 +365,9 @@ class CheckOutLocators:
     gift_card_continue_btn = '//*[@text="ПРОДОЛЖИТЬ"]'
     pickup_selector = '//*[@text="САМОВЫВОЗ"]/..'
     courier_selector = '//*[@text="КУРЬЕРОМ"]/..'
+    card_online_selector = '//*[@text="КАРТОЙ ОНЛАЙН"]/..'
+    sbp_selector = '//*[@text="ЧЕРЕЗ СБП"]/..'
+    gift_card_selector = '//*[@text="ПОДАРОЧНОЙ КАРТОЙ"]/..'
     receiving_selector = '//*[@text="ПРИ ПОЛУЧЕНИИ"]/..'
     upon_receipt_text = d(resourceId="ru.limeshop.android.dev:id/payment_info_title_text",
                           text='НАЛИЧНЫМИ ИЛИ КАРТОЙ ПРИ ПОЛУЧЕНИИ')
