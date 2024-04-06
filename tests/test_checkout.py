@@ -9,12 +9,13 @@ import allure
 
 
 @pytest.mark.usefixtures("setup")
-class TestAndroid:
-    @pytest.mark.checkout
-    @pytest.mark.smoke
+class TestCheckOut:
+
     @allure.title('Экран "Корзина" / Переход к чекауту (Авторизованный)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2869")
     @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/136157")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
     def test_open_checkout_auth(self, login):
         page = MainPage()
         page.clear_basket()
@@ -26,10 +27,10 @@ class TestAndroid:
         page.get_screen()
         page.checkout.back_to_cart()
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Экран "Корзина" / Переход к чекауту (Не авторизованный)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2868")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
     def test_open_checkout_unauth(self):
         page = MainPage()
         page.clear_basket()
@@ -39,11 +40,11 @@ class TestAndroid:
         page.cart.go_to_checkout()
         page.elements_login_screen()
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Экран "Оформление заказа" / Не заполнены основные данные')
     @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/136163")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2875")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
     def test_add_main_address(self):
         page = MainPage()
         page.user_registration()
@@ -56,10 +57,10 @@ class TestAndroid:
         page.checkout.add_main_address()
         page.screen_title('ОФОРМЛЕНИЕ ЗАКАЗА')
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Оплата при получении')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3038")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
     def test_pay_self(self):
         page = MainPage()
         page.user_registration()
@@ -76,13 +77,12 @@ class TestAndroid:
         page.checkout.click_pay()
         page.checkout.continue_shopping()
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Сохранение карты')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2946")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2833")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2834")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3060")
+    @pytest.mark.checkout
     @pytest.mark.smoke
     def test_saving_payment_card(self):
         page = MainPage()
@@ -106,8 +106,6 @@ class TestAndroid:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Попап удаления карты')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2948")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2949")
@@ -115,6 +113,7 @@ class TestAndroid:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2952")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2953")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2954")
+    @pytest.mark.checkout
     @pytest.mark.smoke
     def test_delete_last_card(self):
         page = MainPage()
@@ -126,7 +125,6 @@ class TestAndroid:
         page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
         page.checkout.add_first_card()
-        page.swipe_page_up()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
         page.checkout.click_continue_shopping()
@@ -149,10 +147,10 @@ class TestAndroid:
     #     page.click(MainLocators.PROFILE_NAV)
     #     assert page.is_element_present(ProfileLocators.EMAIL)
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата картой (Нет сохраненных карт)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3147")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
     def test_success_pay_card_with_add_card(self):
         page = MainPage()
         page.user_registration()
@@ -167,8 +165,6 @@ class TestAndroid:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Успешная оплата подарочной картой (Полная стоимость)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3163")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3028")
@@ -185,12 +181,9 @@ class TestAndroid:
         page.cart.go_to_checkout()
         page.checkout.set_gift_card_selector()
         page.checkout.set_gift_card(price)
-        page.swipe_page_up(1)
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Закрытие боттом шита "Добавить подарочную карту" ')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3023")
     @pytest.mark.smoke
@@ -207,8 +200,6 @@ class TestAndroid:
         page.checkout.set_gift_card_selector()
         page.checkout.close_gift_card_block2()
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Проверка полей блока Подарочная карта.')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3024")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3025")
@@ -229,11 +220,11 @@ class TestAndroid:
         page.checkout.checking_gift_card_number(price)
         page.checkout.checking_gift_card_pin_code(price)
 
-    @pytest.mark.checkout
-    @pytest.mark.smoke
     @allure.title('Блок "Оплата" / Доплата картой')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3031")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3035")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
     def test_order_with_gift_card_and_additional_payment(self, login):
         page = MainPage()
         page.clear_basket()
@@ -267,4 +258,3 @@ class TestAndroid:
         page.checkout.set_date_and_time()
         page.checkout.click_pay_sbp()
         print('test')
-

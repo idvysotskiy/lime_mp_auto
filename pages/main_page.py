@@ -44,6 +44,7 @@ class MainPage(BasePage):
         # self.click_subscribe_boxes(subscribe)
         self.click(LoginLocators.SIGNUP_SUBSCRIBE_ACCEPT, "чекбокс согласия маркетинговых коммуникаций")
         self.click(MainLocators.continue_btn, "кнопка Продолжить")
+        self.cancel_notification()
         self.wait_text(email)
         # self.add_new_address()
         self.click_x()
@@ -126,9 +127,9 @@ class MainPage(BasePage):
     def click_resume_btn_signup(self):
         self.click(LoginLocators.SIGNUP_RESUME_BTN)
 
-    @allure.step('Отменить уведомления')
-    def cancel_notification(self):
-        BasePage.cancel_notification(self)
+    # @allure.step('Отменить уведомления')
+    # def cancel_notification(self):
+    #     BasePage.cancel_notification(self)
 
     def screen_title(self, name):
         title_name = self.d(resourceId=MainLocators.TOOLBAR_TITLE).get_text()

@@ -17,7 +17,7 @@ class CheckOutPage(BasePage):
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
-        self.swipe_page_up(2)
+        # self.swipe_page_up(1)
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
