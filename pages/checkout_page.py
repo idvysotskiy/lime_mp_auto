@@ -15,14 +15,14 @@ class CheckOutPage(BasePage):
         self.wait_a_moment()
         self.d.click(0.504, 0.470)
 
-    @allure.step('Нажать кнопку "Неудачно" на экране Cloud Payments')
-    def accept_cloud_payments(self):
+    @allure.step('Нажать кнопку "Неудача" на экране Cloud Payments')
+    def fail_cloud_payments(self):
         # self.wait_element(CheckOutLocators.cloud_payments)
         time.sleep(2)
         self.get_screen()
-        self.d.click(0.504, 0.360)
+        self.d.click(0.504, 0.450)
         self.wait_a_moment()
-        self.d.click(0.504, 0.470)
+        self.d.click(0.504, 0.560)
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
@@ -40,19 +40,17 @@ class CheckOutPage(BasePage):
         self.get_screen()
 
     @allure.step('Нажать кнопку "Оплатить"')
-    def click_pay(self):
+    def click_pay_fail_cloud_payments(self):
         # self.swipe_page_up(1)
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
-        self.accept_cloud_payments()
-
+        self.fail_cloud_payments()
         time.sleep(1)
         self.wait_element(SuccessPayScreenLocators.TITLE)
-        assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
-        assert self.get_text(
-            SuccessPayScreenLocators.DESCRIPTION) == 'Отслеживать его статус вы можете в личном кабинете'
-        assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПРОДОЛЖИТЬ ПОКУПКИ'
+        assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ОПЛАТА НЕ ПРОШЛА'
+        assert self.get_text(SuccessPayScreenLocators.DESCRIPTION_FAIL) == 'Мы сохранили ваш заказ в личном кабинете — оплатите его в течение 8 минут'
+        assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПОВТОРИТЬ ПОПЫТКУ'
         self.get_screen()
 
     @allure.step('Нажать кнопку "Оплатить" (СБП)')
@@ -124,8 +122,7 @@ class CheckOutPage(BasePage):
         assert self.get_text(CheckOutLocators.PAYMENT_INFO_TEXT) == 'Наличными или картой при получении'
         self.get_screen()
 
-    @allure.title('Блок "Оплата" / Успешная оплата (Кнопка продолжить покупки)')
-    @allure.testcase("C3050")
+    @allure.step('Нажать кнопку "Продолжить покупки"')
     def continue_shopping(self):
         self.click(SuccessPayScreenLocators.BUTTON)
         time.sleep(2)
@@ -172,7 +169,7 @@ class CheckOutPage(BasePage):
         self.get_screen()
 
     @allure.step("Добавление новой карты для оплаты заказ")
-    def add_first_card(self, card_number=card_1):
+    def add_first_card(self, card_number=card_1, save='yes'):
         self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
         self.wait_element(CheckOutLocators.ADD_NEW_CARD_PLUS)
         with allure.step('Нажать кнопку "Добавить карту"'):
@@ -184,10 +181,14 @@ class CheckOutPage(BasePage):
             self.set_text(CheckOutLocators.ADD_CARD_OWNER, card_owner)
             self.set_text(CheckOutLocators.ADD_CARD_EXPIRY, card_expiry)
             self.set_text(CheckOutLocators.ADD_CARD_CVV, card_cvv)
-            # with allure.step('Выбрать чекбокс "Запомнить данные карты'):
-            #     self.click(CheckOut.ADD_CARD_SAVE_CHECK_BOX)
-        with allure.step('Нажать кнопку "Сохранить"'):
-            self.click(CheckOutLocators.ADD_CARD_SAVE_BUTTON)
+
+        if save == 'yes':
+            self.click(CheckOutLocators.ADD_CARD_SAVE_BUTTON, "кнопка Сохранить")
+        else:
+            self.click(CheckOutLocators.ADD_CARD_SAVE_CHECK_BOX, "декативировать чекбокс Запомнить данные карты")
+            self.click(CheckOutLocators.ADD_CARD_SAVE_BUTTON, "кнопка Сохранить")
+
+
 
     @allure.step("Проверить наличие кнопки 'Добавить карту +'")
     def check_btn_add_card(self):
@@ -382,7 +383,7 @@ class CheckOutPage(BasePage):
 
     @allure.step("Проверка наличия номера карты '{card_number}' в чекауте")
     def checking_payment_card_number(self, card_number):
-        self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
+        self.click(CheckOutLocators.card_online_selector)
         assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text',
                       textContains=f'{card_number}').wait(5) == True, print(f"Не отображается карта {card_number}")
 
@@ -442,3 +443,16 @@ class CheckOutPage(BasePage):
     def receiving_select(self):
         self.click(CheckOutLocators.receiving_selector, "ПРИ ПОЛУЧЕНИИ")
 
+    def allow_access_geo(self):
+        element = self.d.xpath(PermissionGeoLocators.allow_foreground_only_button).wait(timeout=5)
+        if element is not None:
+            self.d.xpath(PermissionGeoLocators.allow_foreground_only_button).click()
+
+    def tab_list_select(self):
+        self.click(PickupLocators.tab_list, "список")
+
+    @allure.step("Выбрать способ ПВЗ")
+    def pickup_select_pvz(self):
+        self.allow_access_geo()
+        self.tab_list_select()
+        self.click(CheckOutLocators.receiving_selector, "ПРИ ПОЛУЧЕНИИ")

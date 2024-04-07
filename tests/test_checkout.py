@@ -1,4 +1,6 @@
 # file: test_checkout.py
+import time
+
 import pytest
 from pages.main_page import MainPage
 from pages.checkout_page import CheckOutPage
@@ -81,7 +83,7 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2946")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2833")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2834")
-    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3060")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3181")
     @pytest.mark.checkout
     @pytest.mark.smoke
     def test_saving_payment_card(self):
@@ -94,7 +96,6 @@ class TestCheckOut:
         page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
         page.checkout.add_first_card()
-        page.swipe_page_up()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
         page.checkout.click_continue_shopping()
@@ -102,9 +103,31 @@ class TestCheckOut:
         page.card.open_cart()
         page.cart.go_to_checkout()
         page.checkout.checking_payment_card_number('4242')
-        page.swipe_page_up()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+
+    @allure.title('Экран "Оформление заказа" / Оплата "Картой онлайн" (Без сохранения карты)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3167")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
+    def test_payment_card_without_save_card(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.click_add_address_btn()
+        page.checkout.add_main_address()
+        page.checkout.add_first_card(save='no')
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay()
+        page.checkout.click_continue_shopping()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.check_btn_add_card()
+
 
     @allure.title('Блок "Оплата" / Попап удаления карты')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2948")
@@ -133,23 +156,11 @@ class TestCheckOut:
         page.cart.go_to_checkout()
         page.checkout.checking_payment_card_number('4242')
         page.checkout.deleting_single_payment_card()
-        print("test")
-
-    # @pytest.mark.smoke
-    # @allure.title('Экран "Оформление заказа" / Авторизация')
-    # @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/131745")
-    # def test_go_checkout_unautorized(self):
-    #     page = CheckOutPage()
-    #     time.sleep(8)
-    #     page.checkout_with_one_un()
-    #     MainPage().login()
-    #     assert page.get_text(MainLocators.TOOLBAR_TITLE) == 'КОРЗИНА'
-    #     page.click(MainLocators.PROFILE_NAV)
-    #     assert page.is_element_present(ProfileLocators.EMAIL)
 
     @allure.title('Блок "Оплата" / Успешная оплата картой (Нет сохраненных карт)')
-    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3147")
-    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3161")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3175")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3188")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3191")
     @pytest.mark.checkout
     @pytest.mark.smoke
     def test_success_pay_card_with_add_card(self):
@@ -180,8 +191,8 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @allure.title('')
-    @allure.testcase("")
+    @allure.title('Экран "Оформление заказа" / Оплата "Картой онлайн"(Не успешно)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3165")
     @allure.testcase("")
     @pytest.mark.checkout
     @pytest.mark.smoke
@@ -198,8 +209,7 @@ class TestCheckOut:
         page.checkout.card_online_select()
         page.checkout.add_first_card()
         page.checkout.set_date_and_time()
-        page.checkout.click_pay()
-
+        page.checkout.click_pay_fail_cloud_payments()
 
     @allure.title('Блок "Оплата" / Успешная оплата подарочной картой (Полная стоимость)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3163")

@@ -400,6 +400,7 @@ class SuccessPayScreenLocators:
     ICON = '//*[@resource-id="ru.limeshop.android.dev:id/status_icon_image"]'
     TITLE = 'ru.limeshop.android.dev:id/status_title_text'
     DESCRIPTION = '//*[@text="Отслеживать его статус вы можете в личном кабинете"]'
+    DESCRIPTION_FAIL = '//*[@text="Мы сохранили ваш заказ в личном кабинете — оплатите его в течение 8 минут"]'
     BUTTON = 'ru.limeshop.android.dev:id/action_button'
 
 
@@ -432,6 +433,7 @@ class PickupLocators:
     title_address = '//*[@text="АДРЕС"]'
     title_schedule = '//*[@text="ВРЕМЯ РАБОТЫ"]'
     take_point_btn = '//*[@text="ЗАБЕРУ ОТСЮДА"]'
+    order_here_button = "ru.limeshop.android.dev:id/order_here_button"
 
 
 class FavoritesLocators:
