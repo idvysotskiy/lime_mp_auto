@@ -39,6 +39,11 @@ class CheckOutPage(BasePage):
         assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПРОДОЛЖИТЬ ПОКУПКИ'
         self.get_screen()
 
+    @allure.step('Нажать кнопку "Заказать"')
+    def click_pay_upon_receipt(self):
+        self.wait_a_second()
+        self.click(CheckOutLocators.ORDER_PAY)
+
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay_fail_cloud_payments(self):
         # self.swipe_page_up(1)
@@ -49,7 +54,8 @@ class CheckOutPage(BasePage):
         time.sleep(1)
         self.wait_element(SuccessPayScreenLocators.TITLE)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ОПЛАТА НЕ ПРОШЛА'
-        assert self.get_text(SuccessPayScreenLocators.DESCRIPTION_FAIL) == 'Мы сохранили ваш заказ в личном кабинете — оплатите его в течение 8 минут'
+        assert self.get_text(
+            SuccessPayScreenLocators.DESCRIPTION_FAIL) == 'Мы сохранили ваш заказ в личном кабинете — оплатите его в течение 8 минут'
         assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПОВТОРИТЬ ПОПЫТКУ'
         self.get_screen()
 
@@ -170,7 +176,7 @@ class CheckOutPage(BasePage):
 
     @allure.step("Добавление новой карты для оплаты заказ")
     def add_first_card(self, card_number=card_1, save='yes'):
-        self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
+        self.card_online_select()
         self.wait_element(CheckOutLocators.ADD_NEW_CARD_PLUS)
         with allure.step('Нажать кнопку "Добавить карту"'):
             self.click(CheckOutLocators.ADD_NEW_CARD_PLUS)
@@ -187,8 +193,6 @@ class CheckOutPage(BasePage):
         else:
             self.click(CheckOutLocators.ADD_CARD_SAVE_CHECK_BOX, "декативировать чекбокс Запомнить данные карты")
             self.click(CheckOutLocators.ADD_CARD_SAVE_BUTTON, "кнопка Сохранить")
-
-
 
     @allure.step("Проверить наличие кнопки 'Добавить карту +'")
     def check_btn_add_card(self):
@@ -265,7 +269,7 @@ class CheckOutPage(BasePage):
     @allure.step("Выбор способа оплаты - При получении")
     def set_upon_receipt(self):
         self.click(CheckOutLocators.receiving_selector, "при получении")
-        self.wait_element(CheckOutLocators.upon_receipt_text)
+        self.wait_element(CheckOutLocators.PAYMENT_INFO_TEXT)
 
     @allure.step("Выбор способа оплаты - Подарочной картой")
     def set_gift_card_selector(self):
@@ -443,16 +447,28 @@ class CheckOutPage(BasePage):
     def receiving_select(self):
         self.click(CheckOutLocators.receiving_selector, "ПРИ ПОЛУЧЕНИИ")
 
+    @allure.step("Разрешить доступ к геолокации 'При использовании приложения'")
     def allow_access_geo(self):
         element = self.d.xpath(PermissionGeoLocators.allow_foreground_only_button).wait(timeout=5)
         if element is not None:
             self.d.xpath(PermissionGeoLocators.allow_foreground_only_button).click()
 
+    @allure.step("Разрешить доступ к геолокации 'Однократно'")
+    def allow_access_geo_one_time(self):
+        element = self.d.xpath(PermissionGeoLocators.allow_one_time_button).wait(timeout=5)
+        if element is not None:
+            self.d.xpath(PermissionGeoLocators.allow_one_time_button).click()
+
+    @allure.step("Переключить вкладку 'Самовывоз - Список'")
     def tab_list_select(self):
         self.click(PickupLocators.tab_list, "список")
 
-    @allure.step("Выбрать способ ПВЗ")
+    @allure.step("Выбрать ПВЗ")
     def pickup_select_pvz(self):
-        self.allow_access_geo()
+        self.pickup_select()
+        self.wait_a_second()
+        self.allow_access_geo_one_time()
         self.tab_list_select()
-        self.click(CheckOutLocators.receiving_selector, "ПРИ ПОЛУЧЕНИИ")
+        self.wait_element(PickupLocators.order_here_button)
+        element = self.get_random_element(PickupLocators.order_here_button)
+        self.click(element)

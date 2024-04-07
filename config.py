@@ -1,5 +1,6 @@
 # APP
 device_id = 'emulator-5554'
+# device_id = 'TSBM9L55QWWG4LIR'
 package = 'ru.limeshop.android.dev'
 # package = 'ru.limeshop.android'
 app_link = 'app_link'
