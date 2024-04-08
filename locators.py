@@ -453,3 +453,7 @@ class FavoritesLocators:
     SNECKBARBOTTOMGOTOCART = "ru.limeshop.android.dev:id/popupButton"
     card_name = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_name"]'
     SWIPEBOTTOM = "ru.limeshop.android.dev:id/view5"
+    SCREENFORCARDS = "ru.limeshop.android.dev:id/baseContainer"
+    EVENCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]'
+    ODDCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[3]'
+    cards_list = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup'

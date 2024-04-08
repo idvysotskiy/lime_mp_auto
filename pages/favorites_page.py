@@ -75,3 +75,12 @@ class FavoritesPage(BasePage):
     def swipe_module_bottom(self):
         bounds = self.get_element(FavoritesLocators.SWIPEBOTTOM).bounds()
         self.d.swipe(bounds[0], bounds[1], bounds[0], bounds[1] + 600)
+
+    @allure.step('Определение координат для четных/нечетных карточек')
+    def get_cords_for_card(self):
+        bounds = self.get_element(FavoritesLocators.SCREENFORCARDS).bounds()
+        cards = self.get_element(FavoritesLocators.cards_list).all()
+        evenbounds = cards[1].bounds
+        assert evenbounds[2] >= bounds[2] / 2
+        oddbounds = cards[2].bounds
+        assert oddbounds[2] <= bounds[2] / 2

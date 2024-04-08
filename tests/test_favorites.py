@@ -217,5 +217,25 @@ class TestAndroid:
         page.click_x()
         page.open_favorites()
         page.favorites.favorites_product_bottom_buy()
-        page.favorites.swipe_bottom_size()
+        page.favorites.swipe_module_bottom()
         page.wait_hidden_element(FavoritesLocators.MODULEWINDOW, "Модульное окно")
+
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Экран "Избранное" / Четное и нечетное количество товаров в списке "Избранное"')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/333')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/334')
+    def test_even_and_odd_cards_for_favorites(self):
+        page = MainPage()
+        page.open_catalog()
+        for i in range(3):
+            page.catalog.open_random_catalog()
+            page.catalog.open_random_card()
+            page.card.add_to_favorites()
+            page.press_back()
+            page.press_back()
+        page.click_x()
+        page.open_favorites()
+        page.favorites.get_cords_for_card()
+
+
