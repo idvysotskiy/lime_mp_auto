@@ -39,6 +39,29 @@ class CheckOutPage(BasePage):
         assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПРОДОЛЖИТЬ ПОКУПКИ'
         self.get_screen()
 
+    @allure.step('Нажать кнопку "Оплатить"')
+    def click_pay_check_warnings(self):
+        self.swipe_page_up()
+        self.wait_a_second()
+        self.click(CheckOutLocators.ORDER_PAY)
+        # self.wait_element(MainLocators.snack_bar_message)
+        assert self.get_text(MainLocators.snack_bar_message) == 'Не выбран адрес доставки'
+        self.click(CheckOutLocators.ADD_ADDRESS_BUTTON)
+        self.add_main_address()
+        self.wait_a_second()
+        self.click(CheckOutLocators.card_online_selector)
+        self.swipe_page_up()
+        self.wait_a_second()
+        self.click(CheckOutLocators.ORDER_PAY)
+        # self.wait_element(MainLocators.snack_bar_message)
+        assert self.get_text(MainLocators.snack_bar_message) == 'Не выбрана карта для оплаты'
+        self.add_first_card()
+        self.click(CheckOutLocators.ORDER_PAY)
+        # self.wait_element(MainLocators.snack_bar_message)
+        assert self.get_text(MainLocators.snack_bar_message) == 'Не выбрана дата или время доставки'
+        self.set_date_and_time()
+
+
     @allure.step('Нажать кнопку "Заказать"')
     def click_pay_upon_receipt(self):
         self.wait_a_second()
@@ -469,6 +492,10 @@ class CheckOutPage(BasePage):
         self.wait_a_second()
         self.allow_access_geo_one_time()
         self.tab_list_select()
+        self.set_text(PickupLocators.search_field, 'Новосибирск')
+        self.wait_a_second()
+        self.click(CheckOutLocators.ADD_ADDRESS_POPUP)
+        self.wait_a_second()
         self.wait_element(PickupLocators.order_here_button)
         element = self.get_random_element(PickupLocators.order_here_button)
         self.click(element)

@@ -54,7 +54,8 @@ class MainPage(BasePage):
     def login(self, email, password):
         with allure.step('Открыть Личный кабинет'):
             self.click(MainLocators.PROFILE_NAV)
-            self.swipe_page_up()
+            self.swipe_page_up(2)
+            self.wait_a_second()
         with allure.step('Нажать кнопку "Войти"'):
             self.click(ProfileLocators.LOGIN_UN)
         with allure.step('Ввести email'):
