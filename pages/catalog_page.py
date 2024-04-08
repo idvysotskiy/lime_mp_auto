@@ -10,7 +10,7 @@ class CatalogPage(BasePage):
     @allure.step("Переход в рандомный раздел")
     def open_random_catalog(self):
         self.wait_element(CatalogLocators.catalog_item)
-        self.click(self.get_random_element(CatalogLocators.catalog_item), "рандомный раздел в меню")
+        self.click(self.get_random_element_catalog(CatalogLocators.catalog_item), "рандомный раздел в меню")
         self.wait_a_moment()
 
         if self.get_element(CatalogLocators.catalog_item_recycler).count > 0:

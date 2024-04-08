@@ -31,8 +31,11 @@ class CartPage(BasePage):
         assert self.get_text(CartLocators.BUY_BUTTON) == 'НАЧАТЬ ПОКУПКИ'
 
     @allure.step('Ввести промокод')
-    def enter_promo_code(self, promo_code):
+    def enter_promo_code(self, promo_code=promo_code_2):
         self.set_text(CartLocators.PROMO_CODE, promo_code)
+        self.wait_element(CartLocators.gift_card_error)
+        assert self.get_text(CartLocators.gift_card_error) == 'ПРОМОКОД ПРИМЕНЕН'
+        self.get_screen()
 
     @allure.step('Клик по кнопке "К оформлению"')
     def go_to_checkout(self):
@@ -43,6 +46,15 @@ class CartPage(BasePage):
     def cart_clear(self):
         self.click(CartLocators.CLEAR_ALL, "кнопка Очистить")
         self.click(CartLocators.POPUP_CLEAR, "кнопка Очистить корзину")
+
+    @allure.step("Клик по кнопке Очистить")
+    def click_clear_btn(self):
+        self.click(CartLocators.CLEAR_ALL, "кнопка Очистить")
+        self.wait_element(CartLocators.POPUP_CLEAR)
+
+    @allure.step("Клик по кнопке Отмена")
+    def cancel_confirm_of_cleaning(self):
+        self.click(CartLocators.POPUP_CANCEL, "кнопка Отмена")
 
     @allure.step("Проверка пустой корзины")
     def check_empty_cart(self):

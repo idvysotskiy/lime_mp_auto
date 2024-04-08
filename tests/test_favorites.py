@@ -61,7 +61,7 @@ class TestAndroid:
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         product_name = page.card.add_to_favorites()
-        page.press_back()
+        page.click_x()
         page.open_favorites()
         page.wait_text(product_name)
 
@@ -75,7 +75,7 @@ class TestAndroid:
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         product_name = page.card.add_to_favorites()
-        page.press_back()
+        page.click_x()
         page.open_favorites()
         page.favorites.delete_from_favorites()
         page.wait_hidden_element(product_name)
@@ -91,7 +91,7 @@ class TestAndroid:
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         page.card.add_to_favorites()
-        page.press_back()
+        page.click_x()
         page.open_favorites()
         page.favorites.favorites_product_bottom_buy()
 
@@ -105,7 +105,7 @@ class TestAndroid:
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         product_name = [page.card.add_to_favorites()]
-        page.press_back()
+        page.click_x()
         page.open_favorites()
         page.favorites.add_to_cart_and_go_to_cart()
         page.cart.checking_availability_cards(product_name)
@@ -121,10 +121,10 @@ class TestAndroid:
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         page.card.add_to_favorites()
-        page.press_back()
+        page.click_x()
         page.open_favorites()
         page.favorites.go_to_card()
-        page.press_back()
+        page.click_x()
 
     @pytest.mark.smoke
     @pytest.mark.regress
@@ -136,7 +136,7 @@ class TestAndroid:
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         product = page.card.add_to_favorites()
-        page.press_back()
+        page.click_x()
         page.user_registration()
         page.open_favorites()
         favorite = page.favorites.get_text(FavoritesLocators.STUFFNAME)

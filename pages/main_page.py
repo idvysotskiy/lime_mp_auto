@@ -27,20 +27,24 @@ class MainPage(BasePage):
     @allure.step("Регистрация")
     def user_registration(self):
         self.click(MainLocators.PROFILE_NAV, "иконка профиля")
-        self.swipe_page_up()
-        self.swipe_page_up()
+        self.swipe_page_up(2)
+        self.wait_a_second()
         self.click(MainLocators.registration_btn, "кнопка Зарегистрироваться")
         self.wait_a_second()
-        email = 'test' + str(random.randint(0, 999999999)) + '@test.ru'
-        self.set_text(MainLocators.name, 'Тест', "имя")
-        self.set_text(MainLocators.surname, 'Тестов', "фамилия")
-        self.set_text(MainLocators.phone, '9998887755', "телефон")
+        email = self.generate_random_email()
+        self.set_text(MainLocators.name, valid_name_kir, "имя")
+        self.set_text(MainLocators.surname, valid_surname_kir, "фамилия")
+        self.set_text(MainLocators.phone, valid_phone, "телефон")
         self.set_text(MainLocators.email, email, "почта")
-        self.set_text(MainLocators.password, '87654321', "пароль")
-        self.set_text(MainLocators.repeat_password, '87654321', "повторение пароля")
+        self.set_text(MainLocators.password, valid_password, "пароль")
+        self.set_text(MainLocators.repeat_password, valid_password, "повторение пароля")
         self.swipe_page_up()
-        self.click(MainLocators.approve_checkbox, 'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
+        self.wait_a_second()
+        # self.click(MainLocators.approve_checkbox, 'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
+        # self.click_subscribe_boxes(subscribe)
+        self.click(LoginLocators.SIGNUP_SUBSCRIBE_ACCEPT, "чекбокс согласия маркетинговых коммуникаций")
         self.click(MainLocators.continue_btn, "кнопка Продолжить")
+        self.cancel_notification()
         self.wait_text(email)
         # self.add_new_address()
         self.click_x()
@@ -51,19 +55,12 @@ class MainPage(BasePage):
         with allure.step('Открыть Личный кабинет'):
             self.click(MainLocators.PROFILE_NAV)
             self.swipe_page_up()
-            self.swipe_page_up()
         with allure.step('Нажать кнопку "Войти"'):
             self.click(ProfileLocators.LOGIN_UN)
         with allure.step('Ввести email'):
-            # self.click(LoginLocators.LOGIN_SCREEN_EMAIL)
-            self.wait_element('ru.limeshop.android.dev:id/signin_email')
-            self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_email"]', email)
-            # BasePage.get_screen(self)
+            self.set_text(LoginLocators.LOGIN_SCREEN_EMAIL, email)
         with allure.step('Ввести пароль'):
-            # self.click(LoginLocators.LOGIN_SCREEN_PASS)
-            self.set_text('//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]', password)
-            # self.d.xpath('//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]/android.view.ViewGroup[1]/android.widget.EditText[1]').send_keys(password)
-            # BasePage.get_screen(self)
+            self.set_text(LoginLocators.LOGIN_SCREEN_PASS, password)
         with allure.step('Нажать кнопку "Войти"'):
             self.click(LoginLocators.LOGIN_SCREEN_SIGNIN)
             self.wait_element(LoginLocators.profile_avatar)
@@ -77,30 +74,6 @@ class MainPage(BasePage):
     def open_catalog(self):
         self.wait_element(MainLocators.CATALOG_NAV)
         self.click(MainLocators.CATALOG_NAV, "каталог")
-
-    @allure.step('Перейти в раздел каталога')
-    def go_to_catalog_item(self):
-        # self.click(self.get_random_element(Catalog.MENU_ITEM))
-        try:
-            self.click(MainLocators.MENU_ITEM_1)
-        except ZeroDivisionError:
-            pass
-        try:
-            self.click(MainLocators.MENU_ITEM_2)
-        except Exception:
-            print('Элемент меню не найден')
-            raise
-
-    @allure.step('Добавить товар в избранное')
-    def add_to_fav_from_catalog(self):
-        self.click(MainLocators.FAV_ICON)
-        product_name_1 = self.d(resourceId=MainLocators.NAME_PRODUCT_COLLECTION, text=product_name).get_text()
-        BasePage.cancel_notification(self)
-        # product_name_1 = self.get_text(MainLocators.ITEM)
-        self.click(MainLocators.FAVORITES_NAV)
-        time.sleep(1)
-        product_name_2 = self.d(resourceId=MainLocators.NAME_PRODUCT_FAVORITE, text=product_name).get_text()
-        assert product_name_1 == product_name_2, 'Наименования товаров не совпадают'
 
     @allure.step('Открыть регистрацию')
     def go_to_registration(self):
@@ -117,13 +90,13 @@ class MainPage(BasePage):
     def go_to_feature_toggles(self):
         self.click(ProfileLocators.FEATURE_TOGGLES)
 
-    # @allure.step('Включить feature toggles')
-    # def aktivate_feature_toggles(self):
-    #     self.click(FeatureTogglesLocators.SWITCH_1)
-    #     self.click(FeatureTogglesLocators.SWITCH_2)
-    #     self.click(FeatureTogglesLocators.SWITCH_3)
-    #     self.click(FeatureTogglesLocators.SWITCH_4)
-    #     BasePage.get_screen(self)
+    @allure.step('Включить feature toggles')
+    def aktivate_feature_toggles(self):
+        self.click(FeatureTogglesLocators.SWITCH_1)
+        self.click(FeatureTogglesLocators.SWITCH_2)
+        self.click(FeatureTogglesLocators.SWITCH_3)
+        self.click(FeatureTogglesLocators.SWITCH_4)
+        BasePage.get_screen(self)
 
     @allure.step('Заполнить поля валидными данными')
     def enter_valid_registration_data(self, name, surname, phone, password):
@@ -154,9 +127,9 @@ class MainPage(BasePage):
     def click_resume_btn_signup(self):
         self.click(LoginLocators.SIGNUP_RESUME_BTN)
 
-    @allure.step('Отменить уведомления')
-    def cancel_notification(self):
-        BasePage.cancel_notification(self)
+    # @allure.step('Отменить уведомления')
+    # def cancel_notification(self):
+    #     BasePage.cancel_notification(self)
 
     def screen_title(self, name):
         title_name = self.d(resourceId=MainLocators.TOOLBAR_TITLE).get_text()
@@ -190,11 +163,6 @@ class MainPage(BasePage):
         self.aktivate_feature_toggles()
         self.click_x()
         self.click_x()
-
-    def open_product_card_screen(self):
-        self.open_catalog()
-        self.go_to_catalog_item(menu_l1, menu_l2)
-        self.go_to_product_card()
 
     def reg_kir(self):
         self.go_to_registration()
@@ -249,9 +217,16 @@ class MainPage(BasePage):
     def wait_logo(self):
         self.wait_element(MainLocators.lime_logo, "логотип Lime")
 
+    def elements_login_screen(self):
+        self.wait_element(MainLocators.TOOLBAR_TITLE)
+        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'ВОЙТИ В АККАУНТ'
+        assert self.get_text(LoginLocators.LOGIN_SCREEN_TITLE) == 'ВОЙТИ'
+        assert self.get_text(LoginLocators.PASSWORD_RESET_LINK) == 'Забыли данные для входа?'
+        assert self.get_text(LoginLocators.LOGIN_BTN) == 'ВОЙТИ'
+
     @allure.step('Открыть экран "Избранное"')
     def open_favorites(self):
-        self.click(MainLocators.FAVORITES_NAV, "Экран'Избранное'")
-        self.wait_element(FavoritesLocators.TITLE, "Заголовок")
+        self.click(MainLocators.FAVORITES_NAV, "кнопка 'Избранное'")
+        self.wait_element(FavoritesLocators.TITLE)
 
 

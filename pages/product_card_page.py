@@ -36,7 +36,7 @@ class ProductCardPage(BasePage):
         self.is_element_present(MainLocators.X_BUTTON)
         assert self.get_text(ProductCardLocators.BUY) == 'КУПИТЬ'
         assert self.get_text(ProductCardLocators.COLORS) == 'Цвета'
-        BasePage().get_screen()
+        self.get_screen()
 
     def elements_full_product_card(self):
         assert self.get_text(ProductCardLocators.BUY) == 'КУПИТЬ'
@@ -51,7 +51,7 @@ class ProductCardPage(BasePage):
         self.is_element_present(ProductCardLocators.PAYMENT)
         self.is_element_present(ProductCardLocators.GOES_WELL)
         self.is_element_present(ProductCardLocators.YOU_LIKE_IT)
-        BasePage().get_screen()
+        self.get_screen()
 
     def open_full_product_card(self):
         self.click(ProductCardLocators.COLORS)

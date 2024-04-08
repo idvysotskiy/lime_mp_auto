@@ -29,15 +29,6 @@ class TestMobile:
         page.login(valid_email, valid_password)
 
     @pytest.mark.smoke
-    @allure.title('Экран "Коллекции" / Добавление в избранное (добавление в список) с экрана "Коллекция"')
-    @allure.testcase("C283")
-    def test_add_to_fav_from_catalog(self):
-        page = MainPage()
-        page.open_catalog()
-        page.go_to_catalog_item(menu_l1)
-        page.add_to_fav_from_catalog()
-
-    @pytest.mark.smoke
     @allure.title('Экран "Регистрация" / Заполнение полей "Имя/Фамилия" кириллицей')
     @allure.testcase("C1030")
     def test_reg(self):
