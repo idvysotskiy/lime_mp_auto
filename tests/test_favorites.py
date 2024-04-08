@@ -1,7 +1,7 @@
 # file: test_favorites.py
 import pytest
 
-from locators import FavoritesLocators
+from locators import FavoritesLocators, MainLocators, CatalogLocators
 from pages.main_page import MainPage
 import allure
 import random
@@ -182,7 +182,45 @@ class TestAndroid:
             page.press_back()
             page.press_back()
         page.press_back()
+        page.open_profile()
         page.profile.logout()
         page.click_x()
         page.open_favorites()
         page.favorites.check_empty_favorites()
+
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title(' Экран "Избранное" / Закрыть шторку размеров (клик мимо шторки)')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/301')
+    def test_close_module_screen_tap_out_range(self):
+        page = MainPage()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_favorites()
+        page.click_x()
+        page.open_favorites()
+        page.favorites.favorites_product_bottom_buy()
+        page.close_popup()
+        page.wait_hidden_element(FavoritesLocators.MODULEWINDOW, "Модальное окно")
+
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Экран"Избранное" / Закрывание шторки размеров(свайп вниз)')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/302')
+    def test_close_module_screen_swipe_down(self):
+        page = MainPage()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        # if not page.wait_element(CatalogLocators.catalog_item):
+        #     page.click_x()
+        #     page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_favorites()
+        page.click_x()
+        page.open_favorites()
+        page.favorites.favorites_product_bottom_buy()
+        page.swipe_down()
+        page.wait_hidden_element(FavoritesLocators.MODULEWINDOW, "Модульное окно")
+
+
