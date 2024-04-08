@@ -54,6 +54,7 @@ class TestCheckOut:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.click_add_address_btn()
         page.checkout.elements_add_address()
         page.checkout.add_main_address()
@@ -107,6 +108,7 @@ class TestCheckOut:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
         page.checkout.add_first_card()
@@ -131,6 +133,7 @@ class TestCheckOut:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
         page.checkout.add_first_card(save='no')
@@ -158,6 +161,7 @@ class TestCheckOut:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
         page.checkout.add_first_card()
@@ -189,7 +193,7 @@ class TestCheckOut:
         page.checkout.add_first_card()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
-        # ......
+        # ...... Успешная оплата картой +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -236,16 +240,18 @@ class TestCheckOut:
         page.card.open_cart()
         page.cart.swipe_page_up()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.set_gift_card_selector()
         page.checkout.set_gift_card(price)
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
-        # ......
+        # ...... Успешная оплата подарочной картой (Полная стоимость) + Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.enter_promo_code()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.set_gift_card_selector()
         page.checkout.set_gift_card(price)
         page.checkout.set_date_and_time()
@@ -262,6 +268,7 @@ class TestCheckOut:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.set_gift_card_selector()
         page.checkout.close_gift_card_block()
         page.checkout.set_gift_card_selector()
@@ -283,9 +290,37 @@ class TestCheckOut:
         price = page.card.get_product_price()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.set_gift_card_selector()
         page.checkout.checking_gift_card_number(price)
         page.checkout.checking_gift_card_pin_code(price)
+
+    @allure.title('Экран "Оформление заказа" / Оплата через СБП(Успешное оформление)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3166")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3190")
+    @pytest.mark.smoke
+    @pytest.mark.checkout
+    def test_order_payment_sbp(self, login):
+        page = MainPage()
+        page.clear_basket()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.courier_select()
+        page.checkout.sbp_select()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay_sbp()
+        # ...... Оплата через СБП + Промокод
+        page.checkout.continue_shopping()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.enter_promo_code(promo_code_2)
+        page.cart.go_to_checkout()
+        page.checkout.courier_select()
+        page.checkout.sbp_select()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay_sbp()
 
     @allure.title('Блок "Оплата" / Доплата картой')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3031")
@@ -300,6 +335,21 @@ class TestCheckOut:
         price = page.card.get_product_price()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
+        page.checkout.set_gift_card_selector()
+        page.checkout.set_gift_card_with_additional_payment(price)
+        page.checkout.add_additional_payment()
+        page.swipe_page_up()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay()
+        # ......Доплата картой +Промокод
+        page.checkout.continue_shopping()
+        page.add_to_cart_random_product()
+        price = page.card.get_product_price()
+        page.card.open_cart()
+        page.cart.enter_promo_code()
+        page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.set_gift_card_selector()
         page.checkout.set_gift_card_with_additional_payment(price)
         page.checkout.add_additional_payment()
@@ -308,7 +358,7 @@ class TestCheckOut:
         page.checkout.click_pay()
 
     @allure.title('Блок "Оплата" / Доплата СБП')
-    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3036")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3170")
     @pytest.mark.smoke
     @pytest.mark.checkout
     def test_order_with_gift_card_and_additional_payment_sbp(self, login):
@@ -319,36 +369,23 @@ class TestCheckOut:
         price = page.card.get_product_price()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.courier_select()
         page.checkout.set_gift_card_selector()
         page.checkout.set_gift_card_with_additional_payment(price)
         page.checkout.add_additional_payment_sbp()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_sbp()
-
-    @allure.title('Экран "Оформление заказа" / Оплата через СБП(Успешное оформление)')
-    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2914")
-    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3159")
-    @pytest.mark.smoke
-    @pytest.mark.checkout
-    def test_order_payment_sbp(self, login):
-        page = MainPage()
-        page.clear_basket()
-        page.open_catalog()
-        page.add_to_cart_random_product()
-        page.card.open_cart()
-        page.cart.enter_promo_code(promo_code_2)
-        page.cart.go_to_checkout()
-        page.checkout.courier_select()
-        page.checkout.sbp_select()
-        page.checkout.set_date_and_time()
-        page.checkout.click_pay_sbp()
-        # ......
+        # ......Доплата СБП +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
+        price = page.card.get_product_price()
         page.card.open_cart()
+        page.cart.enter_promo_code()
         page.cart.go_to_checkout()
         page.checkout.courier_select()
-        page.checkout.sbp_select()
+        page.checkout.set_gift_card_selector()
+        page.checkout.set_gift_card_with_additional_payment(price)
+        page.checkout.add_additional_payment_sbp()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_sbp()
 
@@ -359,7 +396,7 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3161")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_success_pay_card_with_add_card_pickup(self):
+    def test_pickup_success_pay_card_with_add_card(self):
         page = MainPage()
         page.user_registration()
         page.open_catalog()
@@ -386,10 +423,19 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3159")
     @pytest.mark.smoke
     @pytest.mark.checkout
-    def test_order_payment_sbp(self, login):
+    def test_pickup_order_payment_sbp(self, login):
         page = MainPage()
         page.clear_basket()
         page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.pickup_select_pvz()
+        page.checkout.sbp_select()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay_sbp()
+        # ...... Оплата через СБП(Успешное оформление) + Промокод
+        page.checkout.continue_shopping()
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.enter_promo_code(promo_code_2)
@@ -398,21 +444,13 @@ class TestCheckOut:
         page.checkout.sbp_select()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_sbp()
-        # ......
-        page.checkout.continue_shopping()
-        page.add_to_cart_random_product()
-        page.card.open_cart()
-        page.cart.go_to_checkout()
-        page.checkout.pickup_select_pvz()
-        page.checkout.sbp_select()
-        page.checkout.set_date_and_time()
-        page.checkout.click_pay_sbp()
 
     @allure.title('Блок "Оплата" / Оплата при получении')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3150")
     @allure.testcase("")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_pay_self(self):
+    def test_pickup_pay_self(self):
         page = MainPage()
         page.user_registration()
         page.open_catalog()
@@ -424,7 +462,7 @@ class TestCheckOut:
         page.checkout.elements_checkout_self()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_upon_receipt()
-        # ......
+        # ...... 'Блок "Оплата" / Оплата при получении' + Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -435,3 +473,73 @@ class TestCheckOut:
         page.checkout.elements_checkout_self()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_upon_receipt()
+
+    @allure.title('Блок "Оплата" / Доплата картой')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3037")
+    @allure.testcase("")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
+    def test_pickup_order_with_gift_card_and_additional_payment(self, login):
+        page = MainPage()
+        page.clear_basket()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        price = page.card.get_product_price()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.pickup_select_pvz()
+        page.checkout.set_gift_card_selector()
+        page.checkout.set_gift_card_with_additional_payment(price)
+        page.checkout.add_additional_payment()
+        page.swipe_page_up()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay()
+        # ......Доплата картой +Промокод
+        page.checkout.continue_shopping()
+        page.add_to_cart_random_product()
+        price = page.card.get_product_price()
+        page.card.open_cart()
+        page.cart.enter_promo_code()
+        page.cart.go_to_checkout()
+        page.checkout.pickup_select_pvz()
+        page.checkout.set_gift_card_selector()
+        page.checkout.set_gift_card_with_additional_payment(price)
+        page.checkout.add_additional_payment()
+        page.swipe_page_up()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay()
+
+    @allure.title('Блок "Оплата" / Доплата СБП')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3036")
+    @pytest.mark.smoke
+    @pytest.mark.checkout
+    def test_pickup_order_with_gift_card_and_additional_payment_sbp(self, login):
+        page = MainPage()
+        page.clear_basket()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        price = page.card.get_product_price()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.pickup_select_pvz()
+        page.checkout.set_gift_card_selector()
+        page.checkout.set_gift_card_with_additional_payment(price)
+        page.checkout.add_additional_payment_sbp()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay_sbp()
+        # ...... Доплата СБП +Промокод
+        page.checkout.continue_shopping()
+        page.add_to_cart_random_product()
+        price = page.card.get_product_price()
+        page.card.open_cart()
+        page.cart.enter_promo_code()
+        page.cart.go_to_checkout()
+        page.checkout.pickup_select_pvz()
+        page.checkout.set_gift_card_selector()
+        page.checkout.set_gift_card_with_additional_payment(price)
+        page.checkout.add_additional_payment_sbp()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay_sbp()
+
+
+
