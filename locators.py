@@ -452,3 +452,4 @@ class FavoritesLocators:
     SNECKBARADDCART = "ru.limeshop.android.dev:id/favoritePopup"
     SNECKBARBOTTOMGOTOCART = "ru.limeshop.android.dev:id/popupButton"
     card_name = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_name"]'
+    SWIPEBOTTOM = "ru.limeshop.android.dev:id/view5"

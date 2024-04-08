@@ -70,3 +70,8 @@ class FavoritesPage(BasePage):
 
         for i in range(len(cards_list)):
             assert cards_list[i] in cards_list_in_favorite, print(f"{cards_list[i]} отсутствует в избранном")
+
+    @allure.step('Свайп модалки вниз')
+    def swipe_module_bottom(self):
+        bounds = self.get_element(FavoritesLocators.SWIPEBOTTOM).bounds()
+        self.d.swipe(bounds[0], bounds[1], bounds[0], bounds[1] + 600)

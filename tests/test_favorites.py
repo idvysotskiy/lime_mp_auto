@@ -212,15 +212,10 @@ class TestAndroid:
         page = MainPage()
         page.open_catalog()
         page.catalog.open_random_catalog()
-        # if not page.wait_element(CatalogLocators.catalog_item):
-        #     page.click_x()
-        #     page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         page.card.add_to_favorites()
         page.click_x()
         page.open_favorites()
         page.favorites.favorites_product_bottom_buy()
-        page.swipe_down()
+        page.favorites.swipe_bottom_size()
         page.wait_hidden_element(FavoritesLocators.MODULEWINDOW, "Модульное окно")
-
-
