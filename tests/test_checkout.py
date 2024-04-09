@@ -359,9 +359,9 @@ class TestCheckOut:
         # ......Доплата картой +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
-        price = page.card.get_product_price()
         page.card.open_cart()
         page.cart.enter_promo_code()
+        price = page.cart.get_cart_price()
         page.cart.go_to_checkout()
         page.checkout.courier_select()
         page.checkout.set_gift_card_selector()
@@ -393,9 +393,9 @@ class TestCheckOut:
         # ......Доплата СБП +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
-        price = page.card.get_product_price()
         page.card.open_cart()
         page.cart.enter_promo_code()
+        price = page.cart.get_cart_price()
         page.cart.go_to_checkout()
         page.checkout.courier_select()
         page.checkout.set_gift_card_selector()
@@ -546,9 +546,9 @@ class TestCheckOut:
         # ......Доплата картой +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
-        price = page.card.get_product_price()
         page.card.open_cart()
         page.cart.enter_promo_code()
+        price = page.cart.get_cart_price()
         page.cart.go_to_checkout()
         page.checkout.pickup_select_pvz()
         page.checkout.set_gift_card_selector()
@@ -580,9 +580,9 @@ class TestCheckOut:
         # ...... Доплата СБП +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
-        price = page.card.get_product_price()
         page.card.open_cart()
         page.cart.enter_promo_code()
+        price = page.cart.get_cart_price()
         page.cart.go_to_checkout()
         page.checkout.pickup_select_pvz()
         page.checkout.set_gift_card_selector()
