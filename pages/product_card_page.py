@@ -76,6 +76,7 @@ class ProductCardPage(BasePage):
             self.press_back()
             self.press_back()
 
+    # @allure.step("Получение цены товара")
     def get_product_price(self):
         return self.get_number_from_element(ProductCardLocators.product_price)
 
@@ -83,11 +84,18 @@ class ProductCardPage(BasePage):
     def open_cart(self):
         self.click(ProductCardLocators.CART)
 
+    # @allure.step("Получение названия товара")
     def get_product_name(self):
         return self.get_text(ProductCardLocators.product_name)
+
     @allure.step('Добавление в избранное')
     def add_to_favorites(self):
-        self.click(ProductCardLocators.FAVORITE,'Кнопка добавления в избранное')
+        self.click(ProductCardLocators.FAVORITE, 'Кнопка добавления в избранное')
         product_name = self.get_text(ProductCardLocators.product_name)
         return product_name
 
+    @allure.step("Добавление в корзину второго размера одного товара")
+    def add_to_cart_more_item(self, size):
+        self.click(ProductCardLocators.BUY_MORE, "кнопка Купить еще")
+        self.click(self.get_random_element(
+            f'//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]//android.widget.TextView[@resource-id="ru.limeshop.android.dev:id/product_add_to_cart_name" and not(following-sibling::android.widget.TextView[@resource-id="ru.limeshop.android.dev:id/product_add_to_cart_available"]) and not(@text="{size}")]'), "рандомный размер")
