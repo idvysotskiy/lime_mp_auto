@@ -139,6 +139,7 @@ class ProductCardLocators:
     available_size = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]//android.widget.TextView[@resource-id="ru.limeshop.android.dev:id/product_add_to_cart_name" and not(following-sibling::android.widget.TextView[@resource-id="ru.limeshop.android.dev:id/product_add_to_cart_available"])]'
     product_price = 'ru.limeshop.android.dev:id/productPriceTextView'
     product_name = 'ru.limeshop.android.dev:id/productNameTextView'
+    back_btn = 'ru.limeshop.android.dev:id/closeImageButton'
 
 
 class ProfileLocators:

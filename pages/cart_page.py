@@ -176,3 +176,7 @@ class CartPage(BasePage):
                    'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
         self.click(MainLocators.continue_btn, "кнопка Продолжить")
         self.checking_title_page("КОРЗИНА")
+
+    # @allure.step("Получение размера товара")
+    def get_size(self):
+        return self.get_text(CartLocators.SIZE)

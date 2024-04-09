@@ -132,6 +132,7 @@ class TestCart:
         page.press_back()
         page.click_x()
         page.open_profile()
+        page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_catalog()
@@ -152,6 +153,7 @@ class TestCart:
         page = MainPage()
         email = page.user_registration()
         page.open_profile()
+        page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_catalog()
@@ -177,6 +179,7 @@ class TestCart:
         page.press_back()
         page.click_x()
         page.open_profile()
+        page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_cart()
@@ -222,7 +225,7 @@ class TestCart:
         cards_name = [page.card.get_product_name()]
         page.card.open_cart()
         page.cart.click_clear_btn()
-        page.coordinate_click(100,100)
+        page.coordinate_click(100, 100)
         page.cart.checking_availability_cards(cards_name)
         page.cart.click_clear_btn()
         page.cart.cancel_confirm_of_cleaning()
@@ -260,7 +263,18 @@ class TestCart:
     @pytest.mark.smoke
     @pytest.mark.basket
     def test_return_to_another_screen(self):
-        pass
+        page = MainPage()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        card_size = page.cart.get_size()
+        page.cart.open_card()
+        page.card.add_to_cart_more_item(card_size)
+        page.card.open_cart()
+        page.cart.cart_clear()
+        page.click_x()
+        page.click(ProductCardLocators.back_btn, "кнопка Назад")
+        page.cart.check_empty_cart()
 
     @allure.title('Экран "Корзина" / Очистка корзины после успешного оформления')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1980")
@@ -273,6 +287,7 @@ class TestCart:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.go_to_checkout()
+        page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
         page.checkout.set_card_online_selector()
         page.checkout.add_new_card()
@@ -319,6 +334,7 @@ class TestCart:
         page = MainPage()
         email = page.user_registration()
         page.open_profile()
+        page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_catalog()
@@ -401,7 +417,8 @@ class TestCart:
         page.swipe_page_up()
         page.wait_a_second()
         price_in_checkout = page.checkout.get_summary_total()
-        assert price_in_cart == price_in_checkout, print(f"Сумма в корзине и чекауте отличаются. Сумма в корзине: {price_in_cart}, сумма в чекауте: {price_in_checkout}")
+        assert price_in_cart == price_in_checkout, print(
+            f"Сумма в корзине и чекауте отличаются. Сумма в корзине: {price_in_cart}, сумма в чекауте: {price_in_checkout}")
 
     @allure.title('Экран "Корзина" / Регистрация')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2872")
@@ -415,5 +432,30 @@ class TestCart:
         page.card.open_cart()
         page.cart.go_to_checkout()
         page.cart.registration()
-        assert card_name == page.get_text(CartLocators.PRODUCT_TITLE), print(f"Название товара в корзине после регистрации изменилось. До регистрации {card_name}, после регистрации {page.get_text(CartLocators.PRODUCT_TITLE)}")
+        assert card_name == page.get_text(CartLocators.PRODUCT_TITLE), print(
+            f"Название товара в корзине после регистрации изменилось. До регистрации {card_name}, после регистрации {page.get_text(CartLocators.PRODUCT_TITLE)}")
+
+    @allure.title('Экран "Корзина" / Отображение поля Промокод при удалении одного из товаров')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2026")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_check_promo_after_delete_one_item(self):
+        page = MainPage()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        total_price = page.card.get_product_price()
+        page.press_back()
+        page.press_back()
+        page.add_to_cart_random_product()
+        total_price += page.card.get_product_price()
+        page.card.open_cart()
+        page.swipe_page_up()
+        page.cart.set_valid_promo()
+        assert int(total_price * 0.9) == page.get_number_from_element(CartLocators.FINAL_PRICE), print(
+            f"Скидка не активна. Сумма товаров со скидкой = {int(total_price * 0.9)}, сумма Итого = {page.get_number_from_element(CartLocators.FINAL_PRICE)}")
+        page.cart.delete_item()
+        page.cart.check_valid_promo_message()
+        assert int(page.get_number_from_element(CartLocators.SUMMARY_PRICE) * 0.9) == page.get_number_from_element(
+            CartLocators.FINAL_PRICE), print(
+            f"Скидка не активна после удаления одного из двух товаров. Сумма товаров = {int(page.get_number_from_element(CartLocators.SUMMARY_PRICE) * 0.9)}, сумма Итого = {page.get_number_from_element(CartLocators.FINAL_PRICE)}")
 
