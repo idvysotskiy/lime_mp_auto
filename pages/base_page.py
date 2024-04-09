@@ -236,5 +236,11 @@ class BasePage:
         assert self.d(resourceId='ru.limeshop.android.dev:id/toolbarTitle', text=title).wait(5) == True, print(
             f"Заголовок экрана некорректен. Текущий заголовок - {self.get_text(MainLocators.TOOLBAR_TITLE)}, ожидаемый - {title}")
 
+    @allure.step('Нажать кнопку "X"')
+    def click_x(self):
+        self.click(MainLocators.X_BUTTON)
 
-
+    @allure.step('Переход в каталог')
+    def open_catalog(self):
+        self.wait_element(MainLocators.CATALOG_NAV)
+        self.click(MainLocators.CATALOG_NAV, "каталог")

@@ -17,7 +17,7 @@ class TestAndroid:
     def test_exit_from_favorites(self):
         page = MainPage()
         page.open_favorites()
-        page.click(FavoritesLocators.BOTTOMBACK, 'Кнопка "Назад"')
+        page.click(FavoritesLocators.BUTTONBACK, 'Кнопка "Назад"')
         page.wait_hidden_element(FavoritesLocators.TITLE, 'Заголовок "Избранное"')
 
     @pytest.mark.smoke
@@ -237,5 +237,3 @@ class TestAndroid:
         page.click_x()
         page.open_favorites()
         page.favorites.get_cords_for_card()
-
-

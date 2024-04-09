@@ -79,6 +79,7 @@ class CatalogLocators:
 
 class CollectionLocators:
     # COLLECTION
+    tittle = "ru.limeshop.android.dev:id/toolbarTitle"
     image_view_btn = "ru.limeshop.android.dev:id/toolbar_secondary_image_view"
     filters_btn = "ru.limeshop.android.dev:id/imageView"
     filter_sort_title = d(resourceId="ru.limeshop.android.dev:id/item_filter_name", text="СОРТИРОВАТЬ")
@@ -438,22 +439,22 @@ class PickupLocators:
 
 
 class FavoritesLocators:
-    BOTTOMBACK = "//android.widget.ImageButton"
+    BUTTONBACK = "//android.widget.ImageButton"
     TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
-    BOTTOMBUY = 'ru.limeshop.android.dev:id/buyButton'
+    BUTTONBUY = 'ru.limeshop.android.dev:id/buyButton'
     INFOTEXT = '//*[@text="ВАШ ВИШЛИСТ ПУСТ"]'
-    BOTTOMFAVORITES = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.ImageView[1]'
-    BOTTOMFAVORITES2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.ImageView[1]'
+    BUTTONFAVORITES = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.ImageView[1]'
+    BUTTONFAVORITES2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.ImageView[1]'
     STUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
     STUFFNAME = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_name"]'
-    BOTTOMBUYSTUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.Button[1]'
+    BUTTONBUYSTUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.Button[1]'
     MODULEWINDOW = '//*[@resource-id="ru.limeshop.android.dev:id/design_bottom_sheet"]/android.widget.LinearLayout[1]'
     SIZEINSTUCTION = "ru.limeshop.android.dev:id/sizeInfoButton"
     SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
     SNECKBARADDCART = "ru.limeshop.android.dev:id/favoritePopup"
-    SNECKBARBOTTOMGOTOCART = "ru.limeshop.android.dev:id/popupButton"
+    SNECKBARBUTTONGOTOCART = "ru.limeshop.android.dev:id/popupButton"
     card_name = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_name"]'
-    SWIPEBOTTOM = "ru.limeshop.android.dev:id/view5"
+    SWIPEBUTTON = "ru.limeshop.android.dev:id/view5"
     SCREENFORCARDS = "ru.limeshop.android.dev:id/baseContainer"
     EVENCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]'
     ODDCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[3]'
