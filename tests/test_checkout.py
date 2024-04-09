@@ -93,6 +93,8 @@ class TestCheckOut:
         page.checkout.elements_checkout_self()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_upon_receipt()
+        page.checkout.elements_success_pay()
+
         # ......Блок "Оплата" / Оплата при получении +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
@@ -105,6 +107,7 @@ class TestCheckOut:
         page.checkout.elements_checkout_self()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_upon_receipt()
+        page.checkout.elements_success_pay()
 
     @allure.title('Блок "Оплата" / Курьером / Сохранение карты')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2946")
@@ -600,6 +603,7 @@ class TestCheckOut:
         page.checkout.elements_checkout_self()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_upon_receipt()
+        page.checkout.elements_success_pay()
         # ...... 'Блок "Оплата" / Оплата при получении' + Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
@@ -611,6 +615,7 @@ class TestCheckOut:
         page.checkout.elements_checkout_self()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_upon_receipt()
+        page.checkout.elements_success_pay()
 
     @allure.title('Блок "Оплата" / Самовывоз / Доплата картой')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3037")
