@@ -1,7 +1,7 @@
 import random
 
 import allure
-from locators import MainLocators, ProductCardLocators, CatalogLocators
+from locators import MainLocators, ProductCardLocators, CatalogLocators, CollectionLocators
 from pages.base_page import BasePage
 
 
@@ -28,3 +28,24 @@ class CatalogPage(BasePage):
         product_name = self.get_text(ProductCardLocators.product_name)
         product_price = self.get_number_from_element(ProductCardLocators.product_price)
         return product_name, product_price
+
+    @allure.step("Поиск каталога без подразделов")
+    def open_catalog_without_chapter(self):
+        # while True:
+        #     self.wait_element(CatalogLocators.catalog_item)
+        #     self.click(self.get_random_element_catalog(CatalogLocators.catalog_item), "рандомный раздел в меню")
+        #     self.wait_a_moment()
+        #     if self.get_element(CatalogLocators.catalog_item_recycler).count > 0:
+        #         self.click_x()
+        #         self.open_catalog()
+        #     else:
+        #         break
+        while True:
+            self.wait_element(CatalogLocators.catalog_item)
+            counter = random.randrange(2, self.d(resourceId=CatalogLocators.catalog_item).count - 2)
+            self.click(self.d(resourceId=CatalogLocators.catalog_item)[counter], "Радномный каталог")
+            if self.get_element(CatalogLocators.catalog_item_recycler).count > 0:
+                self.click(self.d(resourceId=CatalogLocators.catalog_item)[counter], "Закрытие подменю")
+                self.wait_a_moment()
+            else:
+                break
