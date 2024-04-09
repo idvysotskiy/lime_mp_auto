@@ -172,25 +172,25 @@ class TestCheckOut:
         page.checkout.click_pay_without_3ds()
         page.checkout.elements_pay_no_funds()
 
-    # @allure.title('Экран "Оформление заказа" / Недостаточно средств на карте 3-D Secure')
-    # @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3184")
-    # @pytest.mark.checkout
-    # @pytest.mark.smoke
-    # def test_no_funds_payment_card_with_3ds(self):
-    #     page = MainPage()
-    #     page.user_registration()
-    #     page.open_catalog()
-    #     page.add_to_cart_random_product()
-    #     page.card.open_cart()
-    #     page.cart.go_to_checkout()
-    #     page.checkout.courier_select()
-    #     page.checkout.click_add_address_btn()
-    #     page.checkout.add_main_address()
-    #     page.checkout.add_first_card(card_15)
-    #     page.wait_a_moment()
-    #     page.checkout.set_date_and_time()
-    #     page.checkout.click_pay_without_3ds()
-    #     page.checkout.elements_pay_no_funds()
+    @allure.title('Экран "Оформление заказа" / Недостаточно средств на карте 3-D Secure')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3184")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
+    def test_no_funds_payment_card_with_3ds(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.courier_select()
+        page.checkout.click_add_address_btn()
+        page.checkout.add_main_address()
+        page.checkout.add_first_card(card_15)
+        page.wait_a_moment()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay_no_funds()
+        page.checkout.elements_pay_no_funds()
 
     @allure.title('Блок "Состав заказа" / Учет скидки по промокоду')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3344")

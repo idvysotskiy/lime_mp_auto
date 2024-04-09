@@ -39,6 +39,15 @@ class CheckOutPage(BasePage):
         assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПРОДОЛЖИТЬ ПОКУПКИ'
         self.get_screen()
 
+    def click_pay_no_funds(self):
+        # self.swipe_page_up(1)
+        self.wait_a_second()
+        self.click(CheckOutLocators.ORDER_PAY)
+        time.sleep(5)
+        self.accept_cloud_payments()
+        time.sleep(1)
+        self.wait_element(SuccessPayScreenLocators.TITLE)
+
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay_without_3ds(self):
         # self.swipe_page_up(1)
