@@ -7,6 +7,7 @@ import random
 
 
 @pytest.mark.usefixtures("setup")
+@allure.feature("Каталог")
 class TestAndroid:
 
     @pytest.mark.smoke

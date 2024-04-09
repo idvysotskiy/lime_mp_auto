@@ -4,6 +4,7 @@ import allure
 
 
 @pytest.mark.usefixtures("setup")
+@allure.feature("Профиль")
 class TestProfile:
     @allure.title('Экран "Личный кабинет" (Пользователь не авторизован)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/16")

@@ -6,7 +6,8 @@ import allure
 
 
 @pytest.mark.usefixtures("setup")
-class TestMobile:
+@allure.feature("Основной экран")
+class TestMain:
     @pytest.mark.smoke
     @allure.title('Экран "Основной экран" / Скролл баннеров')
     @allure.testcase("C1861")

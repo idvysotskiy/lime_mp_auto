@@ -6,6 +6,7 @@ import allure
 
 
 @pytest.mark.usefixtures("setup")
+@allure.feature("Карточка товара")
 class TestMobile:
     @pytest.mark.smoke
     @allure.title('Экран "Карточка товара" / Кнопка "Купить"')

@@ -410,9 +410,7 @@ class CheckOutPage(BasePage):
     @allure.step("Добавление доплаты картой")
     def add_additional_payment(self):
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
-        self.click(self.d(textContains='Добавить карту').sibling(
-            resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
-        self.wait_text("ДОБАВИТЬ КАРТУ")
+        self.click(self.d(textContains='Добавить карту').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
         self.set_text(CheckOutLocators.card_number, "4242424242424242", "номер карты")
         self.set_text(CheckOutLocators.cardholder, "Test Testov", "владелец карты")
         self.set_text(CheckOutLocators.card_date, "1230", "дата окончания карты")

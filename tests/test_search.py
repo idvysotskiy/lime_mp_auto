@@ -6,6 +6,7 @@ import allure
 
 
 @pytest.mark.usefixtures("setup")
+@allure.feature("Поиск")
 class TestSearch:
     @allure.title('Экран "Поиск" / Удачный поиск по текстовому запросу')
     @allure.testcase("C3")

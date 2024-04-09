@@ -4,6 +4,7 @@ import allure
 
 
 @pytest.mark.usefixtures("setup")
+@allure.feature("Корзина")
 class TestCart:
     @allure.title('Экран "Корзина" / Пустой список. Кнопка "Очистить" для пустой корзины')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/28")

@@ -8,7 +8,8 @@ import random
 
 
 @pytest.mark.usefixtures("setup")
-class TestAndroid:
+@allure.feature("Избранное")
+class TestFavorites:
 
     @pytest.mark.smoke
     @pytest.mark.regress
