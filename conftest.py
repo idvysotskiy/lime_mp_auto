@@ -39,12 +39,12 @@ def login():
 def teardown():
     BasePage().get_screen()
     d.app_stop(package)
-    d.service('uiautomator').stop()
+    # d.service('uiautomator').stop()
 
 
 @pytest.fixture()
 def setup():
-    d.service('uiautomator').start()
+    # d.service('uiautomator').start()
     open_app()
     yield
     teardown()
