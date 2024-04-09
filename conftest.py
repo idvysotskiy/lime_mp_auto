@@ -44,7 +44,7 @@ def teardown():
 
 @pytest.fixture()
 def setup():
-    # print('yo')
+    d.service('uiautomator').start()
     open_app()
     yield
     teardown()
