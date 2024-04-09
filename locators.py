@@ -269,7 +269,10 @@ class CartLocators:
     POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
     POPUP_DESCRIPTION = '//*[@resource-id="ru.limeshop.android.dev:id/message_text_view"]'
     card_photo = 'ru.limeshop.android.dev:id/item_cart_photo'
-
+    email_field = '//*[@text="Эл. почта"]'
+    password_field = '//*[@text="Пароль"]'
+    sign_in_btn = 'ru.limeshop.android.dev:id/signin_proceed'
+    register_btn = '//*[@resource-id="ru.limeshop.android.dev:id/signUpButton"]'
 
 class CheckOutLocators:
     DELIVERY_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/delivery_title_text"]'

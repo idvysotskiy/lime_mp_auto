@@ -119,6 +119,7 @@ class CheckOutPage(BasePage):
         assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         self.get_screen()
 
+
     @allure.step('Выбрать элементы на экране Оформление заказа')
     def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
         with allure.step(f"Выбрать способ доставки '{delivery_method}'"):

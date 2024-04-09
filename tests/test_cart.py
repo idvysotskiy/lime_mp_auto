@@ -284,6 +284,136 @@ class TestCart:
         page.open_cart()
         page.cart.check_empty_cart()
 
+    @allure.title('Экран "Корзина" / Поле "Промокод" (ввод валидного значения). Очистка поля Промокод')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2038")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2040")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_promo_valid_value_and_clear_promo_field(self):
+        page = MainPage()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.set_valid_promo()
+        page.cart.clear_promo_field()
 
+    @allure.title('Экран "Корзина" / Поле "Промокод" (ввод валидного значения после невалидного)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2618")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2039")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_promo_valid_after_invalid_value(self):
+        page = MainPage()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.set_invalid_promo()
+        page.cart.set_valid_promo()
 
+    @allure.title('Экран "Корзина" / Отображение поля "Промокод" после авторизации/регистрации')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2025")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2871")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_promo_after_authorization(self):
+        page = MainPage()
+        email = page.user_registration()
+        page.open_profile()
+        page.profile.logout()
+        page.click_x()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.set_valid_promo()
+        page.cart.go_to_checkout()
+        page.cart.authorization(email)
+        page.cart.check_valid_promo_message()
+
+    @allure.title('Экран "Корзина" / Сброс промокода при закрытии экрана (Не авторизован)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2700")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_reset_promo_after_close_basket_without_authorization(self):
+        page = MainPage()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.set_valid_promo()
+        page.click_x()
+        page.card.open_cart()
+        page.cart.check_clear_promo()
+
+    @allure.title('Экран "Корзина" / Сброс промокода при закрытии экрана (Авторизован)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2017")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_reset_promo_after_close_basket_with_authorization(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.set_valid_promo()
+        page.click_x()
+        page.card.open_cart()
+        page.cart.check_clear_promo()
+
+    @allure.title('Экран "Корзина" / Удаление последнего товара из корзины при введенном промокоде')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2215")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_delete_item_with_promo(self):
+        page = MainPage()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.set_valid_promo()
+        page.cart.delete_item()
+        page.cart.check_empty_cart()
+
+    @allure.title('Экран "Корзина" / Очистка корзины при введенном промокоде')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2214")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_clear_cart_with_promo(self):
+        page = MainPage()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.set_valid_promo()
+        page.cart.cart_clear()
+        page.cart.check_empty_cart()
+
+    @allure.title('Экран "Корзина" / Сохранение скидки при переходе к экрану "Оформление заказа"')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2041")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_save_promo_after_go_to_checkout(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.set_valid_promo()
+        page.wait_a_second()
+        price_in_cart = page.cart.get_price_sale()
+        page.cart.go_to_checkout()
+        page.swipe_page_up()
+        page.wait_a_second()
+        price_in_checkout = page.checkout.get_summary_total()
+        assert price_in_cart == price_in_checkout, print(f"Сумма в корзине и чекауте отличаются. Сумма в корзине: {price_in_cart}, сумма в чекауте: {price_in_checkout}")
+
+    @allure.title('Экран "Корзина" / Регистрация')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2872")
+    @pytest.mark.smoke
+    @pytest.mark.basket
+    def test_registration_in_cart(self):
+        page = MainPage()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        card_name = page.card.get_product_name()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.cart.registration()
+        assert card_name == page.get_text(CartLocators.PRODUCT_TITLE), print(f"Название товара в корзине после регистрации изменилось. До регистрации {card_name}, после регистрации {page.get_text(CartLocators.PRODUCT_TITLE)}")
 
