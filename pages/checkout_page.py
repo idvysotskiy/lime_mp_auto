@@ -31,7 +31,7 @@ class CheckOutPage(BasePage):
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
         self.accept_cloud_payments()
-        time.sleep(1)
+        time.sleep(5)
         self.wait_element(SuccessPayScreenLocators.TITLE)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         assert self.get_text(

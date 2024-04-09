@@ -73,7 +73,7 @@ class TestCheckOut:
         page.checkout.add_main_address()
         page.screen_title('ОФОРМЛЕНИЕ ЗАКАЗА')
 
-    @allure.title('Блок "Оплата" / Оплата при получении')
+    @allure.title('Блок "Оплата" / Курьером / Оплата при получении')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3189")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3172")
     @pytest.mark.checkout
@@ -106,7 +106,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay_upon_receipt()
 
-    @allure.title('Блок "Оплата" / Сохранение карты')
+    @allure.title('Блок "Оплата" / Курьером / Сохранение карты')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2946")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2833")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2834")
@@ -134,7 +134,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @allure.title('Экран "Оформление заказа" / Успешный результат без 3-D Secure')
+    @allure.title('Экран "Оформление заказа" / Курьером / Успешный результат без 3-D Secure')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3183")
     @pytest.mark.checkout
     @pytest.mark.smoke
@@ -153,7 +153,7 @@ class TestCheckOut:
         page.checkout.click_pay_without_3ds()
         page.checkout.elements_success_pay()
 
-    @allure.title('Экран "Оформление заказа" / Недостаточно средств на карте без 3-D Secure')
+    @allure.title('Экран "Оформление заказа" / Курьером / Недостаточно средств на карте без 3-D Secure')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3185")
     @pytest.mark.checkout
     @pytest.mark.smoke
@@ -173,7 +173,7 @@ class TestCheckOut:
         page.checkout.click_pay_without_3ds()
         page.checkout.elements_pay_no_funds()
 
-    @allure.title('Экран "Оформление заказа" / Недостаточно средств на карте 3-D Secure')
+    @allure.title('Экран "Оформление заказа" / Курьером / Недостаточно средств на карте 3-D Secure')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3184")
     @pytest.mark.checkout
     @pytest.mark.smoke
@@ -222,7 +222,7 @@ class TestCheckOut:
         assert price == summary_coast, f'Стоимость с карточки товара {price} не совпадает с стоимостью в блоке саммери {summary_coast}'
         assert price_with_discount == summary_total, f'Стоимость товара со скидкой {price_with_discount} с экрана корзина не совпадает с стоимостью со скидкой в блоке саммери {summary_total}'
 
-    @allure.title('Экран "Оформление заказа" / Оплата "Картой онлайн" (Без сохранения карты)')
+    @allure.title('Экран "Оформление заказа" / Курьером / Оплата "Картой онлайн" (Без сохранения карты)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3167")
     @pytest.mark.checkout
     @pytest.mark.smoke
@@ -274,7 +274,7 @@ class TestCheckOut:
         page.checkout.checking_payment_card_number('4242')
         page.checkout.deleting_single_payment_card()
 
-    @allure.title('Блок "Оплата" / Успешная оплата картой (Нет сохраненных карт)')
+    @allure.title('Блок "Оплата" / Курьером / Успешная оплата картой (Нет сохраненных карт)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3175")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3188")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3174")
@@ -305,7 +305,7 @@ class TestCheckOut:
         page.checkout.click_pay()
 #
 
-    @allure.title('Экран "Оформление заказа" / Оплата "Картой онлайн"(Не успешно)')
+    @allure.title('Экран "Оформление заказа" / Курьером / Оплата "Картой онлайн"(Не успешно)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3193")
     @allure.testcase("")
     @pytest.mark.checkout
@@ -324,7 +324,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay_fail_cloud_payments()
 
-    @allure.title('Блок "Оплата" / Успешная оплата подарочной картой (Полная стоимость)')
+    @allure.title('Блок "Оплата" / Курьером / Успешная оплата подарочной картой (Полная стоимость)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3163")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3028")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3187")
@@ -396,7 +396,7 @@ class TestCheckOut:
         page.checkout.checking_gift_card_number(price)
         page.checkout.checking_gift_card_pin_code(price)
 
-    @allure.title('Экран "Оформление заказа" / Оплата через СБП(Успешное оформление)')
+    @allure.title('Экран "Оформление заказа" / Курьером / Оплата через СБП(Успешное оформление)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3166")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3190")
     @pytest.mark.smoke
@@ -423,7 +423,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay_sbp()
 
-    @allure.title('Блок "Оплата" / Доплата картой')
+    @allure.title('Блок "Оплата" / Курьером / Доплата картой')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3031")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3035")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3171")
@@ -460,7 +460,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @allure.title('Блок "Оплата" / Доплата СБП')
+    @allure.title('Блок "Оплата" / Курьером / Доплата СБП')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3170")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3315")
     @pytest.mark.smoke
@@ -495,7 +495,7 @@ class TestCheckOut:
 
 # -----------------------САМОВЫВОЗ------------------------------------------
 
-    @allure.title('Экран "Оформление заказа" / Оплата "Картой онлайн" (Нет сохраненных карт)')
+    @allure.title('Экран "Оформление заказа" / Самовывоз / Оплата "Картой онлайн" (Нет сохраненных карт)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3147")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3050")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3161")
@@ -523,7 +523,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @allure.title('Экран "Оформление заказа" / Оплата через СБП(Успешное оформление)')
+    @allure.title('Экран "Оформление заказа" / Самовывоз / Оплата через СБП(Успешное оформление)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2914")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3159")
     @pytest.mark.smoke
@@ -550,7 +550,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay_sbp()
 
-    @allure.title('Блок "Оплата" / Успешная оплата подарочной картой (Полная стоимость)')
+    @allure.title('Блок "Оплата" / Самовывоз / Успешная оплата подарочной картой (Полная стоимость)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3112")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3032")
     @pytest.mark.smoke
@@ -582,7 +582,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @allure.title('Блок "Оплата" / Оплата при получении')
+    @allure.title('Блок "Оплата" / Самовывоз / Оплата при получении')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3150")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3038")
     @allure.testcase("")
@@ -612,7 +612,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay_upon_receipt()
 
-    @allure.title('Блок "Оплата" / Доплата картой')
+    @allure.title('Блок "Оплата" / Самовывоз / Доплата картой')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3037")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3317")
     @pytest.mark.checkout
@@ -647,7 +647,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @allure.title('Блок "Оплата" / Доплата СБП')
+    @allure.title('Блок "Оплата" / Самовывоз / Доплата СБП')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3036")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3316")
     @pytest.mark.smoke
@@ -680,7 +680,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay_sbp()
 
-    @allure.title('Экран "Оформление заказа" / Оплата "Картой онлайн" (Без сохранения карты)')
+    @allure.title('Экран "Оформление заказа" / Самовывоз / Оплата "Картой онлайн" (Без сохранения карты)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3015")
     @pytest.mark.checkout
     @pytest.mark.smoke
@@ -701,7 +701,7 @@ class TestCheckOut:
         page.cart.go_to_checkout()
         page.checkout.check_btn_add_card()
 
-    @allure.title('Блок "Оплата" / Сохранение карты')
+    @allure.title('Блок "Оплата" / Самовывоз / Сохранение карты')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3066")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3060")
     @pytest.mark.checkout
@@ -726,7 +726,7 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
-    @allure.title('Экран "Оформление заказа" / Оплата "Картой онлайн"(Не успешно)')
+    @allure.title('Экран "Оформление заказа" / Самовывоз / Оплата "Картой онлайн"(Не успешно)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3165")
     @allure.testcase("")
     @pytest.mark.checkout
