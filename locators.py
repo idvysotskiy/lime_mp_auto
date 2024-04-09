@@ -42,6 +42,7 @@ class MainLocators:
     submenu_elements_list = d(resourceId='ru.limeshop.android.dev:id/catalog_item_recycler').child(
         resourceId="ru.limeshop.android.dev:id/catalog_item_name")
 
+
 class SearchLocators:
     X_BUTTON = '//android.widget.ImageButton'
     TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/toolbarTitle"]'
@@ -255,6 +256,7 @@ class CartLocators:
     SUMMARY_PRICE = '//*[@resource-id="ru.limeshop.android.dev:id/textView4"]'
     SUMMARY_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/textView11"]'
     FINAL_PRICE = "ru.limeshop.android.dev:id/textView10"
+    DISCOUNT = "ru.limeshop.android.dev:id/textView6"
     CONTINUE = '//*[@resource-id="ru.limeshop.android.dev:id/cart_continue_button"]'
     gift_card_error = 'ru.limeshop.android.dev:id/errorText'
     # CLEAR CART
@@ -309,6 +311,7 @@ class CheckOutLocators:
     SUMMARY_COAST = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_cost_text"]'
     SUMMARY_TOTAL_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_total_title_text"]'
     SUMMARY_TOTAL = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_summary_total_text"]'
+    summary_discount = "ru.limeshop.android.dev:id/checkout_summary_discount_text"
     ORDER_PAY = '//*[@resource-id="ru.limeshop.android.dev:id/order_pay_button"]'
     TERMS_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/checkout_terms_text"]'
     POPUP_BACK_CART_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
@@ -395,7 +398,7 @@ class CheckOutLocators:
     address_popup = 'ru.limeshop.android.dev:id/popUpRecycler'
     save_address_btn = '//*[@text="СОХРАНИТЬ"]'
     card_online_selector = '//*[@text="КАРТОЙ ОНЛАЙН"]/..'
-
+    order_list_price_with_sale = "ru.limeshop.android.dev:id/sale_text"
 
 
 class SuccessPayScreenLocators:

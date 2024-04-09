@@ -40,6 +40,26 @@ class CheckOutPage(BasePage):
         self.get_screen()
 
     @allure.step('Нажать кнопку "Оплатить"')
+    def click_pay_without_3ds(self):
+        # self.swipe_page_up(1)
+        self.wait_a_second()
+        self.click(CheckOutLocators.ORDER_PAY)
+        self.wait_element(SuccessPayScreenLocators.TITLE)
+
+    def elements_success_pay(self):
+        assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
+        assert self.get_text(
+            SuccessPayScreenLocators.DESCRIPTION) == 'Отслеживать его статус вы можете в личном кабинете'
+        assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПРОДОЛЖИТЬ ПОКУПКИ'
+        self.get_screen()
+
+    def elements_pay_no_funds(self):
+        assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ОПЛАТА НЕ ПРОШЛА'
+        self.wait_text('Мы сохранили ваш заказ в личном кабинете — оплатите его в течение')
+        assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПОВТОРИТЬ ПОПЫТКУ'
+        self.get_screen()
+
+    @allure.step('Нажать кнопку "Оплатить"')
     def click_pay_check_warnings(self):
         self.swipe_page_up()
         self.wait_a_second()
@@ -60,7 +80,6 @@ class CheckOutPage(BasePage):
         # self.wait_element(MainLocators.snack_bar_message)
         assert self.get_text(MainLocators.snack_bar_message) == 'Не выбрана дата или время доставки'
         self.set_date_and_time()
-
 
     @allure.step('Нажать кнопку "Заказать"')
     def click_pay_upon_receipt(self):
@@ -499,3 +518,24 @@ class CheckOutPage(BasePage):
         self.wait_element(PickupLocators.order_here_button)
         element = self.get_random_element(PickupLocators.order_here_button)
         self.click(element)
+
+    @allure.step("Нажать иконку раскрывающегося списка 'Состав заказа'")
+    def open_order_list(self):
+        self.click(CheckOutLocators.ORDER_LIST_SHEVRON)
+
+    @allure.step('Стоимость товара с учетом скидки в карточке Состав заказа')
+    def get_order_list_price_with_discount(self):
+        return self.get_number_from_element(CheckOutLocators.order_list_price_with_sale)
+
+    @allure.step('Суммарная скидка')
+    def get_summary_discount(self):
+        return self.get_number_from_element(CheckOutLocators.summary_discount)
+
+    @allure.step('Суммарная стоимость (Без скидки)')
+    def get_summary_coast(self):
+        return self.get_number_from_element(CheckOutLocators.SUMMARY_COAST)
+
+    @allure.step('Суммарная стоимость c учетом скидки в блоке саммери')
+    def get_summary_total(self):
+        return self.get_number_from_element(CheckOutLocators.SUMMARY_TOTAL)
+

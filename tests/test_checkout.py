@@ -133,6 +133,94 @@ class TestCheckOut:
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
 
+    @allure.title('Экран "Оформление заказа" / Успешный результат без 3-D Secure')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3183")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
+    def test_payment_card_without_3ds(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.courier_select()
+        page.checkout.click_add_address_btn()
+        page.checkout.add_main_address()
+        page.checkout.add_first_card(card_8)
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay_without_3ds()
+        page.checkout.elements_success_pay()
+
+    @allure.title('Экран "Оформление заказа" / Недостаточно средств на карте без 3-D Secure')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3185")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
+    def test_no_funds_payment_card_without_3ds(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        page.card.open_cart()
+        page.cart.go_to_checkout()
+        page.checkout.courier_select()
+        page.checkout.click_add_address_btn()
+        page.checkout.add_main_address()
+        page.checkout.add_first_card(card_15)
+        page.wait_a_moment()
+        page.checkout.set_date_and_time()
+        page.checkout.click_pay_without_3ds()
+        page.checkout.elements_pay_no_funds()
+
+    # @allure.title('Экран "Оформление заказа" / Недостаточно средств на карте 3-D Secure')
+    # @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3184")
+    # @pytest.mark.checkout
+    # @pytest.mark.smoke
+    # def test_no_funds_payment_card_with_3ds(self):
+    #     page = MainPage()
+    #     page.user_registration()
+    #     page.open_catalog()
+    #     page.add_to_cart_random_product()
+    #     page.card.open_cart()
+    #     page.cart.go_to_checkout()
+    #     page.checkout.courier_select()
+    #     page.checkout.click_add_address_btn()
+    #     page.checkout.add_main_address()
+    #     page.checkout.add_first_card(card_15)
+    #     page.wait_a_moment()
+    #     page.checkout.set_date_and_time()
+    #     page.checkout.click_pay_without_3ds()
+    #     page.checkout.elements_pay_no_funds()
+
+    @allure.title('Блок "Состав заказа" / Учет скидки по промокоду')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3344")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2810")
+    @pytest.mark.checkout
+    @pytest.mark.smoke
+    def test_promo_code_discount(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        price = page.card.get_product_price()
+        page.card.open_cart()
+        page.cart.enter_promo_code()
+        discount = page.cart.get_cart_discount()
+        price_with_discount = page.cart.get_cart_price()
+        # assert price - discount == price_with_discount, f'Итоговая цена {price_with_discount} не равна разности исходной цены {price} и скидке {discount}'
+        page.cart.go_to_checkout()
+        page.swipe_page_up()
+        page.checkout.open_order_list()
+        page.swipe_page_up()
+        price_order_list = page.checkout.get_order_list_price_with_discount()
+        assert price_order_list == price_with_discount, f'Итоговая цена из корзины{price_with_discount} не совпадает с ценой в составе заказа {price_order_list}'
+        summary_discount = page.checkout.get_summary_discount()
+        assert discount == summary_discount, f"Скидка с экрана Корзина {discount} не совпадает со скидкой на экране Оформление заказа {summary_discount}"
+        summary_coast = page.checkout.get_summary_coast()
+        summary_total = page.checkout.get_summary_total()
+        assert price == summary_coast, f'Стоимость с карточки товара {price} не совпадает с стоимостью в блоке саммери {summary_coast}'
+        assert price_with_discount == summary_total, f'Стоимость товара со скидкой {price_with_discount} с экрана корзина не совпадает с стоимостью со скидкой в блоке саммери {summary_total}'
+
     @allure.title('Экран "Оформление заказа" / Оплата "Картой онлайн" (Без сохранения карты)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3167")
     @pytest.mark.checkout
