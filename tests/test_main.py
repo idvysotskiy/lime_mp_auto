@@ -6,7 +6,8 @@ import allure
 
 
 @pytest.mark.usefixtures("setup")
-class TestMobile:
+@allure.feature("Основной экран")
+class TestMain:
     @pytest.mark.smoke
     @allure.title('Экран "Основной экран" / Скролл баннеров')
     @allure.testcase("C1861")
@@ -33,5 +34,5 @@ class TestMobile:
     @allure.testcase("C1030")
     def test_reg(self):
         page = MainPage()
-        page.reg_kir()
-        page.screen_title('ЛИЧНЫЙ КАБИНЕТ')
+        page.user_registration()
+
