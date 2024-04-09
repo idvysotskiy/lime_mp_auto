@@ -205,7 +205,7 @@ class TestCheckOut:
         page.checkout.add_first_card()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
-        # ...... Успешная оплата картой +Промокод
+#         # ...... Успешная оплата картой +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -214,6 +214,7 @@ class TestCheckOut:
         page.checkout.courier_select()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+#
 
     @allure.title('Экран "Оформление заказа" / Оплата "Картой онлайн"(Не успешно)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3193")
@@ -260,6 +261,7 @@ class TestCheckOut:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.enter_promo_code()
+        price = page.cart.get_cart_price()
         page.cart.go_to_checkout()
         page.checkout.courier_select()
         page.checkout.set_gift_card_selector()
@@ -483,6 +485,7 @@ class TestCheckOut:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.enter_promo_code()
+        price = page.cart.get_cart_price()
         page.cart.go_to_checkout()
         page.checkout.pickup_select_pvz()
         page.checkout.set_gift_card_selector()

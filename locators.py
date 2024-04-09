@@ -254,6 +254,7 @@ class CartLocators:
     SUMMARY_QUANTITY = '//*[@resource-id="ru.limeshop.android.dev:id/textView2"]'
     SUMMARY_PRICE = '//*[@resource-id="ru.limeshop.android.dev:id/textView4"]'
     SUMMARY_TEXT = '//*[@resource-id="ru.limeshop.android.dev:id/textView11"]'
+    FINAL_PRICE = "ru.limeshop.android.dev:id/textView10"
     CONTINUE = '//*[@resource-id="ru.limeshop.android.dev:id/cart_continue_button"]'
     gift_card_error = 'ru.limeshop.android.dev:id/errorText'
     # CLEAR CART

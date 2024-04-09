@@ -33,5 +33,5 @@ class TestMobile:
     @allure.testcase("C1030")
     def test_reg(self):
         page = MainPage()
-        page.reg_kir()
-        page.screen_title('ЛИЧНЫЙ КАБИНЕТ')
+        page.user_registration()
+

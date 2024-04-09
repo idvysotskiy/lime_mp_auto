@@ -42,6 +42,10 @@ class CartPage(BasePage):
         self.swipe_page_up()
         self.click(CartLocators.CONTINUE, "кнопка К оформлению")
 
+    @allure.step('Цена товаров в корзине (с учетом скидок)')
+    def get_cart_price(self):
+        return self.get_number_from_element(CartLocators.FINAL_PRICE)
+
     @allure.step('Очистка корзины')
     def cart_clear(self):
         self.click(CartLocators.CLEAR_ALL, "кнопка Очистить")
