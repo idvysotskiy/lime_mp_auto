@@ -39,6 +39,7 @@ def login():
 def teardown():
     BasePage().get_screen()
     d.app_stop(package)
+    d.service('uiautomator').stop()
 
 
 @pytest.fixture()

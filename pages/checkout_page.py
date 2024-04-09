@@ -392,3 +392,7 @@ class CheckOutPage(BasePage):
         self.wait_text(valid_surname_kir)
         self.wait_text('+7 963 944 78 45')
         # self.wait_text(email)
+
+    @allure.step("Получение значения Итого в чекауте")
+    def get_summary_total(self):
+        return self.get_number_from_element(CheckOutLocators.SUMMARY_TOTAL)

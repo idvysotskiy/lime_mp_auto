@@ -107,4 +107,61 @@ class CartPage(BasePage):
     def add_to_favorite(self):
         self.click(CartLocators.FAVORITE, "кнопка добавления в избранное")
 
+    @allure.step("Заполнение поля Промокод невалидным значением")
+    def set_invalid_promo(self):
+        self.set_text(CartLocators.PROMO_CODE, "PROMOCODE", "промокод")
+        self.wait_text("ПРОМОКОД НЕ НАЙДЕН")
+        self.wait_hidden_text("Скидка")
 
+    @allure.step("Заполнение поля Промокод валидным значением")
+    def set_valid_promo(self):
+        self.set_text(CartLocators.PROMO_CODE, promo_code_3, "промокод")
+        self.check_valid_promo_message()
+
+    @allure.step("Сообщение об успешном применении промокода")
+    def check_valid_promo_message(self):
+        self.wait_text("ПРОМОКОД ПРИМЕНЕН")
+        self.wait_text("Скидка")
+
+    @allure.step("Очистка поля Промокод")
+    def clear_promo_field(self):
+        self.set_text(CartLocators.PROMO_CODE, "", "промокод")
+        self.wait_hidden_text("Скидка")
+        self.wait_hidden_text("ПРОМОКОД ПРИМЕНЕН")
+
+    @allure.step("Проверка отсутствия промокода")
+    def check_clear_promo(self):
+        self.wait_hidden_text("Скидка")
+        self.wait_hidden_text("ПРОМОКОД ПРИМЕНЕН")
+        assert self.get_text(CartLocators.PROMO_CODE) == "", print("Поле Промокод не пустое")
+
+    @allure.step("Авторизация в корзине")
+    def authorization(self, email):
+        self.wait_text("ВОЙТИ В АККАУНТ")
+        self.set_text(CartLocators.email_field, email, "поле Почта")
+        self.set_text(CartLocators.password_field, valid_password, "поле Пароль")
+        self.click(CartLocators.sign_in_btn, "кнопка Войти")
+        self.checking_title_page("КОРЗИНА")
+
+    @allure.step("Получение цены со скидкой")
+    def get_price_sale(self):
+        return self.get_number_from_element(CartLocators.PRICE_SALE)
+
+    @allure.step("Регистрация в корзине")
+    def registration(self):
+        self.wait_text("ВОЙТИ В АККАУНТ")
+        self.click(CartLocators.register_btn, "кнопка Зарегистироваться")
+        self.wait_a_moment()
+        email = self.generate_random_email()
+        self.set_text(MainLocators.name, valid_name_kir, "имя")
+        self.set_text(MainLocators.surname, valid_surname_kir, "фамилия")
+        self.set_text(MainLocators.phone, valid_phone, "телефон")
+        self.set_text(MainLocators.email, email, "почта")
+        self.set_text(MainLocators.password, valid_password, "пароль")
+        self.set_text(MainLocators.repeat_password, valid_password, "повторение пароля")
+        self.swipe_page_up()
+        self.wait_a_second()
+        self.click(LoginLocators.SIGNUP_SUBSCRIBE_ACCEPT,
+                   'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
+        self.click(MainLocators.continue_btn, "кнопка Продолжить")
+        self.checking_title_page("КОРЗИНА")
