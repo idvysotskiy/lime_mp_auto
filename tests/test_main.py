@@ -8,6 +8,7 @@ import allure
 @pytest.mark.usefixtures("setup")
 @allure.feature("Основной экран")
 class TestMain:
+    @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Экран "Основной экран" / Скролл баннеров')
     @allure.testcase("C1861")
@@ -22,6 +23,7 @@ class TestMain:
         page.swipe_page_up()
         page.get_screen()
 
+    @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Экран "Авторизация" / Авторизация пользователя')
     @allure.testcase("C1016")
@@ -29,6 +31,7 @@ class TestMain:
         page = MainPage()
         page.login(valid_email, valid_password)
 
+    @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Экран "Регистрация" / Заполнение полей "Имя/Фамилия" кириллицей')
     @allure.testcase("C1030")

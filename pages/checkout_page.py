@@ -29,9 +29,14 @@ class CheckOutPage(BasePage):
         # self.swipe_page_up(1)
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
+
+    @allure.step('Нажать кнопку "Успешно"')
+    def accept_accept_cloud_payments(self):
         time.sleep(5)
         self.accept_cloud_payments()
         time.sleep(5)
+
+    def elements_success_pay(self):
         self.wait_element(SuccessPayScreenLocators.TITLE)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         assert self.get_text(
@@ -447,8 +452,7 @@ class CheckOutPage(BasePage):
 
     @allure.step("Добавление доплаты картой")
     def add_additional_payment_sbp(self):
-        # self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
-        # self.click(CheckOutLocators.SURCHARGE_SBP_SELECTOR, "радиобаттон ""Через СБП")
+        self.wait_a_second()
         self.click(self.d(textContains='Через СБП').sibling(
             resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - СБП")
         self.wait_element(CheckOutLocators.CARD_INFO)

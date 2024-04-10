@@ -8,10 +8,11 @@ import allure
 @pytest.mark.usefixtures("setup")
 @allure.feature("Карточка товара")
 class TestMobile:
+    @pytest.mark.main
     @pytest.mark.smoke
     @allure.title('Экран "Карточка товара" / Кнопка "Купить"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/12")
-    def test_size_bottom_sheet(self):
+    def test_size_bottom_sheet(self, login):
         page = MainPage()
         page.clear_basket()
         page.open_catalog()
@@ -23,7 +24,7 @@ class TestMobile:
     @pytest.mark.smoke
     @allure.title('Экран "Карточка товара" / Добавление товара в корзину(Плашка)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2943")
-    def test_buy_popup(self):
+    def test_buy_popup(self, login):
         page = MainPage()
         page.clear_basket()
         page.open_catalog()
@@ -32,9 +33,9 @@ class TestMobile:
         # ...
 
     @pytest.mark.smoke
-    @allure.title('')
-    @allure.testcase("")
-    def test_buy_wtf(self):
+    @allure.title('Экран "Карточка товара" / Открыть карточку товара')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/288")
+    def test_elements_(self, login):
         page = MainPage()
         page.clear_basket()
         page.open_catalog()

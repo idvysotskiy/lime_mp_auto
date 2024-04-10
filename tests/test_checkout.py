@@ -2,8 +2,9 @@
 import time
 import pytest
 from pages.main_page import MainPage
-from pages.cart_page import *
-from pages.product_card_page import *
+# from pages.cart_page import *
+# from pages.product_card_page import *
+from config import *
 import allure
 
 
@@ -129,6 +130,8 @@ class TestCheckOut:
         page.checkout.add_first_card()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.accept_accept_cloud_payments()
+        page.checkout.elements_success_pay()
         page.checkout.click_continue_shopping()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -136,6 +139,7 @@ class TestCheckOut:
         page.checkout.checking_payment_card_number('4242')
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.elements_success_pay()
 
     @allure.title('Экран "Оформление заказа" / Курьером / Успешный результат без 3-D Secure')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3183")
@@ -242,6 +246,8 @@ class TestCheckOut:
         page.checkout.add_first_card(save='no')
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.accept_accept_cloud_payments()
+        page.checkout.elements_success_pay()
         page.checkout.click_continue_shopping()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -270,6 +276,8 @@ class TestCheckOut:
         page.checkout.add_first_card()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.accept_accept_cloud_payments()
+        page.checkout.elements_success_pay()
         page.checkout.click_continue_shopping()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -292,11 +300,14 @@ class TestCheckOut:
         page.card.open_cart()
         page.cart.go_to_checkout()
         page.checkout.courier_select()
+        page.checkout.card_online_select()
         page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
         page.checkout.add_first_card()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.accept_accept_cloud_payments()
+        page.checkout.elements_success_pay()
 #         # ...... Успешная оплата картой +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
@@ -304,8 +315,10 @@ class TestCheckOut:
         page.cart.enter_promo_code()
         page.cart.go_to_checkout()
         page.checkout.courier_select()
+        page.checkout.card_online_select()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.elements_success_pay()
 #
 
     @allure.title('Экран "Оформление заказа" / Курьером / Оплата "Картой онлайн"(Не успешно)')
@@ -350,6 +363,8 @@ class TestCheckOut:
         page.checkout.set_gift_card(price)
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.accept_accept_cloud_payments()
+        page.checkout.elements_success_pay()
         # ...... Успешная оплата подарочной картой (Полная стоимость) + Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
@@ -362,6 +377,7 @@ class TestCheckOut:
         page.checkout.set_gift_card(price)
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.elements_success_pay()
 
     @allure.title('Блок "Оплата" / Закрытие боттом шита "Добавить подарочную карту" ')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3023")
@@ -454,6 +470,8 @@ class TestCheckOut:
         page.swipe_page_up()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.accept_accept_cloud_payments()
+        page.checkout.elements_success_pay()
         # ......Доплата картой +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
@@ -468,7 +486,7 @@ class TestCheckOut:
         page.swipe_page_up()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
-        print('test')
+        page.checkout.elements_success_pay()
 
     @allure.title('Блок "Оплата" / Курьером / Доплата СБП')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3170")
@@ -524,6 +542,8 @@ class TestCheckOut:
         page.checkout.add_first_card()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.accept_accept_cloud_payments()
+        page.checkout.elements_success_pay()
         # ......Экран "Оформление заказа" / Успешная оплата "Картой онлайн" (+Промокод)
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
@@ -534,6 +554,7 @@ class TestCheckOut:
         page.checkout.card_online_select()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.elements_success_pay()
 
     @allure.title('Экран "Оформление заказа" / Самовывоз / Оплата через СБП(Успешное оформление)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2914")

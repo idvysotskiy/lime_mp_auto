@@ -290,7 +290,7 @@ class TestCart:
         page.cart.go_to_checkout()
         page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
-        page.checkout.set_card_online_selector()
+        page.checkout.card_online_select()
         page.checkout.add_new_card()
         page.swipe_page_up()
         page.checkout.set_date_and_time()
