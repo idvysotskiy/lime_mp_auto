@@ -74,7 +74,7 @@ class FavoritesPage(BasePage):
     @allure.step('Свайп модалки вниз')
     def swipe_module_bottom(self):
         bounds = self.get_element(FavoritesLocators.SWIPEBUTTON).bounds()
-        self.d.swipe(bounds[0], bounds[1], bounds[0], bounds[1] + 600)
+        self.d.swipe(bounds[0], bounds[1], bounds[0], bounds[1] + 800)
 
     @allure.step('Определение координат для четных/нечетных карточек')
     def get_cords_for_card(self):

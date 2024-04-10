@@ -12,7 +12,7 @@ class MainLocators:
     TOOLBAR_TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
     lime_logo = 'ru.limeshop.android.dev:id/banner_label_image_view'
     snack_bar_message = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'
-
+    SCREENGIFTCARD = "ru.limeshop.android:id/baseContainer"
     # NAV_BAR
     SEARCH_NAV = 'ru.limeshop.android.dev:id/nav_search'
     FAVORITES_NAV = 'ru.limeshop.android.dev:id/nav_favorites'

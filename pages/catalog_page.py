@@ -31,15 +31,6 @@ class CatalogPage(BasePage):
 
     @allure.step("Поиск каталога без подразделов")
     def open_catalog_without_chapter(self):
-        # while True:
-        #     self.wait_element(CatalogLocators.catalog_item)
-        #     self.click(self.get_random_element_catalog(CatalogLocators.catalog_item), "рандомный раздел в меню")
-        #     self.wait_a_moment()
-        #     if self.get_element(CatalogLocators.catalog_item_recycler).count > 0:
-        #         self.click_x()
-        #         self.open_catalog()
-        #     else:
-        #         break
         while True:
             self.wait_element(CatalogLocators.catalog_item)
             counter = random.randrange(2, self.d(resourceId=CatalogLocators.catalog_item).count - 2)
@@ -49,3 +40,17 @@ class CatalogPage(BasePage):
                 self.wait_a_moment()
             else:
                 break
+
+    @allure.step("Поиск каталога с подразделами")
+    def open_catalog_with_chapter(self):
+        while True:
+            self.wait_element(CatalogLocators.catalog_item)
+            counter = random.randrange(2, self.d(resourceId=CatalogLocators.catalog_item).count - 2)
+            name = self.get_element(CatalogLocators.catalog_item)[counter].get_text()
+            self.click(self.d(resourceId=CatalogLocators.catalog_item)[counter], "Радномный каталог")
+            if self.get_element(CollectionLocators.tittle):
+                self.click_x()
+                self.wait_a_moment()
+            else:
+                break
+        return name

@@ -184,6 +184,7 @@ class TestFavorites:
             page.press_back()
         page.press_back()
         page.open_profile()
+        page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_favorites()
