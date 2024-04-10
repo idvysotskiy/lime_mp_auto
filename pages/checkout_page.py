@@ -12,8 +12,8 @@ class CheckOutPage(BasePage):
         time.sleep(2)
         self.get_screen()
         self.d.click(0.504, 0.360)
-        self.wait_a_moment()
-        self.d.click(0.504, 0.470)
+        # self.wait_a_moment()
+        # self.d.click(0.504, 0.470)
 
     @allure.step('Нажать кнопку "Неудача" на экране Cloud Payments')
     def fail_cloud_payments(self):
@@ -21,7 +21,7 @@ class CheckOutPage(BasePage):
         time.sleep(2)
         self.get_screen()
         self.d.click(0.504, 0.450)
-        self.wait_a_moment()
+        time.sleep(2)
         self.d.click(0.504, 0.560)
 
     @allure.step('Нажать кнопку "Оплатить"')
@@ -408,25 +408,49 @@ class CheckOutPage(BasePage):
         return gift_card_number, gift_card_pin
 
     @allure.step("Добавление доплаты картой")
-    def add_additional_payment(self, card=card_1):
+    def add_additional_payment_no_card(self):
+        self.wait_a_second()
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
-        self.click(self.d(textContains='Картой онлайн').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+        self.wait_a_second()
+        if self.is_element_present(CheckOutLocators.ADD_NEW_CARD_BUTTON):
+            self.click(CheckOutLocators.ADD_NEW_CARD_BUTTON, 'кнопка добавить карту')
+        else:
+            self.click(self.d(textContains='Картой онлайн').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+        self.enter_card_data()
+        self.check_additional_payment()
+
+    @allure.step("Добавление доплаты картой")
+    def add_additional_payment(self):
+        self.wait_a_second()
+        self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
+        self.wait_a_second()
+        if self.is_element_present(CheckOutLocators.ADD_NEW_CARD_BUTTON):
+            self.click(CheckOutLocators.ADD_NEW_CARD_BUTTON, 'кнопка добавить карту')
+        else:
+            self.click(self.d(textContains='Добавить карту').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+        self.enter_card_data()
+        self.check_additional_payment()
+
+    def enter_card_data(self, card=card_1):
         self.set_text(CheckOutLocators.card_number, card, "номер карты")
         self.set_text(CheckOutLocators.cardholder, card_owner, "владелец карты")
         self.set_text(CheckOutLocators.card_date, card_expiry, "дата окончания карты")
         self.set_text(CheckOutLocators.card_cvv, card_cvv, "cvv карты")
         self.click(CheckOutLocators.save_card_btn, "кнопка Сохранить")
 
+    def check_additional_payment(self):
         if len(self.d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
             self.coordinate_click(100, 100)
-
+        self.wait_a_second()
         assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text', textContains='4242').wait(
             5) == True, print("В блоке Доплата не отображается карта 4242")
 
     @allure.step("Добавление доплаты картой")
     def add_additional_payment_sbp(self):
-        self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
-        self.click(CheckOutLocators.SURCHARGE_SBP_SELECTOR, "радиобаттон ""Через СБП")
+        # self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
+        # self.click(CheckOutLocators.SURCHARGE_SBP_SELECTOR, "радиобаттон ""Через СБП")
+        self.click(self.d(textContains='Через СБП').sibling(
+            resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - СБП")
         self.wait_element(CheckOutLocators.CARD_INFO)
         assert self.get_text(CheckOutLocators.CARD_INFO) == 'Через СБП', print(
             'В блоке Доплата не отображается Через СБП')
