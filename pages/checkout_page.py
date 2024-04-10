@@ -12,8 +12,8 @@ class CheckOutPage(BasePage):
         time.sleep(2)
         self.get_screen()
         self.d.click(0.504, 0.360)
-        # self.wait_a_moment()
-        # self.d.click(0.504, 0.470)
+        self.wait_a_moment()
+        self.d.click(0.504, 0.470)
 
     @allure.step('Нажать кнопку "Неудача" на экране Cloud Payments')
     def fail_cloud_payments(self):
