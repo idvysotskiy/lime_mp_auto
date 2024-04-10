@@ -408,13 +408,13 @@ class CheckOutPage(BasePage):
         return gift_card_number, gift_card_pin
 
     @allure.step("Добавление доплаты картой")
-    def add_additional_payment(self):
+    def add_additional_payment(self, card=card_1):
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
-        self.click(self.d(textContains='Добавить карту').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
-        self.set_text(CheckOutLocators.card_number, "4242424242424242", "номер карты")
-        self.set_text(CheckOutLocators.cardholder, "Test Testov", "владелец карты")
-        self.set_text(CheckOutLocators.card_date, "1230", "дата окончания карты")
-        self.set_text(CheckOutLocators.card_cvv, "123", "cvv карты")
+        self.click(self.d(textContains='Картой онлайн').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+        self.set_text(CheckOutLocators.card_number, card, "номер карты")
+        self.set_text(CheckOutLocators.cardholder, card_owner, "владелец карты")
+        self.set_text(CheckOutLocators.card_date, card_expiry, "дата окончания карты")
+        self.set_text(CheckOutLocators.card_cvv, card_cvv, "cvv карты")
         self.click(CheckOutLocators.save_card_btn, "кнопка Сохранить")
 
         if len(self.d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
