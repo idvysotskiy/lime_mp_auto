@@ -39,15 +39,10 @@ class ProductCardPage(BasePage):
     def open_full_product_card(self):
         self.click(ProductCardLocators.COLORS)
 
-    # def add_one_product_to_cart(self):
-    #     main = MainPage()
-    #     main.open_catalog()
-    #     main.go_to_catalog_item()
-    #     main.go_to_product_card()
-    #     self.add_to_cart()
-    #     self.select_size(select_size)
-    #     time.sleep(2)
-    #     main.go_to_cart()
+    @allure.step("Свайп к описанию")
+    def swipe_in_card(self):
+        product_name_bound = self.get_element(ProductCardLocators.product_name).center()
+        self.d.swipe(product_name_bound[0], product_name_bound[1], product_name_bound[0], product_name_bound[1] - 700)
 
     @allure.step("Выбор рандомного размера")
     def select_random_size(self):
@@ -95,4 +90,9 @@ class ProductCardPage(BasePage):
     def click_share(self):
         self.click(ProductCardLocators.SHARE, "кнопка Поделиться")
 
-
+    @allure.step("Клик по кнопке Доставка и возврат")
+    def click_delivery(self):
+        self.click(ProductCardLocators.DELIVERY, "кнопка Доставка и возврат")
+        self.wait_element(ProductCardLocators.delivery_description_page, "описание доставки и возврата")
+        self.wait_text("ДОСТАВКА И ВОЗВРАТ")
+        self.wait_text("СРОКИ ДОСТАВКИ")

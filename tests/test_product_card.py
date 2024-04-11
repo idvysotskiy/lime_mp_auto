@@ -90,27 +90,42 @@ class TestMobile:
         page.card.click_share()
         page.wait_text("SHARE")
 
-
+    @allure.title('Экран "Карточка товара" / Кнопка Корзина')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/294")
     @pytest.mark.smoke
-    @allure.title('Экран "Карточка товара" / Добавление товара в корзину(Плашка)')
-    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2943")
-    def test_buy_popup(self):
+    def test_basket_button(self):
         page = MainPage()
-        page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
-        assert page.get_text(ProductCardLocators.POPUP_TITLE) == 'Товар добавлен в корзину'
-        # ...
+        page.card.open_cart()
+        page.cart.check_empty_cart()
 
+    @allure.title('Экран "Карточка товара" / Кнопка Доставка и возврат')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3123")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3126")
     @pytest.mark.smoke
-    @allure.title('')
-    @allure.testcase("")
-    def test_buy_wtf(self):
+    def test_delivery_button(self):
         page = MainPage()
-        page.clear_basket()
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
-        page.card.elements_product_card()
-        page.card.open_full_product_card()
-        page.card.elements_full_product_card()
+        page.card.swipe_in_card()
+        page.card.click_delivery()
+        page.swipe_page_down()
+        page.wait_hidden_element(ProductCardLocators.delivery_description_page, "описание доставки и возврата")
+
+
+
+
+    # @pytest.mark.smoke
+    # @allure.title('')
+    # @allure.testcase("")
+    # def test_buy_wtf(self):
+    #     page = MainPage()
+    #     page.clear_basket()
+    #     page.open_catalog()
+    #     page.catalog.open_random_catalog()
+    #     page.catalog.open_random_card()
+    #     page.card.elements_product_card()
+    #     page.card.open_full_product_card()
+    #     page.card.elements_full_product_card()
