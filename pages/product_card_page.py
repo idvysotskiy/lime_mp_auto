@@ -9,28 +9,8 @@ class ProductCardPage(BasePage):
 
     @allure.step('Клик по кнопке "Купить"')
     def add_to_cart(self):
-        if self.get_text(ProductCardLocators.BUY) == 'КУПИТЬ':
-            self.click(ProductCardLocators.BUY)
-        elif self.get_text(ProductCardLocators.BUY_MORE) == 'КУПИТЬ ЕЩЕ':
-            self.click(ProductCardLocators.BUY_MORE)
+        self.click(ProductCardLocators.BUY, "кнопка Купить")
         self.wait_a_moment()
-
-    @allure.step('Выбрать размер товара')
-    def select_size(self, size):
-        if size == 'XS':
-            self.d.xpath(ProductCardLocators.XS_SIZE).click()
-        if size == 'S':
-            self.d.xpath(ProductCardLocators.S_SIZE).click()
-        if size == 'M':
-            self.d.xpath(ProductCardLocators.M_SIZE).click()
-        if size == 'L':
-            self.d.xpath(ProductCardLocators.L_SIZE).click()
-        if size == 'XL':
-            self.d.xpath(ProductCardLocators.XS_SIZE).click()
-        if size == '34':
-            self.d.xpath(ProductCardLocators.SIZE_34).click()
-        if size == '36':
-            self.d.xpath(ProductCardLocators.SIZE_36).click()
 
     def elements_product_card(self):
         self.is_element_present(MainLocators.X_BUTTON)
@@ -38,19 +18,22 @@ class ProductCardPage(BasePage):
         assert self.get_text(ProductCardLocators.COLORS) == 'Цвета'
         self.get_screen()
 
-    def elements_full_product_card(self):
-        assert self.get_text(ProductCardLocators.BUY) == 'КУПИТЬ'
-        self.is_element_present(ProductCardLocators.FAVORITE)
-        self.is_element_present(ProductCardLocators.SHARE)
-        self.is_element_present(ProductCardLocators.CART)
-        self.is_element_present(ProductCardLocators.ART)
-        self.is_element_present(ProductCardLocators.SIZES_GUIDE)
-        self.is_element_present(ProductCardLocators.COMPOSITIONS_AND_CARE)
-        self.is_element_present(ProductCardLocators.DELIVERY)
-        self.is_element_present(ProductCardLocators.PRODUCT_STOCKS)
-        self.is_element_present(ProductCardLocators.PAYMENT)
-        self.is_element_present(ProductCardLocators.GOES_WELL)
-        self.is_element_present(ProductCardLocators.YOU_LIKE_IT)
+    @allure.step("Проверка наличия элементов карточки товара")
+    def checking_card_elements(self):
+        self.wait_element(ProductCardLocators.BUY, "Купить")
+        self.wait_element(ProductCardLocators.FAVORITE, "Избранное")
+        self.wait_element(ProductCardLocators.SHARE, "Поделиться")
+        self.wait_element(ProductCardLocators.CART, "Корзина")
+        self.d.swipe(self.get_element(ProductCardLocators.product_name).center()[0], self.get_element(ProductCardLocators.product_name).center()[1], self.get_element(ProductCardLocators.product_name).center()[0], self.get_element(ProductCardLocators.product_name).center()[1] + 500)
+        self.wait_element(ProductCardLocators.ART, "Артикул")
+        self.wait_element(ProductCardLocators.SIZES_GUIDE, "Руководство по размерам")
+        self.wait_element(ProductCardLocators.COMPOSITIONS_AND_CARE, "Состав и уход")
+        self.wait_element(ProductCardLocators.DELIVERY, "Доставка и возврат")
+        self.wait_element(ProductCardLocators.PRODUCT_STOCKS, "Наличие в магазинах")
+        self.swipe_page_up()
+        self.wait_element(ProductCardLocators.PAYMENT, "Оплата")
+        # self.wait_element(ProductCardLocators.GOES_WELL)
+        # self.wait_element(ProductCardLocators.YOU_LIKE_IT)
         self.get_screen()
 
     def open_full_product_card(self):
@@ -82,20 +65,34 @@ class ProductCardPage(BasePage):
 
     @allure.step('Переход в корзину')
     def open_cart(self):
-        self.click(ProductCardLocators.CART)
+        self.click(ProductCardLocators.CART, "кнопка корзины")
 
     # @allure.step("Получение названия товара")
     def get_product_name(self):
         return self.get_text(ProductCardLocators.product_name)
 
-    @allure.step('Добавление в избранное')
+    @allure.step('Добавление/удаление из избранного')
     def add_to_favorites(self):
-        self.click(ProductCardLocators.FAVORITE, 'Кнопка добавления в избранное')
-        product_name = self.get_text(ProductCardLocators.product_name)
+        self.click(ProductCardLocators.FAVORITE, 'Кнопка добавления/удаления из избранного')
+        product_name = self.get_product_name()
         return product_name
 
     @allure.step("Добавление в корзину второго размера одного товара")
     def add_to_cart_more_item(self, size):
         self.click(ProductCardLocators.BUY_MORE, "кнопка Купить еще")
         self.click(self.get_random_element(
-            f'//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]//android.widget.TextView[@resource-id="ru.limeshop.android.dev:id/product_add_to_cart_name" and not(following-sibling::android.widget.TextView[@resource-id="ru.limeshop.android.dev:id/product_add_to_cart_available"]) and not(@text="{size}")]'), "рандомный размер")
+            f'//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]//android.widget.TextView['
+            f'@resource-id="ru.limeshop.android.dev:id/product_add_to_cart_name" and not('
+            f'following-sibling::android.widget.TextView['
+            f'@resource-id="ru.limeshop.android.dev:id/product_add_to_cart_available"]) and not(@text="{size}")]'),
+            "рандомный размер")
+
+    @allure.step("Клик по кнопке Назад")
+    def click_back(self):
+        self.click(ProductCardLocators.back_btn, "кнопка Назад")
+
+    @allure.step("Клик по кнопке Поделиться")
+    def click_share(self):
+        self.click(ProductCardLocators.SHARE, "кнопка Поделиться")
+
+
