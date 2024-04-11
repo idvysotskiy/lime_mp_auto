@@ -98,11 +98,13 @@ class CheckOutPage(BasePage):
     @allure.step('Нажать кнопку "Заказать"')
     def click_pay_upon_receipt(self):
         self.wait_a_second()
+        self.swipe_page_up()
+        self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay_fail_cloud_payments(self):
-        # self.swipe_page_up(1)
+        self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
@@ -459,7 +461,7 @@ class CheckOutPage(BasePage):
     def add_additional_payment_sbp(self):
         self.wait_a_second()
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
-        self.wait_a_second()
+        self.wait_element('ru.limeshop.android.dev:id/is_selected_card_radio')
         self.click(self.d(textContains='Через СБП').sibling(
             resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - СБП")
         self.wait_element(CheckOutLocators.CARD_INFO)
@@ -583,3 +585,20 @@ class CheckOutPage(BasePage):
     def get_summary_total(self):
         return self.get_number_from_element(CheckOutLocators.SUMMARY_TOTAL)
 
+    @allure.step('Суммарная стоимость c учетом скидки в блоке саммери')
+    def check_discount(self):
+        discount = page.cart.get_cart_discount()
+        price_with_discount = page.cart.get_cart_price()
+        # assert price - discount == price_with_discount, f'Итоговая цена {price_with_discount} не равна разности исходной цены {price} и скидке {discount}'
+        page.cart.go_to_checkout()
+        page.swipe_page_up()
+        page.checkout.open_order_list()
+        page.swipe_page_up()
+        price_order_list = page.checkout.get_order_list_price_with_discount()
+        assert price_order_list == price_with_discount, f'Итоговая цена из корзины{price_with_discount} не совпадает с ценой в составе заказа {price_order_list}'
+        summary_discount = page.checkout.get_summary_discount()
+        assert discount == summary_discount, f"Скидка с экрана Корзина {discount} не совпадает со скидкой на экране Оформление заказа {summary_discount}"
+        summary_coast = page.checkout.get_summary_coast()
+        summary_total = page.checkout.get_summary_total()
+        assert price == summary_coast, f'Стоимость с карточки товара {price} не совпадает с стоимостью в блоке саммери {summary_coast}'
+        assert price_with_discount == summary_total, f'Стоимость товара со скидкой {price_with_discount} с экрана корзина не совпадает с стоимостью со скидкой в блоке саммери {summary_total}'

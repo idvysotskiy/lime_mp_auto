@@ -194,7 +194,7 @@ class TestCheckOut:
         page.checkout.courier_select()
         page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
-        page.checkout.add_first_card(card_15)
+        page.checkout.add_first_card(card_6)
         page.wait_a_moment()
         page.checkout.set_date_and_time()
         page.checkout.click_pay_no_funds()

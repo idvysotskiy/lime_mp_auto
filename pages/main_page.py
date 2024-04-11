@@ -30,6 +30,7 @@ class MainPage(BasePage):
     @allure.step("Регистрация")
     def user_registration(self):
         self.click(MainLocators.PROFILE_NAV, "иконка профиля")
+        self.wait_a_second()
         self.swipe_page_up(2)
         self.wait_a_second()
         self.click(MainLocators.registration_btn, "кнопка Зарегистрироваться")
