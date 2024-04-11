@@ -17,6 +17,9 @@ class CatalogPage(BasePage):
             self.wait_element(MainLocators.submenu_elements_list, "подраздел каталога")
             self.click(self.get_random_element(CatalogLocators.submenu_elements_list), "рандомный подраздел каталога")
 
+        collection_title = self.get_collection_title()
+        return collection_title
+
     @allure.step("Переход в рандомную карточку товара")
     def open_random_card(self):
         self.wait_element(CatalogLocators.cards_image)
@@ -49,3 +52,7 @@ class CatalogPage(BasePage):
                 self.wait_a_moment()
             else:
                 break
+
+    @allure.step("Получение заголовка коллекции")
+    def get_collection_title(self):
+        return self.get_text(CollectionLocators.title)

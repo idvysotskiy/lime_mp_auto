@@ -80,7 +80,7 @@ class CatalogLocators:
 
 class CollectionLocators:
     # COLLECTION
-    tittle = "ru.limeshop.android.dev:id/toolbarTitle"
+    title = "ru.limeshop.android.dev:id/toolbarTitle"
     image_view_btn = "ru.limeshop.android.dev:id/toolbar_secondary_image_view"
     filters_btn = "ru.limeshop.android.dev:id/imageView"
     filter_sort_title = d(resourceId="ru.limeshop.android.dev:id/item_filter_name", text="СОРТИРОВАТЬ")
