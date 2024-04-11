@@ -26,7 +26,7 @@ class CheckOutPage(BasePage):
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
-        # self.swipe_page_up(1)
+        self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
 
@@ -107,7 +107,7 @@ class CheckOutPage(BasePage):
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
         self.fail_cloud_payments()
-        time.sleep(1)
+        time.sleep(5)
         self.wait_element(SuccessPayScreenLocators.TITLE)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ОПЛАТА НЕ ПРОШЛА'
         assert self.get_text(
@@ -126,7 +126,8 @@ class CheckOutPage(BasePage):
         time.sleep(5)
         self.accept_cloud_payments()
         self.press_back()
-        self.wait_element(CheckOutLocators.STATUS_PAY_TITLE)
+        # self.wait_element(CheckOutLocators.STATUS_PAY_TITLE)
+        time.sleep(5)
         assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ОЖИДАЕМ ПОДТВЕРЖДЕНИЕ ПЛАТЕЖА'
         self.get_screen()
         time.sleep(100)
@@ -325,8 +326,10 @@ class CheckOutPage(BasePage):
 
     @allure.step("Выбор способа оплаты - При получении")
     def set_upon_receipt(self):
-        self.click(CheckOutLocators.receiving_selector, "при получении")
-        self.wait_element(CheckOutLocators.PAYMENT_INFO_TEXT)
+        self.click(CheckOutLocators.receiving_selector, "При получении")
+        self.wait_a_second()
+        assert self.get_text(CheckOutLocators.PAYMENT_INFO_TEXT) == 'Наличными или картой при получении'
+        self.get_screen()
 
     @allure.step("Выбор способа оплаты - Подарочной картой")
     def set_gift_card_selector(self):
@@ -436,6 +439,7 @@ class CheckOutPage(BasePage):
         self.enter_card_data()
         self.check_additional_payment()
 
+    @allure.step("Заполнить данные карты")
     def enter_card_data(self, card=card_1):
         self.set_text(CheckOutLocators.card_number, card, "номер карты")
         self.set_text(CheckOutLocators.cardholder, card_owner, "владелец карты")
@@ -443,6 +447,7 @@ class CheckOutPage(BasePage):
         self.set_text(CheckOutLocators.card_cvv, card_cvv, "cvv карты")
         self.click(CheckOutLocators.save_card_btn, "кнопка Сохранить")
 
+    @allure.step("Проверить что карта добавлена в способ доплаты")
     def check_additional_payment(self):
         if len(self.d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
             self.coordinate_click(100, 100)
@@ -453,6 +458,8 @@ class CheckOutPage(BasePage):
     @allure.step("Добавление доплаты картой")
     def add_additional_payment_sbp(self):
         self.wait_a_second()
+        self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
+        self.wait_a_second()
         self.click(self.d(textContains='Через СБП').sibling(
             resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - СБП")
         self.wait_element(CheckOutLocators.CARD_INFO)
@@ -461,6 +468,7 @@ class CheckOutPage(BasePage):
 
     @allure.step("Клик Продолжить покупки (после оформления заказа)")
     def click_continue_shopping(self):
+        self.wait_element(SuccessPayScreenLocators.BUTTON)
         self.click(SuccessPayScreenLocators.BUTTON, "кнопка Продолжить покупки")
 
     @allure.step("Проверка наличия номера карты '{card_number}' в чекауте")
