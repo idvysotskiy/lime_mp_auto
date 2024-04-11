@@ -259,7 +259,7 @@ class TestCart:
         page.cart.cart_clear()
         page.cart.check_empty_cart()
 
-    @allure.title('Экран "Корзина" / Кнопка "Очистить" (возврат кдругому экрану корзины)')
+    @allure.title('Экран "Корзина" / Кнопка "Очистить" (возврат к другому экрану корзины)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2578")
     @pytest.mark.smoke
     @pytest.mark.basket
@@ -459,4 +459,20 @@ class TestCart:
         assert int(page.get_number_from_element(CartLocators.SUMMARY_PRICE) * 0.9) == page.get_number_from_element(
             CartLocators.FINAL_PRICE), print(
             f"Скидка не активна после удаления одного из двух товаров. Сумма товаров = {int(page.get_number_from_element(CartLocators.SUMMARY_PRICE) * 0.9)}, сумма Итого = {page.get_number_from_element(CartLocators.FINAL_PRICE)}")
+
+    @allure.title('Экран "Корзина" / Поле "Промокод" (Учет скидки в стоимости)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3356")
+    @pytest.mark.basket
+    @pytest.mark.smoke
+    def test_promo_code_discount(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        price = page.card.get_product_price()
+        page.card.open_cart()
+        page.cart.enter_promo_code()
+        discount = page.cart.get_cart_discount()
+        price_with_discount = page.cart.get_cart_price()
+        assert price + discount == price_with_discount, f'Итоговая цена {price_with_discount} не равна разности исходной цены {price} и скидке {discount}'
 

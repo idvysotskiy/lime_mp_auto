@@ -652,6 +652,7 @@ class TestCheckOut:
         page.checkout.add_additional_payment_no_card()
         page.checkout.click_pay()
         page.checkout.accept_accept_cloud_payments()
+        page.checkout.elements_success_pay()
         # ......Доплата картой +Промокод
         page.checkout.continue_shopping()
         page.add_to_cart_random_product()
@@ -664,6 +665,7 @@ class TestCheckOut:
         page.checkout.set_gift_card_with_additional_payment(price)
         page.checkout.add_additional_payment()
         page.checkout.click_pay()
+        page.checkout.elements_success_pay()
 
     @allure.title('Блок "Оплата" / Самовывоз / Доплата СБП')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3036")

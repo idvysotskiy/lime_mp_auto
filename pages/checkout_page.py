@@ -45,7 +45,7 @@ class CheckOutPage(BasePage):
         self.get_screen()
 
     def click_pay_no_funds(self):
-        # self.swipe_page_up(1)
+        self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
@@ -55,7 +55,7 @@ class CheckOutPage(BasePage):
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay_without_3ds(self):
-        # self.swipe_page_up(1)
+        self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         self.wait_element(SuccessPayScreenLocators.TITLE)
@@ -119,6 +119,7 @@ class CheckOutPage(BasePage):
 
     @allure.step('Нажать кнопку "Оплатить" (СБП)')
     def click_pay_sbp(self):
+        self.wait_a_second()
         self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
@@ -136,43 +137,42 @@ class CheckOutPage(BasePage):
         assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         self.get_screen()
 
-
-    @allure.step('Выбрать элементы на экране Оформление заказа')
-    def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
-        with allure.step(f"Выбрать способ доставки '{delivery_method}'"):
-            if delivery_method == '1':
-                self.click(CheckOutLocators.DELIVERY_SELECTOR_1)
-            elif delivery_method == '2':
-                self.click(CheckOutLocators.DELIVERY_SELECTOR_2)
-            elif delivery_method == '3':
-                self.click(CheckOutLocators.DELIVERY_SELECTOR_3)
-            time.sleep(1)
-        with allure.step(f"Выбрать способ оплаты '{pay_method}'"):
-            if pay_method == '1':
-                self.click(CheckOutLocators.PAYMENT_SELECTOR_1)
-            elif pay_method == '2':
-                self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
-            elif pay_method == '3':
-                self.click(CheckOutLocators.PAYMENT_SELECTOR_3)
-            elif pay_method == '4':
-                self.click(CheckOutLocators.PAYMENT_SELECTOR_4)
-            time.sleep(1)
-        with allure.step(f"Выбрать дату доставки '{date_slot}'"):
-            if date_slot == '1':
-                self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_1)
-            elif date_slot == '2':
-                self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_2)
-            elif date_slot == '3':
-                self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_3)
-            time.sleep(1)
-        with allure.step(f"Выбрать время доставки '{time_slot}'"):
-            if time_slot == '1':
-                self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_1)
-            elif time_slot == '2':
-                self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_2)
-            elif time_slot == '3':
-                self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_3)
-        self.get_screen()
+    # @allure.step('Выбрать элементы на экране Оформление заказа')
+    # def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
+    #     with allure.step(f"Выбрать способ доставки '{delivery_method}'"):
+    #         if delivery_method == '1':
+    #             self.click(CheckOutLocators.DELIVERY_SELECTOR_1)
+    #         elif delivery_method == '2':
+    #             self.click(CheckOutLocators.DELIVERY_SELECTOR_2)
+    #         elif delivery_method == '3':
+    #             self.click(CheckOutLocators.DELIVERY_SELECTOR_3)
+    #         time.sleep(1)
+    #     with allure.step(f"Выбрать способ оплаты '{pay_method}'"):
+    #         if pay_method == '1':
+    #             self.click(CheckOutLocators.PAYMENT_SELECTOR_1)
+    #         elif pay_method == '2':
+    #             self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
+    #         elif pay_method == '3':
+    #             self.click(CheckOutLocators.PAYMENT_SELECTOR_3)
+    #         elif pay_method == '4':
+    #             self.click(CheckOutLocators.PAYMENT_SELECTOR_4)
+    #         time.sleep(1)
+    #     with allure.step(f"Выбрать дату доставки '{date_slot}'"):
+    #         if date_slot == '1':
+    #             self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_1)
+    #         elif date_slot == '2':
+    #             self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_2)
+    #         elif date_slot == '3':
+    #             self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_3)
+    #         time.sleep(1)
+    #     with allure.step(f"Выбрать время доставки '{time_slot}'"):
+    #         if time_slot == '1':
+    #             self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_1)
+    #         elif time_slot == '2':
+    #             self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_2)
+    #         elif time_slot == '3':
+    #             self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_3)
+    #     self.get_screen()
 
     @allure.step('Проверить элементы на экране Оформление заказа')
     def elements_checkout(self):
