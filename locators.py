@@ -48,6 +48,9 @@ class MainLocators:
     submenu_elements_list = d(resourceId='ru.limeshop.android.dev:id/catalog_item_recycler').child(
         resourceId="ru.limeshop.android.dev:id/catalog_item_name")
 
+    # CONTUR
+    check_box = 'ru.limeshop.android.dev:id/item_checkable_option_active'
+
 
 class SearchLocators:
     X_BUTTON = '//android.widget.ImageButton'
@@ -126,17 +129,17 @@ class ProductCardLocators:
     YOU_LIKE_IT_SELECTOR_1 = '//*[@resource-id="ru.limeshop.android.dev:id/youllLikeItRecyclerView"]/android.widget.LinearLayout[1]'
     YOU_LIKE_IT_SELECTOR_2 = '//*[@resource-id="ru.limeshop.android.dev:id/youllLikeItRecyclerView"]/android.widget.LinearLayout[2]'
     # BOTTOM_SHEET
-    XS_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
-    S_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[2]'
-    M_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[3]'
-    L_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[4]'
-    XL_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[5]'
-    SIZE_34 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
-    SIZE_36 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[2]'
-    SIZE_38 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[3]'
-    SIZE_40 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[4]'
-    SIZE_42 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[5]'
-    SIZE_44 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[6]'
+    # XS_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
+    # S_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[2]'
+    # M_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[3]'
+    # L_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[4]'
+    # XL_SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[5]'
+    # SIZE_34 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[1]'
+    # SIZE_36 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[2]'
+    # SIZE_38 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[3]'
+    # SIZE_40 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[4]'
+    # SIZE_42 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[5]'
+    # SIZE_44 = '//*[@resource-id="ru.limeshop.android.dev:id/sizeList"]/android.view.ViewGroup[6]'
     SIZE_INFO = '//*[@resource-id="ru.limeshop.android.dev:id/sizeInfoButton"]'
     POPUP = '//*[@resource-id="ru.limeshop.android.dev:id/productPopup"]'
     POPUP_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/popupStartTitle"]'
@@ -201,13 +204,23 @@ class FeatureTogglesLocators:
 
 
 class LoginLocators:
+    title_text = "ru.limeshop.android.dev:id/title_text"
+    subtitle_text = "ru.limeshop.android.dev:id/subtitle_text"
+    label_text = "ru.limeshop.android.dev:id/labelText"
+    phone_field = "ru.limeshop.android.dev:id/editText"
+    get_code_button = "ru.limeshop.android.dev:id/get_code_button"
+    privacy_policy_text = "ru.limeshop.android.dev:id/privacy_policy_text"
+    errorText = "ru.limeshop.android.dev:id/errorText"
+    number_text_1 = '//*[@resource-id="ru.limeshop.android.dev:id/first_number_layout"]/android.widget.EditText[1]'
+    number_text_2 = '//*[@resource-id="ru.limeshop.android.dev:id/second_number_layout"]/android.widget.EditText[1]'
+    number_text_3 = '//*[@resource-id="ru.limeshop.android.dev:id/third_number_layout"]/android.widget.EditText[1]'
+    number_text_4 = '//*[@resource-id="ru.limeshop.android.dev:id/fourth_number_layout"]/android.widget.EditText[1]'
+
     # LOGIN_SCREEN
     LOGIN_SCREEN_TITLE = 'ru.limeshop.android.dev:id/orderflow_signin_title'
     LOGIN_SCREEN_HINT_EMAIL = d(resourceId="ru.limeshop.android.dev:id/hintText", text="Эл. почта")
-    # LOGIN_SCREEN_EMAIL = 'ru.limeshop.android.dev:id/signin_email'
     LOGIN_SCREEN_EMAIL = '//*[@resource-id="ru.limeshop.android.dev:id/signin_email"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     LOGIN_SCREEN_HINT_PASS = d(resourceId="ru.limeshop.android.dev:id/hintText", text="Пароль")
-    # LOGIN_SCREEN_PASS = 'ru.limeshop.android.dev:id/signin_password'
     LOGIN_SCREEN_PASS = '//*[@resource-id="ru.limeshop.android.dev:id/signin_password"]/android.view.ViewGroup[1]/android.widget.EditText[1]'
     LOGIN_SCREEN_SHOW_PASS = 'ru.limeshop.android.dev:id/endIcon'
     LOGIN_SCREEN_PASS_RESET = 'ru.limeshop.android.dev:id/signin_password_reset'

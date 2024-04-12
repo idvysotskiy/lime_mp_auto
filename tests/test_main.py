@@ -39,3 +39,11 @@ class TestMain:
         page = MainPage()
         page.user_registration()
 
+    # @pytest.mark.main
+    # @pytest.mark.smoke
+    # @allure.title('Экран "Авторизация" / Авторизация пользователя по номеру телефона')
+    # @allure.testcase("")
+    # def test_login(self):
+    #     page = MainPage()
+    #     page.login_with_phone()
+

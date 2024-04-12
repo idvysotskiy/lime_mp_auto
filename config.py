@@ -5,6 +5,12 @@ package = 'ru.limeshop.android.dev'
 # package = 'ru.limeshop.android'
 app_link = 'app_link'
 
+MP1 = 'MP1 контур https://mp1.lmdev.ru/'
+MP2 = 'MP2 контур https://mp2.lmdev.ru/'
+MP3 = 'MP3 контур https://mp3.lmdev.ru/'
+QA1 = 'QA1 контур https://qa1.lmdev.ru/'
+QA2 = 'QA2 контур https://qa2.lmdev.ru/'
+
 # Reg valid data
 valid_name_lat = "Ivan"
 valid_surname_lat = 'Ivanov'

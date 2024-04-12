@@ -15,16 +15,16 @@ def open_app():
     d.app_clear(package)
     d.app_start(package, stop=True)
     # page = MainPage()
-    # page.set_nuxt_02()
+    # page.set_contur()
     # page.login(valid_email, valid_password)
     # page.set_feature_toggles()
 
 
-@allure.title("Сменить контур на nuxt02.mp.lmdev")
+@allure.title("Сменить контур")
 @pytest.fixture()
-def change_nuxt02():
+def change_contur():
     page = MainPage()
-    page.set_nuxt_02()
+    page.set_contur()
 
 
 @allure.title("Авторизация")

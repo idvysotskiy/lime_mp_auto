@@ -155,12 +155,12 @@ class MainPage(BasePage):
     def open_cart(self):
         self.click(MainLocators.CART_NAV)
 
-    @allure.step('Меняем контур на nuxt-02')
-    def set_nuxt_02(self):
+    @allure.step('Меняем контур')
+    def set_contur(self, contur=MP3):
         self.open_profile()
         time.sleep(2)
-        self.d.click(0.062, 0.508)
-        time.sleep(2)
+        self.click(self.d(textContains=contur).sibling(
+            resourceId='ru.limeshop.android.dev:id/item_checkable_option_active'), f"Контур - {contur}")
 
     @allure.step('Включаем feature_toggles')
     def set_feature_toggles(self):
@@ -234,4 +234,19 @@ class MainPage(BasePage):
         self.click(MainLocators.FAVORITES_NAV, "кнопка 'Избранное'")
         self.wait_element(FavoritesLocators.TITLE)
 
+    @allure.step('Ввести код из смс')
+    def enter_code_from_sms(self, code='0000'):
+        self.set_text(LoginLocators.number_text_1, code)
+
+    @allure.step('Авторизоваться по номеру телефона')
+    def login_with_phone(self, phone='9639447845'):
+        with allure.step('Открыть Личный кабинет'):
+            self.click(MainLocators.PROFILE_NAV)
+            self.swipe_page_up(2)
+            self.wait_a_second()
+        with allure.step('Нажать кнопку "Войти"'):
+            self.click(ProfileLocators.LOGIN_UN)
+            self.set_text(LoginLocators.phone_field, phone)
+            self.click(LoginLocators.get_code_button)
+            self.enter_code_from_sms()
 
