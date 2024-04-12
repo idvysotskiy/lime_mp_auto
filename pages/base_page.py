@@ -244,3 +244,10 @@ class BasePage:
     def open_catalog(self):
         self.wait_element(MainLocators.CATALOG_NAV)
         self.click(MainLocators.CATALOG_NAV, "каталог")
+
+    # @allure.step("Получение количества элементов")
+    def get_elements_amount(self, locator):
+        if locator[0] == '/' and locator[1] == '/':
+            return len(self.get_element(locator).all())
+        else:
+            return self.get_element(locator).count

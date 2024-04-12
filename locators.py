@@ -149,6 +149,7 @@ class ProductCardLocators:
     product_price = 'ru.limeshop.android.dev:id/productPriceTextView'
     product_name = 'ru.limeshop.android.dev:id/productNameTextView'
     back_btn = 'ru.limeshop.android.dev:id/closeImageButton'
+    delivery_description_page = 'ru.limeshop.android.dev:id/coordinator'
 
 
 class ProfileLocators:
