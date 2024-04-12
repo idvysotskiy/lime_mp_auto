@@ -10,7 +10,7 @@ import random
 @pytest.mark.usefixtures("setup")
 @allure.feature("Избранное")
 class TestFavorites:
-
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Выход с экрана "Избранное"')
@@ -21,6 +21,7 @@ class TestFavorites:
         page.click(FavoritesLocators.BUTTONBACK, 'Кнопка "Назад"')
         page.wait_hidden_element(FavoritesLocators.TITLE, 'Заголовок "Избранное"')
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Избранное"')
@@ -29,6 +30,7 @@ class TestFavorites:
         page = MainPage()
         page.open_favorites()
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Кнопка "НАЧАТЬ ПОКУПКИ')
@@ -39,6 +41,7 @@ class TestFavorites:
         page.favorites.delete_from_favorites()
         page.favorites.click_pay()
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Возврат из каталога')
@@ -50,6 +53,7 @@ class TestFavorites:
         page.click_x()
         page.wait_logo()
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Товар в избранном')
@@ -66,6 +70,7 @@ class TestFavorites:
         page.open_favorites()
         page.wait_text(product_name)
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Удаление из избранного')
@@ -82,6 +87,7 @@ class TestFavorites:
         page.wait_hidden_element(product_name)
         page.favorites.check_empty_favorites()
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Кнопка "Купить" для товара в избранном')
@@ -96,6 +102,7 @@ class TestFavorites:
         page.open_favorites()
         page.favorites.favorites_product_bottom_buy()
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Добавление товара в корзину')
@@ -111,6 +118,7 @@ class TestFavorites:
         page.favorites.add_to_cart_and_go_to_cart()
         page.cart.checking_availability_cards(product_name)
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Переход в карточку товара и выход из нее')
@@ -127,6 +135,7 @@ class TestFavorites:
         page.favorites.go_to_card()
         page.click_x()
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Соответствие списка "Избранное" авторизованного с неавторизованным')
@@ -143,6 +152,7 @@ class TestFavorites:
         favorite = page.favorites.get_text(FavoritesLocators.STUFFNAME)
         assert product == favorite
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Соответствие списка "Избранное" авторизованного с неавторизованным(Несколько товаров)')
@@ -166,6 +176,7 @@ class TestFavorites:
         favorite_list = [page.favorites.get_text(FavoritesLocators.STUFFNAME)]
         assert product_list == favorite_list
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title(' Список "Избранное" после выхода из профиля(Разлогин)')
@@ -184,11 +195,13 @@ class TestFavorites:
             page.press_back()
         page.press_back()
         page.open_profile()
+        page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_favorites()
         page.favorites.check_empty_favorites()
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title(' Экран "Избранное" / Закрыть шторку размеров (клик мимо шторки)')
@@ -205,6 +218,7 @@ class TestFavorites:
         page.close_popup()
         page.wait_hidden_element(FavoritesLocators.MODULEWINDOW, "Модальное окно")
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран"Избранное" / Закрывание шторки размеров(свайп вниз)')
@@ -221,6 +235,7 @@ class TestFavorites:
         page.favorites.swipe_module_bottom()
         page.wait_hidden_element(FavoritesLocators.MODULEWINDOW, "Модульное окно")
 
+    @pytest.mark.favorites
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Избранное" / Четное и нечетное количество товаров в списке "Избранное"')

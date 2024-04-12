@@ -8,6 +8,7 @@ import allure
 class TestProfile:
     @allure.title('Экран "Личный кабинет" (Пользователь не авторизован)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/16")
+    @pytest.mark.profile
     @pytest.mark.smoke
     def test_account_without_authorization(self):
         page = MainPage()
@@ -16,6 +17,7 @@ class TestProfile:
 
     @allure.title('Экран "Личный кабинет" / Выход с экрана')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/317")
+    @pytest.mark.profile
     @pytest.mark.smoke
     def test_closing_account(self):
         page = MainPage()
@@ -25,6 +27,7 @@ class TestProfile:
 
     @allure.title('Экран "Личный кабинет" / Кнопка "Руководство по покупке"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/318")
+    @pytest.mark.profile
     @pytest.mark.smoke
     def test_manual(self):
         page = MainPage()
@@ -34,6 +37,7 @@ class TestProfile:
     @allure.title('Экран "Личный кабинет" / Кнопка "Контакты"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/319")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1901")
+    @pytest.mark.profile
     @pytest.mark.smoke
     def test_contacts(self):
         page = MainPage()
@@ -43,6 +47,7 @@ class TestProfile:
 
     @allure.title('Экран "Личный кабинет" / Кнопка "Компания"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/320")
+    @pytest.mark.profile
     @pytest.mark.smoke
     def test_about_company(self):
         page = MainPage()

@@ -5,6 +5,7 @@ import random
 import pytest
 
 from pages.base_page import BasePage
+from config import *
 from locators import *
 from pages.cart_page import CartPage
 from pages.catalog_page import CatalogPage
@@ -12,6 +13,7 @@ from pages.checkout_page import CheckOutPage
 from pages.favorites_page import FavoritesPage
 from pages.product_card_page import ProductCardPage
 from pages.profile_page import ProfilePage
+from pages.repeat_payment_page import RepeatPaymentPage
 from pages.search_page import SearchPage
 
 
@@ -23,10 +25,12 @@ class MainPage(BasePage):
     search = SearchPage()
     favorites = FavoritesPage()
     profile = ProfilePage()
+    repeat = RepeatPaymentPage()
 
     @allure.step("Регистрация")
     def user_registration(self):
         self.click(MainLocators.PROFILE_NAV, "иконка профиля")
+        self.wait_a_second()
         self.swipe_page_up(2)
         self.wait_a_second()
         self.click(MainLocators.registration_btn, "кнопка Зарегистрироваться")

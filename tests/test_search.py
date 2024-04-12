@@ -8,6 +8,8 @@ import allure
 @pytest.mark.usefixtures("setup")
 @allure.feature("Поиск")
 class TestSearch:
+    @pytest.mark.search
+    @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Удачный поиск по текстовому запросу')
     @allure.testcase("C3")
     def test_search_text(self):
@@ -17,6 +19,8 @@ class TestSearch:
         page.search.search(product_name_ru)
         page.search.elements_search()
 
+    @pytest.mark.search
+    @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Валидный запрос для одной категории')
     @allure.testcase("C1779")
     def test_search_text_one_category(self):
@@ -28,6 +32,8 @@ class TestSearch:
         page.click(SearchLocators.MEN)
         page.search.elements_search_fail()
 
+    @pytest.mark.search
+    @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Удачный поиск по артикулу')
     @allure.testcase("C199")
     def test_search_article(self):

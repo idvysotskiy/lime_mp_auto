@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 from locators import FavoritesLocators, MainLocators, CatalogLocators, CollectionLocators
@@ -8,8 +10,21 @@ import random
 
 @pytest.mark.usefixtures("setup")
 @allure.feature("Каталог")
-class TestAndroid:
+class TestCatalog:
+    @pytest.mark.catalog
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Экран "Каталог" / Переход из каталога на основной экран')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1757")
+    def test_close_catalog(self):
+        page = MainPage()
+        page.open_catalog()
+        page.click_x()
+        page.wait_hidden_element(CatalogLocators.catalog_item)
+        page.wait_element(MainLocators.lime_logo)
+        page.wait_hidden_element(CatalogLocators.MENU_ITEM)
 
+    @pytest.mark.catalog
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Основной раздел')
@@ -26,6 +41,7 @@ class TestAndroid:
         page.swipe_page_up()
         page.wait_element(CatalogLocators.GIFT_CARD, 'Подарочная карта')
 
+    @pytest.mark.catalog
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Раздел без подразделов')
@@ -34,6 +50,29 @@ class TestAndroid:
         page = MainPage()
         page.open_catalog()
         page.catalog.open_catalog_without_chapter()
-        catalog_name = page.get_text(CollectionLocators.tittle)
-        print(catalog_name, f"{catalog_name} не имеет подразделов")
+
+    @pytest.mark.catalog
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Экран "Каталог" / Переход от раздела к разделу(Содержащий подразделы)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/54")
+    def test_catalog_with_chapter(self):
+        page = MainPage()
+        page.open_catalog()
+        catalog_name = page.catalog.open_catalog_with_chapter()
+        print(f"{catalog_name}.Содержит разделы")
+
+    @pytest.mark.catalog
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Экран "Каталог" / Переключения между категориями')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1756")
+    def test_switch_catalog(self):
+        page = MainPage()
+        page.open_catalog()
+        page.click(CatalogLocators.MEN)
+
+
+
+
 
