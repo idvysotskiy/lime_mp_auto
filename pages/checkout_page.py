@@ -14,6 +14,7 @@ class CheckOutPage(BasePage):
         self.d.click(0.504, 0.360)
         self.wait_a_moment()
         self.d.click(0.504, 0.470)
+        time.sleep(2)
 
     @allure.step('Нажать кнопку "Неудача" на экране Cloud Payments')
     def fail_cloud_payments(self):
@@ -29,12 +30,6 @@ class CheckOutPage(BasePage):
         self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
-
-    @allure.step('Нажать кнопку "Успешно"')
-    def accept_accept_cloud_payments(self):
-        time.sleep(5)
-        self.accept_cloud_payments()
-        time.sleep(5)
 
     def elements_success_pay(self):
         self.wait_element(SuccessPayScreenLocators.TITLE)
@@ -293,6 +288,7 @@ class CheckOutPage(BasePage):
             self.swipe_page_up()
             self.wait_a_second()
             self.click(CheckOutLocators.date)
+            self.wait_a_moment()
             self.click(CheckOutLocators.time)
 
     @allure.step("Выбор способа оплаты - Подарочной картой. С заполнением данных")

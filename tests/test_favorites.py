@@ -194,8 +194,6 @@ class TestFavorites:
             page.press_back()
             page.press_back()
         page.press_back()
-        page.open_profile()
-        page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_favorites()
@@ -233,6 +231,7 @@ class TestFavorites:
         page.open_favorites()
         page.favorites.favorites_product_bottom_buy()
         page.favorites.swipe_module_bottom()
+        page.wait_a_second()
         page.wait_hidden_element(FavoritesLocators.MODULEWINDOW, "Модульное окно")
 
     @pytest.mark.favorites

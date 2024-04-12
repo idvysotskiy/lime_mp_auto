@@ -295,6 +295,7 @@ class TestCart:
         page.swipe_page_up()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.accept_cloud_payments()
         page.checkout.click_continue_shopping()
         page.click_x()
         page.open_cart()
@@ -474,5 +475,5 @@ class TestCart:
         page.cart.enter_promo_code()
         discount = page.cart.get_cart_discount()
         price_with_discount = page.cart.get_cart_price()
-        assert price + discount == price_with_discount, f'Итоговая цена {price_with_discount} не равна разности исходной цены {price} и скидке {discount}'
+        assert price - discount == price_with_discount, f'Итоговая цена {price_with_discount} не равна разности исходной цены {price} и скидке {discount}'
 

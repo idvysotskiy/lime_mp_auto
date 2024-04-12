@@ -9,6 +9,7 @@ class MainLocators:
     # BASE
     X_BUTTON = '//android.widget.ImageButton'
     NOTIFICATION_NEGATIVE = '//*[@resource-id="ru.limeshop.android.dev:id/notification_negative_button"]'
+    notification_positive_button = "ru.limeshop.android.dev:id/notification_positive_button"
     TOOLBAR_TITLE = 'ru.limeshop.android.dev:id/toolbarTitle'
     lime_logo = 'ru.limeshop.android.dev:id/banner_label_image_view'
     snack_bar_message = '//*[@resource-id="ru.limeshop.android.dev:id/title_text_view"]'

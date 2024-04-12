@@ -11,6 +11,7 @@ class TestMobile:
     @allure.title('Экран "Карточка товара" / Кнопка "Купить"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/12")
     @pytest.mark.smoke
+    @pytest.mark.cart
     def test_size_bottom_sheet(self):
         page = MainPage()
         page.open_catalog()
@@ -26,19 +27,24 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/290")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/11")
     @pytest.mark.smoke
+    @pytest.mark.cart
     def test_open_product_card(self):
         page = MainPage()
         page.open_catalog()
         collection_title = page.catalog.open_random_catalog()
         page.catalog.open_random_card()
+        page.card.elements_product_card()
+        page.card.open_full_product_card()
         page.card.checking_card_elements()
         page.card.click_back()
-        assert collection_title == page.catalog.get_collection_title(), print(f"Название коллекции после возврата из карточки изменилось. До переход в карточку: {collection_title}, после перехода: {page.catalog.get_collection_title()}")
+        assert collection_title == page.catalog.get_collection_title(), print(
+            f"Название коллекции после возврата из карточки изменилось. До переход в карточку: {collection_title}, после перехода: {page.catalog.get_collection_title()}")
 
     @allure.title('Экран "Карточка товара" / Кнопка Купить (Изменение)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1622")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1979")
     @pytest.mark.smoke
+    @pytest.mark.cart
     def test_buy_button_changes(self):
         page = MainPage()
         page.open_catalog()
@@ -52,7 +58,7 @@ class TestMobile:
     @allure.title('Экран "Карточка товара" / Кнопка Избранное (Добавить в избранное)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/291")
     @pytest.mark.smoke
-    @pytest.mark.regress
+    @pytest.mark.cart
     def test_add_to_favorites(self):
         page = MainPage()
         page.open_catalog()
@@ -66,7 +72,7 @@ class TestMobile:
     @allure.title('Экран "Карточка товара" / Кнопка Избранное (Удалить из избранного)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/293")
     @pytest.mark.smoke
-    @pytest.mark.regress
+    @pytest.mark.cart
     def test_delete_from_favorites(self):
         page = MainPage()
         page.open_catalog()
@@ -81,22 +87,24 @@ class TestMobile:
     @allure.title('Экран "Карточка товара" / Кнопка Поделиться')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/13")
     @pytest.mark.smoke
-    @pytest.mark.regress
+    @pytest.mark.cart
     def test_share(self):
         page = MainPage()
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         page.card.click_share()
-        page.wait_text("SHARE")
+        page.wait_text("Share")
 
     @allure.title('Экран "Карточка товара" / Кнопка Корзина')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/294")
     @pytest.mark.smoke
+    @pytest.mark.cart
     def test_basket_button(self):
         page = MainPage()
         page.open_catalog()
-        page.add_to_cart_random_product()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
         page.card.open_cart()
         page.cart.check_empty_cart()
 
@@ -104,6 +112,7 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3123")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3126")
     @pytest.mark.smoke
+    @pytest.mark.cart
     def test_delivery_button(self):
         page = MainPage()
         page.open_catalog()
@@ -114,18 +123,3 @@ class TestMobile:
         page.swipe_page_down()
         page.wait_hidden_element(ProductCardLocators.delivery_description_page, "описание доставки и возврата")
 
-
-
-
-    # @pytest.mark.smoke
-    # @allure.title('')
-    # @allure.testcase("")
-    # def test_buy_wtf(self):
-    #     page = MainPage()
-    #     page.clear_basket()
-    #     page.open_catalog()
-    #     page.catalog.open_random_catalog()
-    #     page.catalog.open_random_card()
-    #     page.card.elements_product_card()
-    #     page.card.open_full_product_card()
-    #     page.card.elements_full_product_card()
