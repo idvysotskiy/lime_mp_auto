@@ -49,8 +49,9 @@ class MainPage(BasePage):
         self.wait_a_second()
         self.wait_a_second()
         self.cancel_notification()
+        self.wait_a_second()
+        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'ЛИЧНЫЙ КАБИНЕТ', f'Приложение открыто на экране {self.get_text(MainLocators.TOOLBAR_TITLE)}, а не на экране ЛИЧНЫЙ КАБИНЕТ'
         self.wait_text(email)
-        # self.add_new_address()
         self.click_x()
         return email
 
@@ -140,24 +141,25 @@ class MainPage(BasePage):
         title_name = self.d(resourceId=MainLocators.TOOLBAR_TITLE).get_text()
         assert name == title_name
 
-    @allure.step('Перейти к карточке товара')
-    def go_to_product_card(self):
-        try:
-            self.click(MainLocators.PRODUCT_CARD_1)
-        except ZeroDivisionError:
-            try:
-                self.click(MainLocators.PRODUCT_CARD_1_1)
-            except Exception:
-                print('Элемент меню не найден')
-                raise
+    # @allure.step('Перейти к карточке товара')
+    # def go_to_product_card(self):
+    #     try:
+    #         self.click(MainLocators.PRODUCT_CARD_1)
+    #     except ZeroDivisionError:
+    #         try:
+    #             self.click(MainLocators.PRODUCT_CARD_1_1)
+    #         except Exception:
+    #             print('Элемент меню не найден')
+    #             raise
 
     @allure.step("Переход в корзину")
     def open_cart(self):
         self.click(MainLocators.CART_NAV)
 
     @allure.step('Меняем контур')
-    def set_contur(self, contur=MP3):
+    def set_contur(self, contur=QA2):
         self.open_profile()
+        self.swipe_page_up()
         time.sleep(2)
         self.click(self.d(textContains=contur).sibling(
             resourceId='ru.limeshop.android.dev:id/item_checkable_option_active'), f"Контур - {contur}")
