@@ -51,7 +51,7 @@ class CatalogPage(BasePage):
             counter = random.randrange(2, self.d(resourceId=CatalogLocators.catalog_item).count - 2)
             name = self.get_element(CatalogLocators.catalog_item)[counter].get_text()
             self.click(self.d(resourceId=CatalogLocators.catalog_item)[counter], "Радномный каталог")
-            if self.get_element(CollectionLocators.tittle):
+            if self.get_element(CollectionLocators.title):
                 self.click_x()
                 self.wait_a_moment()
             else:
@@ -62,3 +62,6 @@ class CatalogPage(BasePage):
     def get_collection_title(self):
         return self.get_text(CollectionLocators.title)
 
+    def click_catalog_coords(self):
+        bounds = self.get_random_element_catalog(CatalogLocators.catalog_item).bounds()
+        self.coordinate_click(bounds[2] - 100, (bounds[3] + bounds[1]) / 2)
