@@ -17,6 +17,9 @@ class CatalogPage(BasePage):
             self.wait_element(MainLocators.submenu_elements_list, "подраздел каталога")
             self.click(self.get_random_element(CatalogLocators.submenu_elements_list), "рандомный подраздел каталога")
 
+        collection_title = self.get_collection_title()
+        return collection_title
+
     @allure.step("Переход в рандомную карточку товара")
     def open_random_card(self):
         self.wait_element(CatalogLocators.cards_image)
@@ -55,13 +58,7 @@ class CatalogPage(BasePage):
                 break
         return name
 
-    @allure.step('Получение списка названии каталогов')
-    def list_name_for_catalogs(self):
-        catalog_list = []
+    @allure.step("Получение заголовка коллекции")
+    def get_collection_title(self):
+        return self.get_text(CollectionLocators.title)
 
-        for i in range(self.get_element(CatalogLocators.catalog_item).count):
-            catalog_list.append(self.get_element(CatalogLocators.catalog_item)[i].get_text())
-
-        print()
-
-        # assert "ЮБКИ" not in catalog_list

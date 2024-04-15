@@ -14,6 +14,7 @@ class CheckOutPage(BasePage):
         self.d.click(0.504, 0.360)
         self.wait_a_moment()
         self.d.click(0.504, 0.470)
+        time.sleep(2)
 
     @allure.step('Нажать кнопку "Неудача" на экране Cloud Payments')
     def fail_cloud_payments(self):
@@ -21,17 +22,16 @@ class CheckOutPage(BasePage):
         time.sleep(2)
         self.get_screen()
         self.d.click(0.504, 0.450)
-        self.wait_a_moment()
+        time.sleep(2)
         self.d.click(0.504, 0.560)
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay(self):
-        # self.swipe_page_up(1)
+        self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
-        time.sleep(5)
-        self.accept_cloud_payments()
-        time.sleep(5)
+
+    def elements_success_pay(self):
         self.wait_element(SuccessPayScreenLocators.TITLE)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         assert self.get_text(
@@ -40,7 +40,7 @@ class CheckOutPage(BasePage):
         self.get_screen()
 
     def click_pay_no_funds(self):
-        # self.swipe_page_up(1)
+        self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
@@ -50,7 +50,7 @@ class CheckOutPage(BasePage):
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay_without_3ds(self):
-        # self.swipe_page_up(1)
+        self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         self.wait_element(SuccessPayScreenLocators.TITLE)
@@ -93,16 +93,18 @@ class CheckOutPage(BasePage):
     @allure.step('Нажать кнопку "Заказать"')
     def click_pay_upon_receipt(self):
         self.wait_a_second()
+        self.swipe_page_up()
+        self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
 
     @allure.step('Нажать кнопку "Оплатить"')
     def click_pay_fail_cloud_payments(self):
-        # self.swipe_page_up(1)
+        self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
         time.sleep(5)
         self.fail_cloud_payments()
-        time.sleep(1)
+        time.sleep(5)
         self.wait_element(SuccessPayScreenLocators.TITLE)
         assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ОПЛАТА НЕ ПРОШЛА'
         assert self.get_text(
@@ -112,6 +114,7 @@ class CheckOutPage(BasePage):
 
     @allure.step('Нажать кнопку "Оплатить" (СБП)')
     def click_pay_sbp(self):
+        self.wait_a_second()
         self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
@@ -121,50 +124,50 @@ class CheckOutPage(BasePage):
         time.sleep(5)
         self.accept_cloud_payments()
         self.press_back()
-        self.wait_element(CheckOutLocators.STATUS_PAY_TITLE)
+        # self.wait_element(CheckOutLocators.STATUS_PAY_TITLE)
+        time.sleep(5)
         assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ОЖИДАЕМ ПОДТВЕРЖДЕНИЕ ПЛАТЕЖА'
         self.get_screen()
         time.sleep(100)
         assert self.get_text(CheckOutLocators.STATUS_PAY_TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
         self.get_screen()
 
-
-    @allure.step('Выбрать элементы на экране Оформление заказа')
-    def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
-        with allure.step(f"Выбрать способ доставки '{delivery_method}'"):
-            if delivery_method == '1':
-                self.click(CheckOutLocators.DELIVERY_SELECTOR_1)
-            elif delivery_method == '2':
-                self.click(CheckOutLocators.DELIVERY_SELECTOR_2)
-            elif delivery_method == '3':
-                self.click(CheckOutLocators.DELIVERY_SELECTOR_3)
-            time.sleep(1)
-        with allure.step(f"Выбрать способ оплаты '{pay_method}'"):
-            if pay_method == '1':
-                self.click(CheckOutLocators.PAYMENT_SELECTOR_1)
-            elif pay_method == '2':
-                self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
-            elif pay_method == '3':
-                self.click(CheckOutLocators.PAYMENT_SELECTOR_3)
-            elif pay_method == '4':
-                self.click(CheckOutLocators.PAYMENT_SELECTOR_4)
-            time.sleep(1)
-        with allure.step(f"Выбрать дату доставки '{date_slot}'"):
-            if date_slot == '1':
-                self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_1)
-            elif date_slot == '2':
-                self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_2)
-            elif date_slot == '3':
-                self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_3)
-            time.sleep(1)
-        with allure.step(f"Выбрать время доставки '{time_slot}'"):
-            if time_slot == '1':
-                self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_1)
-            elif time_slot == '2':
-                self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_2)
-            elif time_slot == '3':
-                self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_3)
-        self.get_screen()
+    # @allure.step('Выбрать элементы на экране Оформление заказа')
+    # def checkout_set(self, delivery_method, pay_method, date_slot, time_slot):
+    #     with allure.step(f"Выбрать способ доставки '{delivery_method}'"):
+    #         if delivery_method == '1':
+    #             self.click(CheckOutLocators.DELIVERY_SELECTOR_1)
+    #         elif delivery_method == '2':
+    #             self.click(CheckOutLocators.DELIVERY_SELECTOR_2)
+    #         elif delivery_method == '3':
+    #             self.click(CheckOutLocators.DELIVERY_SELECTOR_3)
+    #         time.sleep(1)
+    #     with allure.step(f"Выбрать способ оплаты '{pay_method}'"):
+    #         if pay_method == '1':
+    #             self.click(CheckOutLocators.PAYMENT_SELECTOR_1)
+    #         elif pay_method == '2':
+    #             self.click(CheckOutLocators.PAYMENT_SELECTOR_2)
+    #         elif pay_method == '3':
+    #             self.click(CheckOutLocators.PAYMENT_SELECTOR_3)
+    #         elif pay_method == '4':
+    #             self.click(CheckOutLocators.PAYMENT_SELECTOR_4)
+    #         time.sleep(1)
+    #     with allure.step(f"Выбрать дату доставки '{date_slot}'"):
+    #         if date_slot == '1':
+    #             self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_1)
+    #         elif date_slot == '2':
+    #             self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_2)
+    #         elif date_slot == '3':
+    #             self.click(CheckOutLocators.SLOTS_DATE_SELECTOR_3)
+    #         time.sleep(1)
+    #     with allure.step(f"Выбрать время доставки '{time_slot}'"):
+    #         if time_slot == '1':
+    #             self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_1)
+    #         elif time_slot == '2':
+    #             self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_2)
+    #         elif time_slot == '3':
+    #             self.click(CheckOutLocators.SLOTS_TIME_SELECTOR_3)
+    #     self.get_screen()
 
     @allure.step('Проверить элементы на экране Оформление заказа')
     def elements_checkout(self):
@@ -285,6 +288,7 @@ class CheckOutPage(BasePage):
             self.swipe_page_up()
             self.wait_a_second()
             self.click(CheckOutLocators.date)
+            self.wait_a_moment()
             self.click(CheckOutLocators.time)
 
     @allure.step("Выбор способа оплаты - Подарочной картой. С заполнением данных")
@@ -320,8 +324,10 @@ class CheckOutPage(BasePage):
 
     @allure.step("Выбор способа оплаты - При получении")
     def set_upon_receipt(self):
-        self.click(CheckOutLocators.receiving_selector, "при получении")
-        self.wait_element(CheckOutLocators.PAYMENT_INFO_TEXT)
+        self.click(CheckOutLocators.receiving_selector, "При получении")
+        self.wait_a_second()
+        assert self.get_text(CheckOutLocators.PAYMENT_INFO_TEXT) == 'Наличными или картой при получении'
+        self.get_screen()
 
     @allure.step("Выбор способа оплаты - Подарочной картой")
     def set_gift_card_selector(self):
@@ -408,31 +414,59 @@ class CheckOutPage(BasePage):
         return gift_card_number, gift_card_pin
 
     @allure.step("Добавление доплаты картой")
-    def add_additional_payment(self):
+    def add_additional_payment_no_card(self):
+        self.wait_a_second()
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
-        self.click(self.d(textContains='Добавить карту').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
-        self.set_text(CheckOutLocators.card_number, "4242424242424242", "номер карты")
-        self.set_text(CheckOutLocators.cardholder, "Test Testov", "владелец карты")
-        self.set_text(CheckOutLocators.card_date, "1230", "дата окончания карты")
-        self.set_text(CheckOutLocators.card_cvv, "123", "cvv карты")
+        self.wait_a_second()
+        if self.is_element_present(CheckOutLocators.ADD_NEW_CARD_BUTTON):
+            self.click(CheckOutLocators.ADD_NEW_CARD_BUTTON, 'кнопка добавить карту')
+        else:
+            self.click(self.d(textContains='Картой онлайн').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+        self.enter_card_data()
+        self.check_additional_payment()
+
+    @allure.step("Добавление доплаты картой")
+    def add_additional_payment(self):
+        self.wait_a_second()
+        self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
+        self.wait_a_second()
+        if self.is_element_present(CheckOutLocators.ADD_NEW_CARD_BUTTON):
+            self.click(CheckOutLocators.ADD_NEW_CARD_BUTTON, 'кнопка добавить карту')
+        else:
+            self.click(self.d(textContains='Добавить карту').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+        self.enter_card_data()
+        self.check_additional_payment()
+
+    @allure.step("Заполнить данные карты")
+    def enter_card_data(self, card=card_1):
+        self.set_text(CheckOutLocators.card_number, card, "номер карты")
+        self.set_text(CheckOutLocators.cardholder, card_owner, "владелец карты")
+        self.set_text(CheckOutLocators.card_date, card_expiry, "дата окончания карты")
+        self.set_text(CheckOutLocators.card_cvv, card_cvv, "cvv карты")
         self.click(CheckOutLocators.save_card_btn, "кнопка Сохранить")
 
+    @allure.step("Проверить что карта добавлена в способ доплаты")
+    def check_additional_payment(self):
         if len(self.d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
             self.coordinate_click(100, 100)
-
+        self.wait_a_second()
         assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text', textContains='4242').wait(
             5) == True, print("В блоке Доплата не отображается карта 4242")
 
     @allure.step("Добавление доплаты картой")
     def add_additional_payment_sbp(self):
+        self.wait_a_second()
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
-        self.click(CheckOutLocators.SURCHARGE_SBP_SELECTOR, "радиобаттон ""Через СБП")
+        self.wait_element('ru.limeshop.android.dev:id/is_selected_card_radio')
+        self.click(self.d(textContains='Через СБП').sibling(
+            resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - СБП")
         self.wait_element(CheckOutLocators.CARD_INFO)
         assert self.get_text(CheckOutLocators.CARD_INFO) == 'Через СБП', print(
             'В блоке Доплата не отображается Через СБП')
 
     @allure.step("Клик Продолжить покупки (после оформления заказа)")
     def click_continue_shopping(self):
+        self.wait_element(SuccessPayScreenLocators.BUTTON)
         self.click(SuccessPayScreenLocators.BUTTON, "кнопка Продолжить покупки")
 
     @allure.step("Проверка наличия номера карты '{card_number}' в чекауте")
@@ -546,4 +580,15 @@ class CheckOutPage(BasePage):
     @allure.step('Суммарная стоимость c учетом скидки в блоке саммери')
     def get_summary_total(self):
         return self.get_number_from_element(CheckOutLocators.SUMMARY_TOTAL)
+
+    @allure.step('Суммарная стоимость c учетом скидки в блоке саммери')
+    def check_discount(self, price, discount, price_with_discount):
+        price_order_list = self.get_order_list_price_with_discount()
+        assert price_order_list == price_with_discount, f'Итоговая цена из корзины{price_with_discount} не совпадает с ценой в составе заказа {price_order_list}'
+        summary_discount = self.get_summary_discount()
+        assert discount == summary_discount, f"Скидка с экрана Корзина {discount} не совпадает со скидкой на экране Оформление заказа {summary_discount}"
+        summary_coast = self.get_summary_coast()
+        summary_total = self.get_summary_total()
+        assert price == summary_coast, f'Стоимость с карточки товара {price} не совпадает с стоимостью в блоке саммери {summary_coast}'
+        assert price_with_discount == summary_total, f'Стоимость товара со скидкой {price_with_discount} с экрана корзина не совпадает с стоимостью со скидкой в блоке саммери {summary_total}'
 

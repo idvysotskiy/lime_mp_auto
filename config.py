@@ -5,6 +5,12 @@ package = 'ru.limeshop.android.dev'
 # package = 'ru.limeshop.android'
 app_link = 'app_link'
 
+MP1 = 'MP1 контур https://mp1.lmdev.ru/'
+MP2 = 'MP2 контур https://mp2.lmdev.ru/'
+MP3 = 'MP3 контур https://mp3.lmdev.ru/'
+QA1 = 'QA1 контур https://qa1.lmdev.ru/'
+QA2 = 'QA2 контур https://qa2.lmdev.ru/'
+
 # Reg valid data
 valid_name_lat = "Ivan"
 valid_surname_lat = 'Ivanov'
@@ -46,7 +52,7 @@ card_owner = 'IVAN SIDOROV'
 card_expiry = '0125'
 card_cvv = '123'
 
-gift_card_list = {'7114280619425099': '7979', '6089952421263991': '1171', '4485928961828302': '3066', '9595731574100900': '8709', '8760983837105082': '4707'}
+gift_card_list = {'9263908528987500': '8195', '8052093706832067': '5301', '3451480351595193': '6588', '2625884058749947': '5078', '8575529756336615': '6786', '3652362379224219': '1368'}
 blocked_gift_card = {'2731131568122692': '6467'}
 
 product_name_ru = 'платье'

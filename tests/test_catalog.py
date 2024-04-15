@@ -10,8 +10,8 @@ import random
 
 @pytest.mark.usefixtures("setup")
 @allure.feature("Каталог")
-class TestAndroid:
-
+class TestCatalog:
+    @pytest.mark.catalog
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Переход из каталога на основной экран')
@@ -24,6 +24,7 @@ class TestAndroid:
         page.wait_element(MainLocators.lime_logo)
         page.wait_hidden_element(CatalogLocators.MENU_ITEM)
 
+    @pytest.mark.catalog
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Основной раздел')
@@ -40,6 +41,7 @@ class TestAndroid:
         page.swipe_page_up()
         page.wait_element(CatalogLocators.GIFT_CARD, 'Подарочная карта')
 
+    @pytest.mark.catalog
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Раздел без подразделов')
@@ -49,6 +51,7 @@ class TestAndroid:
         page.open_catalog()
         page.catalog.open_catalog_without_chapter()
 
+    @pytest.mark.catalog
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Переход от раздела к разделу(Содержащий подразделы)')
@@ -59,6 +62,7 @@ class TestAndroid:
         catalog_name = page.catalog.open_catalog_with_chapter()
         print(f"{catalog_name}.Содержит разделы")
 
+    @pytest.mark.catalog
     @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Переключения между категориями')

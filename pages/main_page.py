@@ -5,6 +5,7 @@ import random
 import pytest
 
 from pages.base_page import BasePage
+from config import *
 from locators import *
 from pages.cart_page import CartPage
 from pages.catalog_page import CatalogPage
@@ -12,6 +13,7 @@ from pages.checkout_page import CheckOutPage
 from pages.favorites_page import FavoritesPage
 from pages.product_card_page import ProductCardPage
 from pages.profile_page import ProfilePage
+from pages.repeat_payment_page import RepeatPaymentPage
 from pages.search_page import SearchPage
 
 
@@ -23,10 +25,12 @@ class MainPage(BasePage):
     search = SearchPage()
     favorites = FavoritesPage()
     profile = ProfilePage()
+    repeat = RepeatPaymentPage()
 
     @allure.step("Регистрация")
     def user_registration(self):
         self.click(MainLocators.PROFILE_NAV, "иконка профиля")
+        self.wait_a_second()
         self.swipe_page_up(2)
         self.wait_a_second()
         self.click(MainLocators.registration_btn, "кнопка Зарегистрироваться")
@@ -40,13 +44,14 @@ class MainPage(BasePage):
         self.set_text(MainLocators.repeat_password, valid_password, "повторение пароля")
         self.swipe_page_up()
         self.wait_a_second()
-        # self.click(MainLocators.approve_checkbox, 'чекбокс Я даю согласие на получение маркетинговых коммуникаций')
-        # self.click_subscribe_boxes(subscribe)
         self.click(LoginLocators.SIGNUP_SUBSCRIBE_ACCEPT, "чекбокс согласия маркетинговых коммуникаций")
         self.click(MainLocators.continue_btn, "кнопка Продолжить")
+        self.wait_a_second()
+        self.wait_a_second()
         self.cancel_notification()
+        self.wait_a_second()
+        assert self.get_text(MainLocators.TOOLBAR_TITLE) == 'ЛИЧНЫЙ КАБИНЕТ', f'Приложение открыто на экране {self.get_text(MainLocators.TOOLBAR_TITLE)}, а не на экране ЛИЧНЫЙ КАБИНЕТ'
         self.wait_text(email)
-        # self.add_new_address()
         self.click_x()
         return email
 
@@ -136,27 +141,28 @@ class MainPage(BasePage):
         title_name = self.d(resourceId=MainLocators.TOOLBAR_TITLE).get_text()
         assert name == title_name
 
-    @allure.step('Перейти к карточке товара')
-    def go_to_product_card(self):
-        try:
-            self.click(MainLocators.PRODUCT_CARD_1)
-        except ZeroDivisionError:
-            try:
-                self.click(MainLocators.PRODUCT_CARD_1_1)
-            except Exception:
-                print('Элемент меню не найден')
-                raise
+    # @allure.step('Перейти к карточке товара')
+    # def go_to_product_card(self):
+    #     try:
+    #         self.click(MainLocators.PRODUCT_CARD_1)
+    #     except ZeroDivisionError:
+    #         try:
+    #             self.click(MainLocators.PRODUCT_CARD_1_1)
+    #         except Exception:
+    #             print('Элемент меню не найден')
+    #             raise
 
     @allure.step("Переход в корзину")
     def open_cart(self):
         self.click(MainLocators.CART_NAV)
 
-    @allure.step('Меняем контур на nuxt-02')
-    def set_nuxt_02(self):
+    @allure.step('Меняем контур')
+    def set_contur(self, contur=QA2):
         self.open_profile()
+        self.swipe_page_up()
         time.sleep(2)
-        self.d.click(0.062, 0.508)
-        time.sleep(2)
+        self.click(self.d(textContains=contur).sibling(
+            resourceId='ru.limeshop.android.dev:id/item_checkable_option_active'), f"Контур - {contur}")
 
     @allure.step('Включаем feature_toggles')
     def set_feature_toggles(self):
@@ -230,4 +236,19 @@ class MainPage(BasePage):
         self.click(MainLocators.FAVORITES_NAV, "кнопка 'Избранное'")
         self.wait_element(FavoritesLocators.TITLE)
 
+    @allure.step('Ввести код из смс')
+    def enter_code_from_sms(self, code='0000'):
+        self.set_text(LoginLocators.number_text_1, code)
+
+    @allure.step('Авторизоваться по номеру телефона')
+    def login_with_phone(self, phone='9639447845'):
+        with allure.step('Открыть Личный кабинет'):
+            self.click(MainLocators.PROFILE_NAV)
+            self.swipe_page_up(2)
+            self.wait_a_second()
+        with allure.step('Нажать кнопку "Войти"'):
+            self.click(ProfileLocators.LOGIN_UN)
+            self.set_text(LoginLocators.phone_field, phone)
+            self.click(LoginLocators.get_code_button)
+            self.enter_code_from_sms()
 

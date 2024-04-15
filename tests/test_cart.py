@@ -132,8 +132,8 @@ class TestCart:
         page.press_back()
         page.press_back()
         page.click_x()
-        page.open_profile()
-        page.swipe_page_up(2)
+        # page.open_profile()
+        # page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_catalog()
@@ -153,8 +153,8 @@ class TestCart:
     def test_basket_list_after_authorization(self):
         page = MainPage()
         email = page.user_registration()
-        page.open_profile()
-        page.swipe_page_up(2)
+        # page.open_profile()
+        # page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_catalog()
@@ -179,8 +179,8 @@ class TestCart:
         page.press_back()
         page.press_back()
         page.click_x()
-        page.open_profile()
-        page.swipe_page_up(2)
+        # page.open_profile()
+        # page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_cart()
@@ -259,7 +259,7 @@ class TestCart:
         page.cart.cart_clear()
         page.cart.check_empty_cart()
 
-    @allure.title('Экран "Корзина" / Кнопка "Очистить" (возврат кдругому экрану корзины)')
+    @allure.title('Экран "Корзина" / Кнопка "Очистить" (возврат к другому экрану корзины)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2578")
     @pytest.mark.smoke
     @pytest.mark.basket
@@ -290,11 +290,12 @@ class TestCart:
         page.cart.go_to_checkout()
         page.checkout.click_add_address_btn()
         page.checkout.add_main_address()
-        page.checkout.set_card_online_selector()
-        page.checkout.add_new_card()
+        page.checkout.card_online_select()
+        page.checkout.add_first_card()
         page.swipe_page_up()
         page.checkout.set_date_and_time()
         page.checkout.click_pay()
+        page.checkout.accept_cloud_payments()
         page.checkout.click_continue_shopping()
         page.click_x()
         page.open_cart()
@@ -334,8 +335,8 @@ class TestCart:
     def test_promo_after_authorization(self):
         page = MainPage()
         email = page.user_registration()
-        page.open_profile()
-        page.swipe_page_up(2)
+        # page.open_profile()
+        # page.swipe_page_up(2)
         page.profile.logout()
         page.click_x()
         page.open_catalog()
@@ -459,4 +460,20 @@ class TestCart:
         assert int(page.get_number_from_element(CartLocators.SUMMARY_PRICE) * 0.9) == page.get_number_from_element(
             CartLocators.FINAL_PRICE), print(
             f"Скидка не активна после удаления одного из двух товаров. Сумма товаров = {int(page.get_number_from_element(CartLocators.SUMMARY_PRICE) * 0.9)}, сумма Итого = {page.get_number_from_element(CartLocators.FINAL_PRICE)}")
+
+    @allure.title('Экран "Корзина" / Поле "Промокод" (Учет скидки в стоимости)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3356")
+    @pytest.mark.basket
+    @pytest.mark.smoke
+    def test_promo_code_discount(self):
+        page = MainPage()
+        page.user_registration()
+        page.open_catalog()
+        page.add_to_cart_random_product()
+        price = page.card.get_product_price()
+        page.card.open_cart()
+        page.cart.enter_promo_code()
+        discount = page.cart.get_cart_discount()
+        price_with_discount = page.cart.get_cart_price()
+        assert price - discount == price_with_discount, f'Итоговая цена {price_with_discount} не равна разности исходной цены {price} и скидке {discount}'
 
