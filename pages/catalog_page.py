@@ -54,3 +54,14 @@ class CatalogPage(BasePage):
             else:
                 break
         return name
+
+    @allure.step('Получение списка названии каталогов')
+    def list_name_for_catalogs(self):
+        catalog_list = []
+
+        for i in range(self.get_element(CatalogLocators.catalog_item).count):
+            catalog_list.append(self.get_element(CatalogLocators.catalog_item)[i].get_text())
+
+        print()
+
+        # assert "ЮБКИ" not in catalog_list

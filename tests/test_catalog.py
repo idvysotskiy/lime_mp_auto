@@ -66,9 +66,12 @@ class TestAndroid:
     def test_switch_catalog(self):
         page = MainPage()
         page.open_catalog()
+        women_list = page.catalog.list_name_for_catalogs()
+        print(women_list)
         page.click(CatalogLocators.MEN)
-
-
+        men_list = page.catalog.list_name_for_catalogs()
+        print(men_list)
+        # assert "ЮБКИ" not in men_list
 
 
 
