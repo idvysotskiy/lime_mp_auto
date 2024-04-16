@@ -1,3 +1,5 @@
+import time
+
 import pytest
 import uiautomator2 as u2
 from config import *
@@ -44,7 +46,8 @@ def teardown():
 
 @pytest.fixture()
 def setup():
-    # d.service('uiautomator').start()
+    # d.service("uiautomator").start()
+    # time.sleep(10)
     open_app()
     yield
     teardown()

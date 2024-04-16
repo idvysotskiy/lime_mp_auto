@@ -316,6 +316,31 @@ class CheckOutPage(BasePage):
                    text=f'Подарочная карта••••{gift_card_number}')
         return gift_card_number, gift_card_pin
 
+    # @allure.step("Выбор способа оплаты - Подарочной картой. Оплата части стоимости")
+    # def set_gift_card_part_price(self, price):
+    #     dictionary = gift_card_list
+    #     gift_card_number = ''
+    #     gift_card_pin = ''
+    #
+    #     for i in range(len(dictionary)):
+    #         self.set_text(CheckOutLocators.gift_card_number_field, list(dictionary.keys())[i], "Номер подарочной карты")
+    #         self.wait_a_second()
+    #         card_balance = self.get_number_from_element(CheckOutLocators.gift_card_balance)
+    #
+    #         if 200 <= card_balance:
+    #             self.set_text(CheckOutLocators.gift_card_pin_field, list(dictionary.values())[i], "Пин-код")
+    #             self.wait_a_second()
+    #             self.click(CheckOutLocators.gift_card_continue_btn, "кнопка Продолжить")
+    #             gift_card_number = list(dictionary.keys())[i]
+    #             gift_card_pin = list(dictionary.values())[i]
+    #             break
+    #
+    #     with allure.step(f"Проверка наличия номера подарочной карты '{gift_card_number}'"):
+    #         self.wait_element(CheckOutLocators.gift_number_text)
+    #         self.d(resourceId='ru.limeshop.android.dev:id/payment_gift_number_text',
+    #                text=f'Подарочная карта••••{gift_card_number}')
+    #     return gift_card_number, gift_card_pin
+
     @allure.step("Выбор способа доставки - Самовывоз")
     def set_pickup(self):
         self.click(CheckOutLocators.pickup_selector, "самовывоз")
@@ -390,7 +415,7 @@ class CheckOutPage(BasePage):
         assert self.d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
 
     @allure.step("Выбор способа оплаты - Подарочной картой. С заполнением данных и выбор доплаты")
-    def set_gift_card_with_additional_payment(self, price):
+    def set_gift_card_with_additional_payment(self, price=200):
         dictionary = gift_card_list
         gift_card_number = ''
         gift_card_pin = ''
