@@ -65,12 +65,14 @@ class TestCatalog:
     @pytest.mark.catalog
     @pytest.mark.smoke
     @pytest.mark.regress
-    @allure.title('Экран "Каталог" / Переключения между категориями')
-    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1756")
-    def test_switch_catalog(self):
+    @allure.title('Экран "Каталог" / Клик по ячейке пункта меню')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/3221")
+    def test_tap_out_name_catalog(self):
         page = MainPage()
         page.open_catalog()
-        page.click(CatalogLocators.MEN)
+        page.catalog.click_catalog_coords()
+        if page.catalog.get_element(CatalogLocators.catalog_item_recycler).count == 0:
+            page.wait_element(CollectionLocators.title)
 
 
 

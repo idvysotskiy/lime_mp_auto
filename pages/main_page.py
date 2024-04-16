@@ -10,6 +10,7 @@ from locators import *
 from pages.cart_page import CartPage
 from pages.catalog_page import CatalogPage
 from pages.checkout_page import CheckOutPage
+from pages.collection_page import CollectionPage
 from pages.favorites_page import FavoritesPage
 from pages.product_card_page import ProductCardPage
 from pages.profile_page import ProfilePage
@@ -26,6 +27,7 @@ class MainPage(BasePage):
     favorites = FavoritesPage()
     profile = ProfilePage()
     repeat = RepeatPaymentPage()
+    collection = CollectionPage()
 
     @allure.step("Регистрация")
     def user_registration(self):
