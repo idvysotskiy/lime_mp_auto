@@ -47,3 +47,15 @@ class TestMain:
     #     page = MainPage()
     #     page.login_with_phone()
 
+    @pytest.mark.main
+    @pytest.mark.smoke
+    @allure.title('TabBar / Цвет неактивных и активных иконок')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/197")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/194")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3392")
+    def test_reg(self):
+        page = MainPage()
+        page.icon_color_check(MainLocators.SEARCH_NAV)
+        page.icon_color_check(MainLocators.FAVORITES_NAV)
+        page.icon_color_catalog_check()
+        page.icon_color_add_to_fav_check()
