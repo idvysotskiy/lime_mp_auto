@@ -6,15 +6,27 @@ from locators import *
 
 class CheckOutPage(BasePage):
 
+    # @allure.step('Нажать кнопку "Успешно" на экране Cloud Payments')
+    # def accept_cloud_payments(self):
+    #     # self.wait_element(CheckOutLocators.cloud_payments)
+    #     time.sleep(2)
+    #     self.get_screen()
+    #     self.d.click(0.504, 0.360)
+    #     self.wait_a_moment()
+    #     self.d.click(0.504, 0.470)
+    #     time.sleep(2)
+
     @allure.step('Нажать кнопку "Успешно" на экране Cloud Payments')
     def accept_cloud_payments(self):
-        # self.wait_element(CheckOutLocators.cloud_payments)
-        time.sleep(2)
+        x = 720
+        elements = [350, 400, 450, 500]
         self.get_screen()
-        self.d.click(0.504, 0.360)
-        self.wait_a_moment()
-        self.d.click(0.504, 0.470)
-        time.sleep(2)
+        for y in elements:
+            pixel = (x, y)
+            color = self.get_color_pixel(pixel)
+            if color == (100, 150, 220):
+                self.d.click(x, y)
+            break
 
     @allure.step('Нажать кнопку "Неудача" на экране Cloud Payments')
     def fail_cloud_payments(self):
@@ -471,12 +483,12 @@ class CheckOutPage(BasePage):
         self.click(CheckOutLocators.save_card_btn, "кнопка Сохранить")
 
     @allure.step("Проверить что карта добавлена в способ доплаты")
-    def check_additional_payment(self):
+    def check_additional_payment(self, number='4242'):
         if len(self.d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
             self.coordinate_click(100, 100)
         self.wait_a_second()
-        assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text', textContains='4242').wait(
-            5) == True, print("В блоке Доплата не отображается карта 4242")
+        assert self.d(resourceId='ru.limeshop.android:id/payment_card_number_text', textContains=number).wait(
+            5) == True, print(f"В блоке Доплата не отображается карта {number}")
 
     @allure.step("Добавление доплаты картой")
     def add_additional_payment_sbp(self):
@@ -616,4 +628,10 @@ class CheckOutPage(BasePage):
         summary_total = self.get_summary_total()
         assert price == summary_coast, f'Стоимость с карточки товара {price} не совпадает с стоимостью в блоке саммери {summary_coast}'
         assert price_with_discount == summary_total, f'Стоимость товара со скидкой {price_with_discount} с экрана корзина не совпадает с стоимостью со скидкой в блоке саммери {summary_total}'
+
+
+
+
+
+
 

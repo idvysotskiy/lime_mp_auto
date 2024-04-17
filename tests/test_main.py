@@ -58,4 +58,6 @@ class TestMain:
         page.icon_color_check(MainLocators.SEARCH_NAV)
         page.icon_color_check(MainLocators.FAVORITES_NAV)
         page.icon_color_catalog_check()
-        page.icon_color_add_to_fav_check()
+        page.icon_color_check(MainLocators.FAV_ICON)
+        page.catalog.open_random_card()
+        page.icon_color_check(ProductCardLocators.FAVORITE)

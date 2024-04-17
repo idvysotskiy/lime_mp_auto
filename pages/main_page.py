@@ -16,7 +16,7 @@ from pages.product_card_page import ProductCardPage
 from pages.profile_page import ProfilePage
 from pages.repeat_payment_page import RepeatPaymentPage
 from pages.search_page import SearchPage
-from PIL import Image
+
 
 class MainPage(BasePage):
     cart = CartPage()
@@ -254,15 +254,6 @@ class MainPage(BasePage):
             self.click(LoginLocators.get_code_button)
             self.enter_code_from_sms()
 
-    @allure.step('Определяем цвет середины элемента')
-    def get_color(self, locator):
-        self.wait_element(locator)
-        self.get_screen()
-        img = Image.open("screen.png")
-        center = self.get_element(locator).center()
-        pixel_color = img.getpixel(center)
-        return pixel_color
-
     @allure.step('Проверяем цвет иконки')
     def icon_color_check(self, locator):
         color = self.get_color(locator)
@@ -280,12 +271,11 @@ class MainPage(BasePage):
         color = self.get_color(MainLocators.CATALOG_NAV)
         assert color == (0, 0, 0), f'Цвет иконки {color} а должен быть (0, 0, 0)'
 
-    @allure.step('Проверяем цвет иконки добавления в избранное')
-    def icon_color_add_to_fav_check(self):
-        color = self.get_color(MainLocators.FAV_ICON)
-        assert color == (255, 255, 255), f'Цвет иконки {color} а должен быть (255, 255, 255)'
-        # self.swipe_page_up()
-        self.click(MainLocators.FAV_ICON)
-        color = self.get_color(MainLocators.FAV_ICON)
-        assert color == (0, 0, 0), f'Цвет иконки {color} а должен быть (0, 0, 0)'
-
+    # @allure.step('Проверяем цвет иконки добавления в избранное с экрана коллекции')
+    # def icon_color_add_to_fav_check(self):
+    #     color = self.get_color(MainLocators.FAV_ICON)
+    #     assert color == (255, 255, 255), f'Цвет иконки {color} а должен быть (255, 255, 255)'
+    #     # self.swipe_page_up()
+    #     self.click(MainLocators.FAV_ICON)
+    #     color = self.get_color(MainLocators.FAV_ICON)
+    #     assert color == (0, 0, 0), f'Цвет иконки {color} а должен быть (0, 0, 0)'
