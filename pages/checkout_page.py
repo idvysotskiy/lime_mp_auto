@@ -25,8 +25,8 @@ class CheckOutPage(BasePage):
             pixel = (x, y)
             color = self.get_color_pixel(pixel)
             if color == (100, 150, 220):
-                self.d.click(x, y)
-            break
+                self.d.click(0.+x, 0.+y)
+                break
 
     @allure.step('Нажать кнопку "Неудача" на экране Cloud Payments')
     def fail_cloud_payments(self):
