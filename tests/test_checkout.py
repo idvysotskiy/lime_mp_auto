@@ -1,9 +1,6 @@
 # file: test_checkout.py
-import time
 import pytest
 from pages.main_page import MainPage
-# from pages.cart_page import *
-# from pages.product_card_page import *
 from config import *
 import allure
 
@@ -653,7 +650,6 @@ class TestCheckOut:
         page.add_to_cart_random_product()
         page.card.open_cart()
         page.cart.enter_promo_code()
-        price = page.cart.get_cart_price()
         page.cart.go_to_checkout()
         page.checkout.pickup_select_pvz()
         page.checkout.set_gift_card_selector()
@@ -733,7 +729,7 @@ class TestCheckOut:
         page.card.open_cart()
         page.cart.go_to_checkout()
         page.checkout.pickup_select_pvz()
-        page.checkout.checking_payment_card_number('4242')
+        page.checkout.checking_payment_card_number()
         page.checkout.click_pay()
 
     @allure.title('Экран "Оформление заказа" / Самовывоз / Оплата "Картой онлайн"(Не успешно)')
