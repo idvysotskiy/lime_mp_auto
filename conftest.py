@@ -1,5 +1,3 @@
-import time
-
 import pytest
 import uiautomator2 as u2
 from config import *
