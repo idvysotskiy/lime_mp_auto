@@ -257,7 +257,7 @@ class CheckOutPage(BasePage):
     def check_btn_add_card(self):
         self.is_element_present(CheckOutLocators.ADD_NEW_CARD_PLUS)
 
-    @allure.step("Добавление адреса доставки")
+    @allure.step("Заполнить поля адреса валидными данными")
     def add_main_address(self):
         # with allure.step('Нажать кнопку "Добавить адрес"'):
         #     self.click(CheckOutLocators.ADD_ADDRESS_BUTTON)
@@ -274,6 +274,13 @@ class CheckOutPage(BasePage):
         self.get_screen()
         with allure.step('Нажать кнопку "Сохранить"'):
             self.click(CheckOutLocators.ADD_ADDRESS_SAVE_BUTTON)
+
+    @allure.step("Проверить отображение выбранного адреса")
+    def check_selected_address(self):
+        address = self.get_text(CheckOutLocators.SELECTED_ADDRESS)
+        assert valid_city in address, f'В отображаемом адресе {address} нет указанного города {valid_city}'
+        assert valid_street in address, f'В отображаемом адресе {address} нет указанной улицы {valid_street}'
+        assert valid_apartment in address, f'В отображаемом адресе {address} нет указанного номера {valid_apartment}'
 
     @allure.step("Проверить элементы модального окна 'ДОБАВИТЬ КАРТУ'")
     def elements_add_card(self):

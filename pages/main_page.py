@@ -271,11 +271,3 @@ class MainPage(BasePage):
         color = self.get_color(MainLocators.CATALOG_NAV)
         assert color == (0, 0, 0), f'Цвет иконки {color} а должен быть (0, 0, 0)'
 
-    # @allure.step('Проверяем цвет иконки добавления в избранное с экрана коллекции')
-    # def icon_color_add_to_fav_check(self):
-    #     color = self.get_color(MainLocators.FAV_ICON)
-    #     assert color == (255, 255, 255), f'Цвет иконки {color} а должен быть (255, 255, 255)'
-    #     # self.swipe_page_up()
-    #     self.click(MainLocators.FAV_ICON)
-    #     color = self.get_color(MainLocators.FAV_ICON)
-    #     assert color == (0, 0, 0), f'Цвет иконки {color} а должен быть (0, 0, 0)'
