@@ -31,11 +31,11 @@ class TestMain:
         page = MainPage()
         page.login(valid_email, valid_password)
 
-    @pytest.mark.main
-    @pytest.mark.smoke
-    @pytest.mark.demo
     @allure.title('Экран "Регистрация" / Заполнение полей "Имя/Фамилия" кириллицей')
     @allure.testcase("C1030")
+    @pytest.mark.smoke
+    @pytest.mark.main
+    @pytest.mark.demo
     def test_reg(self):
         page = MainPage()
         page.user_registration()
