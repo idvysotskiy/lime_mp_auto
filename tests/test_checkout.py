@@ -14,7 +14,6 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/136157")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    @pytest.mark.demo
     def test_open_checkout_auth(self, login):
         page = MainPage()
         page.clear_basket()
@@ -59,6 +58,7 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2875")
     @pytest.mark.checkout
     @pytest.mark.smoke
+    @pytest.mark.demo_auto
     def test_add_main_address(self):
         page = MainPage()
         page.user_registration()

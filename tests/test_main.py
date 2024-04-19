@@ -35,7 +35,7 @@ class TestMain:
     @allure.testcase("C1030")
     @pytest.mark.smoke
     @pytest.mark.main
-    @pytest.mark.demo
+    @pytest.mark.demo_auto
     def test_reg(self):
         page = MainPage()
         page.user_registration()
