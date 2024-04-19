@@ -65,3 +65,19 @@ class CatalogPage(BasePage):
     def click_catalog_coords(self):
         bounds = self.get_random_element_catalog(CatalogLocators.catalog_item).bounds()
         self.coordinate_click(bounds[2] - 100, (bounds[3] + bounds[1]) / 2)
+
+    @allure.step('Поиск экрана коллекции с баннером')
+    def open_collection_with_banner(self):
+        for i in range(self.get_element(CatalogLocators.catalog_item).count):
+            elements = self.get_element("//*[@resource-id='ru.limeshop.android.dev:id/catalog_item_name']").all()
+            self.click(elements[i], elements[i].text)
+            self.wait_a_moment()
+
+            if self.get_element(CatalogLocators.catalog_item_recycler).count > 0:
+                self.wait_element(MainLocators.submenu_elements_list, "подраздел каталога")
+                self.click(CatalogLocators.submenu_elements_list, "первый подраздел каталога")
+
+            if self.get_element(CollectionLocators.banner_image).count > 0:
+                return
+
+            self.click_x()
