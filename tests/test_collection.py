@@ -119,6 +119,7 @@ class TestCollection:
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.collection.add_few_to_favorite()
+        product_list = page.get_text(CollectionLocators.CARDNAME)
         page.open_favorites()
-        favorite_list = page.get_text(FavoritesLocators.STUFFNAME).all()
+        favorite_list = page.get_text(FavoritesLocators.STUFFNAME)
         assert favorite_list == product_list

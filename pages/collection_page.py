@@ -54,10 +54,10 @@ class CollectionPage(BasePage):
     @allure.step('Добавить несколько товаров в избранное с экрана "Коллекция"')
     def add_few_to_favorite(self):
         product_list = []
-        number = random.randint(0, 3)
+        number = random.randint(0, 2)
         for i in range(number):
             self.click(CollectionLocators.FAVORITEBUTTON)
-            elements_list = self.get_element(CollectionLocators.FAVORITEBUTTON).all()
-            product_list.append(elements_list[i].text)
-            self.swipe_page_up()
+            elements_list = self.get_element(CollectionLocators.CARDNAME).all()
+            product_list.append(self.get_text(elements_list[i]))
+            self.swipe_page_up(2)
         return product_list
