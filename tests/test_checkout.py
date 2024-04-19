@@ -737,7 +737,7 @@ class TestCheckOut:
     @allure.testcase("")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_fail_pay_card(self):
+    def test_pickup_fail_pay_card(self):
         page = MainPage()
         page.user_registration()
         page.open_catalog()
