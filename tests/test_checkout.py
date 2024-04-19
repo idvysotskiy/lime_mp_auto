@@ -58,7 +58,6 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2875")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    @pytest.mark.demo_auto
     def test_add_main_address(self):
         page = MainPage()
         page.user_registration()

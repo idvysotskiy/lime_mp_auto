@@ -54,7 +54,7 @@ class TestMain:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/197")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/194")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3392")
-    def test_reg(self):
+    def test_colors(self):
         page = MainPage()
         page.icon_color_check(MainLocators.SEARCH_NAV)
         page.icon_color_check(MainLocators.FAVORITES_NAV)
