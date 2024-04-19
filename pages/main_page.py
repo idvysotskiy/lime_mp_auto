@@ -254,3 +254,28 @@ class MainPage(BasePage):
             self.click(LoginLocators.get_code_button)
             self.enter_code_from_sms()
 
+    @allure.step('Проверяем цвет иконки')
+    def icon_color_check(self, locator):
+        color = self.get_color(locator)
+        assert color == (255, 255, 255), f'Цвет иконки {color} а должен быть (255, 255, 255)'
+        self.click(locator)
+        color = self.get_color(locator)
+        assert color == (0, 0, 0), f'Цвет иконки {color} а должен быть (0, 0, 0)'
+
+    @allure.step('Проверяем цвет иконки Каталог')
+    def icon_color_catalog_check(self):
+        color = self.get_color(MainLocators.CATALOG_NAV)
+        assert color == (255, 255, 255), f'Цвет иконки {color} а должен быть (255, 255, 255)'
+        self.open_catalog()
+        self.catalog.open_random_catalog()
+        color = self.get_color(MainLocators.CATALOG_NAV)
+        assert color == (0, 0, 0), f'Цвет иконки {color} а должен быть (0, 0, 0)'
+
+    # @allure.step('Проверяем цвет иконки добавления в избранное с экрана коллекции')
+    # def icon_color_add_to_fav_check(self):
+    #     color = self.get_color(MainLocators.FAV_ICON)
+    #     assert color == (255, 255, 255), f'Цвет иконки {color} а должен быть (255, 255, 255)'
+    #     # self.swipe_page_up()
+    #     self.click(MainLocators.FAV_ICON)
+    #     color = self.get_color(MainLocators.FAV_ICON)
+    #     assert color == (0, 0, 0), f'Цвет иконки {color} а должен быть (0, 0, 0)'

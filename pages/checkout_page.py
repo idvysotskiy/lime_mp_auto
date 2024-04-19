@@ -6,15 +6,27 @@ from locators import *
 
 class CheckOutPage(BasePage):
 
+    # @allure.step('Нажать кнопку "Успешно" на экране Cloud Payments')
+    # def accept_cloud_payments(self):
+    #     # self.wait_element(CheckOutLocators.cloud_payments)
+    #     time.sleep(2)
+    #     self.get_screen()
+    #     self.d.click(0.504, 0.360)
+    #     self.wait_a_moment()
+    #     self.d.click(0.504, 0.470)
+    #     time.sleep(2)
+
     @allure.step('Нажать кнопку "Успешно" на экране Cloud Payments')
     def accept_cloud_payments(self):
-        # self.wait_element(CheckOutLocators.cloud_payments)
-        time.sleep(2)
+        x = 720
+        elements = [350, 400, 450, 500, 550, 600, 650, 700]
         self.get_screen()
-        self.d.click(0.504, 0.360)
-        self.wait_a_moment()
-        self.d.click(0.504, 0.470)
-        time.sleep(2)
+        for y in elements:
+            pixel = (x, y)
+            color = self.get_color_pixel(pixel)
+            if color == (100, 150, 220):
+                self.d.click(0.+x, 0.+y)
+                break
 
     @allure.step('Нажать кнопку "Неудача" на экране Cloud Payments')
     def fail_cloud_payments(self):
@@ -30,14 +42,6 @@ class CheckOutPage(BasePage):
         self.swipe_page_up()
         self.wait_a_second()
         self.click(CheckOutLocators.ORDER_PAY)
-
-    def elements_success_pay(self):
-        self.wait_element(SuccessPayScreenLocators.TITLE)
-        assert self.get_text(SuccessPayScreenLocators.TITLE) == 'ВАШ ЗАКАЗ ПРИНЯТ'
-        assert self.get_text(
-            SuccessPayScreenLocators.DESCRIPTION) == 'Отслеживать его статус вы можете в личном кабинете'
-        assert self.get_text(SuccessPayScreenLocators.BUTTON) == 'ПРОДОЛЖИТЬ ПОКУПКИ'
-        self.get_screen()
 
     def click_pay_no_funds(self):
         self.swipe_page_up()
@@ -316,31 +320,6 @@ class CheckOutPage(BasePage):
                    text=f'Подарочная карта••••{gift_card_number}')
         return gift_card_number, gift_card_pin
 
-    # @allure.step("Выбор способа оплаты - Подарочной картой. Оплата части стоимости")
-    # def set_gift_card_part_price(self, price):
-    #     dictionary = gift_card_list
-    #     gift_card_number = ''
-    #     gift_card_pin = ''
-    #
-    #     for i in range(len(dictionary)):
-    #         self.set_text(CheckOutLocators.gift_card_number_field, list(dictionary.keys())[i], "Номер подарочной карты")
-    #         self.wait_a_second()
-    #         card_balance = self.get_number_from_element(CheckOutLocators.gift_card_balance)
-    #
-    #         if 200 <= card_balance:
-    #             self.set_text(CheckOutLocators.gift_card_pin_field, list(dictionary.values())[i], "Пин-код")
-    #             self.wait_a_second()
-    #             self.click(CheckOutLocators.gift_card_continue_btn, "кнопка Продолжить")
-    #             gift_card_number = list(dictionary.keys())[i]
-    #             gift_card_pin = list(dictionary.values())[i]
-    #             break
-    #
-    #     with allure.step(f"Проверка наличия номера подарочной карты '{gift_card_number}'"):
-    #         self.wait_element(CheckOutLocators.gift_number_text)
-    #         self.d(resourceId='ru.limeshop.android.dev:id/payment_gift_number_text',
-    #                text=f'Подарочная карта••••{gift_card_number}')
-    #     return gift_card_number, gift_card_pin
-
     @allure.step("Выбор способа доставки - Самовывоз")
     def set_pickup(self):
         self.click(CheckOutLocators.pickup_selector, "самовывоз")
@@ -471,12 +450,12 @@ class CheckOutPage(BasePage):
         self.click(CheckOutLocators.save_card_btn, "кнопка Сохранить")
 
     @allure.step("Проверить что карта добавлена в способ доплаты")
-    def check_additional_payment(self):
+    def check_additional_payment(self, number='4242'):
         if len(self.d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
             self.coordinate_click(100, 100)
         self.wait_a_second()
-        assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text', textContains='4242').wait(
-            5) == True, print("В блоке Доплата не отображается карта 4242")
+        assert self.d(resourceId='ru.limeshop.android:id/payment_card_number_text', textContains=number).wait(
+            5) == True, print(f"В блоке Доплата не отображается карта {number}")
 
     @allure.step("Добавление доплаты картой")
     def add_additional_payment_sbp(self):
@@ -495,7 +474,7 @@ class CheckOutPage(BasePage):
         self.click(SuccessPayScreenLocators.BUTTON, "кнопка Продолжить покупки")
 
     @allure.step("Проверка наличия номера карты '{card_number}' в чекауте")
-    def checking_payment_card_number(self, card_number):
+    def checking_payment_card_number(self, card_number='4242'):
         self.click(CheckOutLocators.card_online_selector)
         assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text',
                       textContains=f'{card_number}').wait(5) == True, print(f"Не отображается карта {card_number}")
@@ -504,19 +483,6 @@ class CheckOutPage(BasePage):
     def checking_card_list(self, card_number):
         assert self.d(resourceId='ru.limeshop.android.dev:id/info_text_view', textContains=f'{card_number}').wait(
             5) == True, print(f"Не отображается карта {card_number}")
-
-    # @allure.step("Добавление адреса доставки")
-    # def add_courier_address(self):
-    #     self.click(CheckOutLocators.add_courier_address_btn, "кнопка Добавить адрес")
-    #     self.set_text(CheckOutLocators.city, "Новосибирск", "город")
-    #     self.wait_element(CheckOutLocators.address_popup)
-    #     self.click(CheckOutLocators.address_popup)
-    #     self.set_text(CheckOutLocators.street, "Иванова 1", "улица")
-    #     self.wait_element(CheckOutLocators.address_popup)
-    #     self.click(CheckOutLocators.address_popup)
-    #     self.set_text(CheckOutLocators.apartment, "1", "квартира")
-    #     self.click(CheckOutLocators.save_address_btn, "кнопка Сохранить")
-    #     self.wait_text("ОФОРМЛЕНИЕ ЗАКАЗА")
 
     @allure.step("Нажать кнопку 'Добавить адрес'")
     def click_add_address_btn(self):
@@ -616,4 +582,10 @@ class CheckOutPage(BasePage):
         summary_total = self.get_summary_total()
         assert price == summary_coast, f'Стоимость с карточки товара {price} не совпадает с стоимостью в блоке саммери {summary_coast}'
         assert price_with_discount == summary_total, f'Стоимость товара со скидкой {price_with_discount} с экрана корзина не совпадает с стоимостью со скидкой в блоке саммери {summary_total}'
+
+
+
+
+
+
 

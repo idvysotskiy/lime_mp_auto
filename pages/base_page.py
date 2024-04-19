@@ -9,6 +9,7 @@ import random
 import string
 from uiautomator2 import Direction
 import unittest
+from PIL import Image
 import uiautomator2 as u2
 
 
@@ -251,3 +252,20 @@ class BasePage:
             return len(self.get_element(locator).all())
         else:
             return self.get_element(locator).count
+
+    @allure.step('Определяем цвет середины элемента')
+    def get_color(self, locator):
+        self.wait_element(locator)
+        self.get_screen()
+        img = Image.open("screen.png")
+        center = self.get_element(locator).center()
+        pixel_color = img.getpixel(center)
+        return pixel_color
+
+    @allure.step('Определяем цвет по координатам')
+    def get_color_pixel(self, x, y):
+        img = Image.open("screen.png")
+        pixel_color = img.getpixel((x, y))
+        return pixel_color
+
+
