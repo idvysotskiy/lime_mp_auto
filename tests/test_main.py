@@ -33,6 +33,7 @@ class TestMain:
 
     @pytest.mark.main
     @pytest.mark.smoke
+    @pytest.mark.demo
     @allure.title('Экран "Регистрация" / Заполнение полей "Имя/Фамилия" кириллицей')
     @allure.testcase("C1030")
     def test_reg(self):

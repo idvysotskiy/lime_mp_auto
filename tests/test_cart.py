@@ -46,6 +46,7 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/29")
     @pytest.mark.smoke
     @pytest.mark.basket
+    @pytest.mark.demo
     def test_one_product_in_cart(self):
         page = MainPage()
         page.clear_basket()
