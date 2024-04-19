@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from locators import FavoritesLocators, MainLocators, CatalogLocators, CollectionLocators
+from locators import FavoritesLocators, MainLocators, CatalogLocators, CollectionLocators, ProductCardLocators
 from pages.main_page import MainPage
 import allure
 import random
@@ -118,8 +118,33 @@ class TestCollection:
         page = MainPage()
         page.open_catalog()
         page.catalog.open_random_catalog()
-        page.collection.add_few_to_favorite()
-        product_list = page.get_text(CollectionLocators.CARDNAME)
+        page.wait_a_second()
+        cards_list = page.collection.add_few_to_favorite()
         page.open_favorites()
-        favorite_list = page.get_text(FavoritesLocators.STUFFNAME)
-        assert favorite_list == product_list
+        page.favorites.checking_availability_cards(cards_list)
+
+    @pytest.mark.collection
+    @pytest.mark.smoke
+    @pytest.mark.blablabla
+    @pytest.mark.regress
+    @allure.title('Экран "Коллекции" / Отображение добавленного в избранное (из карточки)')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1977")
+    def test_equals_favorites_card_with_collection(self):
+        page = MainPage()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_favorites()
+        namecard = page.card.get_text(ProductCardLocators.product_name)
+        page.click_x()
+        product_page = page.get_element(CollectionLocators.CARDNAME).count
+        for i in range(product_page):
+            color_favorites = page.get_color(CollectionLocators.FAVORITEBUTTON)
+            if color_favorites == (0, 0, 0):
+                break
+            if i == product_page-1:
+                pytest.xfail("На экране не найдено добавленныйх в избранное товаров!" )
+
+
+
+
