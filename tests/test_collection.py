@@ -135,7 +135,7 @@ class TestCollection:
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         page.card.add_to_favorites()
-        namecard = page.card.get_text(ProductCardLocators.product_name)
+        page.card.get_text(ProductCardLocators.product_name)
         page.click_x()
         product_page = page.get_element(CollectionLocators.CARDNAME).count
         for i in range(product_page):
@@ -145,6 +145,20 @@ class TestCollection:
             if i == product_page-1:
                 pytest.xfail("На экране не найдено добавленныйх в избранное товаров!" )
 
+    @pytest.mark.collection
+    @pytest.mark.smoke
+    @pytest.mark.regress
+    @allure.title('Экран "Коллекции" / Возвращение из карточки товара')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/history/287")
+    def test_back_from_card(self):
+        page = MainPage()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.click_x()
+        page.collection.wait_element(CollectionLocators.title)
+        page.collection.wait_element(CollectionLocators.filters_btn)
+        page.collection.wait_element(CollectionLocators.CARDNAME)
 
 
 
