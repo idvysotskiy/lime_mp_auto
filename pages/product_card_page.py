@@ -96,3 +96,37 @@ class ProductCardPage(BasePage):
         self.wait_element(ProductCardLocators.delivery_description_page, "описание доставки и возврата")
         self.wait_text("ДОСТАВКА И ВОЗВРАТ")
         self.wait_text("СРОКИ ДОСТАВКИ")
+
+    @allure.step("Клик по кнопке Оплата")
+    def click_payment(self):
+        self.click(ProductCardLocators.PAYMENT, "кнопка Оплата")
+        self.wait_element(ProductCardLocators.payment_url, "url страницы Оплата")
+
+    @allure.step("Клик по кнопке Цвета")
+    def click_colors(self):
+        self.click(ProductCardLocators.COLORS, "кнопка Цвета")
+
+    # @allure.step("Получение значения выбранного цвета")
+    def get_selected_color(self):
+        return self.get_text(ProductCardLocators.selected_color)
+
+    @allure.step("Выбор случайного цвета")
+    def select_color(self):
+        random_color_element = self.get_random_element(ProductCardLocators.unselected_color)
+        color = random_color_element.text
+        self.click(random_color_element, "рандомный цвет")
+        return color
+
+    @allure.step("Клик по фото в карточке товара")
+    def zoom_image(self):
+        self.click(ProductCardLocators.PHOTO_ZOOM, "фото товара")
+
+    @allure.step("Проверка попапа в карточке после добавления товара в корзину")
+    def checking_popup_buy_btn(self):
+        self.wait_element(ProductCardLocators.popup_buy_btn, "плашка добавления товара в корзину")
+        assert self.get_text(ProductCardLocators.popup_title) == 'Товар добавлен в корзину', print(f"Текст на плашке некорректен. Полученный текст: {self.get_text(ProductCardLocators.popup_title)}, ожидаемый текст: Товар добавлен в корзину")
+        self.wait_element(ProductCardLocators.popup_btn, "кнопка Перейти")
+
+    @allure.step("Переход в корзину по кнопке Перейти в попапе")
+    def click_popup_buy_btn(self):
+        self.click(ProductCardLocators.popup_btn, "кнопка Перейти")

@@ -304,6 +304,7 @@ class CheckOutPage(BasePage):
 
     @allure.step("Выбор способа оплаты - Подарочной картой. С заполнением данных")
     def set_gift_card(self, price):
+        d = self.get_driver()
         dictionary = gift_card_list
         gift_card_number = ''
         gift_card_pin = ''
@@ -323,7 +324,7 @@ class CheckOutPage(BasePage):
 
         with allure.step(f"Проверка наличия номера подарочной карты '{gift_card_number}'"):
             self.wait_element(CheckOutLocators.gift_number_text)
-            self.d(resourceId='ru.limeshop.android.dev:id/payment_gift_number_text',
+            d(resourceId='ru.limeshop.android.dev:id/payment_gift_number_text',
                    text=f'Подарочная карта••••{gift_card_number}')
         return gift_card_number, gift_card_pin
 
@@ -343,38 +344,41 @@ class CheckOutPage(BasePage):
     @allure.step("Выбор способа оплаты - Подарочной картой")
     def set_gift_card_selector(self):
         self.click(CheckOutLocators.gift_card_selector, "Подарочной картой")
-        self.wait_element(CheckOutLocators.add_gift_card_title, "Добавить подарочную карту")
+        self.wait_text("ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
 
     @allure.step("Закрытие блока подарочной карты кликом мимо области блока")
     def close_gift_card_block(self):
         self.coordinate_click(500, 300)
-        self.wait_hidden_element(CheckOutLocators.add_gift_card_title, 'блок добавления подарочной карты')
+        self.wait_hidden_text("ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
         self.wait_element(CheckOutLocators.add_gift_card_btn, "кнопка Добавить карту")
 
     @allure.step("Закрытие блока подарочной карты свайпом шторки вниз")
     def close_gift_card_block2(self):
+        d = self.get_driver()
         with allure.step("Свайп вниз блока подарочной карты"):
             gift_card_dragger_view_x = self.get_element(CheckOutLocators.gift_card_dragger_view).center()[0]
             gift_card_dragger_view_y = self.get_element(CheckOutLocators.gift_card_dragger_view).center()[1]
             d.swipe(gift_card_dragger_view_x, gift_card_dragger_view_y, gift_card_dragger_view_x,
                     gift_card_dragger_view_y + 300)
-        self.wait_hidden_element(CheckOutLocators.add_gift_card_title, 'блок добавления подарочной карты')
+        self.wait_hidden_text("ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
         self.wait_element(CheckOutLocators.add_gift_card_btn, "кнопка Добавить карту")
 
     @allure.step("Проверка номера подарочной карты. Проверка кнопки Продолжить")
     def checking_gift_card_number(self, price):
+        d = self.get_driver()
         dictionary = gift_card_list
         self.wait_element(CheckOutLocators.gift_card_number_field)
         self.set_text(CheckOutLocators.gift_card_number_field, list(dictionary.keys())[0], "Номер подарочной карты")
         self.wait_element(CheckOutLocators.gift_card_balance, "баланс подарочной карты")
-        assert self.d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
+        assert d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
         self.set_text(CheckOutLocators.gift_card_number_field, '1234567890123456', "Номер подарочной карты")
         self.wait_element(CheckOutLocators.gift_card_balance, "баланс подарочной карты")
         self.wait_text('Неправильно указан номер карты')
-        assert self.d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
+        assert d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
 
     @allure.step("Проверка поля пин-код. Проверка кнопки Продолжить")
     def checking_gift_card_pin_code(self, price):
+        d = self.get_driver()
         gift_card_pin = ''
         dictionary = gift_card_list
 
@@ -390,15 +394,15 @@ class CheckOutPage(BasePage):
         self.wait_element(CheckOutLocators.gift_card_balance, "баланс подарочной карты")
         self.wait_text(price)
         self.set_text(CheckOutLocators.gift_card_pin_field, gift_card_pin, "Пин-код")
-        assert self.d(text="ПРОДОЛЖИТЬ", enabled='true').wait(5) == True, print("Кнопка Продолжить неактивна")
+        assert d(text="ПРОДОЛЖИТЬ", enabled='true').wait(5) == True, print("Кнопка Продолжить неактивна")
         # self.set_text(CheckOutLocators.gift_card_number_field, list(blocked_gift_card.keys())[0], "Номер подарочной карты")
         # self.wait_element(CheckOutLocators.gift_card_balance, "баланс подарочной карты")
         # self.set_text(CheckOutLocators.gift_card_pin_field, '1234', "Пин-код")
         # self.wait_text('Не верный пин-код подарочной карты')
-        # assert self.d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
+        # assert d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
         self.wait_a_second()
         self.set_text(CheckOutLocators.gift_card_pin_field, "", "Пин-код")
-        assert self.d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
+        assert d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
 
     @allure.step("Выбор способа оплаты - Подарочной картой. С заполнением данных и выбор доплаты")
     def set_gift_card_with_additional_payment(self, price=200):
@@ -426,25 +430,27 @@ class CheckOutPage(BasePage):
 
     @allure.step("Добавление доплаты картой")
     def add_additional_payment_no_card(self):
+        d = self.get_driver()
         self.wait_a_second()
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
         self.wait_a_second()
         if self.is_element_present(CheckOutLocators.ADD_NEW_CARD_BUTTON):
             self.click(CheckOutLocators.ADD_NEW_CARD_BUTTON, 'кнопка добавить карту')
         else:
-            self.click(self.d(textContains='Картой онлайн').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+            self.click(d(textContains='Картой онлайн').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
         self.enter_card_data()
         self.check_additional_payment()
 
     @allure.step("Добавление доплаты картой")
     def add_additional_payment(self):
+        d = self.get_driver()
         self.wait_a_second()
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
         self.wait_a_second()
         if self.is_element_present(CheckOutLocators.ADD_NEW_CARD_BUTTON):
             self.click(CheckOutLocators.ADD_NEW_CARD_BUTTON, 'кнопка добавить карту')
         else:
-            self.click(self.d(textContains='Добавить карту').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+            self.click(d(textContains='Добавить карту').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
         self.enter_card_data()
         self.check_additional_payment()
 
@@ -458,18 +464,20 @@ class CheckOutPage(BasePage):
 
     @allure.step("Проверить что карта добавлена в способ доплаты")
     def check_additional_payment(self, number='4242'):
-        if len(self.d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
+        d = self.get_driver()
+        if len(d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
             self.coordinate_click(100, 100)
         self.wait_a_second()
-        assert self.d(resourceId='ru.limeshop.android:id/payment_card_number_text', textContains=number).wait(
+        assert d(resourceId='ru.limeshop.android:id/payment_card_number_text', textContains=number).wait(
             5) == True, print(f"В блоке Доплата не отображается карта {number}")
 
     @allure.step("Добавление доплаты картой")
     def add_additional_payment_sbp(self):
+        d = self.get_driver()
         self.wait_a_second()
         self.click(CheckOutLocators.payment_add_card_btn, "кнопка для добавления доплаты")
         self.wait_element('ru.limeshop.android.dev:id/is_selected_card_radio')
-        self.click(self.d(textContains='Через СБП').sibling(
+        self.click(d(textContains='Через СБП').sibling(
             resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - СБП")
         self.wait_element(CheckOutLocators.CARD_INFO)
         assert self.get_text(CheckOutLocators.CARD_INFO) == 'Через СБП', print(
@@ -482,13 +490,15 @@ class CheckOutPage(BasePage):
 
     @allure.step("Проверка наличия номера карты '{card_number}' в чекауте")
     def checking_payment_card_number(self, card_number='4242'):
+        d = self.get_driver()
         self.click(CheckOutLocators.card_online_selector)
-        assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text',
+        assert d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text',
                       textContains=f'{card_number}').wait(5) == True, print(f"Не отображается карта {card_number}")
 
     @allure.step("Проверка наличия номера карты '{card_number}' на экране Ваши карты")
     def checking_card_list(self, card_number):
-        assert self.d(resourceId='ru.limeshop.android.dev:id/info_text_view', textContains=f'{card_number}').wait(
+        d = self.get_driver()
+        assert d(resourceId='ru.limeshop.android.dev:id/info_text_view', textContains=f'{card_number}').wait(
             5) == True, print(f"Не отображается карта {card_number}")
 
     @allure.step("Нажать кнопку 'Добавить адрес'")
@@ -531,15 +541,17 @@ class CheckOutPage(BasePage):
 
     @allure.step("Разрешить доступ к геолокации 'При использовании приложения'")
     def allow_access_geo(self):
-        element = self.d.xpath(PermissionGeoLocators.allow_foreground_only_button).wait(timeout=5)
+        d = self.get_driver()
+        element = d.xpath(PermissionGeoLocators.allow_foreground_only_button).wait(timeout=5)
         if element is not None:
-            self.d.xpath(PermissionGeoLocators.allow_foreground_only_button).click()
+            d.xpath(PermissionGeoLocators.allow_foreground_only_button).click()
 
     @allure.step("Разрешить доступ к геолокации 'Однократно'")
     def allow_access_geo_one_time(self):
-        element = self.d.xpath(PermissionGeoLocators.allow_one_time_button).wait(timeout=5)
+        d = self.get_driver()
+        element = d.xpath(PermissionGeoLocators.allow_one_time_button).wait(timeout=5)
         if element is not None:
-            self.d.xpath(PermissionGeoLocators.allow_one_time_button).click()
+            d.xpath(PermissionGeoLocators.allow_one_time_button).click()
 
     @allure.step("Переключить вкладку 'Самовывоз - Список'")
     def tab_list_select(self):

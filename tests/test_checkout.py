@@ -14,8 +14,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/136157")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_open_checkout_auth(self, login):
-        page = MainPage()
+    def test_open_checkout_auth(self, login, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -31,8 +31,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2765")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_checkout_error(self):
-        page = MainPage()
+    def test_checkout_error(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -44,8 +44,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2868")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_open_checkout_unauth(self):
-        page = MainPage()
+    def test_open_checkout_unauth(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -58,8 +58,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2875")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_add_main_address(self):
-        page = MainPage()
+    def test_add_main_address(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -77,8 +77,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3172")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_pay_self(self):
-        page = MainPage()
+    def test_pay_self(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -115,8 +115,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3181")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_saving_payment_card(self):
-        page = MainPage()
+    def test_saving_payment_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -143,8 +143,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3183")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_payment_card_without_3ds(self):
-        page = MainPage()
+    def test_payment_card_without_3ds(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -162,8 +162,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3185")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_no_funds_payment_card_without_3ds(self):
-        page = MainPage()
+    def test_no_funds_payment_card_without_3ds(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -182,8 +182,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3184")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_no_funds_payment_card_with_3ds(self):
-        page = MainPage()
+    def test_no_funds_payment_card_with_3ds(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -203,8 +203,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2810")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_promo_code_discount(self):
-        page = MainPage()
+    def test_promo_code_discount(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -224,8 +224,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3167")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_payment_card_without_save_card(self):
-        page = MainPage()
+    def test_payment_card_without_save_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -254,8 +254,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2954")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_delete_last_card(self):
-        page = MainPage()
+    def test_delete_last_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -283,8 +283,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3191")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_success_pay_card_with_add_card(self):
-        page = MainPage()
+    def test_success_pay_card_with_add_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -317,8 +317,8 @@ class TestCheckOut:
     @allure.testcase("")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_fail_pay_card(self):
-        page = MainPage()
+    def test_fail_pay_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -338,8 +338,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3169")
     @pytest.mark.smoke
     @pytest.mark.checkout
-    def test_order_courier_gift_card(self):
-        page = MainPage()
+    def test_order_courier_gift_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -374,8 +374,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3023")
     @pytest.mark.smoke
     @pytest.mark.checkout
-    def test_closing_gift_card_block(self):
-        page = MainPage()
+    def test_closing_gift_card_block(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -395,8 +395,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3029")
     @pytest.mark.smoke
     @pytest.mark.checkout
-    def test_gift_card_fields(self):
-        page = MainPage()
+    def test_gift_card_fields(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -413,8 +413,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3190")
     @pytest.mark.smoke
     @pytest.mark.checkout
-    def test_order_payment_sbp(self):
-        page = MainPage()
+    def test_order_payment_sbp(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -444,8 +444,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3314")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_order_with_gift_card_and_additional_payment(self):
-        page = MainPage()
+    def test_order_with_gift_card_and_additional_payment(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -483,8 +483,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3315")
     @pytest.mark.smoke
     @pytest.mark.checkout
-    def test_order_with_gift_card_and_additional_payment_sbp(self):
-        page = MainPage()
+    def test_order_with_gift_card_and_additional_payment_sbp(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -519,8 +519,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3161")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_pickup_success_pay_card_with_add_card(self):
-        page = MainPage()
+    def test_pickup_success_pay_card_with_add_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -547,8 +547,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3159")
     @pytest.mark.smoke
     @pytest.mark.checkout
-    def test_pickup_order_payment_sbp(self):
-        page = MainPage()
+    def test_pickup_order_payment_sbp(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -572,8 +572,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3032")
     @pytest.mark.smoke
     @pytest.mark.checkout
-    def test_pickup_order_courier_gift_card(self):
-        page = MainPage()
+    def test_pickup_order_courier_gift_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -603,8 +603,8 @@ class TestCheckOut:
     @allure.testcase("")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_pickup_pay_self(self):
-        page = MainPage()
+    def test_pickup_pay_self(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -632,8 +632,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3317")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_pickup_order_with_gift_card_and_additional_payment(self):
-        page = MainPage()
+    def test_pickup_order_with_gift_card_and_additional_payment(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -664,8 +664,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3316")
     @pytest.mark.one
     @pytest.mark.checkout
-    def test_pickup_order_with_gift_card_and_additional_payment_sbp(self):
-        page = MainPage()
+    def test_pickup_order_with_gift_card_and_additional_payment_sbp(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -692,8 +692,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3015")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_pickup_payment_card_without_save_card(self):
-        page = MainPage()
+    def test_pickup_payment_card_without_save_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -714,8 +714,8 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3060")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_pickup_saving_payment_card(self):
-        page = MainPage()
+    def test_pickup_saving_payment_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -738,8 +738,8 @@ class TestCheckOut:
     @allure.testcase("")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_pickup_fail_pay_card(self):
-        page = MainPage()
+    def test_pickup_fail_pay_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -749,6 +749,3 @@ class TestCheckOut:
         page.checkout.pickup_select_pvz()
         page.checkout.add_first_card()
         page.checkout.click_pay_fail_cloud_payments()
-
-
-

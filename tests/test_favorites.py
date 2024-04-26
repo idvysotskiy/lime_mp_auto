@@ -15,8 +15,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Выход с экрана "Избранное"')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/238")
-    def test_exit_from_favorites(self):
-        page = MainPage()
+    def test_exit_from_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_favorites()
         page.click(FavoritesLocators.BUTTONBACK, 'Кнопка "Назад"')
         page.wait_hidden_element(FavoritesLocators.TITLE, 'Заголовок "Избранное"')
@@ -26,8 +26,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Экран "Избранное"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/7")
-    def test_open_favorites(self):
-        page = MainPage()
+    def test_open_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_favorites()
 
     @pytest.mark.favorites
@@ -35,8 +35,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Кнопка "НАЧАТЬ ПОКУПКИ')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/231")
-    def test_click_bottom_buy(self):
-        page = MainPage()
+    def test_click_bottom_buy(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_favorites()
         page.favorites.delete_from_favorites()
         page.favorites.click_pay()
@@ -46,8 +46,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Возврат из каталога')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/277")
-    def test_back_from_catalog(self):
-        page = MainPage()
+    def test_back_from_catalog(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_favorites()
         page.favorites.click_pay()
         page.click_x()
@@ -58,8 +58,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Товар в избранном')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/8")
-    def test_product_in_favorites(self):
-        page = MainPage()
+    def test_product_in_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_favorites()
         page.favorites.delete_from_favorites()
         page.open_catalog()
@@ -75,8 +75,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Удаление из избранного')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/9')
-    def test_delete_from_favorites(self):
-        page = MainPage()
+    def test_delete_from_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -92,8 +92,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Кнопка "Купить" для товара в избранном')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/232')
-    def test_bottom_buy_for_favorites_product(self):
-        page = MainPage()
+    def test_bottom_buy_for_favorites_product(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -107,8 +107,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Добавление товара в корзину')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/10')
-    def test_add_to_cart(self):
-        page = MainPage()
+    def test_add_to_cart(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -124,8 +124,8 @@ class TestFavorites:
     @allure.title('Переход в карточку товара и выход из нее')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/241')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/276')
-    def test_go_to_card(self):
-        page = MainPage()
+    def test_go_to_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -140,8 +140,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Соответствие списка "Избранное" авторизованного с неавторизованным')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/278')
-    def test_equals_favorite_registration_and_un_registration(self):
-        page = MainPage()
+    def test_equals_favorite_registration_and_un_registration(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -157,10 +157,10 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Соответствие списка "Избранное" авторизованного с неавторизованным(Несколько товаров)')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/278')
-    def test_equals_favorites_registration_and_un_registration(self):
+    def test_equals_favorites_registration_and_un_registration(self, connect_to_device):
         items = [1, 2, 3, 4]
         count = random.choice(items)
-        page = MainPage()
+        page = MainPage(connect_to_device)
         product_list = []
         page.open_catalog()
         for i in range(count):
@@ -181,10 +181,10 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title(' Список "Избранное" после выхода из профиля(Разлогин)')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/280')
-    def test_favorite_list_after_relog(self):
+    def test_favorite_list_after_relog(self, connect_to_device):
         items = [1, 2, 3, 4]
         count = random.choice(items)
-        page = MainPage()
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         for i in range(count):
@@ -204,8 +204,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title(' Экран "Избранное" / Закрыть шторку размеров (клик мимо шторки)')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/301')
-    def test_close_module_screen_tap_out_range(self):
-        page = MainPage()
+    def test_close_module_screen_tap_out_range(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -221,8 +221,8 @@ class TestFavorites:
     @pytest.mark.regress
     @allure.title('Экран"Избранное" / Закрывание шторки размеров(свайп вниз)')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/302')
-    def test_close_module_screen_swipe_down(self):
-        page = MainPage()
+    def test_close_module_screen_swipe_down(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -240,8 +240,8 @@ class TestFavorites:
     @allure.title('Экран "Избранное" / Четное и нечетное количество товаров в списке "Избранное"')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/333')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/334')
-    def test_even_and_odd_cards_for_favorites(self):
-        page = MainPage()
+    def test_even_and_odd_cards_for_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         for i in range(3):
             page.catalog.open_random_catalog()

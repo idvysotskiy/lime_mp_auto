@@ -17,8 +17,8 @@ class TestCollection:
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Переход на экран')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/483")
-    def test_open_collection(self):
-        page = MainPage()
+    def test_open_collection(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.collection.click_x()

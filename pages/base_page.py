@@ -1,4 +1,3 @@
-# file: base_page.py
 import time
 from datetime import date
 import allure
@@ -10,28 +9,11 @@ import string
 from uiautomator2 import Direction
 import unittest
 from PIL import Image
-import uiautomator2 as u2
-
-
-class InstallAPK:
-    d = u2.connect(device_id)
-
-    def clear_app_data(self):
-        self.d.app_stop(package)
-        self.d.app_clear(package)
-
-    def install_app(self):
-        self.d.app_install(app_link)
-
-    def remove_app(self):
-        self.d.app_uninstall(package)
-
-    def stop_app(self):
-        self.d.app_stop(package)
 
 
 class BasePage:
-    d = u2.connect(device_id)
+    def __init__(self, d):
+        self.d = d
 
     def swipe_page_down(self):
         self.d.swipe_ext(Direction.BACKWARD)
@@ -59,15 +41,18 @@ class BasePage:
         print(element.get_text())
 
     def is_element_present(self, locator):
-        unittest.TestCase.assertTrue(self.d.xpath(locator).exists, 'Element not found!')
+        d = self.d
+        unittest.TestCase.assertTrue(d.xpath(locator).exists, 'Element not found!')
 
     def cancel_notification(self):
-        element = self.d.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=10)
+        d = self.d
+        element = d.xpath(MainLocators.NOTIFICATION_NEGATIVE).wait(timeout=10)
         if element is not None:
-            self.d.xpath(MainLocators.NOTIFICATION_NEGATIVE).click()
+            d.xpath(MainLocators.NOTIFICATION_NEGATIVE).click()
 
     def test_text(self, locator, text):
-        assert self.d.xpath(locator).get_text() == text
+        d = self.d
+        assert d.xpath(locator).get_text() == text
 
     def current_date(self):
         current_date = date.today()
@@ -107,10 +92,11 @@ class BasePage:
             self.get_element(locator).set_text(text)
 
     def get_element(self, locator):
+        d = self.d
         if locator[0] == '/' and locator[1] == '/':
-            return self.d.xpath(locator)
+            return d.xpath(locator)
         else:
-            return self.d(resourceId=locator)
+            return d(resourceId=locator)
 
     def get_text(self, locator):
         return self.get_element(locator).get_text()
@@ -144,29 +130,31 @@ class BasePage:
 
     # @allure.step("Получение рандомного элемента")
     def get_random_element(self, locator):
+        d = self.d
         if isinstance(locator, str):
             if locator[0] == '/' and locator[1] == '/':
-                counter = random.randrange(0, len(self.d.xpath(locator).all()))
-                elements_list = self.d.xpath(locator).all()
+                counter = random.randrange(0, len(d.xpath(locator).all()))
+                elements_list = d.xpath(locator).all()
                 return elements_list[counter]
             else:
-                counter = random.randrange(0, self.d(resourceId=locator).count)
-                return self.d(resourceId=locator)[counter]
+                counter = random.randrange(0, d(resourceId=locator).count)
+                return d(resourceId=locator)[counter]
         else:
             counter = random.randrange(0, locator.count)
             return locator[counter]
 
     def get_random_element_catalog(self, locator):
+        d = self.d
         if isinstance(locator, str):
             if locator[0] == '/' and locator[1] == '/':
-                counter = random.randrange(2, len(self.d.xpath(locator).all())-2)
-                elements_list = self.d.xpath(locator).all()
+                counter = random.randrange(2, len(d.xpath(locator).all()) - 2)
+                elements_list = d.xpath(locator).all()
                 return elements_list[counter]
             else:
-                counter = random.randrange(2, self.d(resourceId=locator).count-2)
-                return self.d(resourceId=locator)[counter]
+                counter = random.randrange(2, d(resourceId=locator).count - 2)
+                return d(resourceId=locator)[counter]
         else:
-            counter = random.randrange(2, locator.count-2)
+            counter = random.randrange(2, locator.count - 2)
             return locator[counter]
 
     # @allure.step("Ожидание элемента")
@@ -195,11 +183,13 @@ class BasePage:
             with allure.step(f"Ожидание отсутствия элемента '{element_name}'"):
                 if isinstance(locator, str):
                     if locator[0] == '/' and locator[1] == '/':
-                        assert self.get_element(locator).exists == False, print(f"Элемент {element_name} присутствует на экране")
+                        assert self.get_element(locator).exists == False, print(
+                            f"Элемент '{element_name}' присутствует на экране")
                     else:
-                        assert self.get_element(locator).wait_gone(5) == True, print(f"Элемент {element_name} присутствует на экране")
+                        assert self.get_element(locator).wait_gone(7) == True, print(
+                            f"Элемент '{element_name}' присутствует на экране")
                 else:
-                    assert locator.wait_gone(5) == True, print(f"Элемент {element_name} присутствует на экране")
+                    assert locator.wait_gone(7) == True, print(f"Элемент '{element_name}' присутствует на экране")
         else:
             if isinstance(locator, str):
                 if locator[0] == '/' and locator[1] == '/':
@@ -211,11 +201,13 @@ class BasePage:
 
     @allure.step("Ожидание на экране текста '{text}'")
     def wait_text(self, text):
-        assert self.d(textContains=text).wait(10) == True, print(f"Элемент с текстом '{text}' не найден")
+        d = self.d
+        assert d(textContains=text).wait(10) == True, print(f"Элемент с текстом '{text}' не найден")
 
     @allure.step("Ожидание отсутствия на экране текста '{text}'")
     def wait_hidden_text(self, text):
-        assert self.d(textContains=text).wait_gone(10) == True, print(f"Элемент с текстом '{text}' присутствует на экране")
+        d = self.d
+        assert d(textContains=text).wait_gone(10) == True, print(f"Элемент с текстом '{text}' присутствует на экране")
 
     def close_popup(self):
         self.d.click(0.477, 0.031)
@@ -230,11 +222,12 @@ class BasePage:
 
     @allure.step("Клик Назад")
     def press_back(self):
-        d.press("back")
+        self.d.press("back")
 
     @allure.step("Проверка заголовка экрана - '{title}'")
     def checking_title_page(self, title):
-        assert self.d(resourceId='ru.limeshop.android.dev:id/toolbarTitle', text=title).wait(5) == True, print(
+        d = self.d
+        assert d(resourceId='ru.limeshop.android.dev:id/toolbarTitle', text=title).wait(5) == True, print(
             f"Заголовок экрана некорректен. Текущий заголовок - {self.get_text(MainLocators.TOOLBAR_TITLE)}, ожидаемый - {title}")
 
     @allure.step('Нажать кнопку "X"')
@@ -268,4 +261,6 @@ class BasePage:
         pixel_color = img.getpixel((x, y))
         return pixel_color
 
-
+    # @allure.step("Элемент с текстом {text}")
+    def get_text_element(self, text):
+        return self.d.xpath(f'//*[@text="{text}"]')

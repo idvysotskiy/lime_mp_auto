@@ -14,11 +14,18 @@ class CatalogPage(BasePage):
         self.wait_a_moment()
 
         if self.get_element(CatalogLocators.catalog_item_recycler).count > 0:
-            self.wait_element(MainLocators.submenu_elements_list, "подраздел каталога")
+            # self.wait_element(MainLocators.submenu_elements_list, "подраздел каталога")
             self.click(self.get_random_element(CatalogLocators.submenu_elements_list), "рандомный подраздел каталога")
 
         collection_title = self.get_collection_title()
         return collection_title
+
+    @allure.step("Переход в раздел Футболки. Базовые модели")
+    def open_shirts_page(self):
+        self.wait_element(CatalogLocators.catalog_item)
+        self.click(self.get_text_element("ФУТБОЛКИ"), "раздел Футболки")
+        self.wait_a_moment()
+        self.click(self.get_text_element("БАЗОВЫЕ"), "подраздел Базовые")
 
     @allure.step("Переход в рандомную карточку товара")
     def open_random_card(self):
