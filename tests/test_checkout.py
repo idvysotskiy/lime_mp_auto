@@ -14,8 +14,9 @@ class TestCheckOut:
     @allure.testcase("https://lmdev.testrail.io/index.php?/tests/view/136157")
     @pytest.mark.checkout
     @pytest.mark.smoke
-    def test_open_checkout_auth(self, login, connect_to_device):
+    def test_open_checkout_auth(self, connect_to_device):
         page = MainPage(connect_to_device)
+        page.user_registration()
         page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
