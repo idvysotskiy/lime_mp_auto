@@ -11,8 +11,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/12")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_size_bottom_sheet(self):
-        page = MainPage()
+    def test_size_bottom_sheet(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -27,8 +27,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/11")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_open_product_card(self):
-        page = MainPage()
+    def test_open_product_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         collection_title = page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -44,8 +44,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1979")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_buy_button_changes(self):
-        page = MainPage()
+    def test_buy_button_changes(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.wait_element(ProductCardLocators.BUY_MORE, "кнопка Купить еще")
@@ -58,8 +58,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/291")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_add_to_favorites(self):
-        page = MainPage()
+    def test_add_to_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -72,8 +72,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/293")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_delete_from_favorites(self):
-        page = MainPage()
+    def test_delete_from_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -87,8 +87,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/13")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_share(self):
-        page = MainPage()
+    def test_share(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -99,8 +99,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/294")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_basket_button(self):
-        page = MainPage()
+    def test_basket_button(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -112,8 +112,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3126")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_delivery_button(self):
-        page = MainPage()
+    def test_delivery_button(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -126,8 +126,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3124")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_payment_button(self):
-        page = MainPage()
+    def test_payment_button(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -138,8 +138,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/174")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_card_colors(self):
-        page = MainPage()
+    def test_card_colors(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_shirts_page()
         page.catalog.open_random_card()
@@ -154,8 +154,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/325")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_zoom_image(self):
-        page = MainPage()
+    def test_zoom_image(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -168,8 +168,8 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2943")
     @pytest.mark.smoke
     @pytest.mark.card
-    def test_add_to_cart_popup(self):
-        page = MainPage()
+    def test_add_to_cart_popup(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()

@@ -17,8 +17,8 @@ class TestCollection:
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Выход с экрана')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/3391')
-    def test_close_collection(self):
-        page = MainPage()
+    def test_close_collection(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.collection.click_x()
@@ -33,8 +33,8 @@ class TestCollection:
     @allure.title('Экран "Коллекция" / Переход на экран "Коллекция"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/483")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/484")
-    def test_open_collection(self):
-        page = MainPage()
+    def test_open_collection(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.wait_element(CollectionLocators.title)
@@ -46,8 +46,8 @@ class TestCollection:
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Баннер в коллекции (клик на баннер)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/336")
-    def test_click_banner(self):
-        page = MainPage()
+    def test_click_banner(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_collection_with_banner()
         page.collection.click(CollectionLocators.banner_image)
@@ -70,8 +70,8 @@ class TestCollection:
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Переход к карточке товара')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/286")
-    def test_open_card(self):
-        page = MainPage()
+    def test_open_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -81,8 +81,8 @@ class TestCollection:
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Добавление в избранное (добавление в список) с экрана "Коллекция"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/283")
-    def test_add_to_favorites(self):
-        page = MainPage()
+    def test_add_to_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.swipe_page_up()
@@ -97,8 +97,8 @@ class TestCollection:
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Добавление в избранное (добавление в список) с экрана "Коллекция"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/283")
-    def test_delete_favorites_from_collection(self):
-        page = MainPage()
+    def test_delete_favorites_from_collection(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         product_card = page.collection.add_to_favorite()
@@ -114,8 +114,8 @@ class TestCollection:
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Добавление в избранное нескольких товаров (более 3-х) с экрана "Коллекция"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3101")
-    def test_add_few_favorites_from_collection(self):
-        page = MainPage()
+    def test_add_few_favorites_from_collection(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.wait_a_second()
@@ -129,8 +129,8 @@ class TestCollection:
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Отображение добавленного в избранное (из карточки)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1977")
-    def test_equals_favorites_card_with_collection(self):
-        page = MainPage()
+    def test_equals_favorites_card_with_collection(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
@@ -150,8 +150,8 @@ class TestCollection:
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Возвращение из карточки товара')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/history/287")
-    def test_back_from_card(self):
-        page = MainPage()
+    def test_back_from_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_random_catalog()
         page.catalog.open_random_card()
