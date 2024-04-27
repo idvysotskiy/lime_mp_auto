@@ -1,3 +1,4 @@
+import math
 import time
 import allure
 from pages.base_page import BasePage
@@ -18,15 +19,18 @@ class CheckOutPage(BasePage):
 
     @allure.step('Нажать кнопку "Успешно" на экране Cloud Payments')
     def accept_cloud_payments(self):
-        x = 720
-        elements = [350, 400, 450, 500, 550, 600, 650, 700]
+        time.sleep(8)
+        y = self.d.window_size()[1] * 0.2
+        x = self.d.window_size()[0] * 0.3
         self.get_screen()
-        for y in elements:
-            pixel = (x, y)
-            color = self.get_color_pixel(pixel)
-            if color == (100, 150, 220):
-                self.d.click(0.+x, 0.+y)
+        counter = int((self.d.window_size()[1] - self.d.window_size()[1] * 0.2) / 20) - 1
+        for i in range(counter):
+            color = self.get_color_pixel(x, y)
+            if color == (100, 150, 220) or color == (100, 150, 220, 255):
+                self.d.click(x, y)
                 break
+            else:
+                y += 20
 
     @allure.step('Нажать кнопку "Неудача" на экране Cloud Payments')
     def fail_cloud_payments(self):
@@ -432,7 +436,8 @@ class CheckOutPage(BasePage):
         if self.is_element_present(CheckOutLocators.ADD_NEW_CARD_BUTTON):
             self.click(CheckOutLocators.ADD_NEW_CARD_BUTTON, 'кнопка добавить карту')
         else:
-            self.click(self.d(textContains='Картой онлайн').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+            self.click(self.d(textContains='Картой онлайн').sibling(
+                resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
         self.enter_card_data()
         self.check_additional_payment()
 
@@ -444,7 +449,8 @@ class CheckOutPage(BasePage):
         if self.is_element_present(CheckOutLocators.ADD_NEW_CARD_BUTTON):
             self.click(CheckOutLocators.ADD_NEW_CARD_BUTTON, 'кнопка добавить карту')
         else:
-            self.click(self.d(textContains='Добавить карту').sibling(resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
+            self.click(self.d(textContains='Добавить карту').sibling(
+                resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
         self.enter_card_data()
         self.check_additional_payment()
 
@@ -589,10 +595,3 @@ class CheckOutPage(BasePage):
         summary_total = self.get_summary_total()
         assert price == summary_coast, f'Стоимость с карточки товара {price} не совпадает с стоимостью в блоке саммери {summary_coast}'
         assert price_with_discount == summary_total, f'Стоимость товара со скидкой {price_with_discount} с экрана корзина не совпадает с стоимостью со скидкой в блоке саммери {summary_total}'
-
-
-
-
-
-
-
