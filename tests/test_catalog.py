@@ -16,8 +16,8 @@ class TestCatalog:
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Переход из каталога на основной экран')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1757")
-    def test_close_catalog(self):
-        page = MainPage()
+    def test_close_catalog(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.click_x()
         page.wait_hidden_element(CatalogLocators.catalog_item)
@@ -29,8 +29,8 @@ class TestCatalog:
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Основной раздел')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/53")
-    def test_open_catalog(self):
-        page = MainPage()
+    def test_open_catalog(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.wait_element(CatalogLocators.WOMEN)
         page.wait_element(CatalogLocators.KIDS)
@@ -46,8 +46,8 @@ class TestCatalog:
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Раздел без подразделов')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/54")
-    def test_catalog_without_chapter(self):
-        page = MainPage()
+    def test_catalog_without_chapter(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.open_catalog_without_chapter()
 
@@ -56,8 +56,8 @@ class TestCatalog:
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Переход от раздела к разделу(Содержащий подразделы)')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/54")
-    def test_catalog_with_chapter(self):
-        page = MainPage()
+    def test_catalog_with_chapter(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         catalog_name = page.catalog.open_catalog_with_chapter()
         print(f"{catalog_name}.Содержит разделы")
@@ -67,8 +67,8 @@ class TestCatalog:
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Клик по ячейке пункта меню')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/3221")
-    def test_tap_out_name_catalog(self):
-        page = MainPage()
+    def test_tap_out_name_catalog(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.catalog.click_catalog_coords()
         if page.catalog.get_element(CatalogLocators.catalog_item_recycler).count == 0:

@@ -80,16 +80,19 @@ class CartPage(BasePage):
         self.click(CartLocators.BUY_BUTTON, "кнопка Начать покупки")
         self.wait_element(CatalogLocators.WOMEN, "заголовок каталога 'Женщины'")
 
-    @allure.step("Проверка наличия в корзине товаров: '{cards_list}'")
-    def checking_availability_cards(self, cards_list):
+    @allure.step("Проверка наличия в корзине товаров: '{cards}'")
+    def checking_availability_cards(self, cards):
         cards_list_in_cart = []
         elements_list = self.get_element(CartLocators.PRODUCT_TITLE).all()
 
         for i in range(len(self.get_element(CartLocators.PRODUCT_TITLE).all())):
             cards_list_in_cart.append(elements_list[i].text)
 
-        for i in range(len(cards_list)):
-            assert cards_list[i] in cards_list_in_cart, print(f"{cards_list[i]} отсутствует в корзине")
+        if type(cards) is list:
+            for i in range(len(cards)):
+                assert cards[i] in cards_list_in_cart, print(f"{cards[i]} отсутствует в корзине")
+        elif type(cards) is str:
+            assert cards in cards_list_in_cart, print(f"{cards} отсутствует в корзине")
 
     @allure.step("Увеличение количества товаров")
     def increasing_products_number(self, price_in_card):

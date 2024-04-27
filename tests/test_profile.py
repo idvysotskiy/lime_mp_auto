@@ -10,8 +10,8 @@ class TestProfile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/16")
     @pytest.mark.profile
     @pytest.mark.smoke
-    def test_account_without_authorization(self):
-        page = MainPage()
+    def test_account_without_authorization(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_profile()
         page.profile.checking_account_elements()
 
@@ -19,8 +19,8 @@ class TestProfile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/317")
     @pytest.mark.profile
     @pytest.mark.smoke
-    def test_closing_account(self):
-        page = MainPage()
+    def test_closing_account(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_profile()
         page.profile.close_account()
         page.wait_logo()
@@ -29,8 +29,8 @@ class TestProfile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/318")
     @pytest.mark.profile
     @pytest.mark.smoke
-    def test_manual(self):
-        page = MainPage()
+    def test_manual(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_profile()
         page.profile.open_manual()
 
@@ -39,8 +39,8 @@ class TestProfile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1901")
     @pytest.mark.profile
     @pytest.mark.smoke
-    def test_contacts(self):
-        page = MainPage()
+    def test_contacts(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_profile()
         page.profile.open_contacts()
         page.profile.checking_contacts_phone_number()
@@ -49,8 +49,8 @@ class TestProfile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/320")
     @pytest.mark.profile
     @pytest.mark.smoke
-    def test_about_company(self):
-        page = MainPage()
+    def test_about_company(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_profile()
         page.profile.open_company()
 

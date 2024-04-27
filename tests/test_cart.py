@@ -11,8 +11,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2067")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_clear_cart(self):
-        page = MainPage()
+    def test_clear_cart(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_cart()
         page.cart.check_empty_cart()
@@ -21,8 +21,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/310")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_start_shopping_btn(self):
-        page = MainPage()
+    def test_start_shopping_btn(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_cart()
         page.cart.click_start_shopping()
@@ -31,8 +31,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2181")
     @pytest.mark.basket
     @pytest.mark.smoke
-    def test_go_to_card(self):
-        page = MainPage()
+    def test_go_to_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -47,8 +47,8 @@ class TestCart:
     @pytest.mark.smoke
     @pytest.mark.basket
     @pytest.mark.demo_auto
-    def test_one_product_in_cart(self):
-        page = MainPage()
+    def test_one_product_in_cart(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -61,8 +61,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/587")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_several_product_in_cart(self):
-        page = MainPage()
+    def test_several_product_in_cart(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -80,8 +80,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/589")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_change_quantity(self):
-        page = MainPage()
+    def test_change_quantity(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -93,8 +93,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/295")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_remove_item_from_cart(self):
-        page = MainPage()
+    def test_remove_item_from_cart(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -110,8 +110,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/296")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_remove_last_item_from_cart(self):
-        page = MainPage()
+    def test_remove_last_item_from_cart(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -123,8 +123,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/340")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_merge_basket_with_authorization(self):
-        page = MainPage()
+    def test_merge_basket_with_authorization(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.clear_basket()
         email = page.user_registration()
         page.open_catalog()
@@ -151,8 +151,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/341")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_basket_list_after_authorization(self):
-        page = MainPage()
+    def test_basket_list_after_authorization(self, connect_to_device):
+        page = MainPage(connect_to_device)
         email = page.user_registration()
         # page.open_profile()
         # page.swipe_page_up(2)
@@ -172,8 +172,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/342")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_basket_after_logout(self):
-        page = MainPage()
+    def test_basket_after_logout(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -191,8 +191,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/599")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_add_to_favorite_from_basket(self):
-        page = MainPage()
+    def test_add_to_favorite_from_basket(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         cards_list = [page.card.get_product_name()]
@@ -207,8 +207,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2180")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_delete_all_items(self):
-        page = MainPage()
+    def test_delete_all_items(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -220,8 +220,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2068")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_close_confirm_of_cleaning(self):
-        page = MainPage()
+    def test_close_confirm_of_cleaning(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         cards_name = [page.card.get_product_name()]
@@ -237,8 +237,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1954")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_clear_cart_with_one_item(self):
-        page = MainPage()
+    def test_clear_cart_with_one_item(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -249,8 +249,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1960")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_clear_cart_with_several_items(self):
-        page = MainPage()
+    def test_clear_cart_with_several_items(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.press_back()
@@ -264,8 +264,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2578")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_return_to_another_screen(self):
-        page = MainPage()
+    def test_return_to_another_screen(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -282,8 +282,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1980")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_basket_after_order(self):
-        page = MainPage()
+    def test_basket_after_order(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -307,8 +307,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2040")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_promo_valid_value_and_clear_promo_field(self):
-        page = MainPage()
+    def test_promo_valid_value_and_clear_promo_field(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -320,8 +320,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2039")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_promo_valid_after_invalid_value(self):
-        page = MainPage()
+    def test_promo_valid_after_invalid_value(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -333,8 +333,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2871")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_promo_after_authorization(self):
-        page = MainPage()
+    def test_promo_after_authorization(self, connect_to_device):
+        page = MainPage(connect_to_device)
         email = page.user_registration()
         # page.open_profile()
         # page.swipe_page_up(2)
@@ -352,8 +352,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2700")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_reset_promo_after_close_basket_without_authorization(self):
-        page = MainPage()
+    def test_reset_promo_after_close_basket_without_authorization(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -366,8 +366,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2017")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_reset_promo_after_close_basket_with_authorization(self):
-        page = MainPage()
+    def test_reset_promo_after_close_basket_with_authorization(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -381,8 +381,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2215")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_delete_item_with_promo(self):
-        page = MainPage()
+    def test_delete_item_with_promo(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -394,8 +394,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2214")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_clear_cart_with_promo(self):
-        page = MainPage()
+    def test_clear_cart_with_promo(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         page.card.open_cart()
@@ -407,8 +407,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2041")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_save_promo_after_go_to_checkout(self):
-        page = MainPage()
+    def test_save_promo_after_go_to_checkout(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()
@@ -427,8 +427,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2872")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_registration_in_cart(self):
-        page = MainPage()
+    def test_registration_in_cart(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         card_name = page.card.get_product_name()
@@ -442,8 +442,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2026")
     @pytest.mark.smoke
     @pytest.mark.basket
-    def test_check_promo_after_delete_one_item(self):
-        page = MainPage()
+    def test_check_promo_after_delete_one_item(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.open_catalog()
         page.add_to_cart_random_product()
         total_price = page.card.get_product_price()
@@ -466,8 +466,8 @@ class TestCart:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3356")
     @pytest.mark.basket
     @pytest.mark.smoke
-    def test_promo_code_discount(self):
-        page = MainPage()
+    def test_promo_code_discount(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()

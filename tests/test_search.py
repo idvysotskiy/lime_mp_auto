@@ -12,8 +12,8 @@ class TestSearch:
     @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Удачный поиск по текстовому запросу')
     @allure.testcase("C3")
-    def test_search_text(self):
-        page = MainPage()
+    def test_search_text(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.search.go_to_search()
         page.search.elements_search_first()
         page.search.search(product_name_ru)
@@ -23,8 +23,8 @@ class TestSearch:
     @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Валидный запрос для одной категории')
     @allure.testcase("C1779")
-    def test_search_text_one_category(self):
-        page = MainPage()
+    def test_search_text_one_category(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.search.go_to_search()
         page.search.elements_search_first()
         page.search.search(product_name_ru)
@@ -36,8 +36,8 @@ class TestSearch:
     @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Удачный поиск по артикулу')
     @allure.testcase("C199")
-    def test_search_article(self):
-        page = MainPage()
+    def test_search_article(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.search.go_to_search()
         page.search.elements_search_first()
         page.search.search(product_article)

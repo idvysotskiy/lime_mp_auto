@@ -19,15 +19,18 @@ from pages.search_page import SearchPage
 
 
 class MainPage(BasePage):
-    cart = CartPage()
-    catalog = CatalogPage()
-    checkout = CheckOutPage()
-    card = ProductCardPage()
-    search = SearchPage()
-    favorites = FavoritesPage()
-    profile = ProfilePage()
-    repeat = RepeatPaymentPage()
-    collection = CollectionPage()
+    def __init__(self, d):
+        super().__init__(d)
+        self.d = d
+        self.cart = CartPage(d)
+        self.catalog = CatalogPage(d)
+        self.checkout = CheckOutPage(d)
+        self.card = ProductCardPage(d)
+        self.search = SearchPage(d)
+        self.favorites = FavoritesPage(d)
+        self.profile = ProfilePage(d)
+        self.repeat = RepeatPaymentPage(d)
+        self.collection = CollectionPage(d)
 
     @allure.step("Регистрация")
     def user_registration(self):

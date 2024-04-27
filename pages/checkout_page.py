@@ -347,12 +347,12 @@ class CheckOutPage(BasePage):
     @allure.step("Выбор способа оплаты - Подарочной картой")
     def set_gift_card_selector(self):
         self.click(CheckOutLocators.gift_card_selector, "Подарочной картой")
-        self.wait_element(CheckOutLocators.add_gift_card_title, "Добавить подарочную карту")
+        self.wait_text("ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
 
     @allure.step("Закрытие блока подарочной карты кликом мимо области блока")
     def close_gift_card_block(self):
         self.coordinate_click(500, 300)
-        self.wait_hidden_element(CheckOutLocators.add_gift_card_title, 'блок добавления подарочной карты')
+        self.wait_hidden_text("ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
         self.wait_element(CheckOutLocators.add_gift_card_btn, "кнопка Добавить карту")
 
     @allure.step("Закрытие блока подарочной карты свайпом шторки вниз")
@@ -360,9 +360,9 @@ class CheckOutPage(BasePage):
         with allure.step("Свайп вниз блока подарочной карты"):
             gift_card_dragger_view_x = self.get_element(CheckOutLocators.gift_card_dragger_view).center()[0]
             gift_card_dragger_view_y = self.get_element(CheckOutLocators.gift_card_dragger_view).center()[1]
-            d.swipe(gift_card_dragger_view_x, gift_card_dragger_view_y, gift_card_dragger_view_x,
+            self.d.swipe(gift_card_dragger_view_x, gift_card_dragger_view_y, gift_card_dragger_view_x,
                     gift_card_dragger_view_y + 300)
-        self.wait_hidden_element(CheckOutLocators.add_gift_card_title, 'блок добавления подарочной карты')
+        self.wait_hidden_text("ДОБАВИТЬ ПОДАРОЧНУЮ КАРТУ")
         self.wait_element(CheckOutLocators.add_gift_card_btn, "кнопка Добавить карту")
 
     @allure.step("Проверка номера подарочной карты. Проверка кнопки Продолжить")
@@ -399,7 +399,7 @@ class CheckOutPage(BasePage):
         # self.wait_element(CheckOutLocators.gift_card_balance, "баланс подарочной карты")
         # self.set_text(CheckOutLocators.gift_card_pin_field, '1234', "Пин-код")
         # self.wait_text('Не верный пин-код подарочной карты')
-        # assert self.d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
+        # assert d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")
         self.wait_a_second()
         self.set_text(CheckOutLocators.gift_card_pin_field, "", "Пин-код")
         assert self.d(text="ПРОДОЛЖИТЬ", enabled='false').wait(5) == True, print("Кнопка Продолжить Активна")

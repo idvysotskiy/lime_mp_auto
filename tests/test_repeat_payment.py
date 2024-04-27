@@ -15,8 +15,8 @@ class TestRepeatPayments:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2966")
     @pytest.mark.repeat_payment
     @pytest.mark.smoke
-    def test_repay_navigation(self):
-        page = MainPage()
+    def test_repay_navigation(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
         page.open_catalog()
         page.add_to_cart_random_product()

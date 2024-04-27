@@ -12,8 +12,8 @@ class TestMain:
     @pytest.mark.smoke
     @allure.title('Экран "Основной экран" / Скролл баннеров')
     @allure.testcase("C1861")
-    def test_swipe_banner(self):
-        page = BasePage()
+    def test_swipe_banner(self, connect_to_device):
+        page = MainPage(connect_to_device)
         time.sleep(5)
         page.swipe_page_up()
         page.swipe_page_up()
@@ -27,8 +27,8 @@ class TestMain:
     @pytest.mark.smoke
     @allure.title('Экран "Авторизация" / Авторизация пользователя')
     @allure.testcase("C1016")
-    def test_login(self):
-        page = MainPage()
+    def test_login(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.login(valid_email, valid_password)
 
     @allure.title('Экран "Регистрация" / Заполнение полей "Имя/Фамилия" кириллицей')
@@ -36,8 +36,8 @@ class TestMain:
     @pytest.mark.smoke
     @pytest.mark.main
     @pytest.mark.demo_auto
-    def test_reg(self):
-        page = MainPage()
+    def test_reg(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.user_registration()
 
     # @pytest.mark.main
@@ -54,8 +54,8 @@ class TestMain:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/197")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/194")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3392")
-    def test_colors(self):
-        page = MainPage()
+    def test_colors(self, connect_to_device):
+        page = MainPage(connect_to_device)
         page.icon_color_check(MainLocators.SEARCH_NAV)
         page.icon_color_check(MainLocators.FAVORITES_NAV)
         page.icon_color_catalog_check()
