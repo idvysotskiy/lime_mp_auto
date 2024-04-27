@@ -19,7 +19,7 @@ class CheckOutPage(BasePage):
 
     @allure.step('Нажать кнопку "Успешно" на экране Cloud Payments')
     def accept_cloud_payments(self):
-        time.sleep(8)
+        time.sleep(5)
         y = self.d.window_size()[1] * 0.2
         x = self.d.window_size()[0] * 0.3
         self.get_screen()
@@ -439,6 +439,7 @@ class CheckOutPage(BasePage):
             self.click(self.d(textContains='Картой онлайн').sibling(
                 resourceId='ru.limeshop.android.dev:id/is_selected_card_radio'), "способ доплаты - Картой онлайн")
         self.enter_card_data()
+        self.wait_a_second()
         self.check_additional_payment()
 
     @allure.step("Добавление доплаты картой")
@@ -467,7 +468,8 @@ class CheckOutPage(BasePage):
         if len(self.d.xpath('//*[@text="СПОСОБ ДОПЛАТЫ"]').all()) > 0:
             self.coordinate_click(100, 100)
         self.wait_a_second()
-        assert self.d(resourceId='ru.limeshop.android:id/payment_card_number_text', textContains=number).wait(
+        # assert self.get_text('ru.limeshop.android.dev:id/payment_card_number_text') == number
+        assert self.d(resourceId='ru.limeshop.android.dev:id/payment_card_number_text', textContains=number).wait(
             5) == True, print(f"В блоке Доплата не отображается карта {number}")
 
     @allure.step("Добавление доплаты картой")

@@ -147,14 +147,14 @@ class BasePage:
         d = self.d
         if isinstance(locator, str):
             if locator[0] == '/' and locator[1] == '/':
-                counter = random.randrange(2, len(d.xpath(locator).all()) - 2)
+                counter = random.randrange(3, len(d.xpath(locator).all()) - 2)
                 elements_list = d.xpath(locator).all()
                 return elements_list[counter]
             else:
-                counter = random.randrange(2, d(resourceId=locator).count - 2)
+                counter = random.randrange(3, d(resourceId=locator).count - 2)
                 return d(resourceId=locator)[counter]
         else:
-            counter = random.randrange(2, locator.count - 2)
+            counter = random.randrange(3, locator.count - 2)
             return locator[counter]
 
     # @allure.step("Ожидание элемента")
