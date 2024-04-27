@@ -2,6 +2,7 @@
 from config import *
 import uiautomator2 as u2
 
+
 # d = u2.connect(device_id)
 
 
@@ -107,13 +108,14 @@ class CollectionLocators:
     price_product_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]'
     banner_image = 'ru.limeshop.android.dev:id/media_view'
     cards_image = "ru.limeshop.android.dev:id/media_view_container_layout"
-    image_card1 = d.xpath('//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]')
-    image_card2 = d.xpath('//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[2]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]')
+    image_card1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
+    image_card2 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[2]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
     SCREENFORCARDS = "ru.limeshop.android.dev:id/recycler_catalog"
     CARDPLACE = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout'
     PRICELIST = "//*[@resource-id='ru.limeshop.android.dev:id/priceTextView']"
     FAVORITEBUTTON = 'ru.limeshop.android.dev:id/favoriteImageView'
     CARDNAME = 'ru.limeshop.android.dev:id/nameTextView'
+
 
 class ProductCardLocators:
     # PRODUCT_CARD
@@ -165,6 +167,7 @@ class ProductCardLocators:
     popup_buy_btn = 'ru.limeshop.android.dev:id/productPopup'
     popup_title = 'ru.limeshop.android.dev:id/popupStartTitle'
     popup_btn = 'ru.limeshop.android.dev:id/popupButton'
+
 
 class ProfileLocators:
     # PROFILE
@@ -507,4 +510,3 @@ class FavoritesLocators:
     EVENCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]'
     ODDCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[3]'
     cards_list = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup'
-
