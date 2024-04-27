@@ -105,8 +105,15 @@ class CollectionLocators:
     color_box_2 = '//*[@resource-id="ru.limeshop.android.dev:id/filter_color_block"]/androidx.recyclerview.widget.RecyclerView[1]/android.widget.LinearLayout[2]/android.widget.ImageView[1]'
     filter_apply_btn = d(resourceId="ru.limeshop.android.dev:id/filter_apply")
     price_product_1 = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]'
-    cards_image = 'ru.limeshop.android.dev:id/media_view'
-
+    banner_image = 'ru.limeshop.android.dev:id/media_view'
+    cards_image = "ru.limeshop.android.dev:id/media_view_container_layout"
+    image_card1 = d.xpath('//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]')
+    image_card2 = d.xpath('//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout[2]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]')
+    SCREENFORCARDS = "ru.limeshop.android.dev:id/recycler_catalog"
+    CARDPLACE = '//*[@resource-id="ru.limeshop.android.dev:id/recycler_catalog"]/android.widget.FrameLayout'
+    PRICELIST = "//*[@resource-id='ru.limeshop.android.dev:id/priceTextView']"
+    FAVORITEBUTTON = 'ru.limeshop.android.dev:id/favoriteImageView'
+    CARDNAME = 'ru.limeshop.android.dev:id/nameTextView'
 
 class ProductCardLocators:
     # PRODUCT_CARD
@@ -495,3 +502,4 @@ class FavoritesLocators:
     EVENCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]'
     ODDCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[3]'
     cards_list = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup'
+
