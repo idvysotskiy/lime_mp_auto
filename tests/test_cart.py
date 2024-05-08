@@ -44,9 +44,7 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Один товар в корзине')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/29")
-    @pytest.mark.smoke
     @pytest.mark.basket
-    @pytest.mark.demo_auto
     def test_one_product_in_cart(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.clear_basket()
@@ -121,7 +119,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Объединение корзины при авторизации')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/340")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_merge_basket_with_authorization(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -149,7 +146,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Список товаров корзины после авторизации')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/341")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_basket_list_after_authorization(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -170,7 +166,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Корзина после логаута')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/342")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_basket_after_logout(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -218,7 +213,6 @@ class TestCart:
     @allure.title('Экран "Корзина" / Кнопка очистки корзины (отмена)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1955")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2068")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_close_confirm_of_cleaning(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -235,7 +229,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Кнопка очистки корзины (один товар/очистка)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1954")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_clear_cart_with_one_item(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -262,7 +255,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Кнопка "Очистить" (возврат к другому экрану корзины)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2578")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_return_to_another_screen(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -318,7 +310,6 @@ class TestCart:
     @allure.title('Экран "Корзина" / Поле "Промокод" (ввод валидного значения после невалидного)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2618")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2039")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_promo_valid_after_invalid_value(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -331,7 +322,6 @@ class TestCart:
     @allure.title('Экран "Корзина" / Отображение поля "Промокод" после авторизации/регистрации')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2025")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2871")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_promo_after_authorization(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -350,7 +340,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Сброс промокода при закрытии экрана (Не авторизован)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2700")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_reset_promo_after_close_basket_without_authorization(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -364,7 +353,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Сброс промокода при закрытии экрана (Авторизован)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2017")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_reset_promo_after_close_basket_with_authorization(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -379,7 +367,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Удаление последнего товара из корзины при введенном промокоде')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2215")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_delete_item_with_promo(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -392,7 +379,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Очистка корзины при введенном промокоде')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2214")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_clear_cart_with_promo(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -425,7 +411,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Регистрация')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2872")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_registration_in_cart(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -440,7 +425,6 @@ class TestCart:
 
     @allure.title('Экран "Корзина" / Отображение поля Промокод при удалении одного из товаров')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2026")
-    @pytest.mark.smoke
     @pytest.mark.basket
     def test_check_promo_after_delete_one_item(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -465,7 +449,6 @@ class TestCart:
     @allure.title('Экран "Корзина" / Поле "Промокод" (Учет скидки в стоимости)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3356")
     @pytest.mark.basket
-    @pytest.mark.smoke
     def test_promo_code_discount(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.user_registration()

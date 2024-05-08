@@ -24,7 +24,10 @@ class ProductCardPage(BasePage):
         self.wait_element(ProductCardLocators.FAVORITE, "Избранное")
         self.wait_element(ProductCardLocators.SHARE, "Поделиться")
         self.wait_element(ProductCardLocators.CART, "Корзина")
-        self.d.swipe(self.get_element(ProductCardLocators.product_name).center()[0], self.get_element(ProductCardLocators.product_name).center()[1], self.get_element(ProductCardLocators.product_name).center()[0], self.get_element(ProductCardLocators.product_name).center()[1] + 500)
+        self.d.swipe(self.get_element(ProductCardLocators.product_name).center()[0],
+                     self.get_element(ProductCardLocators.product_name).center()[1],
+                     self.get_element(ProductCardLocators.product_name).center()[0],
+                     self.get_element(ProductCardLocators.product_name).center()[1] + 500)
         self.wait_element(ProductCardLocators.ART, "Артикул")
         self.wait_element(ProductCardLocators.SIZES_GUIDE, "Руководство по размерам")
         self.wait_element(ProductCardLocators.COMPOSITIONS_AND_CARE, "Состав и уход")
@@ -35,9 +38,6 @@ class ProductCardPage(BasePage):
         # self.wait_element(ProductCardLocators.GOES_WELL)
         # self.wait_element(ProductCardLocators.YOU_LIKE_IT)
         self.get_screen()
-
-    def open_full_product_card(self):
-        self.click(ProductCardLocators.COLORS)
 
     @allure.step("Свайп к описанию")
     def swipe_in_card(self):
@@ -124,9 +124,19 @@ class ProductCardPage(BasePage):
     @allure.step("Проверка попапа в карточке после добавления товара в корзину")
     def checking_popup_buy_btn(self):
         self.wait_element(ProductCardLocators.popup_buy_btn, "плашка добавления товара в корзину")
-        assert self.get_text(ProductCardLocators.popup_title) == 'Товар добавлен в корзину', print(f"Текст на плашке некорректен. Полученный текст: {self.get_text(ProductCardLocators.popup_title)}, ожидаемый текст: Товар добавлен в корзину")
+        assert self.get_text(ProductCardLocators.popup_title) == 'Товар добавлен в корзину', print(
+            f"Текст на плашке некорректен. Полученный текст: {self.get_text(ProductCardLocators.popup_title)}, ожидаемый текст: Товар добавлен в корзину")
         self.wait_element(ProductCardLocators.popup_btn, "кнопка Перейти")
 
     @allure.step("Переход в корзину по кнопке Перейти в попапе")
     def click_popup_buy_btn(self):
         self.click(ProductCardLocators.popup_btn, "кнопка Перейти")
+
+    # @allure.step("Получение артикула")
+    def get_article(self):
+        return self.get_text(ProductCardLocators.ART).partition(' ')[2]
+
+    @allure.step("Проверка артикула в найденной карточке")
+    def checking_article_in_found_card(self, article):
+        self.click_colors()
+        assert article == self.get_article(), f"Артикул найденной карточки отличается от исходника. Исходный артикул - {article}, артикул найденной карточки - {self.get_article()} "

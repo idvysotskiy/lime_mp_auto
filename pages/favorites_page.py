@@ -60,16 +60,19 @@ class FavoritesPage(BasePage):
         self.wait_element(ProductCardLocators.product_price)
         self.wait_element(ProductCardLocators.BUY)
 
-    @allure.step("Проверка наличия в избранном товаров: '{cards_list}'")
-    def checking_availability_cards(self, cards_list):
+    @allure.step("Проверка наличия в избранном товаров: '{cards}'")
+    def checking_availability_cards(self, cards):
         cards_list_in_favorite = []
         elements_list = self.get_element(FavoritesLocators.STUFFNAME).all()
 
         for i in range(len(self.get_element(FavoritesLocators.STUFFNAME).all())):
             cards_list_in_favorite.append(elements_list[i].text)
 
-        for i in range(len(cards_list)):
-            assert cards_list[i] in cards_list_in_favorite, print(f"{cards_list[i]} отсутствует в избранном")
+        if type(cards) is list:
+            for i in range(len(cards)):
+                assert cards[i] in cards_list_in_favorite, print(f"{cards[i]} отсутствует в избранном")
+        elif type(cards) is str:
+            assert cards in cards_list_in_favorite, print(f"{cards} отсутствует в корзине")
 
     @allure.step('Свайп модалки вниз')
     def swipe_module_bottom(self):

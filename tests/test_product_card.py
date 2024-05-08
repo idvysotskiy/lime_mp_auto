@@ -6,7 +6,7 @@ import allure
 
 @pytest.mark.usefixtures("setup")
 @allure.feature("Карточка товара")
-class TestMobile:
+class TestProductCard:
     @allure.title('Экран "Карточка товара" / Кнопка "Купить"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/12")
     @pytest.mark.smoke
@@ -25,6 +25,7 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/288")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/290")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/11")
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/292")
     @pytest.mark.smoke
     @pytest.mark.card
     def test_open_product_card(self, connect_to_device):
@@ -33,7 +34,7 @@ class TestMobile:
         collection_title = page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         page.card.elements_product_card()
-        page.card.open_full_product_card()
+        page.card.click_colors()
         page.card.checking_card_elements()
         page.card.click_back()
         assert collection_title == page.catalog.get_collection_title(), print(
