@@ -74,7 +74,9 @@ class SearchLocators:
     ICON_FAIL_SEARCH = '//androidx.appcompat.widget.LinearLayoutCompat/android.widget.ImageView[1]'
     FAIL_SEARCH_TEXT = '//*[@text="НИЧЕГО НЕ НАЙДЕНО"]'
     FAIL_SEARCH_DESCRIPTION = '//*[@text="Проверьте, правильно ли введен запрос"]'
-
+    card_name_in_search_result = 'ru.limeshop.android.dev:id/item_product_name'
+    card_img_in_search_result = 'ru.limeshop.android.dev:id/media_view'
+    card_favorite_icon = 'ru.limeshop.android.dev:id/item_product_favorite'
 
 class CatalogLocators:
     WOMEN = '//*[@text="ЖЕНЩИНЫ"]'
@@ -126,7 +128,7 @@ class ProductCardLocators:
     SHARE = '//*[@resource-id="ru.limeshop.android.dev:id/productShareImageButton"]'
     CART = '//*[@resource-id="ru.limeshop.android.dev:id/productCartImageButton"]'
     PHOTO_ZOOM = '//*[@resource-id="ru.limeshop.android.dev:id/productPhotosViewpager"]'
-    ART = '//*[@resource-id="ru.limeshop.android.dev:id/productArticleTextView"]'
+    ART = 'ru.limeshop.android.dev:id/productArticleTextView'
     SIZES_GUIDE = '//*[@resource-id="ru.limeshop.android.dev:id/product_sizes_text_view"]'
     COMPOSITIONS_AND_CARE = '//*[@resource-id="ru.limeshop.android.dev:id/productCompositionAndCareTextView"]'
     DELIVERY = '//*[@resource-id="ru.limeshop.android.dev:id/productDeliveryTextView"]'

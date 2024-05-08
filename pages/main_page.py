@@ -93,7 +93,7 @@ class MainPage(BasePage):
         self.click(ProfileLocators.SIGNUP_UN)
         BasePage.get_screen(self)
 
-    @allure.step('Открыть личный кабинет')
+    @allure.step('Переход в личный кабинет')
     def open_profile(self):
         self.click(MainLocators.PROFILE_NAV, "личный кабинет")
 
@@ -274,3 +274,7 @@ class MainPage(BasePage):
         color = self.get_color(MainLocators.CATALOG_NAV)
         assert color == (0, 0, 0), f'Цвет иконки {color} а должен быть (0, 0, 0)'
 
+    @allure.step('Переход в поиск')
+    def open_search(self):
+        self.wait_element(MainLocators.SEARCH_NAV)
+        self.click(MainLocators.SEARCH_NAV, "кнопка Поиск")
