@@ -21,7 +21,6 @@ class TestFavorites:
         page.wait_hidden_element(FavoritesLocators.TITLE, 'Заголовок "Избранное"')
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Избранное"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/7")
@@ -51,7 +50,6 @@ class TestFavorites:
         page.wait_logo()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Товар в избранном')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/8")
@@ -68,7 +66,6 @@ class TestFavorites:
         page.wait_text(product_name)
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Удаление из избранного')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/9')
@@ -85,7 +82,6 @@ class TestFavorites:
         page.favorites.check_empty_favorites()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Кнопка "Купить" для товара в избранном')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/232')
@@ -100,7 +96,6 @@ class TestFavorites:
         page.favorites.favorites_product_bottom_buy()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Добавление товара в корзину')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/10')
@@ -116,7 +111,6 @@ class TestFavorites:
         page.cart.checking_availability_cards(product_name)
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Переход в карточку товара и выход из нее')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/241')

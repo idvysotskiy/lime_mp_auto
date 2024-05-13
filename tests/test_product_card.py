@@ -6,10 +6,9 @@ import allure
 
 @pytest.mark.usefixtures("setup")
 @allure.feature("Карточка товара")
-class TestMobile:
+class TestProductCard:
     @allure.title('Экран "Карточка товара" / Кнопка "Купить"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/12")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_size_bottom_sheet(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -25,7 +24,7 @@ class TestMobile:
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/288")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/290")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/11")
-    @pytest.mark.smoke
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/292")
     @pytest.mark.card
     def test_open_product_card(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -33,7 +32,7 @@ class TestMobile:
         collection_title = page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         page.card.elements_product_card()
-        page.card.open_full_product_card()
+        page.card.click_colors()
         page.card.checking_card_elements()
         page.card.click_back()
         assert collection_title == page.catalog.get_collection_title(), print(
@@ -42,7 +41,6 @@ class TestMobile:
     @allure.title('Экран "Карточка товара" / Кнопка Купить (Изменение)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1622")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1979")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_buy_button_changes(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -56,7 +54,6 @@ class TestMobile:
 
     @allure.title('Экран "Карточка товара" / Кнопка Избранное (Добавить в избранное)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/291")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_add_to_favorites(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -70,7 +67,6 @@ class TestMobile:
 
     @allure.title('Экран "Карточка товара" / Кнопка Избранное (Удалить из избранного)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/293")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_delete_from_favorites(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -85,7 +81,6 @@ class TestMobile:
 
     @allure.title('Экран "Карточка товара" / Кнопка Поделиться')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/13")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_share(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -97,7 +92,6 @@ class TestMobile:
 
     @allure.title('Экран "Карточка товара" / Кнопка Корзина')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/294")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_basket_button(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -110,7 +104,6 @@ class TestMobile:
     @allure.title('Экран "Карточка товара" / Кнопка Доставка и возврат')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3123")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3126")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_delivery_button(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -124,7 +117,6 @@ class TestMobile:
 
     @allure.title('Экран "Карточка товара" / Кнопка Оплата')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3124")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_payment_button(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -136,7 +128,6 @@ class TestMobile:
 
     @allure.title('Экран "Карточка товара" / Товар с несколькими цветомоделями')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/174")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_card_colors(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -152,7 +143,6 @@ class TestMobile:
 
     @allure.title('Экран "Карточка товара" / ЗУМ (Переход с первого фото)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/325")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_zoom_image(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -166,7 +156,6 @@ class TestMobile:
 
     @allure.title('Экран "Карточка товара" / Добавление товара в корзину (Плашка)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2943")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_add_to_cart_popup(self, connect_to_device):
         page = MainPage(connect_to_device)
@@ -181,7 +170,6 @@ class TestMobile:
 
     @allure.title('Экран "Карточка товара" / Переход в корзину (Плашка)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2944")
-    @pytest.mark.smoke
     @pytest.mark.card
     def test_open_cart_via_popup(self, connect_to_device):
         page = MainPage(connect_to_device)

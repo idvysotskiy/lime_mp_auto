@@ -24,7 +24,6 @@ class TestCatalog:
         page.wait_hidden_element(CatalogLocators.MENU_ITEM)
 
     @pytest.mark.catalog
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Основной раздел')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/53")
@@ -41,7 +40,6 @@ class TestCatalog:
         page.wait_element(CatalogLocators.GIFT_CARD, 'Подарочная карта')
 
     @pytest.mark.catalog
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Раздел без подразделов')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/54")
@@ -51,7 +49,6 @@ class TestCatalog:
         page.catalog.open_catalog_without_chapter()
 
     @pytest.mark.catalog
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Переход от раздела к разделу(Содержащий подразделы)')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/54")

@@ -163,11 +163,11 @@ class BasePage:
             with allure.step(f"Ожидание элемента '{element_name}'"):
                 if isinstance(locator, str):
                     if locator[0] == '/' and locator[1] == '/':
-                        assert self.get_element(locator).exists == True, print(f"Элемент {element_name} отсутствует")
+                        assert self.get_element(locator).exists == True, print(f"Элемент '{element_name}' отсутствует")
                     else:
-                        assert self.get_element(locator).wait(10) == True, print(f"Элемент {element_name} отсутствует")
+                        assert self.get_element(locator).wait(10) == True, print(f"Элемент '{element_name}' отсутствует")
                 else:
-                    assert locator.wait(10) == True, print(f"Элемент {element_name} отсутствует")
+                    assert locator.wait(10) == True, print(f"Элемент '{element_name}' отсутствует")
         else:
             if isinstance(locator, str):
                 if locator[0] == '/' and locator[1] == '/':
