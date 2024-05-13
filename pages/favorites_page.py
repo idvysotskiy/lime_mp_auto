@@ -42,13 +42,19 @@ class FavoritesPage(BasePage):
         self.wait_element(FavoritesLocators.SIZEINSTUCTION, "Руководство по размерам")
         self.wait_element(FavoritesLocators.SIZE, "Размер")
 
-    @allure.step("Добавление переход в корзину")
+    @allure.step("Добавление и переход в корзину")
     def add_to_cart_and_go_to_cart(self):
         self.click(FavoritesLocators.BUTTONBUYSTUFF, 'Кнопка "Купить" для товара')
         self.wait_a_moment()
         self.click(FavoritesLocators.SIZE, "Выбрать размер")
         self.wait_element(FavoritesLocators.SNECKBARADDCART)
         self.click(FavoritesLocators.SNECKBARBUTTONGOTOCART, "Кнопка ПЕРЕЙТИ")
+
+    @allure.step("Добавление в корзину")
+    def add_to_cart(self):
+        self.click(FavoritesLocators.BUTTONBUYSTUFF, 'Кнопка "Купить" для товара')
+        self.wait_a_moment()
+        self.click(FavoritesLocators.SIZE, "Выбрать размер")
 
     @allure.step("Переход в карточку товара")
     def go_to_card(self):

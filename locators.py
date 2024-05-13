@@ -512,3 +512,4 @@ class FavoritesLocators:
     EVENCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]'
     ODDCARD = 'ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[3]'
     cards_list = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup'
+    BOTTONDELETEFROMFAV = '//*[@resource-id="ru.limeshop.android.dev:id/removeImageView"]'

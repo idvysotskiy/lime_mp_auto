@@ -2,7 +2,7 @@ import allure
 import pytest
 
 from config import product_name_ru
-from locators import SearchLocators
+from locators import SearchLocators, FavoritesLocators
 from pages.main_page import MainPage
 
 
@@ -67,6 +67,93 @@ class TestSmoke:
         page.click_x()
         page.open_favorites()
         page.favorites.checking_availability_cards(card_name)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Избранное" / Пустой список')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2236")
+    def test_empty_favorites_screen(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_favorites()
+        page.favorites.wait_element(FavoritesLocators.BUTTONBUY)
+        page.favorites.wait_element(FavoritesLocators.INFOTEXT)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Избранное" / Товар в избранном')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2237")
+    def test_product_in_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_favorites()
+        page.favorites.delete_from_favorites()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        product_name = page.card.add_to_favorites()
+        page.click_x()
+        page.open_favorites()
+        page.wait_text(product_name)
+        page.wait_element(FavoritesLocators.BUTTONBUYSTUFF)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Избранное" / Удаление товара из избранного')
+    @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/2238")
+    def test_delete_product_from_favorites(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_favorites()
+        page.favorites.delete_from_favorites()
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_favorites()
+        page.click_x()
+        page.open_favorites()
+        page.favorites.click(FavoritesLocators.BOTTONDELETEFROMFAV)
+        page.wait_a_second()
+        page.favorites.wait_hidden_element(FavoritesLocators.BUTTONBUYSTUFF)
+        page.favorites.wait_element(FavoritesLocators.INFOTEXT)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Избранное" / Кнопка "Купить" для товара')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/2239')
+    def test_bottom_buy_for_favorites_product(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.add_to_favorites()
+        page.click_x()
+        page.open_favorites()
+        page.favorites.favorites_product_bottom_buy()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Избранное" / Добавить товар в корзину')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/2240')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/2241')
+    def test_add_to_cart(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        product_name = [page.card.add_to_favorites()]
+        page.click_x()
+        page.open_favorites()
+        page.favorites.add_to_cart_and_go_to_cart()
+        page.cart.checking_availability_cards(product_name)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Избранное" / Переход на экран "Корзина"(Через ТапБар)')
+    @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/2242')
+    def test_add_to_cart_from_navbar(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        product_name = [page.card.add_to_favorites()]
+        page.click_x()
+        page.open_favorites()
+        page.favorites.add_to_cart()
+        page.open_cart()
+        page.cart.checking_availability_cards(product_name)
+
 
 
 
