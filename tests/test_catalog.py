@@ -12,7 +12,6 @@ import random
 @allure.feature("Каталог")
 class TestCatalog:
     @pytest.mark.catalog
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Переход из каталога на основной экран')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1757")
@@ -63,7 +62,6 @@ class TestCatalog:
         print(f"{catalog_name}.Содержит разделы")
 
     @pytest.mark.catalog
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Каталог" / Клик по ячейке пункта меню')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/3221")
