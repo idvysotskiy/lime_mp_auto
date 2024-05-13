@@ -8,7 +8,6 @@ import allure
 @allure.feature("Поиск")
 class TestSearch:
     @pytest.mark.search
-    @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Удачный поиск по текстовому запросу')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/60")
@@ -20,7 +19,6 @@ class TestSearch:
         page.search.checking_elements_after_search()
 
     @pytest.mark.search
-    @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Удачный поиск по артикулу')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/199")
     def test_article_search(self, connect_to_device):
@@ -38,7 +36,6 @@ class TestSearch:
         page.card.checking_article_in_found_card(article)
 
     @pytest.mark.search
-    @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Артикул для разных категорий')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1778")
     def test_articles_for_different_categories(self, connect_to_device):
@@ -60,7 +57,6 @@ class TestSearch:
         page.wait_element(SearchLocators.card_name_in_search_result, "найденная по запросу карточка")
 
     @pytest.mark.search
-    @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Валидный запрос для одной категории')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1779")
     def test_valid_query_for_one_category(self, connect_to_device):
@@ -72,7 +68,6 @@ class TestSearch:
         page.search.checking_empty_search_page()
 
     @pytest.mark.search
-    @pytest.mark.smoke
     @allure.title('Экран "Поиск" / Неудачный поиск + переход по категориям')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/5")
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/1777")

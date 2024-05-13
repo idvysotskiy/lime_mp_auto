@@ -13,7 +13,6 @@ import random
 class TestCollection:
 
     @pytest.mark.collection
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Выход с экрана')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/3391')
@@ -28,7 +27,6 @@ class TestCollection:
         page.catalog.wait_element(CatalogLocators.KIDS)
 
     @pytest.mark.collection
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Коллекция" / Переход на экран "Коллекция"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/483")
@@ -42,7 +40,6 @@ class TestCollection:
         page.catalog.wait_element(CollectionLocators.filters_btn)
 
     @pytest.mark.collection
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Баннер в коллекции (клик на баннер)')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/336")
@@ -54,7 +51,7 @@ class TestCollection:
         page.collection.wait_hidden_element(CollectionLocators.banner_image)
 
     # @pytest.mark.collection
-    # @pytest.mark.smoke
+
     # @pytest.mark.regress
     # @allure.title('Экран "Коллекции" / Сортировка коллекции')
     # @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/171")
@@ -66,7 +63,6 @@ class TestCollection:
     #     page.collection.sort_upper_price()
 
     @pytest.mark.collection
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Переход к карточке товара')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/286")
@@ -77,7 +73,6 @@ class TestCollection:
         page.catalog.open_random_card()
 
     @pytest.mark.collection
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Добавление в избранное (добавление в список) с экрана "Коллекция"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/283")
@@ -93,7 +88,6 @@ class TestCollection:
         assert product_name == favorites_product, 'Товары разные!!'
 
     @pytest.mark.collection
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Добавление в избранное (добавление в список) с экрана "Коллекция"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/283")
@@ -110,7 +104,6 @@ class TestCollection:
         page.wait_element(FavoritesLocators.INFOTEXT)
 
     @pytest.mark.collection
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Добавление в избранное нескольких товаров (более 3-х) с экрана "Коллекция"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/3101")
@@ -124,7 +117,6 @@ class TestCollection:
         page.favorites.checking_availability_cards(cards_list)
 
     @pytest.mark.collection
-    @pytest.mark.smoke
     @pytest.mark.blablabla
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Отображение добавленного в избранное (из карточки)')
@@ -146,7 +138,6 @@ class TestCollection:
                 pytest.xfail("На экране не найдено добавленныйх в избранное товаров!" )
 
     @pytest.mark.collection
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Коллекции" / Возвращение из карточки товара')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/history/287")

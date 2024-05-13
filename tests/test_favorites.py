@@ -11,7 +11,6 @@ import random
 @allure.feature("Избранное")
 class TestFavorites:
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Выход с экрана "Избранное"')
     @allure.title("https://lmdev.testrail.io/index.php?/cases/view/238")
@@ -22,7 +21,6 @@ class TestFavorites:
         page.wait_hidden_element(FavoritesLocators.TITLE, 'Заголовок "Избранное"')
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Избранное"')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/7")
@@ -31,7 +29,6 @@ class TestFavorites:
         page.open_favorites()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Кнопка "НАЧАТЬ ПОКУПКИ')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/231")
@@ -42,7 +39,6 @@ class TestFavorites:
         page.favorites.click_pay()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Возврат из каталога')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/277")
@@ -54,7 +50,6 @@ class TestFavorites:
         page.wait_logo()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Товар в избранном')
     @allure.testcase("https://lmdev.testrail.io/index.php?/cases/view/8")
@@ -71,7 +66,6 @@ class TestFavorites:
         page.wait_text(product_name)
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Удаление из избранного')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/9')
@@ -88,7 +82,6 @@ class TestFavorites:
         page.favorites.check_empty_favorites()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Кнопка "Купить" для товара в избранном')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/232')
@@ -103,7 +96,6 @@ class TestFavorites:
         page.favorites.favorites_product_bottom_buy()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Добавление товара в корзину')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/10')
@@ -119,7 +111,6 @@ class TestFavorites:
         page.cart.checking_availability_cards(product_name)
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Переход в карточку товара и выход из нее')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/241')
@@ -136,7 +127,6 @@ class TestFavorites:
         page.click_x()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Соответствие списка "Избранное" авторизованного с неавторизованным')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/278')
@@ -153,7 +143,6 @@ class TestFavorites:
         assert product == favorite
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Соответствие списка "Избранное" авторизованного с неавторизованным(Несколько товаров)')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/278')
@@ -177,7 +166,6 @@ class TestFavorites:
         assert product_list == favorite_list
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title(' Список "Избранное" после выхода из профиля(Разлогин)')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/280')
@@ -200,7 +188,6 @@ class TestFavorites:
         page.favorites.check_empty_favorites()
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title(' Экран "Избранное" / Закрыть шторку размеров (клик мимо шторки)')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/301')
@@ -217,7 +204,6 @@ class TestFavorites:
         page.wait_hidden_element(FavoritesLocators.MODULEWINDOW, "Модальное окно")
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран"Избранное" / Закрывание шторки размеров(свайп вниз)')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/302')
@@ -235,7 +221,6 @@ class TestFavorites:
         page.wait_hidden_element(FavoritesLocators.MODULEWINDOW, "Модульное окно")
 
     @pytest.mark.favorites
-    @pytest.mark.smoke
     @pytest.mark.regress
     @allure.title('Экран "Избранное" / Четное и нечетное количество товаров в списке "Избранное"')
     @allure.testcase('https://lmdev.testrail.io/index.php?/cases/view/333')
