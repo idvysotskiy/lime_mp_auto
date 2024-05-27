@@ -10,7 +10,7 @@ from pages.main_page import MainPage
 
 
 def pytest_addoption(parser):
-    parser.addoption('--device', action='store', default='emulator-5554', help='emulator id')
+    parser.addoption('--device', action='store', default='R58N63MW4QR', help='emulator id')
 
 
 @pytest.fixture
@@ -32,11 +32,11 @@ def open_app(d):
     # page.set_feature_toggles()
 
 
-# @allure.title("Сменить контур")
-# @pytest.fixture()
-# def change_contur():
-#     page = MainPage()
-#     page.set_contur()
+@allure.title("Сменить контур")
+@pytest.fixture()
+def change_contur():
+    page = MainPage()
+    page.set_contur()
 
 
 @allure.title("Авторизация")
@@ -60,5 +60,7 @@ def setup(request):
     os.environ["device_id"] = dev_id
     d = u2.connect(dev_id)
     open_app(d)
+    page = MainPage(d)
+    page.set_contur()
     yield
     teardown(d)

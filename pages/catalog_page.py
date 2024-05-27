@@ -88,3 +88,21 @@ class CatalogPage(BasePage):
                 return
 
             self.click_x()
+
+    @allure.step('Переключение между разделами')
+    def change_chapter(self):
+        list_of_elements = []
+        elements = self.get_element(CatalogLocators.catalog_item)
+        for i in range(self.get_elements_amount(CatalogLocators.catalog_item)):
+            list_of_elements.append(elements[i].get_text())
+        print(elements)
+        chapter = random.choice((CatalogLocators.KIDS, CatalogLocators.MEN))
+        print("Выбранный раздел" + chapter)
+        self.click(chapter)
+        list_of_elements2 = []
+        elements2 = self.get_element(CatalogLocators.catalog_item)
+        for i in range(self.get_elements_amount(CatalogLocators.catalog_item)):
+            list_of_elements2.append(elements2[i].get_text())
+        print(elements2)
+        assert list_of_elements != list_of_elements2, print("Разделы  не отличаются")
+

@@ -34,7 +34,7 @@ class BasePage:
         username = 'lime.tester+'
         return username + rnd_name + domain
 
-    def get_element_text(self, locator, element_name):
+    def get_element_text(self, locator: object, element_name: object) -> object:
         element = self.d.xpath(locator)
         element.wait(timeout=10)
         assert element.exists, f"Catalog item '{element_name}' not found"
