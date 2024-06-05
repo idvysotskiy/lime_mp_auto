@@ -81,7 +81,7 @@ class CatalogPage(BasePage):
             self.wait_a_moment()
 
             if self.get_element(CatalogLocators.catalog_item_recycler).count > 0:
-                self.wait_element(MainLocators.submenu_elements_list, "подраздел каталога")
+                self.wait_element(CatalogLocators.submenu_elements_list, "подраздел каталога")
                 self.click(CatalogLocators.submenu_elements_list, "первый подраздел каталога")
 
             if self.get_element(CollectionLocators.banner_image).count > 0:
@@ -106,3 +106,43 @@ class CatalogPage(BasePage):
         print(elements2)
         assert list_of_elements != list_of_elements2, print("Разделы  не отличаются")
 
+    @allure.step('Добавление в избранное из каталога')
+    def add_to_favorites_from_catalog(self):
+        self.click(CollectionLocators.FAVORITEBUTTON)
+        product_name = self.get_text(CollectionLocators.CARDNAME)
+        product_price = self.get_number_from_element(CollectionLocators.CARDPRICE)
+        return product_price, product_name
+
+    @allure.step('Добавление в избранное из каталога')
+    def add_a_few_to_favorites_from_catalog(self):
+        product_name_list = []
+        number = [1, 2, 3]
+        c = random.choice(number)
+        for i in range(c):
+            self.click(CollectionLocators.FAVORITEBUTTON)
+            product_name = self.get_text(CollectionLocators.CARDNAME)
+            product_name_list.append(product_name)
+            self.swipe_page_up()
+            self.swipe_page_up()
+        return product_name_list
+
+    @allure.step('Переход в карточку товара')
+    def open_card(self):
+        self.swipe_page_up()
+        self.swipe_page_up()
+        self.click(CollectionLocators.cards_image)
+
+    @allure.step('Комбинированная фильтрация')
+    def combine_filtration(self):
+        number = [0, 1]
+        random.choice(number)
+        if number == 1:
+            self.click(CollectionLocators.filter_price_asc_cbox)
+        else:
+            self.click(CollectionLocators.filter_price_desc_cbox)
+        box_list = self.get_element(CollectionLocators.CHECKBOX_FILTERS).count
+        for i in range(box_list):
+            a = random.choice(box_list)
+            self.click(CollectionLocators.CHECKBOX_FILTERS(a))
+        self.swipe_page_up()
+        self.swipe_page_up()

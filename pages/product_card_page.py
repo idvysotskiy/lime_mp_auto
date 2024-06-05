@@ -140,3 +140,32 @@ class ProductCardPage(BasePage):
     def checking_article_in_found_card(self, article):
         self.click_colors()
         assert article == self.get_article(), f"Артикул найденной карточки отличается от исходника. Исходный артикул - {article}, артикул найденной карточки - {self.get_article()} "
+
+    @allure.step('Проверка элементов на экране "Расширенная информация о товаре')
+    def checking_advanced_info_card(self):
+        self.wait_element(ProductCardLocators.ART, "Артикул")
+        self.wait_element(ProductCardLocators.SIZES_GUIDE, "Руководство по размерам")
+        self.wait_element(ProductCardLocators.COMPOSITIONS_AND_CARE, "Состав и уход")
+        self.wait_element(ProductCardLocators.DELIVERY, "Доставка и возврат")
+        self.wait_element(ProductCardLocators.PRODUCT_STOCKS, "Наличие в магазинах")
+        self.wait_element(ProductCardLocators.PAYMENT, "Оплата")
+
+    @allure.step('Проверка элементов в модалке "Купить"')
+    def checking_modal_screen(self):
+        self.wait_element(ProductCardLocators.SIZE_INFO)
+        self.wait_element(ProductCardLocators.BOTTOM_SHEET)
+        self.wait_element(ProductCardLocators.SIZES_PRODUCT)
+
+    @allure.step('Покупка нескольких товаров')
+    def buy_a_few_product(self):
+        self.click(ProductCardLocators.BUY)
+        self.click(ProductCardLocators.SIZES_PRODUCT)
+        self.click(ProductCardLocators.BUY_MORE)
+        self.click(ProductCardLocators.SIZES_PRODUCT)
+        self.click(ProductCardLocators.BUY_MORE)
+        self.click(ProductCardLocators.SIZES_PRODUCT)
+        self.click(ProductCardLocators.BUY_MORE)
+        self.click(ProductCardLocators.SIZES_PRODUCT)
+        time.sleep(5)
+        self.wait_hidden_element(ProductCardLocators.POPUP)
+

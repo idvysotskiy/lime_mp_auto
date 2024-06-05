@@ -3,7 +3,7 @@ import pytest
 
 from config import product_name_ru
 from locators import SearchLocators, FavoritesLocators, MainLocators, CatalogLocators, CollectionLocators, \
-    ProductCardLocators
+    ProductCardLocators, CartLocators, ProfileLocators
 from pages.main_page import MainPage
 
 
@@ -323,9 +323,257 @@ class TestSmoke:
     def test_open_card(self, connect_to_device):
         page = MainPage(connect_to_device)
         page.open_catalog()
+        page.catalog.open_random_catalog()
         page.catalog.open_random_card()
         page.card.wait_element(ProductCardLocators.product_name)
         page.card.wait_element(ProductCardLocators.product_price)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Коллекции" / Добавление в избранное (добавление в список) с экрана "Коллекция"')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/283")
+    def test_add_to_favorites_from_catalog(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        product_price, product_name = page.catalog.add_to_favorites_from_catalog()
+        page.click(MainLocators.FAVORITES_NAV)
+        favorites_name = page.get_text(FavoritesLocators.STUFFNAME)
+        favorites_price = page.get_number_from_element(FavoritesLocators.STUFFPRICE)
+        assert favorites_price == product_price, print("Цена отличается")
+        assert favorites_name == product_name, print(f"Название товара отличается, {favorites_name},{product_name}")
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Коллекции" /Удаление из избранного (удаление из списка) с экрана "Коллекция"')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/284")
+    def test_del_to_favorites_from_catalog(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.click(CatalogLocators.cards_image)
+        page.card.add_to_favorites()
+        card_name = page.card.get_product_name()
+        page.card.click(ProductCardLocators.back_btn)
+        page.click(MainLocators.FAVORITES_NAV)
+        page.favorites.checking_availability_cards(card_name)
+        page.click(MainLocators.CATALOG_NAV)
+        page.catalog.add_to_favorites_from_catalog()
+        page.click(MainLocators.FAVORITES_NAV)
+        page.wait_element(FavoritesLocators.BUTTONBUY)
+        page.wait_element(FavoritesLocators.INFOTEXT)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Коллекции" / Добавление в избранное нескольких товаров (более 3-х) с экрана "Коллекция"')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/3101")
+    def test_add_a_few_to_favorites_from_catalog(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        product_list = page.catalog.add_a_few_to_favorites_from_catalog()
+        page.click(MainLocators.FAVORITES_NAV)
+        page.favorites.checking_availability_cards(product_list)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Коллекции" / Отображение добавленного в избранное (из карточки)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1977")
+    def test_equals_favorites_icon_card_and_catalog(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_card()
+        page.card.add_to_favorites()
+        page.card.click_back()
+        color = page.get_color(CollectionLocators.FAVORITEBUTTON)
+        assert color == (0, 0, 0), "Цвет не черный - Товар не добавлен в избранное"
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Коллекция" / Переход на экран "Фильтр"(Android)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/488")
+    def test_open_filters_screen(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.click(CollectionLocators.filters_btn)
+        page.wait_element(CollectionLocators.filter_price_asc_cbox)
+        page.wait_element(CollectionLocators.color_box_1)
+
+    #@pytest.mark.smoke
+    #@allure.title('Экран "Фильтр" / Комбинированная фильтрация')
+    #@allure.title("https://lmdev.testrail.io/index.php?/cases/view/1668")
+    #def test_combine_filtration(self, connect_to_device):
+    #    page = MainPage(connect_to_device)
+    #    page.open_catalog()
+    #    page.catalog.open_random_catalog()
+    #    page.click(CollectionLocators.filters_btn)
+    #    page.catalog.combine_filtration()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / Открыть карточку товара')
+    @allure.title('Экран "Карточка товара" / Кнопка возврата')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/288")
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/11")
+    def test_open_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.wait_element(ProductCardLocators.product_name)
+        page.card.wait_element(ProductCardLocators.product_price)
+        page.card.wait_element(ProductCardLocators.FAVORITE)
+        page.card.wait_element(ProductCardLocators.BUY)
+        page.card.click_back()
+        page.catalog.wait_element(CollectionLocators.title)
+        page.catalog.wait_element(CollectionLocators.CARDPRICE)
+        page.catalog.wait_element(CollectionLocators.filters_btn)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / Открыть шторку (Расширенный экран информации о товаре)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/290")
+    def test_open_advanced_menu_of_product(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.swipe_in_card()
+        page.card.checking_advanced_info_card()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / Кнопка "Купить"')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/12")
+    def test_bottom_buy(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.click(ProductCardLocators.BUY)
+        page.card.checking_modal_screen()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / Кнопка "Избранное" (Добавить в избранное)')
+    @allure.title('Экран "Карточка товара" / Кнопка "Избранное" (Удалить из избранного)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/291")
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/293")
+    def test_add_to_favorites_and_del(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        product = page.card.add_to_favorites()
+        page.card.click_back()
+        page.click(MainLocators.FAVORITES_NAV)
+        page.favorites.checking_availability_cards(product)
+        page.favorites.click(FavoritesLocators.STUFF)
+        page.card.click(ProductCardLocators.FAVORITE)
+        page.card.click_back()
+        page.favorites.wait_element(FavoritesLocators.TITLE)
+        page.favorites.wait_element(FavoritesLocators.INFOTEXT)
+        page.favorites.wait_hidden_element(FavoritesLocators.STUFF)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / Кнопка "Корзина"')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/294")
+    def test_cart_bottom_from_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        product = page.card.get_element(ProductCardLocators.product_name)
+        page.card.click(ProductCardLocators.CART)
+        page.cart.wait_hidden_element(product)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / ЗУМ (Переход с первого фото)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/325")
+    def test_zoom_card(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        bounds = page.card.get_element(ProductCardLocators.PHOTO_ZOOM).bounds[3]
+        page.card.zoom_image()
+        bounds_zoom = page.card.get_element(ProductCardLocators.ZOOM_VIEW).bounds[3]
+        assert bounds < bounds_zoom
+        page.card.wait_hidden_element(ProductCardLocators.product_name)
+        page.card.wait_hidden_element(ProductCardLocators.product_price)
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / Добавление товара в корзину(Плашка)')
+    @allure.title('Экран "Карточка товара" / Добавление нескольких товаров в корзину подряд (Плашка)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/2943")
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/2606")
+    def test_snack_bar_when_buy_product(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        page.card.click(ProductCardLocators.BUY)
+        page.card.click(ProductCardLocators.SIZES_PRODUCT)
+        page.card.buy_a_few_product()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Карточка товара" / Переход в корзину(Плашка)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/2944")
+    def test_snack_bar_when_buy_product(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_catalog()
+        page.catalog.open_random_catalog()
+        page.catalog.open_random_card()
+        product = page.card.get_text(ProductCardLocators.product_name)
+        page.card.click(ProductCardLocators.BUY)
+        page.card.click(ProductCardLocators.SIZES_PRODUCT)
+        page.card.click(ProductCardLocators.POPUP_BUTTON)
+        page.cart.wait_element(CartLocators.TITLE)
+        cart_product = page.cart.get_text(CartLocators.PRODUCT_TITLE)
+        assert product == cart_product
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Личный кабинет" / Экран "Личный кабинет" (Пользователь не авторизован)')
+    @allure.title('Экран "Личный кабинет" / Выход с экрана')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/16")
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/317")
+    def test_open_profile_and_quit(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_profile()
+        page.profile.checking_account_elements()
+        page.profile.exit_from_profile()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Личный кабинет" / Кнопка "Руководство по покупке"')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/318")
+    def test_open_how_to_buy(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_profile()
+        page.profile.open_manual()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Личный кабинет" / Кнопка "Контакты"')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/319")
+    def test_open_how_to_buy(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_profile()
+        page.profile.open_contacts()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Личный кабинет"  / Кнопка "Компания"')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/320")
+    def test_open_company(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_profile()
+        page.profile.open_company()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Личный кабинет" / Кнопка "Магазины"(геолокация включена)')
+    @allure.title('Экран "Личный кабинет" / Кнопка "Магазины"(назад)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/2053")
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/3247")
+    def test_open_company(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_profile()
+        page.profile.open_shops()
+        page.profile.checking_shops_elements()
+        page.click_x()
+        page.profile.checking_account_elements()
+
+
 
 
 

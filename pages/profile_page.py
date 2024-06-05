@@ -43,13 +43,19 @@ class ProfilePage(BasePage):
         self.click(ProfileLocators.COMPANY_UN, "компания")
         self.checking_title_page("О КОМПАНИИ")
 
+    @allure.step("Переход в раздел Магазины")
+    def open_shops(self):
+        self.click(ProfileLocators.SHOPS_UN, "Магазины")
+        # self.checking_title_page("Магазины")
+
     @allure.step("Проверка номера в контактах")
     def checking_contacts_phone_number(self):
         phone_number = self.get_number_from_element(ProfileLocators.phone_number)
         self.click(ProfileLocators.phone_number, "номер телефона в контактах")
         self.wait_element(ProfileLocators.dialer_digits, "набранный номер на экране")
         dialer_digits = self.get_text(ProfileLocators.dialer_digits)
-        assert str(phone_number) == dialer_digits, print(f"Отображается некорректный номер. В приложении - {phone_number}, в приложении для звонков - {dialer_digits}")
+        assert str(phone_number) == dialer_digits, print(
+            f"Отображается некорректный номер. В приложении - {phone_number}, в приложении для звонков - {dialer_digits}")
 
     @allure.step("Логаут")
     def logout(self):
@@ -58,3 +64,21 @@ class ProfilePage(BasePage):
         self.wait_a_second()
         self.click(ProfileLocators.LOGOUT, "кнопка Выйти")
         self.wait_element(ProfileLocators.LOGIN_UN, "кнопка Войти")
+
+    @allure.step('Проверка отсутсвия элементов')
+    def exit_from_profile(self):
+        self.click_x()
+        self.wait_hidden_element(ProfileLocators.MANUAL_UN, "Руководство по покупке")
+        self.wait_hidden_element(ProfileLocators.CONTACTS_UN, "Контакты")
+        self.wait_hidden_element(ProfileLocators.COMPANY_UN, "Компания")
+        self.wait_hidden_element(ProfileLocators.SHOPS_UN, "Магазины")
+        self.wait_hidden_element(ProfileLocators.SUBSCRIPTIONS_UN, "Подписки и уведомления")
+
+    @allure.step("Проверка номера в контактах")
+    def checking_shops_elements(self):
+        if self.get_element(ProfileLocators.PERMISSION_SCREEN):
+            self.click(ProfileLocators.ONE_USE)
+        self.wait_element(ProfileLocators.SHOP_MAP)
+        self.wait_element(ProfileLocators.SHOP_LIST)
+        self.wait_element(ProfileLocators.SHOPS_VIEW_LIST)
+        self.wait_element(ProfileLocators.SHOPS_PARTS_FILTERS)

@@ -117,6 +117,8 @@ class CollectionLocators:
     PRICELIST = "//*[@resource-id='ru.limeshop.android.dev:id/priceTextView']"
     FAVORITEBUTTON = 'ru.limeshop.android.dev:id/favoriteImageView'
     CARDNAME = 'ru.limeshop.android.dev:id/nameTextView'
+    CARDPRICE = 'ru.limeshop.android.dev:id/priceTextView'
+    CHECKBOX_FILTERS = 'ru.limeshop.android.dev:id/item_checkable_option_active'
 
 
 class ProductCardLocators:
@@ -169,6 +171,9 @@ class ProductCardLocators:
     popup_buy_btn = 'ru.limeshop.android.dev:id/productPopup'
     popup_title = 'ru.limeshop.android.dev:id/popupStartTitle'
     popup_btn = 'ru.limeshop.android.dev:id/popupButton'
+    BOTTOM_SHEET = '//*[@resource-id="ru.limeshop.android.dev:id/design_bottom_sheet"]'
+    SIZES_PRODUCT = 'ru.limeshop.android.dev:id/product_add_to_cart_name'
+    ZOOM_VIEW = '//*[@resource-id="ru.limeshop.android.dev:id/productPhotosPager"]'
 
 
 class ProfileLocators:
@@ -180,12 +185,20 @@ class ProfileLocators:
     FEATURE_TOGGLES = '//*[@resource-id="ru.limeshop.android.dev:id/profile_feature_toggle"]'
     VERSION_TEXT = '//*[@text="ВЕРСИЯ 3.23.6"]'
     app_id = 'ru.limeshop.android.dev:id/uuid_text_view'
+    PERMISSION_SCREEN = '//*[@resource-id="com.android.permissioncontroller:id/grant_dialog"]'
+    DENY_USE = '//*[@resource-id="com.android.permissioncontroller:id/permission_deny_button"]'
+    ONE_USE = '//*[@resource-id="com.android.permissioncontroller:id/permission_allow_one_time_button"]'
+    ALLWAYS_USE = '//*[@resource-id="com.android.permissioncontroller:id/permission_allow_foreground_only_button"]'
 
     # PROFILE_UNAUTHORIZED
     MANUAL_UN = 'ru.limeshop.android.dev:id/profile_unauthorized_manual'
     CONTACTS_UN = 'ru.limeshop.android.dev:id/profile_unauthorized_contacts'
     COMPANY_UN = 'ru.limeshop.android.dev:id/profile_unauthorized_company'
     SHOPS_UN = 'ru.limeshop.android.dev:id/profile_unauthorized_shops'
+    SHOP_LIST = '//*[@content-desc="Список"]'
+    SHOP_MAP = '//*[@content-desc="Карта"]'
+    SHOPS_PARTS_FILTERS = '//*[@resource-id="ru.limeshop.android.dev:id/collections_recycler_view"]'
+    SHOPS_VIEW_LIST = 'ru.limeshop.android.dev:id/stores_list'
     SUBSCRIPTIONS_UN = 'ru.limeshop.android.dev:id/profile_unauthorized_subscriptions'
     FEATURE_TOGGLES_UN = '//*[@resource-id="ru.limeshop.android.dev:id/profile_feature_toggle_unauthorized"]'
     CHAT_UN = '//*[@text="ЧАТ"]'
@@ -281,6 +294,7 @@ class CartLocators:
     CLEAR_ALL = 'ru.limeshop.android.dev:id/toolbar_secondary_text_view'
     FAVORITE = '//*[@resource-id="ru.limeshop.android.dev:id/favorites_image_view"]'
     PRODUCT_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/item_cart_name"]'
+    TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/toolbarTitle"]'
     ART = '//*[@resource-id="ru.limeshop.android.dev:id/item_cart_code"]'
     SIZE = '//*[@resource-id="ru.limeshop.android.dev:id/item_cart_size"]'
     COLOR = '//*[@resource-id="ru.limeshop.android.dev:id/item_cart_color"]'
@@ -500,6 +514,7 @@ class FavoritesLocators:
     BUTTONFAVORITES2 = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[2]/android.widget.ImageView[1]'
     STUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.FrameLayout[1]'
     STUFFNAME = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_name"]'
+    STUFFPRICE = '//*[@resource-id="ru.limeshop.android.dev:id/item_product_price"]'
     BUTTONBUYSTUFF = '//*[@resource-id="ru.limeshop.android.dev:id/favoritesRecyclerView"]/android.view.ViewGroup[1]/android.widget.Button[1]'
     MODULEWINDOW = '//*[@resource-id="ru.limeshop.android.dev:id/design_bottom_sheet"]/android.widget.LinearLayout[1]'
     SIZEINSTUCTION = "ru.limeshop.android.dev:id/sizeInfoButton"
