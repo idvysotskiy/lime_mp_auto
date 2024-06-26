@@ -1,3 +1,5 @@
+import time
+
 import allure
 import pytest
 
@@ -572,6 +574,45 @@ class TestSmoke:
         page.profile.checking_shops_elements()
         page.click_x()
         page.profile.checking_account_elements()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Личный Кабинет" / Кнопка "Подписки и Уведомления"')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1822")
+    def test_open_subscriptions_and_notifications(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_profile()
+        page.profile.open_subscribed_screen()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Личный кабинет" / Кнопка "Условия покупки"')
+    @allure.title('Экран "Личный кабинет" / Кнопка "Условия покупки"(назад)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1982")
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1983")
+    def test_open_terms_of_purchase(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_profile()
+        page.swipe_page_up(2)
+        page.profile.click(ProfileLocators.TERMS_OF_PURCHASE)
+        time.sleep(3)
+        page.wait_element(ProfileLocators.OFFER_DOCUMENT)
+        page.click(ProfileLocators.BTN_BACK_TERMS)
+        page.profile.checking_account_elements()
+
+    @pytest.mark.smoke
+    @allure.title('Экран "Личный кабинет" / Кнопка "Политика конфиденциальности"')
+    @allure.title('Экран "Личный кабинет" / Кнопка "Политика конфиденциальности"(назад)')
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1984")
+    @allure.title("https://lmdev.testrail.io/index.php?/cases/view/1985")
+    def test_open_privacy_policy(self, connect_to_device):
+        page = MainPage(connect_to_device)
+        page.open_profile()
+        page.swipe_page_up(2)
+        page.profile.click(ProfileLocators.PRIVACY_POLICY)
+        time.sleep(3)
+        page.wait_element(ProfileLocators.PRIVACY_POLICY_DOCUMENT)
+        page.click(ProfileLocators.PRIVACY_POLICY_BTN_BACK)
+        page.profile.checking_account_elements()
+
 
 
 

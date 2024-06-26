@@ -202,8 +202,7 @@ class ProfileLocators:
     SUBSCRIPTIONS_UN = 'ru.limeshop.android.dev:id/profile_unauthorized_subscriptions'
     FEATURE_TOGGLES_UN = '//*[@resource-id="ru.limeshop.android.dev:id/profile_feature_toggle_unauthorized"]'
     CHAT_UN = '//*[@text="ЧАТ"]'
-    LOGIN_UN = 'ru.limeshop.android.dev:id/profile_unauthorized_login'
-    SIGNUP_UN = 'ru.limeshop.android.dev:id/profile_unauthorized_signup'
+    LOGIN_AND_SIGN = '//*[@resource-id="ru.limeshop.android.dev:id/profile_registration_button"]'
     phone_number = 'ru.limeshop.android.dev:id/textView42'
     dialer_digits = '//*[@resource-id="com.android.dialer:id/digits"]'
 
@@ -227,6 +226,26 @@ class ProfileLocators:
     address_popup = 'ru.limeshop.android.dev:id/popUpRecycler'
     save_address_btn = 'ru.limeshop.android.dev:id/save_address_button'
 
+    # SUBSCRIBED_ELEMENTS
+    SUBSCRIPTIONS_TITLE = '//*[@resource-id="ru.limeshop.android.dev:id/toolbarTitle"]'
+    SUBSCRIPTIONS_BTN_BACK = '//android.widget.ImageButton'
+    SUBSCRIPTIONS_PUSH = '//*[@resource-id="ru.limeshop.android.dev:id/pushTitle"]'
+    SUBSCRIPTIONS_PUSH_SWITCH = '//*[@resource-id="ru.limeshop.android.dev:id/pushSwitch"]'
+    SUBSCRIPTIONS_MAIL = '//*[@resource-id="ru.limeshop.android.dev:id/mailTitle"]'
+    SUBSCRIPTIONS_MAIL_SWITCH = '//*[@resource-id="ru.limeshop.android.dev:id/emailSwitch"]'
+    SUBSCRIPTIONS_WOMEN = '//*[@text="Женщины"]'
+    SUBSCRIPTIONS_WOMEN_CHBX = '//*[@resource-id="ru.limeshop.android.dev:id/subscribe_kinds_recycler_view"]/android.widget.LinearLayout[1]/android.widget.ImageView[1]'
+    SUBSCRIPTIONS_MEN = '//*[@text="Мужчины"]'
+    SUBSCRIPTIONS_MEN_CHBX = '//*[@resource-id="ru.limeshop.android.dev:id/subscribe_kinds_recycler_view"]/android.widget.LinearLayout[2]/android.widget.ImageView[1]'
+    SUBSCRIPTIONS_KIDS = '//*[@text="Дети"]'
+    SUBSCRIPTIONS_KIDS_CHBX = '//*[@resource-id="ru.limeshop.android.dev:id/subscribe_kinds_recycler_view"]/android.widget.LinearLayout[3]/android.widget.ImageView[1]'
+    SUBSCRIPTIONS_BTN_SAVE = '//*[@resource-id="ru.limeshop.android.dev:id/subscribe_button"]'
+
+    #TERMS_OF_PURCHASE
+    OFFER_DOCUMENT = '//*[@resource-id="ru.limeshop.android.dev:id/baseContainer"]'
+    BTN_BACK_TERMS = "//android.widget.ImageButton"
+    PRIVACY_POLICY_DOCUMENT = '//*[@resource-id="ru.limeshop.android.dev:id/baseContainer"]'
+    PRIVACY_POLICY_BTN_BACK = '//android.widget.ImageButton'
 
 class FeatureTogglesLocators:
     SWITCH_1 = '//*[@resource-id="ru.limeshop.android.dev:id/toggleRecycler"]/android.view.ViewGroup[1]/android.widget.Switch[1]'

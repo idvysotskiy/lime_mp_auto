@@ -16,8 +16,7 @@ class ProfilePage(BasePage):
         self.wait_element(ProfileLocators.SUBSCRIPTIONS_UN, "Подписки и уведомления")
         self.swipe_page_up(2)
         self.wait_element(ProfileLocators.CHAT_UN, "Чат")
-        self.wait_element(ProfileLocators.LOGIN_UN, "кнопка Войти")
-        self.wait_element(ProfileLocators.SIGNUP_UN, "кнопка Зарегистрироваться")
+        self.wait_element(ProfileLocators.LOGIN_AND_SIGN, "Кнопка Войти или Зарегистрироваться")
         self.wait_text("ОЦЕНИТЕ ПРИЛОЖЕНИЕ")
         self.wait_text("Политика конфиденциальности")
         self.wait_text("Условия покупки")
@@ -82,3 +81,22 @@ class ProfilePage(BasePage):
         self.wait_element(ProfileLocators.SHOP_LIST)
         self.wait_element(ProfileLocators.SHOPS_VIEW_LIST)
         self.wait_element(ProfileLocators.SHOPS_PARTS_FILTERS)
+
+    @allure.step('Открытие экрана "Подписки и Уведомления')
+    def open_subscribed_screen(self):
+        self.click(ProfileLocators.SUBSCRIPTIONS_UN)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_TITLE)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_WOMEN)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_WOMEN_CHBX)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_MEN)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_MEN_CHBX)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_KIDS)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_KIDS_CHBX)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_MAIL)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_MAIL_SWITCH)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_PUSH)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_PUSH_SWITCH)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_BTN_SAVE)
+        self.wait_element(ProfileLocators.SUBSCRIPTIONS_BTN_BACK)
+
+
